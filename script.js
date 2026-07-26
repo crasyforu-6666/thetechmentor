@@ -332,7 +332,7 @@
         <div class="routing-card routing-success">
           <h4>🎉 Candidate Pre-Qualified!</h4>
           <p>Congratulations ${name}! Based on your experience and commitment, your application is approved for a 15-minute Strategy Call with Anshuman Behuria.</p>
-          <a href="https://wa.me/918895077943?text=Hi%20Anshuman,%20my%20application%20is%20approved.%20I%20want%20to%20schedule%20my%2015-min%20strategy%20call." target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Confirm Strategy Call Slot on WhatsApp ↗</a>
+          <a href="https://wa.me/917848942021?text=Hi%20Anshuman,%20my%20application%20is%20approved.%20I%20want%20to%20schedule%20my%2015-min%20strategy%20call." target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Confirm Strategy Call Slot on WhatsApp ↗</a>
           <p style="margin-top: 0.75rem; font-size: 0.85rem;">🔓 <strong>Curriculum Playlist Unlocked:</strong> <a href="https://www.youtube.com/playlist?list=PL71i23QiQd9VSrHTuXQyiOlLsi8NnGbSp" target="_blank" rel="noopener noreferrer" style="color: #3db8f5; text-decoration: underline;">Access 40+ Module Video Library ↗</a></p>
         </div>
       `;
