@@ -1,0 +1,9 @@
+linkedin-saas/
+.local-node/
+node_modules/
+sap-video-agent/
+src/
+supabase/
+.cursor/
+.git/
+**/.DS_Store
