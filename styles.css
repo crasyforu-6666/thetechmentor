@@ -3007,3 +3007,14 @@ section {
     padding-bottom: 70px;
   }
 }
+
+.price-instruction-note {
+  font-size: 0.8rem;
+  color: var(--accent-light);
+  background: rgba(61, 184, 245, 0.1);
+  border: 1px solid rgba(61, 184, 245, 0.25);
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  text-align: center;
+  margin: 0;
+}
