@@ -1,11 +1,52 @@
 (function () {
   "use strict";
 
+  const RAZORPAY_KEY_ID = "rzp_live_TIR6aQnG0gjmV8";
   const RAZORPAY_URL = "https://razorpay.me/@anshumanbehuria";
   const YOUTUBE_PLAYLIST = "https://www.youtube.com/playlist?list=PL71i23QiQd9VSrHTuXQyiOlLsi8NnGbSp";
 
+  function payWithRazorpay(amountInRupees, programName, userDetails = {}) {
+    if (typeof window.Razorpay !== "undefined") {
+      const options = {
+        key: RAZORPAY_KEY_ID,
+        amount: (amountInRupees || 4999) * 100, // Amount in paise (499900 = ₹4,999)
+        currency: "INR",
+        name: "SmartEduVerse · Anshuman Behuria",
+        description: programName || "SAP MM & EWM Self-Paced Track",
+        image: "https://sap-mm-ewm-courses.vercel.app/images/og-cover.svg",
+        prefill: {
+          name: userDetails.name || "",
+          email: userDetails.email || "",
+          contact: userDetails.phone || ""
+        },
+        notes: {
+          program: programName || "SAP MM & EWM Self-Paced Track"
+        },
+        theme: {
+          color: "#0070b8"
+        },
+        handler: function (response) {
+          alert("🎉 Payment Successful!\nPayment ID: " + response.razorpay_payment_id + "\n\nThank you for enrolling in " + (programName || "SAP MM & EWM Self-Paced Track") + ". Access instructions have been sent to your email!");
+        }
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } else {
+      window.open(RAZORPAY_URL, "_blank");
+    }
+  }
+
+  window.payWithRazorpay = payWithRazorpay;
+
   document.querySelectorAll(".razorpay-link").forEach((link) => {
     link.href = RAZORPAY_URL;
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const amount = parseInt(link.dataset.amount || "4999", 10);
+      const program = link.dataset.program || "SAP MM & EWM Self-Paced Track";
+      payWithRazorpay(amount, program);
+    });
   });
 
   const playlistYoutubeLink = document.getElementById("playlist-youtube-link");
@@ -341,7 +382,7 @@
         <div class="routing-card routing-redirect">
           <h4>Notice: Self-Paced Track Recommended</h4>
           <p>Thank you for your response, ${name}! Live 1-on-1 strategy call slots are reserved for candidates ready to invest in live mentorship. Based on your budget readiness, our ₹4,999 Self-Paced Bundle is the best fit for your journey.</p>
-          <a href="${RAZORPAY_URL}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block razorpay-link">Enroll in Self-Paced Track (₹4,999) ↗</a>
+          <button type="button" onclick="payWithRazorpay(4999, 'SAP MM & EWM Self-Paced Track')" class="btn btn-primary btn-block">Enroll in Self-Paced Track (₹4,999) ↗</button>
           <p style="margin-top: 0.75rem; font-size: 0.85rem;">🔓 <strong>Free Video Access:</strong> <a href="https://www.youtube.com/playlist?list=PL71i23QiQd9VSrHTuXQyiOlLsi8NnGbSp" target="_blank" rel="noopener noreferrer" style="color: #3db8f5; text-decoration: underline;">Watch Free Video Playlist on YouTube ↗</a></p>
         </div>
       `;
