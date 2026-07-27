@@ -381,8 +381,11 @@
       outputEl.innerHTML = `
         <div class="routing-card routing-redirect">
           <h4>Notice: Self-Paced Track Recommended</h4>
-          <p>Thank you for your response, ${name}! Live 1-on-1 strategy call slots are reserved for candidates ready to invest in live mentorship. Based on your budget readiness, our ₹4,999 Self-Paced Bundle is the best fit for your journey.</p>
-          <button type="button" onclick="payWithRazorpay(4999, 'SAP MM & EWM Self-Paced Track')" class="btn btn-primary btn-block">Enroll in Self-Paced Track (₹4,999) ↗</button>
+          <p>Thank you for your response, ${name}! Live 1-on-1 strategy call slots are reserved for candidates ready to invest in live mentorship. Based on your budget readiness, our Self-Paced Programs are the best fit for your journey.</p>
+          <div style="display:flex; flex-direction:column; gap:0.5rem;">
+            <button type="button" onclick="payWithRazorpay(4999, 'SAP MM Self-Paced Track')" class="btn btn-primary btn-block">Enroll in MM Self-Paced (₹4,999) ↗</button>
+            <button type="button" onclick="payWithRazorpay(11000, 'MM + EWM Self-Paced Bundle')" class="btn btn-primary btn-block" style="background:var(--gold); border-color:var(--gold);">Enroll in Full Bundle (₹11,000) ↗</button>
+          </div>
           <p style="margin-top: 0.75rem; font-size: 0.85rem;">🔓 <strong>Free Video Access:</strong> <a href="https://www.youtube.com/playlist?list=PL71i23QiQd9VSrHTuXQyiOlLsi8NnGbSp" target="_blank" rel="noopener noreferrer" style="color: #3db8f5; text-decoration: underline;">Watch Free Video Playlist on YouTube ↗</a></p>
         </div>
       `;
