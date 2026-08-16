@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="480" viewBox="0 0 400 480" role="img" aria-label="Anshuman Behuria">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d2847"/>
+      <stop offset="100%" style="stop-color:#0070b8"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="480" fill="url(#bg)"/>
+  <circle cx="200" cy="165" r="72" fill="rgba(255,255,255,0.15)"/>
+  <ellipse cx="200" cy="320" rx="110" ry="95" fill="rgba(255,255,255,0.12)"/>
+  <text x="200" y="420" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="22" font-weight="600">Anshuman Behuria</text>
+  <text x="200" y="450" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="system-ui,sans-serif" font-size="14">SAP MM &amp; EWM Trainer</text>
+</svg>

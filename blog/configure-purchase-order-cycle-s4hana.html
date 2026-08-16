@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Configure a Complete Purchase Order Cycle in SAP S/4HANA | theTechMentor</title>
+  <meta name="description" content="Step-by-step configuration guide for the S/4HANA purchase order cycle: document types, number ranges, item categories, account assignment, and pricing procedures." />
+  <link rel="canonical" href="https://youronementor.com/blog/configure-purchase-order-cycle-s4hana.html" />
+  <meta property="og:title" content="How to Configure a Complete Purchase Order Cycle in SAP S/4HANA" />
+  <meta property="og:description" content="A hands-on implementation walkthrough for SAP logistics consultants." />
+  <meta property="og:image" content="https://youronementor.com/images/og-cover.svg" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="blog.css" />
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+  <div class="reading-progress" id="reading-progress-bar"></div>
+
+  <header class="header">
+    <nav class="nav container">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">SAP</span>
+        <span class="logo-text">theTechMentor</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#courses">Live Batches</a></li>
+        <li><a href="../index.html#self-paced">Self-Paced</a></li>
+        <li><a href="index.html" style="color:var(--blog-accent-light); font-weight:600;">Blog Hub</a></li>
+        <li><a href="../index.html#pricing">Pricing</a></li>
+        <li><a href="../index.html#enroll" class="btn btn-sm">Enroll Now</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="blog-article-wrap">
+    <div class="blog-breadcrumb">
+      <a href="../index.html">Home</a> &gt; <a href="index.html">Blog</a> &gt; <span>Tutorials</span>
+    </div>
+
+    <header class="blog-header">
+      <span class="sp-badge sp-badge--green" style="margin-bottom:1rem; display:inline-block;">Tutorial</span>
+      <h1 class="blog-title">How to Configure a Complete Purchase Order Cycle in SAP S/4HANA: Step-by-Step Guide</h1>
+      
+      <div class="blog-meta">
+        <div class="author-chip">
+          <div class="author-avatar-ph">AB</div>
+          <div class="author-info">
+            <strong>Anshuman Behuria</strong>
+            <span>SAP MM/EWM Solution Architect</span>
+          </div>
+        </div>
+        <span>•</span>
+        <span>⏱️ 15 min read</span>
+      </div>
+    </header>
+
+    <div class="toc-box">
+      <h3>📑 Implementation Steps</h3>
+      <ul class="toc-list">
+        <li><a href="#doc-types">1. Define Custom Purchasing Document Types</a></li>
+        <li><a href="#number-ranges">2. Assign Number Ranges & Screen Layouts</a></li>
+        <li><a href="#pricing-procedure">3. Schema Determination & Pricing Conditions (M/08)</a></li>
+        <li><a href="#three-way-match">4. The 3-Way Match GR/IR Accounting Integration</a></li>
+        <li><a href="#comments-section">5. Ask Questions & Community Troubleshooting</a></li>
+      </ul>
+    </div>
+
+    <article class="article-content">
+      <p>Configuring a clean, robust Purchase Order cycle is the bedrock of every SAP S/4HANA Sourcing &amp; Procurement implementation. This tutorial walks through standard SPRO customizing steps with real-world best practices.</p>
+
+      <h2 id="doc-types">1. Define Custom Purchasing Document Types</h2>
+      <p>Standard SAP delivers document type <code>NB</code> for standard purchase orders. In customer implementation projects, standard types should never be modified directly; instead, create custom types with the <code>Z</code> prefix (e.g. <code>ZNB</code> for Standard Domestic PO, <code>ZIMP</code> for Imports).</p>
+
+      <p><strong>Customizing Path:</strong></p>
+      <pre><code>SPRO -> Materials Management -> Purchasing -> Purchase Order -> Define Document Types</code></pre>
+      <p>Key parameters to configure per document type:</p>
+      <ul>
+        <li><strong>Internal / External Number Range:</strong> Defines automated numbering rules.</li>
+        <li><strong>Field Selection Key:</strong> Controls mandatory, optional, and suppressed fields (e.g., <code>NBF</code>).</li>
+        <li><strong>Allowed Item Categories:</strong> Standard (<code>blank</code>), Consignment (<code>K</code>), Subcontracting (<code>L</code>), Third Party (<code>S</code>), Service (<code>D</code>).</li>
+      </ul>
+
+      <h2 id="number-ranges">2. Assign Number Ranges & Screen Layouts</h2>
+      <p>Number ranges must be strictly separated for internal automated generation vs external legacy migration.</p>
+      <pre><code>Transaction Code: OMH6 / OMED</code></pre>
+
+      <h2 id="pricing-procedure">3. Schema Determination & Pricing Conditions (M/08)</h2>
+      <p>SAP calculates gross prices, discounts, freight surcharges, and customs duties using <strong>Calculation Schema Determination</strong>:</p>
+      <div class="callout-box">
+        <h4>💡 Determination Rule in S/4HANA:</h4>
+        <p><strong>Schema Group Purchasing Org + Schema Group Vendor = Purchasing Calculation Schema</strong> (e.g. <code>RM0000</code> or custom <code>ZRM001</code>).</p>
+      </div>
+
+      <h2 id="three-way-match">4. The 3-Way Match GR/IR Accounting Integration</h2>
+      <p>The 3-way matching mechanism cross-validates:</p>
+      <ol>
+        <li><strong>Purchase Order:</strong> Agreed quantity & price (<code>ME21N</code>)</li>
+        <li><strong>Goods Receipt (GR):</strong> Actual delivered quantity via <code>MIGO</code> movement type <strong>101</strong></li>
+        <li><strong>Invoice Receipt (IR):</strong> Vendor billed quantity & price via <code>MIRO</code></li>
+      </ol>
+
+      <!-- Embedded Course CTA -->
+      <div class="blog-course-cta">
+        <span class="tier-badge" style="background:#f59e0b; color:#000; font-weight:700; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; text-transform:uppercase;">Self-Paced Track</span>
+        <h3>Want Full Step-by-Step Configuration PDFs & S/4HANA Screen Recordings?</h3>
+        <p>Get the complete SAP MM workbook with 35+ hours of step-by-step video tutorials and lifetime Q&A access.</p>
+        <div class="blog-cta-actions">
+          <button type="button" class="btn btn-primary razorpay-link" data-amount="4999" data-program="SAP MM Self-Paced Track">
+            Enroll in MM Self-Paced — ₹4,999 ↗
+          </button>
+          <a href="../index.html#courses" class="btn btn-outline">Explore Live Batches</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Comments & Q&A Section -->
+    <section class="comments-section" id="comments-section">
+      <div class="comments-header">
+        <h3>💬 Configuration Questions & Discussion</h3>
+        <span class="comments-count-badge" id="comments-count">Loading...</span>
+      </div>
+
+      <div class="comment-form-card">
+        <div class="comment-form-title">
+          <span>✍️</span> Have a question about this S/4HANA PO configuration?
+        </div>
+        <form id="new-comment-form">
+          <div class="form-row">
+            <input type="text" id="commenter-name" class="comment-input" placeholder="Your Name *" required />
+            <input type="email" id="commenter-email" class="comment-input" placeholder="Your Email (Optional)" />
+          </div>
+          <textarea id="commenter-message" class="comment-textarea" placeholder="Ask your question or share your project scenario..." required></textarea>
+          <div class="comment-form-footer">
+            <span style="font-size:0.85rem; color:var(--blog-muted);">⚡ Instant community feedback & instructor replies.</span>
+            <button type="submit" class="comment-submit-btn">Post Question / Comment 🚀</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="comments-list" id="comments-list-container"></div>
+    </section>
+  </main>
+
+  <footer class="footer" style="margin-top:5rem;">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">
+          <span class="logo-mark">SAP</span>
+          <span class="logo-text">theTechMentor</span>
+        </a>
+        <p>SAP MM &amp; EWM training by <strong>Anshuman Behuria</strong>.</p>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="../index.html#courses">Live Batches</a></li>
+          <li><a href="../index.html#self-paced">Self-Paced</a></li>
+          <li><a href="index.html">Blog Hub</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/917848942021" target="_blank">WhatsApp: +91 78489 42021</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; 2026 theTechMentor · Anshuman Behuria. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="blog-comments.js"></script>
+</body>
+</html>
