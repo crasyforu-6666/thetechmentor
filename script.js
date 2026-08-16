@@ -11,9 +11,9 @@
         key: RAZORPAY_KEY_ID,
         amount: (amountInRupees || 4999) * 100, // Amount in paise (499900 = ₹4,999)
         currency: "INR",
-        name: "SmartEduVerse · Anshuman Behuria",
+        name: "YourOneMentor · Anshuman Behuria",
         description: programName || "SAP MM & EWM Self-Paced Track",
-        image: "https://sap-mm-ewm-courses.vercel.app/images/og-cover.svg",
+        image: "https://youronementor.com/images/og-cover.svg",
         prefill: {
           name: userDetails.name || "",
           email: userDetails.email || "",
