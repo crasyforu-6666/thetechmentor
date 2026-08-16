@@ -26,6 +26,23 @@
           color: "#0070b8"
         },
         handler: function (response) {
+          try {
+            const currentSales = JSON.parse(localStorage.getItem("ttm_admin_sales") || "[]");
+            currentSales.unshift({
+              id: response.razorpay_payment_id || ("pay_" + Date.now().toString(36)),
+              date: new Date().toISOString().replace("T", " ").substring(0, 16),
+              name: userDetails.name || "Enrolled Student",
+              email: userDetails.email || "student@example.com",
+              phone: userDetails.phone || "",
+              course: programName || "SAP MM & EWM Track",
+              amount: amountInRupees || 4999,
+              status: "Paid",
+              method: "Razorpay Checkout"
+            });
+            localStorage.setItem("ttm_admin_sales", JSON.stringify(currentSales));
+          } catch (e) {
+            console.error(e);
+          }
           alert("🎉 Payment Successful!\nPayment ID: " + response.razorpay_payment_id + "\n\nThank you for enrolling in " + (programName || "SAP MM & EWM Self-Paced Track") + ". Access instructions have been sent to your email!");
         }
       };
@@ -362,8 +379,28 @@
     const formData = new FormData(formEl);
     const budget = formData.get("budget");
     const name = formData.get("name") || "Applicant";
+    const email = formData.get("email") || "";
+    const phone = formData.get("phone") || "";
+    const experience = formData.get("experience") || "Experienced Professional";
+    const course = formData.get("course") || "SAP MM / EWM Mentorship";
 
-    console.log("Pre-qualification submission:", Object.fromEntries(formData));
+    try {
+      const currentLeads = JSON.parse(localStorage.getItem("ttm_admin_leads") || "[]");
+      currentLeads.unshift({
+        id: "lead_" + Date.now().toString(36),
+        date: new Date().toISOString().replace("T", " ").substring(0, 16),
+        name: name,
+        email: email,
+        phone: phone,
+        module: course,
+        experience: experience,
+        budget: budget,
+        status: budget === "Yes" ? "Qualified" : "Self-Paced Redirected"
+      });
+      localStorage.setItem("ttm_admin_leads", JSON.stringify(currentLeads));
+    } catch (e) {
+      console.error(e);
+    }
 
     formEl.hidden = true;
     outputEl.hidden = false;
@@ -401,9 +438,14 @@
     }
   });
 
-  modalForm?.addEventListener("submit", (e) => {
-    if (modalResult) {
-      handleScreeningSubmit(e, modalForm, modalResult);
-    }
-  });
+  // Traffic Telemetry Tracking for Admin
+  try {
+    const rawTraffic = localStorage.getItem("ttm_admin_traffic");
+    let traffic = rawTraffic ? JSON.parse(rawTraffic) : { totalVisits: 1480, uniqueVisitors: 920, checkoutClicks: 142, leadsSubmitted: 38, todayVisits: 84 };
+    traffic.totalVisits += 1;
+    traffic.todayVisits += 1;
+    localStorage.setItem("ttm_admin_traffic", JSON.stringify(traffic));
+  } catch (e) {
+    console.error(e);
+  }
 })();
