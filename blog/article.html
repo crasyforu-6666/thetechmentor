@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Blog Article · theTechMentor</title>
+  <meta name="description" id="page-desc" content="In-depth SAP MM, EWM, and S/4HANA guides by Anshuman Behuria." />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="blog.css" />
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress-container">
+    <div class="reading-progress-bar" id="reading-progress-bar"></div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">SAP</span>
+        <span class="logo-text">theTechMentor</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#courses">Live Batches</a></li>
+        <li><a href="../index.html#self-paced">Self-Paced</a></li>
+        <li><a href="index.html">Blog Hub</a></li>
+        <li><a href="../index.html#pricing">Pricing</a></li>
+        <li><a href="../index.html#enroll" class="btn btn-sm">Enroll Now</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="padding-top: 110px; padding-bottom: 80px;">
+    <article class="container" style="max-width: 820px;">
+      
+      <!-- Article Header -->
+      <header class="blog-header-section" style="margin-bottom: 2.5rem; text-align: left;">
+        <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom: 1rem;">
+          <a href="index.html" style="color:var(--blog-accent-light); text-decoration:none; font-size:0.9rem; font-weight:600;">&larr; Back to All Articles</a>
+          <span style="color:var(--blog-border);">|</span>
+          <span class="blog-post-badge blog-post-badge--blue" id="art-category">Category</span>
+        </div>
+        
+        <h1 id="art-title" style="font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; color: #fff; line-height: 1.25; margin-bottom: 1rem;">
+          Loading Article...
+        </h1>
+        
+        <div style="display:flex; align-items:center; gap:0.8rem; color:var(--blog-muted); font-size:0.95rem; margin-bottom: 1.5rem;">
+          <img src="../images/instructor-fallback.svg" alt="Anshuman Behuria" style="width:36px; height:36px; border-radius:50%; border:1px solid var(--blog-border);" />
+          <div>
+            <strong style="color:#fff; display:block;" id="art-author">Anshuman Behuria</strong>
+            <span id="art-meta">Aug 22, 2026 · 8 min read</span>
+          </div>
+        </div>
+
+        <p id="art-excerpt" style="font-size: 1.15rem; color: #cbd5e1; line-height: 1.6; border-left: 3px solid var(--blog-accent); padding-left: 1rem; margin-bottom: 2rem;">
+        </p>
+
+        <!-- Cover Image -->
+        <div id="cover-img-wrap" style="display:none; margin-bottom: 2.5rem;">
+          <img id="art-cover-img" src="" alt="Cover" style="width:100%; max-height:420px; object-fit:cover; border-radius:12px; border:1px solid var(--blog-border);" />
+        </div>
+      </header>
+
+      <!-- Main Body Content -->
+      <div id="art-body" class="blog-content-body" style="font-size:1.1rem; line-height:1.8; color:#e2e8f0;">
+      </div>
+
+      <!-- Instructor Bio Banner -->
+      <div class="blog-author-box" style="margin-top: 4rem; padding:2rem; background:#0c1219; border:1px solid var(--blog-border); border-radius:12px; display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap;">
+        <img src="../images/instructor-fallback.svg" alt="Anshuman Behuria" style="width:72px; height:72px; border-radius:50%; border:2px solid var(--blog-accent);" />
+        <div style="flex:1;">
+          <h4 style="color:#fff; font-size:1.2rem; margin-bottom:0.25rem;">Written by Anshuman Behuria</h4>
+          <p style="color:var(--blog-muted); font-size:0.9rem; line-height:1.5;">
+            Lead SAP MM &amp; EWM S/4HANA Architect with 12+ years of global enterprise implementation experience. Founder of <strong>theTechMentor</strong>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Q&A Comment Section -->
+      <section class="comments-section" style="margin-top: 4rem;">
+        <h3 style="color:#fff; font-size:1.5rem; margin-bottom:1.5rem;">Community Q&amp;A &amp; Discussion</h3>
+        <div class="comment-form-box" style="margin-bottom:2.5rem; background:#0e1520; padding:1.5rem; border-radius:12px; border:1px solid var(--blog-border);">
+          <h4 style="color:#fff; margin-bottom:1rem;">Ask a Question or Share Feedback</h4>
+          <form id="comment-form">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+              <input type="text" id="comment-author" class="comment-input" placeholder="Your Name *" required />
+              <input type="email" id="comment-email" class="comment-input" placeholder="Email Address *" required />
+            </div>
+            <textarea id="comment-text" class="comment-textarea" rows="3" placeholder="Type your question or SAP implementation feedback..." required></textarea>
+            <button type="submit" class="btn btn-primary" style="margin-top:1rem;">Post Question to Forum &rarr;</button>
+          </form>
+        </div>
+
+        <div id="comments-list">
+          <!-- Comments rendered via blog-comments.js -->
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <script src="blog-comments.js"></script>
+  <script>
+    // Simple Markdown to HTML parser
+    function parseMarkdown(md) {
+      if (!md) return "";
+      let html = md;
+      
+      // Images: ![alt](url) -> <img src="url" alt="alt" style="width:100%; border-radius:8px; margin:1.5rem 0;" />
+      html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" style="width:100%; max-height:500px; object-fit:cover; border-radius:8px; margin:1.5rem 0; border:1px solid #1e293b;" />');
+      
+      // Headers
+      html = html.replace(/^### (.*$)/gim, '<h3 style="color:#fff; font-size:1.35rem; margin:1.75rem 0 0.75rem 0;">$1</h3>');
+      html = html.replace(/^## (.*$)/gim, '<h2 style="color:#fff; font-size:1.65rem; margin:2rem 0 1rem 0;">$1</h2>');
+      html = html.replace(/^# (.*$)/gim, '<h1 style="color:#fff; font-size:2rem; margin:2.25rem 0 1rem 0;">$1</h1>');
+      
+      // Bold & Italic
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong style="color:#fff;">$1</strong>');
+      html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      
+      // Code blocks
+      html = html.replace(/`([^`]+)`/g, '<code style="background:#090e15; color:#38bdf8; padding:0.2rem 0.4rem; border-radius:4px; font-size:0.9em;">$1</code>');
+      
+      // Paragraph breaks
+      html = html.replace(/\n\n/g, '</p><p style="margin-bottom:1.25rem;">');
+      html = '<p style="margin-bottom:1.25rem;">' + html + '</p>';
+      
+      return html;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const postId = params.get("id");
+      const postSlug = params.get("slug");
+
+      const customBlogs = JSON.parse(localStorage.getItem("ttm_admin_custom_blogs") || "[]");
+      const article = customBlogs.find(b => b.id === postId || b.slug === postSlug);
+
+      if (article) {
+        document.getElementById("page-title").textContent = article.title + " · theTechMentor";
+        document.getElementById("art-title").textContent = article.title;
+        document.getElementById("art-category").textContent = article.category || "Tutorial";
+        document.getElementById("art-meta").textContent = (article.date || "Aug 2026") + " · " + (article.readTime || "8 min read");
+        document.getElementById("art-excerpt").textContent = article.excerpt || "";
+
+        if (article.imageUrl) {
+          document.getElementById("cover-img-wrap").style.display = "block";
+          document.getElementById("art-cover-img").src = article.imageUrl;
+        }
+
+        // Render Body
+        document.getElementById("art-body").innerHTML = parseMarkdown(article.content);
+      } else {
+        document.getElementById("art-title").textContent = "Article Not Found";
+        document.getElementById("art-body").innerHTML = "<p>The requested blog post could not be loaded. Return to <a href='index.html' style='color:#38bdf8;'>Blog Hub</a>.</p>";
+      }
+    });
+  </script>
+</body>
+</html>

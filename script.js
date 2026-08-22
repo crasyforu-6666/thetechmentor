@@ -438,13 +438,41 @@
     }
   });
 
-  // Traffic Telemetry Tracking for Admin
+  // Traffic Telemetry Tracking & Custom Blog Rendering
   try {
     const rawTraffic = localStorage.getItem("ttm_admin_traffic");
     let traffic = rawTraffic ? JSON.parse(rawTraffic) : { totalVisits: 1480, uniqueVisitors: 920, checkoutClicks: 142, leadsSubmitted: 38, todayVisits: 84 };
     traffic.totalVisits += 1;
     traffic.todayVisits += 1;
     localStorage.setItem("ttm_admin_traffic", JSON.stringify(traffic));
+
+    // Homepage Custom Blog Renderer
+    const homeBlogGrid = document.querySelector("#blog .blog-grid") || document.querySelector(".blog-grid");
+    const isBlogHubPage = window.location.pathname.includes("/blog/");
+    if (homeBlogGrid && !isBlogHubPage) {
+      const customBlogs = JSON.parse(localStorage.getItem("ttm_admin_custom_blogs") || "[]");
+      customBlogs.forEach(b => {
+        let badgeClass = "blog-post-badge--green";
+        if (b.category === "Interview prep") badgeClass = "blog-post-badge--blue";
+        else if (b.category === "Career") badgeClass = "blog-post-badge--amber";
+        else if (b.category === "SAP news") badgeClass = "blog-post-badge--teal";
+
+        const card = document.createElement("article");
+        card.className = "blog-card";
+        card.innerHTML = `
+          <div class="blog-thumb" style="${b.imageUrl ? `background-image:url('${b.imageUrl}'); background-size:cover; background-position:center;` : 'background:#dcfce7;'}">
+            ${b.imageUrl ? '' : '📝'}
+          </div>
+          <div class="blog-body">
+            <span class="blog-post-badge ${badgeClass}">${b.category || 'Tutorial'}</span>
+            <h3 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">${b.title}</h3>
+            <div class="blog-meta-line">By Anshuman Behuria &middot; ${b.readTime || '8 min read'}</div>
+            <a href="blog/article.html?id=${b.id}" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
+          </div>
+        `;
+        homeBlogGrid.prepend(card);
+      });
+    }
   } catch (e) {
     console.error(e);
   }
