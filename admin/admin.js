@@ -327,7 +327,8 @@
   // Setup Blog CMS
   function setupBlogCMS() {
     const form = document.getElementById("admin-new-blog-form");
-    if (!form) return;
+    let editingBlogIndex = null;
+    window.editingBlogIndex = null;
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -338,25 +339,46 @@
       const imageUrl = document.getElementById("blog-input-image") ? document.getElementById("blog-input-image").value.trim() : "";
       const content = document.getElementById("blog-input-content").value.trim();
 
-      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-      const newPost = {
-        id: "post_" + Date.now(),
-        title: title,
-        slug: slug,
-        category: category,
-        readTime: readTime || "8 min read",
-        excerpt: excerpt,
-        imageUrl: imageUrl || "https://youronementor.com/images/og-cover.svg",
-        content: content,
-        date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
-      };
-
       const customBlogs = JSON.parse(localStorage.getItem(BLOGS_KEY) || "[]");
-      customBlogs.unshift(newPost);
-      localStorage.setItem(BLOGS_KEY, JSON.stringify(customBlogs));
-      window.TTM_AUTH.logAudit(currentUser.id, currentUser.email, "BLOG_PUBLISHED", "blog", newPost.id, "SUCCESS", { title });
 
-      alert(`🎉 Blog article "${title}" published successfully!`);
+      if (window.editingBlogIndex !== null && window.editingBlogIndex !== undefined && customBlogs[window.editingBlogIndex]) {
+        // Update existing article
+        customBlogs[window.editingBlogIndex].title = title;
+        customBlogs[window.editingBlogIndex].category = category;
+        customBlogs[window.editingBlogIndex].readTime = readTime || "8 min read";
+        customBlogs[window.editingBlogIndex].excerpt = excerpt;
+        customBlogs[window.editingBlogIndex].imageUrl = imageUrl || "https://youronementor.com/images/og-cover.svg";
+        customBlogs[window.editingBlogIndex].content = content;
+        customBlogs[window.editingBlogIndex].updatedAt = new Date().toISOString();
+
+        localStorage.setItem(BLOGS_KEY, JSON.stringify(customBlogs));
+        window.TTM_AUTH.logAudit(currentUser.id, currentUser.email, "BLOG_UPDATED", "blog", customBlogs[window.editingBlogIndex].id, "SUCCESS", { title });
+
+        alert(`🎉 Article "${title}" updated successfully!`);
+        window.editingBlogIndex = null;
+        document.getElementById("blog-submit-btn").textContent = "🚀 Publish Article to Blog Hub";
+      } else {
+        // Create new article
+        const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+        const newPost = {
+          id: "post_" + Date.now(),
+          title: title,
+          slug: slug,
+          category: category,
+          readTime: readTime || "8 min read",
+          excerpt: excerpt,
+          imageUrl: imageUrl || "https://youronementor.com/images/og-cover.svg",
+          content: content,
+          date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+        };
+
+        customBlogs.unshift(newPost);
+        localStorage.setItem(BLOGS_KEY, JSON.stringify(customBlogs));
+        window.TTM_AUTH.logAudit(currentUser.id, currentUser.email, "BLOG_PUBLISHED", "blog", newPost.id, "SUCCESS", { title });
+
+        alert(`🎉 Blog article "${title}" published successfully!`);
+      }
+
       form.reset();
       renderCustomBlogs();
     });
@@ -384,7 +406,7 @@
     }
     list.innerHTML = customBlogs.map((b, i) => `
       <div class="card-panel" style="margin-bottom:1rem; padding:1.25rem;">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; flex-wrap:wrap;">
           <div style="display:flex; gap:1rem; align-items:flex-start;">
             ${b.imageUrl ? `<img src="${b.imageUrl}" alt="${b.title}" style="width:80px; height:60px; object-fit:cover; border-radius:6px; border:1px solid var(--admin-border);" />` : ''}
             <div>
@@ -393,11 +415,35 @@
               <p style="color:var(--admin-muted); font-size:0.85rem;">${b.date} · ${b.readTime}</p>
             </div>
           </div>
-          <button type="button" class="action-btn" style="color:#ef4444;" onclick="window.deleteCustomBlog(${i})">Delete</button>
+          <div style="display:flex; gap:0.5rem;">
+            <button type="button" class="action-btn action-btn-green" onclick="window.editCustomBlog(${i})">Edit Article</button>
+            <button type="button" class="action-btn" style="color:#ef4444;" onclick="window.deleteCustomBlog(${i})">Delete</button>
+          </div>
         </div>
       </div>
     `).join('');
   }
+
+  window.editCustomBlog = function(index) {
+    const customBlogs = JSON.parse(localStorage.getItem(BLOGS_KEY) || "[]");
+    const b = customBlogs[index];
+    if (!b) return;
+
+    window.editingBlogIndex = index;
+    document.getElementById("blog-input-title").value = b.title || "";
+    document.getElementById("blog-input-category").value = b.category || "Tutorial";
+    document.getElementById("blog-input-time").value = b.readTime || "";
+    document.getElementById("blog-input-excerpt").value = b.excerpt || "";
+    if (document.getElementById("blog-input-image")) {
+      document.getElementById("blog-input-image").value = b.imageUrl || "";
+    }
+    document.getElementById("blog-input-content").value = b.content || "";
+
+    const submitBtn = document.getElementById("blog-submit-btn");
+    if (submitBtn) submitBtn.textContent = "💾 Save Changes to Article";
+
+    document.getElementById("admin-new-blog-form")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   window.deleteCustomBlog = function(index) {
     if (confirm("Delete this article?")) {
