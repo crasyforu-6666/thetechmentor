@@ -324,11 +324,127 @@
     `).join('');
   }
 
-  // Setup Blog CMS
+  // Setup Blog CMS & PDF Auto-Importer
   function setupBlogCMS() {
     const form = document.getElementById("admin-new-blog-form");
-    let editingBlogIndex = null;
+    const pdfInput = document.getElementById("pdf-file-input");
+    const pdfStatusMsg = document.getElementById("pdf-status-msg");
     window.editingBlogIndex = null;
+
+    // PDF Import Handler
+    if (pdfInput) {
+      pdfInput.addEventListener("change", async (e) => {
+        const file = e.target.files[0];
+        if (!file || file.type !== "application/pdf") {
+          alert("Please select a valid PDF file.");
+          return;
+        }
+
+        if (pdfStatusMsg) {
+          pdfStatusMsg.style.color = "#38bdf8";
+          pdfStatusMsg.innerHTML = "⏳ Converting PDF text, pages, and images to SEO Blog format...";
+        }
+
+        try {
+          if (window.pdfjsLib) {
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          }
+
+          const arrayBuffer = await file.arrayBuffer();
+          const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+
+          let fullExtractedText = "";
+          let pageImages = [];
+          let extractedTitle = file.name.replace(/\.pdf$/i, "").replace(/[-_]+/g, " ");
+
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const textContent = await page.getTextContent();
+            const pageText = textContent.items.map(item => item.str).join(" ");
+            fullExtractedText += pageText + "\n\n";
+
+            // Render Page to Canvas Image for Visual Diagrams
+            if (i <= 3) {
+              const viewport = page.getViewport({ scale: 1.2 });
+              const canvas = document.createElement("canvas");
+              const ctx = canvas.getContext("2d");
+              canvas.width = viewport.width;
+              canvas.height = viewport.height;
+
+              await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+              const imgDataUrl = canvas.toDataURL("image/png");
+              pageImages.push(imgDataUrl);
+            }
+          }
+
+          // Parse Extracted Title
+          const lines = fullExtractedText.split("\n").map(l => l.trim()).filter(l => l.length > 5);
+          if (lines.length > 0) {
+            extractedTitle = lines[0].substring(0, 100);
+          }
+
+          // Parse Excerpt
+          const excerpt = fullExtractedText.substring(0, 180).replace(/\s+/g, " ") + "...";
+
+          // Format HTML with SEO Headers & Callouts
+          let formattedHtml = "";
+          let sectionBlocks = fullExtractedText.split("\n\n").filter(b => b.trim().length > 0);
+
+          sectionBlocks.forEach((block, idx) => {
+            const clean = block.trim();
+            if (idx === 0) {
+              formattedHtml += `<h2 style="color:#fff; font-size:1.6rem; margin:1.5rem 0 0.8rem 0;">${clean}</h2>`;
+            } else if (clean.length < 60 && !clean.endsWith(".")) {
+              formattedHtml += `<h3 style="color:#38bdf8; font-size:1.3rem; margin:1.5rem 0 0.5rem 0;">${clean}</h3>`;
+            } else {
+              formattedHtml += `<p style="margin-bottom:1.2rem; line-height:1.7;">${clean}</p>`;
+            }
+
+            // Insert rendered PDF page image diagram after first main section
+            if (idx === 1 && pageImages[0]) {
+              formattedHtml += `
+                <div style="margin:2rem 0; text-align:center;">
+                  <img src="${pageImages[0]}" alt="PDF Page Diagram" style="width:100%; max-height:480px; object-fit:contain; border-radius:10px; border:1px solid #1e293b; background:#080c12;" />
+                  <small style="color:var(--admin-muted); display:block; margin-top:0.5rem;">Diagram 1: Extracted from PDF Document</small>
+                </div>
+              `;
+            }
+          });
+
+          // Add Key Takeaway Callout Box
+          formattedHtml += `
+            <div style="background:rgba(2,132,199,0.1); border-left:4px solid #38bdf8; padding:1.25rem; border-radius:8px; margin:2rem 0;">
+              <strong style="color:#fff; display:block; margin-bottom:0.4rem;">💡 Key Implementation Takeaway:</strong>
+              <p style="margin-bottom:0; font-size:0.95rem; color:#cbd5e1;">Review the step-by-step transaction walkthrough and verify configuration rules in your SAP S/4HANA sandbox before transport release.</p>
+            </div>
+          `;
+
+          // Populate Form Fields
+          document.getElementById("blog-input-title").value = extractedTitle;
+          document.getElementById("blog-input-excerpt").value = excerpt;
+          if (document.getElementById("blog-input-image")) {
+            document.getElementById("blog-input-image").value = pageImages[0] || "https://youronementor.com/images/og-cover.svg";
+          }
+          document.getElementById("blog-input-content").value = formattedHtml;
+
+          if (pdfStatusMsg) {
+            pdfStatusMsg.style.color = "#10b981";
+            pdfStatusMsg.innerHTML = "🎉 <strong>PDF Converted Successfully!</strong> Title, excerpt, SEO headers, and page diagrams populated into form below. Click <strong>Publish Article</strong> below to make it live!";
+          }
+
+          document.getElementById("admin-new-blog-form")?.scrollIntoView({ behavior: "smooth" });
+
+        } catch (err) {
+          console.error("PDF Parsing Error:", err);
+          if (pdfStatusMsg) {
+            pdfStatusMsg.style.color = "#ef4444";
+            pdfStatusMsg.innerHTML = "❌ Failed to read PDF file. Please ensure it is a valid PDF document.";
+          }
+        }
+      });
+    }
+
+    if (!form) return;
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();

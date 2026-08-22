@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Portal · theTechMentor</title>
   <link rel="stylesheet" href="admin.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
 
@@ -265,9 +266,26 @@
 
       <!-- TAB 7: Blog CMS -->
       <div class="tab-pane" id="tab-blog-cms">
+
+        <!-- PDF Auto-Importer Card -->
+        <div class="card-panel" style="background: linear-gradient(135deg, rgba(2, 132, 199, 0.12), rgba(168, 85, 247, 0.12)); border: 1.5px dashed var(--admin-accent); margin-bottom: 1.75rem;">
+          <div style="text-align: center; padding: 1.5rem 1rem;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.4rem;">📄</div>
+            <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 0.35rem;">Upload PDF to Auto-Generate SEO Blog Article</h3>
+            <p style="color: var(--admin-muted); font-size: 0.9rem; max-width: 580px; margin: 0 auto 1.25rem auto;">
+              Drop your PDF document below. The engine will automatically extract the <strong>title</strong>, <strong>summary</strong>, <strong>page images</strong>, and structure it into clean SEO-friendly HTML!
+            </p>
+            <input type="file" id="pdf-file-input" accept="application/pdf" style="display: none;" />
+            <button type="button" class="login-btn" style="width: auto; padding: 0.85rem 2rem; background: linear-gradient(135deg, #0284c7, #a855f7); font-weight:700;" onclick="document.getElementById('pdf-file-input').click()">
+              📁 Select PDF Document &amp; Convert Now &rarr;
+            </button>
+            <div id="pdf-status-msg" style="margin-top: 1rem; font-size: 0.9rem; font-weight: 600;"></div>
+          </div>
+        </div>
+
         <div class="card-panel">
           <div class="panel-header">
-            <h3>Publish New Blog Article</h3>
+            <h3>Publish / Edit Blog Article</h3>
           </div>
           <form id="admin-new-blog-form">
             <div class="admin-form-group">
