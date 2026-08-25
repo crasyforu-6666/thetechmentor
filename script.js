@@ -450,24 +450,42 @@
     const homeBlogGrid = document.querySelector("#blog .blog-grid") || document.querySelector(".blog-grid");
     const isBlogHubPage = window.location.pathname.includes("/blog/");
     if (homeBlogGrid && !isBlogHubPage) {
-      const customBlogs = JSON.parse(localStorage.getItem("ttm_admin_custom_blogs") || "[]");
+      const localBlogs = JSON.parse(localStorage.getItem("ttm_admin_custom_blogs") || "[]");
+      const globalBlogs = window.TTM_CUSTOM_BLOGS || [];
+      
+      const blogMap = new Map();
+      [...globalBlogs, ...localBlogs].forEach(b => {
+        if (b && b.id && !blogMap.has(b.id)) {
+          blogMap.set(b.id, b);
+        }
+      });
+      const customBlogs = Array.from(blogMap.values());
+
       customBlogs.forEach(b => {
+        let catKey = "tutorial";
         let badgeClass = "blog-post-badge--green";
-        if (b.category === "Interview prep") badgeClass = "blog-post-badge--blue";
-        else if (b.category === "Career") badgeClass = "blog-post-badge--amber";
-        else if (b.category === "SAP news") badgeClass = "blog-post-badge--teal";
+        if (b.category === "Interview prep") { catKey = "interview"; badgeClass = "blog-post-badge--blue"; }
+        else if (b.category === "Career" || b.category === "CAREER BLUEPRINT") { catKey = "career"; badgeClass = "blog-post-badge--amber"; }
+        else if (b.category === "SAP news" || b.category === "SAP Updates" || (b.badge && b.badge.includes("SAP"))) { catKey = "news"; badgeClass = "blog-post-badge--teal"; }
+
+        // Check if card already exists on page to prevent duplicate rendering
+        const existingCard = homeBlogGrid.querySelector(`a[href*="${b.id}"]`) || (b.slug && homeBlogGrid.querySelector(`a[href*="${b.slug}"]`));
+        if (existingCard) return;
+
+        const targetHref = b.slug ? `blog/${b.slug}.html` : `blog/article.html?id=${b.id}`;
 
         const card = document.createElement("article");
         card.className = "blog-card";
+        card.dataset.cat = catKey;
         card.innerHTML = `
           <div class="blog-thumb" style="${b.imageUrl ? `background-image:url('${b.imageUrl}'); background-size:cover; background-position:center;` : 'background:#dcfce7;'}">
             ${b.imageUrl ? '' : '📝'}
           </div>
           <div class="blog-body">
             <span class="blog-post-badge ${badgeClass}">${b.category || 'Tutorial'}</span>
-            <h3 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">${b.title}</h3>
-            <div class="blog-meta-line">By Anshuman Behuria &middot; ${b.readTime || '8 min read'}</div>
-            <a href="blog/article.html?id=${b.id}" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
+            <div class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0; color:#fff; font-weight:700;">${b.title}</div>
+            <div class="blog-meta-line">By Anshuman Behuria &middot; ${b.readTime || '8 min read'} &middot; ${b.date || ''}</div>
+            <a href="${targetHref}" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
         `;
         homeBlogGrid.prepend(card);

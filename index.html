@@ -99,6 +99,7 @@
         <li><a href="#blog">Blog</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#faq">FAQ</a></li>
+        <li><a href="login/index.html" class="btn btn-sm btn-outline" id="nav-auth-btn" style="border:1px solid #38bdf8; color:#38bdf8;">Login</a></li>
         <li><a href="#enroll" class="btn btn-sm">Enroll</a></li>
       </ul>
     </nav>
@@ -732,6 +733,50 @@
         <!-- Blog grid -->
         <div class="blog-grid" id="blog-grid">
 
+          <article class="blog-card" data-cat="news">
+            <div class="blog-thumb" style="background:#ccfbf1;">📰</div>
+            <div class="blog-body">
+              <span class="blog-post-badge blog-post-badge--teal">SAP MM MASTERCLASS</span>
+              <div class="blog-post-title">SAP MM OBYC Account Determination: S/4HANA Automatic Posting Masterclass</div>
+              <div class="blog-meta-line">By Anshuman Behuria &middot; 12 min read</div>
+              <a href="blog/sap-mm-obyc-account-determination-s4hana-masterclass.html" class="blog-read-link">Read article &amp; join Q&amp;A &rarr;</a>
+            </div>
+          </article>
+
+
+          <!-- New Article 1: Autonomous AI -->
+          <article class="blog-card" data-cat="news">
+            <div class="blog-thumb" style="background:#ccfbf1;">🤖</div>
+            <div class="blog-body">
+              <span class="blog-post-badge blog-post-badge--teal">SAP UPDATES 2026</span>
+              <div class="blog-post-title">Autonomous AI in SAP S/4HANA MM &amp; EWM: 2026 Guide</div>
+              <div class="blog-meta-line">By Anshuman Behuria &middot; 9 min read</div>
+              <a href="blog/autonomous-ai-sap-mm-ewm-2026-guide.html" class="blog-read-link">Read article &amp; join Q&amp;A &rarr;</a>
+            </div>
+          </article>
+
+          <!-- New Article 2: Embedded EWM Matrix -->
+          <article class="blog-card" data-cat="news">
+            <div class="blog-thumb" style="background:#dcfce7;">🏭</div>
+            <div class="blog-body">
+              <span class="blog-post-badge blog-post-badge--teal">SAP EWM 2026</span>
+              <div class="blog-post-title">SAP S/4HANA 2026 Embedded EWM vs Decentral EWM Matrix</div>
+              <div class="blog-meta-line">By Anshuman Behuria &middot; 10 min read</div>
+              <a href="blog/s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix.html" class="blog-read-link">Read article &amp; join Q&amp;A &rarr;</a>
+            </div>
+          </article>
+
+          <!-- Featured Roadmap Blueprint Post -->
+          <article class="blog-card" data-cat="career" style="border: 1px solid var(--gold);">
+            <div class="blog-thumb" style="background:#fef3c7;">🚀</div>
+            <div class="blog-body">
+              <span class="blog-post-badge blog-post-badge--amber">CAREER BLUEPRINT 2026</span>
+              <div class="blog-post-title">How to Master SAP MM in 3 Months &mdash; 90-Day S/4HANA Career Roadmap</div>
+              <div class="blog-meta-line">By Anshuman Behuria &middot; 10 min read</div>
+              <a href="blog/how-to-master-sap-mm-in-3-months.html" class="blog-read-link">Read article &amp; join Q&amp;A &rarr;</a>
+            </div>
+          </article>
+
           <!-- Post 1 -->
           <article class="blog-card" data-cat="interview">
             <div class="blog-thumb" style="background:#dbeafe;">📋</div>
@@ -1196,6 +1241,21 @@
   </div>
 
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script src="script.js?v=3" defer></script>
+  <script src="auth/auth.js"></script>
+  <script src="blog/custom-blogs.js"></script>
+  <script src="script.js?v=4" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.TTM_AUTH) {
+        const user = window.TTM_AUTH.getCurrentUser();
+        const authNavBtn = document.getElementById("nav-auth-btn");
+        if (user && authNavBtn) {
+          authNavBtn.textContent = `Dashboard (${user.name.split(' ')[0]}) ↗`;
+          authNavBtn.href = window.TTM_AUTH.getRoleDashboardUrl(user.role).replace('../', '');
+          authNavBtn.style.background = "rgba(56, 189, 248, 0.15)";
+        }
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,2 @@
+[2026-08-25 14:18:56] ERROR: Attempt 1 failed for https://httpbin.org/status/500 - HTTP 500: INTERNAL SERVER ERROR
+[2026-08-25 14:18:59] ERROR: Attempt 2 failed for https://httpbin.org/status/500 - HTTP 500: INTERNAL SERVER ERROR

@@ -350,6 +350,14 @@
             window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
           }
 
+          // Generate Data URL for Original PDF Download
+          const pdfReader = new FileReader();
+          const pdfDataUrlPromise = new Promise((resolve) => {
+            pdfReader.onload = () => resolve(pdfReader.result);
+            pdfReader.readAsDataURL(file);
+          });
+          const pdfDataUrl = await pdfDataUrlPromise;
+
           const arrayBuffer = await file.arrayBuffer();
           const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
 
@@ -386,36 +394,103 @@
           // Parse Excerpt
           const excerpt = fullExtractedText.substring(0, 180).replace(/\s+/g, " ") + "...";
 
-          // Format HTML with SEO Headers & Callouts
-          let formattedHtml = "";
+          // Parse Sections & Generate Clickable Table of Contents (TOC)
           let sectionBlocks = fullExtractedText.split("\n\n").filter(b => b.trim().length > 0);
+          let tocItems = [];
+          let tocCounter = 1;
 
+          sectionBlocks.forEach((block) => {
+            let clean = block.trim();
+            if (/^[0-9]+\.\s+/.test(clean) || (clean.length < 65 && !clean.endsWith("."))) {
+              const secId = `section-${tocCounter++}`;
+              tocItems.push({ id: secId, title: clean });
+            }
+          });
+
+          // Build Universal Web Format
+          let formattedHtml = "";
+
+          // SECTION 1: PDF Download Component (Top)
+          formattedHtml += `
+            <div style="background:#080d14; border:1px solid #1e293b; border-left:4px solid #38bdf8; padding:1.25rem; border-radius:10px; margin:1.5rem 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+              <div>
+                <strong style="color:#fff; font-size:1.05rem; display:block;">📄 Download Original PDF Guide</strong>
+                <span style="color:#94a3b8; font-size:0.85rem;">Prefer reading offline? Download the original PDF document.</span>
+              </div>
+              <a href="${pdfDataUrl}" download="${file.name}" class="btn btn-sm btn-primary" style="padding:0.6rem 1.25rem; font-weight:700; text-decoration:none; background:linear-gradient(135deg,#0284c7,#7c3aed); border:none; color:#fff; border-radius:6px;">Download PDF ↗</a>
+            </div>
+          `;
+
+          // SECTION 2: Table of Contents (TOC)
+          if (tocItems.length > 0) {
+            formattedHtml += `
+              <div style="background:#080d14; border:1px solid #1e293b; border-radius:10px; padding:1.5rem; margin:1.75rem 0;">
+                <h3 style="color:#fff; font-size:1.15rem; font-weight:700; margin:0 0 0.85rem 0; border-bottom:1px solid #1e293b; padding-bottom:0.5rem;">📑 Table of Contents</h3>
+                <ul style="padding-left:1.25rem; margin:0; display:flex; flex-direction:column; gap:0.4rem;">
+                  ${tocItems.map(item => `<li><a href="#${item.id}" style="color:#38bdf8; text-decoration:none; font-weight:600;">${item.title}</a></li>`).join("")}
+                </ul>
+              </div>
+            `;
+          }
+
+          // SECTION 3: Content Body Formatting
+          let currentTocIdx = 0;
           sectionBlocks.forEach((block, idx) => {
-            const clean = block.trim();
+            let clean = block.trim();
+
+            // Highlight T-Codes & SAP terms
+            clean = clean.replace(/\b(SPRO|ME51N|ME21N|MIGO|MIRO|OBYC|XK01|FK01|FLVN00|FLVN01|ME01|ME41|MRKO|BSX|WRX|PRD|GBB-VBR|M7021|MR11|MMBE|MB52|MATDOC|BP|ROH|HALB|FERT|NB)\b/g, '<code style="background:#1e293b; color:#38bdf8; padding:0.15rem 0.4rem; border-radius:4px; font-weight:600;">$1</code>');
+
             if (idx === 0) {
-              formattedHtml += `<h2 style="color:#fff; font-size:1.6rem; margin:1.5rem 0 0.8rem 0;">${clean}</h2>`;
-            } else if (clean.length < 60 && !clean.endsWith(".")) {
-              formattedHtml += `<h3 style="color:#38bdf8; font-size:1.3rem; margin:1.5rem 0 0.5rem 0;">${clean}</h3>`;
+              formattedHtml += `<p style="font-size:1.15rem; line-height:1.75; color:#cbd5e1; margin-bottom:1.5rem;">${clean}</p>`;
+            } else if (/^[0-9]+\.\s+/.test(clean) || (clean.length < 65 && !clean.endsWith("."))) {
+              const secId = tocItems[currentTocIdx] ? tocItems[currentTocIdx++].id : `section-${idx}`;
+              formattedHtml += `<h2 id="${secId}" style="color:#fff; font-size:1.5rem; margin:2.25rem 0 1rem 0; font-weight:700; border-bottom:1px solid #1e293b; padding-bottom:0.5rem;">${clean}</h2>`;
+            } else if (clean.startsWith("•") || clean.startsWith("-") || clean.includes("\n•")) {
+              const items = clean.split(/\n?[•\-]\s+/).filter(i => i.trim().length > 0);
+              formattedHtml += `<ul style="padding-left:1.25rem; margin-bottom:1.25rem; display:flex; flex-direction:column; gap:0.5rem;">` +
+                items.map(item => `<li style="line-height:1.6; color:#cbd5e1;">${item.trim()}</li>`).join("") +
+                `</ul>`;
             } else {
-              formattedHtml += `<p style="margin-bottom:1.2rem; line-height:1.7;">${clean}</p>`;
+              formattedHtml += `<p style="margin-bottom:1.25rem; line-height:1.75; color:#cbd5e1;">${clean}</p>`;
             }
 
-            // Insert rendered PDF page image diagram after first main section
+            // Insert rendered PDF page image diagram after major section
             if (idx === 1 && pageImages[0]) {
               formattedHtml += `
-                <div style="margin:2rem 0; text-align:center;">
-                  <img src="${pageImages[0]}" alt="PDF Page Diagram" style="width:100%; max-height:480px; object-fit:contain; border-radius:10px; border:1px solid #1e293b; background:#080c12;" />
-                  <small style="color:var(--admin-muted); display:block; margin-top:0.5rem;">Diagram 1: Extracted from PDF Document</small>
+                <div style="margin:2rem 0; text-align:center; background:#080d14; border:1px solid #1e293b; border-radius:12px; padding:1.25rem;">
+                  <img src="${pageImages[0]}" alt="PDF Diagram" style="width:100%; max-height:500px; object-fit:contain; border-radius:8px;" />
+                  <small style="color:var(--admin-muted); display:block; margin-top:0.75rem;">Figure 1: Visual Diagram Extracted from PDF Document</small>
                 </div>
               `;
             }
           });
 
-          // Add Key Takeaway Callout Box
+          // SECTION 4: Important Callout Cards & Dynamic Key Takeaways
+          const takeawayList = sectionBlocks.slice(1, 4).map(b => b.trim()).filter(b => b.length > 20 && b.length < 200);
+          
+          if (takeawayList.length > 0) {
+            formattedHtml += `
+              <div style="background:rgba(2,132,199,0.1); border-left:4px solid #38bdf8; padding:1.25rem; border-radius:8px; margin:2rem 0;">
+                <strong style="color:#fff; display:block; margin-bottom:0.4rem;">🎯 KEY TAKEAWAY</strong>
+                <p style="margin-bottom:0; font-size:0.95rem; color:#cbd5e1;">${takeawayList[0]}</p>
+              </div>
+
+              <div style="background:#080d14; border:1px solid #1e293b; border-radius:10px; padding:1.5rem; margin:2rem 0;">
+                <h3 style="color:#fff; font-size:1.2rem; font-weight:700; margin:0 0 0.75rem 0;">🚀 Key Takeaways Summary</h3>
+                <ul style="padding-left:1.25rem; margin:0; display:flex; flex-direction:column; gap:0.55rem; color:#cbd5e1;">
+                  ${takeawayList.map(t => `<li>${t}</li>`).join("")}
+                </ul>
+              </div>
+            `;
+          }
+
+          // SECTION 5: Footer PDF Download
           formattedHtml += `
-            <div style="background:rgba(2,132,199,0.1); border-left:4px solid #38bdf8; padding:1.25rem; border-radius:8px; margin:2rem 0;">
-              <strong style="color:#fff; display:block; margin-bottom:0.4rem;">💡 Key Implementation Takeaway:</strong>
-              <p style="margin-bottom:0; font-size:0.95rem; color:#cbd5e1;">Review the step-by-step transaction walkthrough and verify configuration rules in your SAP S/4HANA sandbox before transport release.</p>
+            <div style="background:#080d14; border:1px solid #1e293b; border-radius:10px; padding:1.5rem; margin-top:2.5rem; text-align:center;">
+              <h4 style="color:#fff; font-size:1.15rem; font-weight:700; margin-bottom:0.4rem;">📄 Need Offline Access?</h4>
+              <p style="color:#94a3b8; font-size:0.9rem; margin-bottom:1rem;">Download the full original PDF document to read anytime.</p>
+              <a href="${pdfDataUrl}" download="${file.name}" class="btn btn-primary" style="padding:0.75rem 1.75rem; font-weight:700; text-decoration:none; background:linear-gradient(135deg,#0284c7,#7c3aed); border:none; color:#fff; border-radius:6px;">Download Original PDF File ↗</a>
             </div>
           `;
 
@@ -490,9 +565,14 @@
 
         customBlogs.unshift(newPost);
         localStorage.setItem(BLOGS_KEY, JSON.stringify(customBlogs));
+
+        // Push to global window repository for instant cross-device URL access
+        window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [];
+        window.TTM_CUSTOM_BLOGS.unshift(newPost);
+
         window.TTM_AUTH.logAudit(currentUser.id, currentUser.email, "BLOG_PUBLISHED", "blog", newPost.id, "SUCCESS", { title });
 
-        alert(`🎉 Blog article "${title}" published successfully!`);
+        alert(`🎉 Blog article "${title}" published successfully! View live at article.html?id=${newPost.id}`);
       }
 
       form.reset();
@@ -500,14 +580,56 @@
     });
   }
 
+  // Cover File Input Handler
+  const coverFileInput = document.getElementById("cover-file-input");
+  if (coverFileInput) {
+    coverFileInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const coverInput = document.getElementById("blog-input-image");
+        if (coverInput) {
+          coverInput.value = event.target.result;
+          alert("🎉 Cover image uploaded successfully!");
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Content Image File Input Handler
+  const contentFileInput = document.getElementById("content-file-input");
+  if (contentFileInput) {
+    contentFileInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const caption = prompt("Enter Caption / Alt Text for this Image:", file.name.replace(/\.[^/.]+$/, "")) || "Article Screenshot";
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const textarea = document.getElementById("blog-input-content");
+        if (textarea) {
+          const figureTag = `\n\n<figure style="margin:2.25rem 0; text-align:center; background:#080d14; border:1px solid #1e293b; border-radius:12px; padding:1.25rem;">\n  <img src="${event.target.result}" alt="${caption}" style="width:100%; max-height:550px; object-fit:contain; border-radius:8px;" />\n  <figcaption style="color:#94a3b8; font-size:0.85rem; margin-top:0.75rem; font-weight:600;">Figure: ${caption}</figcaption>\n</figure>\n\n`;
+          const start = textarea.selectionStart || textarea.value.length;
+          const end = textarea.selectionEnd || textarea.value.length;
+          textarea.value = textarea.value.substring(0, start) + figureTag + textarea.value.substring(end);
+          textarea.focus();
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
   window.insertImageHelper = function() {
-    const imgUrl = prompt("Enter the Direct Image URL (or path like ../images/your-screenshot.png):", "https://youronementor.com/images/og-cover.svg");
+    const imgUrl = prompt("Enter Direct Image URL (or path like ../images/your-screenshot.png):", "https://youronementor.com/images/og-cover.svg");
     if (!imgUrl) return;
-    const altText = prompt("Enter Image Description / Caption:", "SAP Configuration Screenshot") || "Article Image";
+    const caption = prompt("Enter Image Description / Caption:", "SAP Configuration Screenshot") || "Article Image";
     const textarea = document.getElementById("blog-input-content");
     if (textarea) {
-      const markdownTag = `\n\n![${altText}](${imgUrl})\n\n`;
-      textarea.value += markdownTag;
+      const figureTag = `\n\n<figure style="margin:2.25rem 0; text-align:center; background:#080d14; border:1px solid #1e293b; border-radius:12px; padding:1.25rem;">\n  <img src="${imgUrl}" alt="${caption}" style="width:100%; max-height:550px; object-fit:contain; border-radius:8px;" />\n  <figcaption style="color:#94a3b8; font-size:0.85rem; margin-top:0.75rem; font-weight:600;">Figure: ${caption}</figcaption>\n</figure>\n\n`;
+      const start = textarea.selectionStart || textarea.value.length;
+      const end = textarea.selectionEnd || textarea.value.length;
+      textarea.value = textarea.value.substring(0, start) + figureTag + textarea.value.substring(end);
       textarea.focus();
     }
   };
@@ -515,7 +637,17 @@
   function renderCustomBlogs() {
     const list = document.getElementById("admin-custom-blogs-list");
     if (!list) return;
-    const customBlogs = JSON.parse(localStorage.getItem(BLOGS_KEY) || "[]");
+    const localBlogs = JSON.parse(localStorage.getItem(BLOGS_KEY) || "[]");
+    const globalBlogs = window.TTM_CUSTOM_BLOGS || [];
+    
+    const blogMap = new Map();
+    [...globalBlogs, ...localBlogs].forEach(b => {
+      if (b && b.id && !blogMap.has(b.id)) {
+        blogMap.set(b.id, b);
+      }
+    });
+    const customBlogs = Array.from(blogMap.values());
+
     if (customBlogs.length === 0) {
       list.innerHTML = `<p style="color:var(--admin-muted); font-size:0.9rem;">No custom articles published yet.</p>`;
       return;

@@ -62,6 +62,50 @@
       <!-- Blog Grid -->
       <div class="blog-grid" id="hub-blog-grid">
 
+        <article class="blog-card" data-cat="news">
+          <div class="blog-thumb" style="background:#ccfbf1;">📰</div>
+          <div class="blog-body">
+            <span class="blog-post-badge blog-post-badge--teal">SAP MM MASTERCLASS</span>
+            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP MM OBYC Account Determination: S/4HANA Automatic Posting Masterclass</h2>
+            <div class="blog-meta-line">By Anshuman Behuria &middot; 12 min read</div>
+            <a href="sap-mm-obyc-account-determination-s4hana-masterclass.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
+          </div>
+        </article>
+
+
+        <!-- Embedded EWM Decision Matrix 2026 -->
+        <article class="blog-card" data-cat="news">
+          <div class="blog-thumb" style="background:#dcfce7;">🏭</div>
+          <div class="blog-body">
+            <span class="blog-post-badge blog-post-badge--teal">SAP EWM 2026</span>
+            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP S/4HANA 2026 Embedded EWM vs Decentral EWM Matrix</h2>
+            <div class="blog-meta-line">By Anshuman Behuria &middot; 10 min read</div>
+            <a href="s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
+          </div>
+        </article>
+
+        <!-- New Autonomous AI Agentic Post 2026 -->
+        <article class="blog-card" data-cat="news">
+          <div class="blog-thumb" style="background:#ccfbf1;">🤖</div>
+          <div class="blog-body">
+            <span class="blog-post-badge blog-post-badge--teal">SAP UPDATES 2026</span>
+            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">Autonomous AI in SAP S/4HANA MM &amp; EWM: 2026 Guide</h2>
+            <div class="blog-meta-line">By Anshuman Behuria &middot; 9 min read</div>
+            <a href="autonomous-ai-sap-mm-ewm-2026-guide.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Featured Roadmap Blueprint Post -->
+        <article class="blog-card" data-cat="career" style="border: 1px solid var(--blog-accent);">
+          <div class="blog-thumb" style="background:#fef3c7;">🚀</div>
+          <div class="blog-body">
+            <span class="blog-post-badge blog-post-badge--amber">CAREER BLUEPRINT 2026</span>
+            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">How to Master SAP MM in 3 Months &mdash; 90-Day S/4HANA Career Roadmap</h2>
+            <div class="blog-meta-line">By Anshuman Behuria &middot; 10 min read</div>
+            <a href="how-to-master-sap-mm-in-3-months.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
+          </div>
+        </article>
+
         <!-- Post 1 -->
         <article class="blog-card" data-cat="interview">
           <div class="blog-thumb" style="background:#dbeafe;">📋</div>
@@ -178,20 +222,36 @@
     </div>
   </footer>
 
+  <script src="custom-blogs.js"></script>
   <script src="../script.js"></script>
   <script>
     // Load Custom Admin Published Blogs
     document.addEventListener("DOMContentLoaded", () => {
       const grid = document.getElementById("hub-blog-grid");
-      const customBlogs = JSON.parse(localStorage.getItem("ttm_admin_custom_blogs") || "[]");
+      const localBlogs = JSON.parse(localStorage.getItem("ttm_admin_custom_blogs") || "[]");
+      const globalBlogs = window.TTM_CUSTOM_BLOGS || [];
+
+      const blogMap = new Map();
+      [...globalBlogs, ...localBlogs].forEach(b => {
+        if (b && b.id && !blogMap.has(b.id)) {
+          blogMap.set(b.id, b);
+        }
+      });
+      const customBlogs = Array.from(blogMap.values());
 
       if (grid && customBlogs.length > 0) {
         customBlogs.forEach(b => {
+          // Prevent duplicates if hardcoded in static HTML
+          const existingCard = grid.querySelector(`a[href*="${b.id}"]`) || (b.slug && grid.querySelector(`a[href*="${b.slug}"]`));
+          if (existingCard) return;
+
           let catKey = "tutorial";
           let badgeClass = "blog-post-badge--green";
           if (b.category === "Interview prep") { catKey = "interview"; badgeClass = "blog-post-badge--blue"; }
-          else if (b.category === "Career") { catKey = "career"; badgeClass = "blog-post-badge--amber"; }
-          else if (b.category === "SAP news") { catKey = "news"; badgeClass = "blog-post-badge--teal"; }
+          else if (b.category === "Career" || b.category === "CAREER BLUEPRINT") { catKey = "career"; badgeClass = "blog-post-badge--amber"; }
+          else if (b.category === "SAP news" || b.category === "SAP Updates" || (b.badge && b.badge.includes("SAP"))) { catKey = "news"; badgeClass = "blog-post-badge--teal"; }
+
+          const targetHref = b.slug ? `${b.slug}.html` : `article.html?id=${b.id}`;
 
           const card = document.createElement("article");
           card.className = "blog-card";
@@ -202,9 +262,9 @@
             </div>
             <div class="blog-body">
               <span class="blog-post-badge ${badgeClass}">${b.category || 'Tutorial'}</span>
-              <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">${b.title}</h2>
+              <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0; color:#fff;">${b.title}</h2>
               <div class="blog-meta-line">By Anshuman Behuria &middot; ${b.readTime || '8 min read'} &middot; ${b.date || ''}</div>
-              <a href="article.html?id=${b.id}" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
+              <a href="${targetHref}" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
             </div>
           `;
           grid.prepend(card);

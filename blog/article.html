@@ -102,6 +102,7 @@
     </article>
   </main>
 
+  <script src="custom-blogs.js"></script>
   <script src="blog-comments.js"></script>
   <script>
     // Simple Markdown to HTML parser
@@ -109,8 +110,8 @@
       if (!md) return "";
       let html = md;
       
-      // Images: ![alt](url) -> <img src="url" alt="alt" style="width:100%; border-radius:8px; margin:1.5rem 0;" />
-      html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" style="width:100%; max-height:500px; object-fit:cover; border-radius:8px; margin:1.5rem 0; border:1px solid #1e293b;" />');
+      // Images
+      html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<figure style="margin:2.25rem 0; text-align:center; background:#080d14; border:1px solid #1e293b; border-radius:12px; padding:1.25rem;"><img src="$2" alt="$1" style="width:100%; max-height:550px; object-fit:contain; border-radius:8px;" /><figcaption style="color:#94a3b8; font-size:0.85rem; margin-top:0.75rem; font-weight:600;">$1</figcaption></figure>');
       
       // Headers
       html = html.replace(/^### (.*$)/gim, '<h3 style="color:#fff; font-size:1.35rem; margin:1.75rem 0 0.75rem 0;">$1</h3>');
@@ -136,26 +137,37 @@
       const postId = params.get("id");
       const postSlug = params.get("slug");
 
-      const customBlogs = JSON.parse(localStorage.getItem("ttm_admin_custom_blogs") || "[]");
-      const article = customBlogs.find(b => b.id === postId || b.slug === postSlug);
+      const localBlogs = JSON.parse(localStorage.getItem("ttm_admin_custom_blogs") || "[]");
+      const globalBlogs = window.TTM_CUSTOM_BLOGS || [];
+      const allBlogs = [...globalBlogs, ...localBlogs];
+
+      const article = allBlogs.find(b => b.id === postId || b.slug === postSlug || (b.id && postId && b.id.includes(postId)));
 
       if (article) {
         document.getElementById("page-title").textContent = article.title + " · theTechMentor";
         document.getElementById("art-title").textContent = article.title;
         document.getElementById("art-category").textContent = article.category || "Tutorial";
         document.getElementById("art-meta").textContent = (article.date || "Aug 2026") + " · " + (article.readTime || "8 min read");
-        document.getElementById("art-excerpt").textContent = article.excerpt || "";
+        if (article.excerpt) {
+          document.getElementById("art-excerpt").textContent = article.excerpt;
+        } else {
+          document.getElementById("art-excerpt").style.display = "none";
+        }
 
         if (article.imageUrl) {
           document.getElementById("cover-img-wrap").style.display = "block";
           document.getElementById("art-cover-img").src = article.imageUrl;
         }
 
-        // Render Body
-        document.getElementById("art-body").innerHTML = parseMarkdown(article.content);
+        // Render Body Content
+        if (article.content && article.content.trim().startsWith("<")) {
+          document.getElementById("art-body").innerHTML = article.content;
+        } else {
+          document.getElementById("art-body").innerHTML = parseMarkdown(article.content);
+        }
       } else {
         document.getElementById("art-title").textContent = "Article Not Found";
-        document.getElementById("art-body").innerHTML = "<p>The requested blog post could not be loaded. Return to <a href='index.html' style='color:#38bdf8;'>Blog Hub</a>.</p>";
+        document.getElementById("art-body").innerHTML = "<p style='color:#cbd5e1;'>The requested article could not be loaded. Please return to the <a href='index.html' style='color:#38bdf8;'>Blog Hub</a> to view all published guides.</p>";
       }
     });
   </script>

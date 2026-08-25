@@ -315,19 +315,27 @@
                 <input type="text" id="blog-input-excerpt" class="admin-input" placeholder="Short description for Google and social previews..." />
               </div>
               <div class="admin-form-group">
-                <label class="admin-form-label">Cover / Featured Image URL</label>
-                <input type="url" id="blog-input-image" class="admin-input" placeholder="e.g. https://youronementor.com/images/og-cover.svg" />
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.25rem;">
+                  <label class="admin-form-label" style="margin-bottom:0;">Cover / Featured Image</label>
+                  <button type="button" class="action-btn" style="font-size:0.75rem; padding:0.2rem 0.5rem;" onclick="document.getElementById('cover-file-input').click()">📁 Upload Cover</button>
+                </div>
+                <input type="file" id="cover-file-input" accept="image/*" style="display:none;" />
+                <input type="url" id="blog-input-image" class="admin-input" placeholder="Paste URL or upload image file..." />
               </div>
             </div>
 
             <div class="admin-form-group">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem; flex-wrap:wrap; gap:0.5rem;">
                 <label class="admin-form-label" style="margin-bottom:0;">Article Content (Markdown / HTML) *</label>
-                <button type="button" class="action-btn" style="font-size:0.75rem; padding:0.25rem 0.6rem;" onclick="window.insertImageHelper()">🖼️ Insert Image in Content</button>
+                <div style="display:flex; gap:0.5rem;">
+                  <input type="file" id="content-file-input" accept="image/*" style="display:none;" />
+                  <button type="button" class="action-btn action-btn-green" style="font-size:0.75rem; padding:0.25rem 0.6rem;" onclick="document.getElementById('content-file-input').click()">📁 Upload &amp; Embed Image</button>
+                  <button type="button" class="action-btn" style="font-size:0.75rem; padding:0.25rem 0.6rem;" onclick="window.insertImageHelper()">🌐 Insert Image URL</button>
+                </div>
               </div>
-              <textarea id="blog-input-content" class="admin-textarea" style="min-height:220px;" placeholder="Write your guide... Use Markdown ![Alt](url) or HTML <img src='url'> to embed inline screenshots!" required></textarea>
+              <textarea id="blog-input-content" class="admin-textarea" style="min-height:260px;" placeholder="Write your guide in well-defined paragraphs... Use the buttons above to upload screenshots or diagrams directly from your computer!" required></textarea>
               <small style="color:var(--admin-muted); display:block; margin-top:0.4rem; font-size:0.8rem;">
-                💡 <strong>Tip:</strong> Embed inline screenshots with Markdown <code>![Alt Text](Image_URL)</code> or HTML <code>&lt;img src="Image_URL" style="width:100%; border-radius:8px;" /&gt;</code>.
+                💡 <strong>Tip:</strong> Click <strong>📁 Upload &amp; Embed Image</strong> above to insert any screenshot or diagram from your device directly into the body paragraphs.
               </small>
             </div>
 
