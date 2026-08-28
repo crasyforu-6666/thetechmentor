@@ -66,6 +66,70 @@ TOPIC_POOL = [
             ("Execution Engine", "Wave Management, Picking Strategies, and Resource Management"),
             ("Scenario Questions", "Real-World Troubleshooting Questions asked by Top MNC Intervewers")
         ]
+    },
+    {
+        "title": "SAP EWM POSC vs LOSC Storage Control: S/4HANA Deep Dive Blueprint",
+        "slug": "sap-ewm-posc-losc-storage-control-deep-dive",
+        "category": "Tutorial",
+        "badge": "SAP EWM Masterclass",
+        "read_time": "14 min read",
+        "keyword": "sap ewm posc losc storage control s4hana",
+        "meta_desc": "Master Process-Oriented (POSC) and Layout-Oriented (LOSC) Storage Control in SAP S/4HANA EWM with step-by-step customizing rules.",
+        "role": "SAP EWM Senior Consultant / Warehouse Architect",
+        "sections": [
+            ("POSC Foundations", "Configuring Multi-Step Inbound Deconsolidation, Inspection & Putaway"),
+            ("LOSC Rules", "Handling Intermediate Storage Bins, Conveyor Belts & Automated Systems"),
+            ("Combined Scenarios", "Integrating POSC + LOSC in Complex Distribution Centers"),
+            ("Customizing Blueprint", "SPRO Path, Storage Process Steps, and Warehouse Task Creation Logic")
+        ]
+    },
+    {
+        "title": "SAP MM Pricing Procedure (Calculation Schema) Configuration Guide",
+        "slug": "sap-mm-pricing-procedure-schema-s4hana-guide",
+        "category": "Tutorial",
+        "badge": "SAP MM Blueprint",
+        "read_time": "13 min read",
+        "keyword": "sap mm pricing procedure calculation schema s4hana",
+        "meta_desc": "Step-by-step configuration of Condition Types, Access Sequences, Calculation Schemata, and Schema Determination in SAP MM.",
+        "role": "SAP MM Functional Lead / Procurement Specialist",
+        "sections": [
+            ("Condition Technique", "Understanding Field Catalog, Condition Tables & Access Sequences"),
+            ("Calculation Schema", "Step, Counter, Condition Type, From/To, and Requirement Formulas"),
+            ("Schema Determination", "Mapping Purchase Org, Vendor Schema, and Document Schema"),
+            ("S/4HANA Enhancements", "Handling Freight Costs, Discounts, and Tax Conditions in Fiori")
+        ]
+    },
+    {
+        "title": "SAP S/4HANA MRP Live vs Classic MRP: Performance & Functional Matrix",
+        "slug": "sap-s4hana-mrp-live-classic-mrp-comparison",
+        "category": "Guide",
+        "badge": "S/4HANA 2026",
+        "read_time": "11 min read",
+        "keyword": "sap s4hana mrp live vs classic mrp md01n",
+        "meta_desc": "Detailed architectural comparison between MRP Live (MD01N) and Classic MRP (MD01) in S/4HANA Sourcing & Procurement.",
+        "role": "SAP MM/PP Lead Consultant & Logistics Architect",
+        "sections": [
+            ("HANA In-Memory Engine", "How MRP Live Executes Directly on HANA Database Layer"),
+            ("Functional Scope Changes", "Supported vs Unsupported Materials in MRP Live (BADI PPH_MRP_DISER)"),
+            ("PPH_MRP_DISER Check", "Analyzing MRP Live Compatibility via Report PPH_CHECK_MRP_ON_HANA"),
+            ("Migration Strategy", "Best Practices for Transitioning Plant Operations to MD01N")
+        ]
+    },
+    {
+        "title": "SAP MM Split Valuation Configuration: S/4HANA Inventory Valuation Masterclass",
+        "slug": "sap-mm-split-valuation-configuration-step-by-step",
+        "category": "Tutorial",
+        "badge": "SAP MM Advanced",
+        "read_time": "12 min read",
+        "keyword": "sap mm split valuation configuration s4hana",
+        "meta_desc": "Learn how to configure Valuation Types, Valuation Categories, and Local/Global Rules for Split Valuation in SAP MM.",
+        "role": "SAP MM / FI Inventory Analyst",
+        "sections": [
+            ("Use Cases", "In-House vs Procured, Batch-Specific, and Refurbished Goods Valuation"),
+            ("SPRO Configuration", "Valuation Types, Valuation Categories, and Global Types Activation"),
+            ("Material Master Setup", "Accounting 1 View Setup and Price Control (V/S) Selection"),
+            ("Goods Movement Execution", "MIGO Postings & Financial Posting Analysis for Split Valuated Items")
+        ]
     }
 ]
 
@@ -79,8 +143,23 @@ def log_msg(msg: str):
 def run_daily_publisher():
     log_msg("🚀 Starting Autonomous Twice-Daily Blog Publishing Routine...")
     
-    # Pick a topic that hasn't been published recently
-    topic = random.choice(TOPIC_POOL)
+    # Check already published slugs
+    published_slugs = set()
+    custom_blogs_js = os.path.join(BLOG_DIR, "custom-blogs.js")
+    if os.path.exists(custom_blogs_js):
+        with open(custom_blogs_js, "r", encoding="utf-8") as f:
+            content = f.read()
+            for t in TOPIC_POOL:
+                if t['slug'] in content:
+                    published_slugs.add(t['slug'])
+
+    # Filter un-published topics
+    available_topics = [t for t in TOPIC_POOL if t['slug'] not in published_slugs]
+    if not available_topics:
+        log_msg("ℹ️ All predefined topics have been published. Selecting from entire pool to cycle updates...")
+        available_topics = TOPIC_POOL
+
+    topic = random.choice(available_topics)
     log_msg(f"📌 Selected Trending Topic: {topic['title']}")
     log_msg(f"📌 Primary SEO Keyword : {topic['keyword']}")
     log_msg(f"📌 Target Article Slug  : {topic['slug']}")

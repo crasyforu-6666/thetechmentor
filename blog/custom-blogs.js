@@ -245,5 +245,25 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     date: "Aug 25, 2026",
     excerpt: "Master SAP MM OBYC automatic account determination, BSX, WRX, GBB valuation keys, and FI integration in S/4HANA.",
     imageUrl: "https://youronementor.com/images/og-cover.svg"
+  },
+  {
+    id: "post_1787892656280",
+    title: "Top 25 SAP EWM Interview Questions & Answers for 2026",
+    slug: "top-25-sap-ewm-interview-questions-2026",
+    category: "Interview prep",
+    readTime: "15 min read",
+    date: "Aug 28, 2026",
+    excerpt: "Prepare for senior SAP EWM consultant interviews with 25 model questions on Storage Types, Wave Management, POSC, and LOSC.",
+    imageUrl: "https://youronementor.com/images/og-cover.svg"
+  },
+  {
+    id: "post_1787892679924",
+    title: "SAP S/4HANA MRP Live vs Classic MRP: Performance & Functional Matrix",
+    slug: "sap-s4hana-mrp-live-classic-mrp-comparison",
+    category: "Guide",
+    readTime: "11 min read",
+    date: "Aug 28, 2026",
+    excerpt: "Detailed architectural comparison between MRP Live (MD01N) and Classic MRP (MD01) in S/4HANA Sourcing & Procurement.",
+    imageUrl: "https://youronementor.com/images/og-cover.svg"
   }
 ];
