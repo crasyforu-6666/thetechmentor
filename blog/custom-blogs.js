@@ -305,5 +305,15 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     date: "Sep 05, 2026",
     excerpt: "Discover the top 5 highest-paying SAP S/4HANA modules in 2026 to crack ₹20+ LPA salaries in India. Complete career roadmap, market demand, and skill blueprints.",
     imageUrl: "https://youronementor.com/images/og-cover.svg"
+  },
+  {
+    id: "post_1788602783210",
+    title: "SAP MM Split Valuation Configuration: S/4HANA Inventory Valuation Masterclass",
+    slug: "sap-mm-split-valuation-configuration-step-by-step",
+    category: "Tutorial",
+    readTime: "12 min read",
+    date: "Sep 05, 2026",
+    excerpt: "Learn how to configure Valuation Types, Valuation Categories, and Local/Global Rules for Split Valuation in SAP MM.",
+    imageUrl: "https://youronementor.com/images/og-cover.svg"
   }
 ];
