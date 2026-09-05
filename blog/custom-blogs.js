@@ -285,5 +285,15 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     date: "Sep 05, 2026",
     excerpt: "Step-by-step configuration of Condition Types, Access Sequences, Calculation Schemata, and Schema Determination in SAP MM.",
     imageUrl: "https://youronementor.com/images/og-cover.svg"
+  },
+  {
+    id: "post_1788595122055",
+    title: "SAP EWM POSC vs LOSC Storage Control: S/4HANA Deep Dive Blueprint",
+    slug: "sap-ewm-posc-losc-storage-control-deep-dive",
+    category: "Tutorial",
+    readTime: "14 min read",
+    date: "Sep 05, 2026",
+    excerpt: "Master Process-Oriented (POSC) and Layout-Oriented (LOSC) Storage Control in SAP S/4HANA EWM with step-by-step customizing rules.",
+    imageUrl: "https://youronementor.com/images/og-cover.svg"
   }
 ];
