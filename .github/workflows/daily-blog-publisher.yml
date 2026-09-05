@@ -1,0 +1,38 @@
+name: Twice-Daily Autonomous SAP Blog Publisher
+
+on:
+  schedule:
+    # 9:00 AM IST = 03:30 AM UTC
+    - cron: '30 3 * * *'
+    # 7:30 PM IST = 14:00 (2:00 PM) UTC
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish-blog:
+    runs-on: ubuntu-latest
+    name: Run Twice-Daily Content Research & SEO Publishing Routine
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Execute Autonomous Blog Scheduler
+        run: |
+          python3 scripts/auto_daily_blog_scheduler.py
+
+      - name: Commit and Push Updated Articles & JS Repository
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "feat(blog): automated twice-daily blog publication [skip ci]"
+          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          file_pattern: "blog/* index.html logs/*"

@@ -265,5 +265,25 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     date: "Aug 28, 2026",
     excerpt: "Detailed architectural comparison between MRP Live (MD01N) and Classic MRP (MD01) in S/4HANA Sourcing & Procurement.",
     imageUrl: "https://youronementor.com/images/og-cover.svg"
+  },
+  {
+    id: "post_1788593713418",
+    title: "SAP S/4HANA 2026 Embedded EWM vs Decentral EWM: Complete Decision Matrix",
+    slug: "s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix",
+    category: "Tutorial",
+    readTime: "10 min read",
+    date: "Sep 05, 2026",
+    excerpt: "Comprehensive comparison between Embedded EWM and Decentralized EWM on S/4HANA 2026 for supply chain leads and functional consultants.",
+    imageUrl: "https://youronementor.com/images/og-cover.svg"
+  },
+  {
+    id: "post_1788594806242",
+    title: "SAP MM Pricing Procedure (Calculation Schema) Configuration Guide",
+    slug: "sap-mm-pricing-procedure-schema-s4hana-guide",
+    category: "Tutorial",
+    readTime: "13 min read",
+    date: "Sep 05, 2026",
+    excerpt: "Step-by-step configuration of Condition Types, Access Sequences, Calculation Schemata, and Schema Determination in SAP MM.",
+    imageUrl: "https://youronementor.com/images/og-cover.svg"
   }
 ];
