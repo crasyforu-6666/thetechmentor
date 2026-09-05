@@ -464,19 +464,22 @@
       customBlogs.forEach(b => {
         let catKey = "tutorial";
         let badgeClass = "blog-post-badge--green";
-        if (b.category === "Interview prep") { catKey = "interview"; badgeClass = "blog-post-badge--blue"; }
-        else if (b.category === "Career" || b.category === "CAREER BLUEPRINT") { catKey = "career"; badgeClass = "blog-post-badge--amber"; }
-        else if (b.category === "SAP news" || b.category === "SAP Updates" || (b.badge && b.badge.includes("SAP"))) { catKey = "news"; badgeClass = "blog-post-badge--teal"; }
+        const catLower = (b.category || "").toLowerCase();
+        if (catLower.includes("interview")) { catKey = "interview"; badgeClass = "blog-post-badge--blue"; }
+        else if (catLower.includes("career")) { catKey = "career"; badgeClass = "blog-post-badge--amber"; }
+        else if (catLower.includes("news") || catLower.includes("update") || (b.badge && b.badge.includes("SAP"))) { catKey = "news"; badgeClass = "blog-post-badge--teal"; }
 
         // Check if card already exists on page to prevent duplicate rendering
         const existingCard = homeBlogGrid.querySelector(`a[href*="${b.id}"]`) || (b.slug && homeBlogGrid.querySelector(`a[href*="${b.slug}"]`));
         if (existingCard) return;
 
         const targetHref = b.slug ? `blog/${b.slug}.html` : `blog/article.html?id=${b.id}`;
+        const dateStr = b.date || "Sep 05, 2026";
 
         const card = document.createElement("article");
         card.className = "blog-card";
         card.dataset.cat = catKey;
+        card.dataset.date = b.isoDate || (new Date(dateStr).toISOString().split('T')[0]);
         card.innerHTML = `
           <div class="blog-thumb" style="${b.imageUrl ? `background-image:url('${b.imageUrl}'); background-size:cover; background-position:center;` : 'background:#dcfce7;'}">
             ${b.imageUrl ? '' : '📝'}
@@ -484,12 +487,21 @@
           <div class="blog-body">
             <span class="blog-post-badge ${badgeClass}">${b.category || 'Tutorial'}</span>
             <div class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0; color:#fff; font-weight:700;">${b.title}</div>
-            <div class="blog-meta-line">By Anshuman Behuria &middot; ${b.readTime || '8 min read'} &middot; ${b.date || ''}</div>
+            <div class="blog-meta-line">By Anshuman Behuria &middot; ${b.readTime || '8 min read'} &middot; ${dateStr}</div>
             <a href="${targetHref}" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
         `;
-        homeBlogGrid.prepend(card);
+        homeBlogGrid.appendChild(card);
       });
+
+      // Universal Descending Date Sorter (Newest First)
+      const allCards = Array.from(homeBlogGrid.querySelectorAll(".blog-card"));
+      allCards.sort((a, b) => {
+        const dateA = a.dataset.date ? new Date(a.dataset.date).getTime() : (Date.parse(a.querySelector(".blog-meta-line")?.textContent || "") || 0);
+        const dateB = b.dataset.date ? new Date(b.dataset.date).getTime() : (Date.parse(b.querySelector(".blog-meta-line")?.textContent || "") || 0);
+        return dateB - dateA;
+      });
+      allCards.forEach(c => homeBlogGrid.appendChild(c));
     }
   } catch (e) {
     console.error(e);
