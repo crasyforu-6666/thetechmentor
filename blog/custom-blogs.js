@@ -295,5 +295,15 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     date: "Sep 05, 2026",
     excerpt: "Master Process-Oriented (POSC) and Layout-Oriented (LOSC) Storage Control in SAP S/4HANA EWM with step-by-step customizing rules.",
     imageUrl: "https://youronementor.com/images/og-cover.svg"
+  },
+  {
+    id: "post_1788599800000",
+    title: "Top 5 SAP Modules to Learn in 2026 for a ₹20+ LPA Salary",
+    slug: "top-5-sap-modules-to-learn-in-2026-for-20-lpa-salary",
+    category: "Career",
+    readTime: "12 min read",
+    date: "Sep 05, 2026",
+    excerpt: "Discover the top 5 highest-paying SAP S/4HANA modules in 2026 to crack ₹20+ LPA salaries in India. Complete career roadmap, market demand, and skill blueprints.",
+    imageUrl: "https://youronementor.com/images/og-cover.svg"
   }
 ];
