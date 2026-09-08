@@ -22,6 +22,7 @@
   // Initialize Default Courses
   const defaultCourses = [
     { id: "mm-self-paced", name: "SAP MM Materials Management (Self-Paced)", category: "Self-Paced", price: 4999, originalPrice: 9999, status: "Active", hours: "35+ Hours" },
+    { id: "mm-career-transition", name: "SAP MM Career Transition Program", category: "Self-Paced", price: 8999, originalPrice: 10999, status: "Active", hours: "50+ Hours + 2M Server" },
     { id: "ewm-self-paced", name: "SAP EWM Extended Warehouse (Self-Paced)", category: "Self-Paced", price: 6999, originalPrice: 12999, status: "Active", hours: "40+ Hours" },
     { id: "bundle-self-paced", name: "MM + EWM Complete Self-Paced Bundle", category: "Self-Paced", price: 10999, originalPrice: 18999, status: "Active", hours: "70+ Hours" },
     { id: "mm-live-batch", name: "SAP MM S/4HANA Weekend Live Batch", category: "Live Batch", price: 24999, originalPrice: 35000, status: "Active", hours: "10-12 Weeks" },
