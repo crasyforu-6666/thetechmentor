@@ -12,8 +12,20 @@ import time
 import datetime
 import random
 import subprocess
+import argparse
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
+
+from scripts.seo_researcher import (
+    discover_trending_topic,
+    MODULES,
+    MODULE_META,
+    fetch_google_suggestions,
+    TOPIC_DATABASE
+)
+
 BLOG_DIR = os.path.join(BASE_DIR, "blog")
 LOGS_DIR = os.path.join(BASE_DIR, "logs")
 os.makedirs(LOGS_DIR, exist_ok=True)
@@ -1167,10 +1179,15 @@ def render_article_html(topic: dict) -> str:
     iso_date = datetime.datetime.now().strftime('%Y-%m-%d')
     
     # Render Table of Contents
-    toc_items = "".join([
+    toc_entries = [
         f'<li><a href="#sec-{idx+1}" style="color:#38bdf8; text-decoration:none; font-weight:600;">{idx+1}. {s[0]}</a></li>'
         for idx, s in enumerate(topic['sections'])
-    ])
+    ]
+    if "faqs" in topic and topic["faqs"]:
+        toc_entries.append(
+            f'<li><a href="#google-faqs" style="color:#38bdf8; text-decoration:none; font-weight:600;">{len(topic["sections"])+1}. People Also Ask (Google Search FAQs)</a></li>'
+        )
+    toc_items = "".join(toc_entries)
     
     # Render Process Steps if available
     process_html = ""
@@ -1237,6 +1254,34 @@ def render_article_html(topic: dict) -> str:
           <p style="color: #94a3b8; font-size: 0.9rem; margin: 0; line-height: 1.6;">
             Always verify that transport requests for {s[0]} are tested end-to-end in the Quality (QAS) environment with active stock transactions before scheduling production deployment.
           </p>
+        </div>
+        """
+
+    # Render FAQs / People Also Ask if available
+    faq_html = ""
+    if "faqs" in topic and topic["faqs"]:
+        faq_items = "".join([
+            f"""
+            <details style="background:#080d14; border:1px solid #1e293b; border-radius:8px; padding:1.1rem 1.25rem; margin-bottom:0.75rem; cursor:pointer;">
+              <summary style="color:#38bdf8; font-weight:600; font-size:1.05rem; outline:none; display:flex; justify-content:space-between; align-items:center;">
+                <span>{q}</span>
+                <span style="color:#94a3b8; font-size:0.85rem;">▼</span>
+              </summary>
+              <p style="color:#cbd5e1; font-size:0.95rem; line-height:1.7; margin:0.85rem 0 0 0; padding-top:0.75rem; border-top:1px solid #1e293b;">
+                {a}
+              </p>
+            </details>"""
+            for q, a in topic["faqs"]
+        ])
+        faq_html = f"""
+        <!-- PEOPLE ALSO ASK (GOOGLE FAQS) -->
+        <div id="google-faqs" style="margin: 2.75rem 0;">
+          <h2 style="color: #fff; font-size: 1.5rem; font-weight: 700; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid #1e293b;">
+            ❓ People Also Ask: Google Search FAQs
+          </h2>
+          <div class="faq-list">
+            {faq_items}
+          </div>
         </div>
         """
 
@@ -1347,6 +1392,8 @@ def render_article_html(topic: dict) -> str:
 
       {sections_html}
 
+      {faq_html}
+
       <!-- CALLOUT CARD -->
       <div style="background:rgba(2,132,199,0.1); border-left:4px solid #38bdf8; padding:1.25rem; border-radius:8px; margin:2rem 0;">
         <strong style="color:#fff; display:block; margin-bottom:0.4rem;">🎯 KEY CONSULTANT TAKEAWAYS</strong>
@@ -1380,41 +1427,61 @@ def render_article_html(topic: dict) -> str:
 </body>
 </html>"""
 
-def run_daily_publisher():
+def determine_next_module() -> str:
+    """Cycles through mm, ewm, sd, fico, joule based on recent publishing history."""
+    if not os.path.exists(AUTOMATION_LOG):
+        return random.choice(MODULES)
+    try:
+        with open(AUTOMATION_LOG, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+        for line in reversed(lines):
+            for m in MODULES:
+                if f"[{m.upper()}]" in line or f"Target SAP Domain : [{m.upper()}]" in line:
+                    idx = MODULES.index(m)
+                    return MODULES[(idx + 1) % len(MODULES)]
+    except Exception:
+        pass
+    return random.choice(MODULES)
+
+def run_daily_publisher(preferred_module=None, dry_run=False):
     log_msg("🚀 Starting Autonomous Twice-Daily Blog Publishing Routine...")
     
-    # 1. Check already published slugs from repository and custom-blogs.js
-    published_slugs = set()
-    custom_blogs_js = os.path.join(BLOG_DIR, "custom-blogs.js")
-    if os.path.exists(custom_blogs_js):
-        with open(custom_blogs_js, "r", encoding="utf-8") as f:
-            content = f.read()
-            for t in TOPIC_POOL:
-                if t['slug'] in content:
-                    published_slugs.add(t['slug'])
+    target_mod = preferred_module or determine_next_module()
+    mod_name = MODULE_META.get(target_mod, {}).get("name", "SAP")
+    log_msg(f"🎯 Target SAP Domain : [{target_mod.upper()}] {mod_name}")
 
-    # Also check html files in blog/
-    for fname in os.listdir(BLOG_DIR):
-        if fname.endswith(".html"):
-            published_slugs.add(fname[:-5])
+    # Synchronize TOPIC_POOL with SEO database
+    for t in TOPIC_POOL:
+        slug = t["slug"]
+        m = "ewm" if any(k in slug for k in ["ewm", "wocr", "losc", "posc", "rf-"]) else "mm"
+        if not any(x["slug"] == slug for x in TOPIC_DATABASE.get(m, [])):
+            t_copy = dict(t)
+            t_copy["module"] = m
+            TOPIC_DATABASE[m].append(t_copy)
 
-    # 2. Filter un-published topics from pool
-    available_topics = [t for t in TOPIC_POOL if t['slug'] not in published_slugs]
-    
-    # If all predefined topics are published, invoke dynamic generator
-    if not available_topics:
-        log_msg("ℹ️ All predefined topics have been published. Invoking Autonomous Dynamic Topic Synthesizer...")
-        topic = generate_dynamic_sap_topic()
-        while topic['slug'] in published_slugs:
-            topic = generate_dynamic_sap_topic()
-    else:
-        topic = random.choice(available_topics)
-
+    # 1. Discover or Synthesize Trending SEO Topic via Google Suggest & Blueprints
+    topic = discover_trending_topic(target_mod)
     log_msg(f"📌 Selected Trending Topic: {topic['title']}")
     log_msg(f"📌 Primary SEO Keyword : {topic['keyword']}")
     log_msg(f"📌 Target Article Slug  : {topic['slug']}")
+    if "faqs" in topic and topic["faqs"]:
+        log_msg(f"📌 Google PAA Questions : {len(topic['faqs'])} FAQs integrated")
 
-    # 3. Build HTML article
+    if dry_run:
+        print("\n=================== [DRY RUN PREVIEW] ===================")
+        print(f"Title       : {topic['title']}")
+        print(f"Slug        : {topic['slug']}")
+        print(f"Module      : {topic.get('module', target_mod).upper()}")
+        print(f"Badge       : {topic['badge']}")
+        print(f"Keyword     : {topic['keyword']}")
+        print(f"Meta Desc   : {topic['meta_desc']}")
+        print("Sections    :", [s[0] for s in topic['sections']])
+        if 'faqs' in topic:
+            print("Google FAQs :", [f[0] for f in topic['faqs']])
+        print("=================== [END DRY RUN] ===================\n")
+        return
+
+    # 2. Build HTML article
     article_path = os.path.join(BLOG_DIR, f"{topic['slug']}.html")
     html_content = render_article_html(topic)
 
@@ -1424,8 +1491,9 @@ def run_daily_publisher():
 
     current_date_str = datetime.datetime.now().strftime('%b %d, %Y')
     current_iso_date = datetime.datetime.now().strftime('%Y-%m-%d')
+    custom_blogs_js = os.path.join(BLOG_DIR, "custom-blogs.js")
 
-    # 4. Update blog/custom-blogs.js
+    # 3. Update blog/custom-blogs.js
     if os.path.exists(custom_blogs_js):
         with open(custom_blogs_js, "r", encoding="utf-8") as f:
             js_data = f.read()
@@ -1437,6 +1505,7 @@ def run_daily_publisher():
     title: "{topic['title']}",
     slug: "{topic['slug']}",
     category: "{topic['category']}",
+    badge: "{topic['badge']}",
     readTime: "{topic['read_time']}",
     date: "{current_date_str}",
     isoDate: "{current_iso_date}",
@@ -1449,22 +1518,38 @@ def run_daily_publisher():
                 f.write(js_data)
             log_msg("✅ Updated blog/custom-blogs.js repository file")
 
-    # 5. Update homepage index.html
+    # Card badges & categories
+    cat_lower = topic['category'].lower()
+    badge_lower = topic.get('badge', '').lower()
+    
+    cat_badge_class = "blog-post-badge--teal"
+    if "interview" in cat_lower:
+        cat_badge_class = "blog-post-badge--blue"
+    elif "career" in cat_lower:
+        cat_badge_class = "blog-post-badge--amber"
+    elif "sd" in badge_lower or "fico" in badge_lower:
+        cat_badge_class = "blog-post-badge--blue"
+    elif "joule" in badge_lower or "ai" in badge_lower:
+        cat_badge_class = "blog-post-badge--teal"
+
+    card_cat = "tutorial"
+    if "interview" in cat_lower:
+        card_cat = "interview"
+    elif "career" in cat_lower:
+        card_cat = "career"
+    elif "technology" in cat_lower or "joule" in badge_lower:
+        card_cat = "news"
+
+    # 4. Update homepage index.html
     home_html = os.path.join(BASE_DIR, "index.html")
     if os.path.exists(home_html):
         with open(home_html, "r", encoding="utf-8") as f:
             h_data = f.read()
         
         if topic['slug'] not in h_data:
-            cat_badge_class = "blog-post-badge--teal"
-            if "interview" in topic['category'].lower():
-                cat_badge_class = "blog-post-badge--blue"
-            elif "career" in topic['category'].lower():
-                cat_badge_class = "blog-post-badge--amber"
-
             card_html = f"""
-          <!-- Auto-Published on {current_date_str} -->
-          <article class="blog-card" data-cat="tutorial" data-date="{current_iso_date}">
+          <!-- Auto-Published on {current_date_str} [{target_mod.upper()}] -->
+          <article class="blog-card" data-cat="{card_cat}" data-date="{current_iso_date}">
             <div class="blog-thumb" style="background:#ccfbf1;">📰</div>
             <div class="blog-body">
               <span class="blog-post-badge {cat_badge_class}">{topic['badge'].upper()}</span>
@@ -1480,22 +1565,16 @@ def run_daily_publisher():
                     f.write(h_data)
                 log_msg("✅ Updated homepage index.html with new blog card")
 
-    # 6. Update blog/index.html hub
+    # 5. Update blog/index.html hub
     hub_html = os.path.join(BLOG_DIR, "index.html")
     if os.path.exists(hub_html):
         with open(hub_html, "r", encoding="utf-8") as f:
             hb_data = f.read()
         
         if topic['slug'] not in hb_data:
-            cat_badge_class = "blog-post-badge--teal"
-            if "interview" in topic['category'].lower():
-                cat_badge_class = "blog-post-badge--blue"
-            elif "career" in topic['category'].lower():
-                cat_badge_class = "blog-post-badge--amber"
-
             hub_card = f"""
-        <!-- Auto-Published on {current_date_str} -->
-        <article class="blog-card" data-cat="tutorial" data-date="{current_iso_date}">
+        <!-- Auto-Published on {current_date_str} [{target_mod.upper()}] -->
+        <article class="blog-card" data-cat="{card_cat}" data-date="{current_iso_date}">
           <div class="blog-thumb" style="background:#ccfbf1;">📰</div>
           <div class="blog-body">
             <span class="blog-post-badge {cat_badge_class}">{topic['badge'].upper()}</span>
@@ -1511,13 +1590,13 @@ def run_daily_publisher():
                     f.write(hb_data)
                 log_msg("✅ Updated blog/index.html hub with new blog card")
 
-    # 7. Invoke publish_blog.py with dynamic payload
+    # 6. Invoke publish_blog.py with dynamic payload
     pub_script = os.path.join(BASE_DIR, "scripts", "publish_blog.py")
     payload = {
         "title": topic['title'],
         "slug": topic['slug'],
         "category": topic['category'],
-        "tags": ["SAP MM", "SAP EWM", "S/4HANA 2026", topic.get('badge', 'SAP'), "Clean Core"],
+        "tags": [topic.get('badge', 'SAP'), "S/4HANA 2026", "Clean Core", topic['category'], mod_name],
         "status": "publish",
         "meta_title": f"{topic['title']} | theTechMentor",
         "meta_description": topic['meta_desc'],
@@ -1531,4 +1610,28 @@ def run_daily_publisher():
         log_msg(f"⚠️ Publishing returned non-zero code {res.returncode}.")
 
 if __name__ == "__main__":
-    run_daily_publisher()
+    parser = argparse.ArgumentParser(description="Autonomous Google SEO Blog Publisher for SAP MM, EWM, SD, FICO & Joule")
+    parser.add_argument("--module", choices=["mm", "ewm", "sd", "fico", "joule"], help="Target specific SAP module")
+    parser.add_argument("--dry-run", action="store_true", help="Simulate topic discovery without writing files")
+    parser.add_argument("--research", action="store_true", help="Research trending questions from Google Suggest live")
+    args = parser.parse_args()
+
+    if args.research:
+        print("\n🔍 EXECUTING LIVE GOOGLE QUESTION RESEARCH ACROSS 5 MODULES...")
+        seed_map = {
+            "SAP MM": ["sap mm configuration guide", "sap mm interview questions scenario", "sap mm p2p troubleshooting"],
+            "SAP EWM": ["sap ewm posc vs losc difference", "sap ewm wave management configuration", "sap ewm rfui transaction"],
+            "SAP SD": ["sap sd pricing procedure step by step", "sap sd condition technique access sequence", "sap sd order to cash cycle"],
+            "SAP FICO": ["sap fico document splitting configuration", "sap fico universal journal acdoca", "sap fico new asset accounting"],
+            "SAP Joule AI": ["sap joule ai s4hana 2026 use cases", "sap joule generative ai copilot logistics", "sap joule procurement agents"]
+        }
+        for mod, seeds in seed_map.items():
+            print(f"\n=================== {mod} ===================")
+            for s in seeds:
+                queries = fetch_google_suggestions(s)
+                print(f"  • Seed: '{s}'")
+                for q in queries:
+                    print(f"    ↳ Google Ask: {q}")
+        print("\n✅ Research Complete!\n")
+    else:
+        run_daily_publisher(preferred_module=args.module, dry_run=args.dry_run)

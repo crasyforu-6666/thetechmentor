@@ -326,5 +326,29 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-09-08",
     excerpt: "Comprehensive guide to mandatory Material Ledger in S/4HANA: Actual Costing (CKMLCP), multi-currency valuation, price variance settlement (PRD), and CKM3N analysis.",
     imageUrl: "https://youronementor.com/images/og-cover.svg"
+  },
+  {
+    id: "post_1788850671122",
+    title: "SAP Joule AI in S/4HANA Logistics & Procurement: 2026 Architect Blueprint",
+    slug: "sap-joule-ai-s4hana-logistics-procurement-blueprint",
+    category: "Technology",
+    badge: "SAP JOULE AI 2026",
+    readTime: "14 min read",
+    date: "Sep 08, 2026",
+    isoDate: "2026-09-08",
+    excerpt: "Explore how SAP Joule and autonomous AI agents transform S/4HANA 2026: Natural language procurement triage, automated EWM wave replenishment, and Clean Core AI extensibility.",
+    imageUrl: "https://youronementor.com/images/og-cover.svg"
+  },
+  {
+    id: "post_1788850748007",
+    title: "SAP SD Pricing Procedure & Condition Technique: Complete Step-by-Step Guide",
+    slug: "sap-sd-pricing-procedure-condition-technique-guide",
+    category: "Tutorial",
+    badge: "SAP SD MASTERCLASS",
+    readTime: "15 min read",
+    date: "Sep 08, 2026",
+    isoDate: "2026-09-08",
+    excerpt: "Step-by-step configuration of SAP SD Pricing Procedure: Condition Tables (V/03), Access Sequences (V/07), Condition Types (V/06), Pricing Schema (V/08), and Determination (OVKK).",
+    imageUrl: "https://youronementor.com/images/og-cover.svg"
   }
 ];
