@@ -33,20 +33,25 @@ jobs:
       - name: Commit and Push Updated Articles & JS Repository
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "feat(blog): automated twice-daily blog publication [skip ci]"
+          commit_message: "feat(blog): automated twice-daily blog publication"
           commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
           file_pattern: "blog/* index.html logs/*"
 
       - name: Set up Node.js
+        if: ${{ secrets.VERCEL_TOKEN != '' }}
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Deploy Live to Vercel (youronementor.com)
+        if: ${{ secrets.VERCEL_TOKEN != '' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
+          mkdir -p .vercel
+          echo "{\"projectId\":\"${VERCEL_PROJECT_ID:-prj_A2vf9EEEQYSHia9twNwZtXy63oZL}\",\"orgId\":\"${VERCEL_ORG_ID:-team_Sd9NTal1Q6HqsMPsBpa3KDoh}\",\"projectName\":\"sap-mm-ewm-courses\"}" > .vercel/project.json
           npx vercel --prod --token "$VERCEL_TOKEN" --yes
+
 

@@ -79,24 +79,38 @@ def main():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     env_vars = load_env(os.path.join(base_dir, ".env"))
 
-    # Payload for the 2026 SAP AI Article
-    payload = {
-        "title": "Autonomous AI in SAP S/4HANA MM & EWM: 2026 Guide",
-        "slug": "autonomous-ai-sap-mm-ewm-2026-guide",
-        "category": "SAP Updates",
-        "tags": ["SAP MM", "SAP EWM", "S/4HANA 2026", "Joule AI", "Clean Core", "Procurement"],
-        "status": "publish",
-        "meta_title": "Autonomous AI in SAP S/4HANA MM & EWM: 2026 Guide | theTechMentor",
-        "meta_description": "Explore how SAP Joule and agentic AI automate P2P procurement, dynamic EWM slotting, and clean core logistics workflows in S/4HANA 2026.",
-        "focus_keyword": "autonomous AI in SAP MM EWM",
-        "live_url": "https://youronementor.com/blog/autonomous-ai-sap-mm-ewm-2026-guide.html",
-        "source_url": "https://news.sap.com/2026/02/joule-agentic-ai-s4hana-logistics-procurement/"
-    }
+    # Check if payload passed via CLI arg or env var
+    payload = None
+    if len(sys.argv) > 1:
+        try:
+            payload = json.loads(sys.argv[1])
+        except Exception:
+            pass
+    if not payload and os.environ.get("PUBLISH_PAYLOAD"):
+        try:
+            payload = json.loads(os.environ.get("PUBLISH_PAYLOAD"))
+        except Exception:
+            pass
+
+    if not payload:
+        # Default fallback payload
+        payload = {
+            "title": "Autonomous AI in SAP S/4HANA MM & EWM: 2026 Guide",
+            "slug": "autonomous-ai-sap-mm-ewm-2026-guide",
+            "category": "SAP Updates",
+            "tags": ["SAP MM", "SAP EWM", "S/4HANA 2026", "Joule AI", "Clean Core", "Procurement"],
+            "status": "publish",
+            "meta_title": "Autonomous AI in SAP S/4HANA MM & EWM: 2026 Guide | theTechMentor",
+            "meta_description": "Explore how SAP Joule and agentic AI automate P2P procurement, dynamic EWM slotting, and clean core logistics workflows in S/4HANA 2026.",
+            "focus_keyword": "autonomous AI in SAP MM EWM",
+            "live_url": "https://youronementor.com/blog/autonomous-ai-sap-mm-ewm-2026-guide.html",
+            "source_url": "https://news.sap.com/2026/02/joule-agentic-ai-s4hana-logistics-procurement/"
+        }
 
     print("==========================================================")
     print("🤖 AUTONOMOUS CONTENT RESEARCHER & PUBLISHER ENGINE")
     print("==========================================================")
-    print(f"📌 Selected Topic Source: {payload['source_url']}")
+    print(f"📌 Selected Topic Source: {payload.get('source_url', 'Autonomous S/4HANA Knowledge Base')}")
     print(f"📌 Post Title: {payload['title']}")
     print(f"📌 Target Slug: {payload['slug']}")
     print("----------------------------------------------------------")

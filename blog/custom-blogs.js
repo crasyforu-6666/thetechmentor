@@ -315,5 +315,16 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     date: "Sep 05, 2026",
     excerpt: "Learn how to configure Valuation Types, Valuation Categories, and Local/Global Rules for Split Valuation in SAP MM.",
     imageUrl: "https://youronementor.com/images/og-cover.svg"
+  },
+  {
+    id: "post_1788849656841",
+    title: "SAP S/4HANA Material Ledger & Actual Costing: Valuation Masterclass",
+    slug: "sap-s4hana-material-ledger-actual-costing-valuation-guide",
+    category: "Tutorial",
+    readTime: "14 min read",
+    date: "Sep 08, 2026",
+    isoDate: "2026-09-08",
+    excerpt: "Comprehensive guide to mandatory Material Ledger in S/4HANA: Actual Costing (CKMLCP), multi-currency valuation, price variance settlement (PRD), and CKM3N analysis.",
+    imageUrl: "https://youronementor.com/images/og-cover.svg"
   }
 ];
