@@ -350,5 +350,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-09-08",
     excerpt: "Step-by-step configuration of SAP SD Pricing Procedure: Condition Tables (V/03), Access Sequences (V/07), Condition Types (V/06), Pricing Schema (V/08), and Determination (OVKK).",
     imageUrl: "https://youronementor.com/images/og-cover.svg"
+  },
+  {
+    id: "post_1788851121813",
+    title: "SAP S/4HANA Universal Journal (ACDOCA): Architecture & Configuration Guide",
+    slug: "sap-s4hana-universal-journal-acdoca-guide",
+    category: "Tutorial",
+    badge: "SAP FICO BLUEPRINT",
+    readTime: "14 min read",
+    date: "Sep 08, 2026",
+    isoDate: "2026-09-08",
+    excerpt: "Deep dive into the SAP S/4HANA Universal Journal (Table ACDOCA): Single source of truth, elimination of reconciliation between FI and CO, extension ledgers, and multi-GAAP reporting.",
+    imageUrl: "https://youronementor.com/images/og-cover.svg"
   }
 ];
