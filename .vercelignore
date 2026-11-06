@@ -7,3 +7,10 @@ supabase/
 .cursor/
 .git/
 **/.DS_Store
+# Not deployed: browser-only demo login with hardcoded passwords (insecure) and setup docs
+auth/
+login/
+admin/
+integrations/
+scripts/
+logs/

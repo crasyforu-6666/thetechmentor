@@ -43,10 +43,36 @@
           } catch (e) {
             console.error(e);
           }
-          alert("🎉 Payment Successful!\nPayment ID: " + response.razorpay_payment_id + "\n\nThank you for enrolling in " + (programName || "SAP MM & EWM Self-Paced Track") + ". Access instructions have been sent to your email!");
+          const paidProgram = programName || "SAP MM & EWM Self-Paced Track";
+          const paidAmount = amountInRupees || 4999;
+          const paymentId = response.razorpay_payment_id || "";
+          if (window.ttmTrack) {
+            window.ttmTrack("purchase", { value: paidAmount, content_name: paidProgram, transaction_id: paymentId });
+          }
+          const sent = window.ttmSend
+            ? window.ttmSend({
+                type: "sale",
+                name: userDetails.name || "",
+                email: userDetails.email || "",
+                phone: userDetails.phone || "",
+                program: paidProgram,
+                amount: paidAmount,
+                payment_id: paymentId,
+                status: "Paid"
+              })
+            : Promise.resolve();
+          const goToThankYou = () => {
+            const qs = new URLSearchParams({ pid: paymentId, program: paidProgram, amount: String(paidAmount) });
+            window.location.href = "thank-you.html?" + qs.toString();
+          };
+          // Give the notification a moment to leave the browser, but never block the buyer.
+          Promise.race([sent, new Promise((r) => setTimeout(r, 1500))]).then(goToThankYou, goToThankYou);
         }
       };
 
+      if (window.ttmTrack) {
+        window.ttmTrack("begin_checkout", { value: amountInRupees || 4999, content_name: programName || "" });
+      }
       const rzp = new window.Razorpay(options);
       rzp.open();
     } else {
@@ -239,28 +265,6 @@
     }
   }
 
-  const form = document.getElementById("enroll-form");
-  const successMsg = document.getElementById("form-success");
-
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-      const data = Object.fromEntries(new FormData(form));
-      console.log("Enrollment request:", data);
-      form.reset();
-      if (successMsg) {
-        successMsg.hidden = false;
-        window.setTimeout(() => {
-          successMsg.hidden = true;
-        }, 8000);
-      }
-    });
-  }
-
   const header = document.querySelector(".header");
   if (header) {
     let scrollTicking = false;
@@ -378,7 +382,8 @@
 
     const formData = new FormData(formEl);
     const budget = formData.get("budget");
-    const name = formData.get("name") || "Applicant";
+    const rawName = formData.get("name") || "Applicant";
+    const name = String(rawName).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
     const email = formData.get("email") || "";
     const phone = formData.get("phone") || "";
     const experience = formData.get("experience") || "Experienced Professional";
@@ -402,6 +407,28 @@
       console.error(e);
     }
 
+    // Deliver the lead to the owner (Google Sheet + email) and to ad tracking.
+    const programLabel = document.getElementById("modal-selected-program");
+    const selectedProgram = formEl.id === "modal-screening-form" && programLabel
+      ? programLabel.textContent
+      : "Strategy Call (15-Min)";
+    if (window.ttmSend) {
+      window.ttmSend({
+        type: "lead",
+        name: String(rawName),
+        email: email,
+        phone: phone,
+        role: formData.get("role") || "",
+        timeline: formData.get("timeline") || "",
+        budget: budget || "",
+        status: budget === "Yes" ? "Qualified" : "Self-Paced Redirected",
+        program: selectedProgram
+      });
+    }
+    if (window.ttmTrack) {
+      window.ttmTrack("lead", { content_name: selectedProgram, lead_status: budget === "Yes" ? "qualified" : "self_paced" });
+    }
+
     formEl.hidden = true;
     outputEl.hidden = false;
 
@@ -421,7 +448,7 @@
           <p>Thank you for your response, ${name}! Live 1-on-1 strategy call slots are reserved for candidates ready to invest in live mentorship. Based on your budget readiness, our Self-Paced Programs are the best fit for your journey.</p>
           <div style="display:flex; flex-direction:column; gap:0.5rem;">
             <button type="button" onclick="payWithRazorpay(4999, 'SAP MM Self-Paced Track')" class="btn btn-primary btn-block">Enroll in MM Self-Paced (₹4,999) ↗</button>
-            <button type="button" onclick="payWithRazorpay(11000, 'MM + EWM Self-Paced Bundle')" class="btn btn-primary btn-block" style="background:var(--gold); border-color:var(--gold);">Enroll in Full Bundle (₹11,000) ↗</button>
+            <button type="button" onclick="payWithRazorpay(10999, 'MM + EWM Self-Paced Bundle')" class="btn btn-primary btn-block" style="background:var(--gold); border-color:var(--gold);">Enroll in Full Bundle (₹10,999) ↗</button>
           </div>
           <p style="margin-top: 0.75rem; font-size: 0.85rem;">🔓 <strong>Free Video Access:</strong> <a href="https://www.youtube.com/playlist?list=PL71i23QiQd9VSrHTuXQyiOlLsi8NnGbSp" target="_blank" rel="noopener noreferrer" style="color: #3db8f5; text-decoration: underline;">Watch Free Video Playlist on YouTube ↗</a></p>
         </div>

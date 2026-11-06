@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Payment Received | theTechMentor</title>
+  <link rel="stylesheet" href="page.css" />
+  <script src="site-config.js"></script>
+  <script src="tracking.js"></script>
+</head>
+<body>
+  <header class="page-header"><a href="/"><span class="mark">SAP</span>theTechMentor</a></header>
+  <main class="page-wrap">
+    <h1>🎉 Payment received — welcome aboard!</h1>
+    <p class="muted">Thank you for enrolling with Anshuman Behuria. Here's exactly what happens next.</p>
+
+    <div class="card">
+      <dl>
+        <dt>Program</dt><dd id="ty-program">—</dd>
+        <dt>Amount</dt><dd id="ty-amount">—</dd>
+        <dt>Payment ID</dt><dd id="ty-pid">—</dd>
+      </dl>
+    </div>
+
+    <h2>Get your access in 3 steps</h2>
+    <ol class="steps">
+      <li><strong>Send us your Payment ID on WhatsApp</strong> using the button below. It's pre-filled, just tap send.</li>
+      <li>We confirm your payment and send your <strong>course access, workbooks and server details</strong> within a few working hours (Mon–Sat, 10 AM – 7 PM IST).</li>
+      <li>For live batches, you'll be added to the batch group with the class schedule and Zoom links.</li>
+    </ol>
+
+    <div class="btn-row">
+      <a id="ty-wa" class="btn btn-wa" href="https://wa.me/917848942021" target="_blank" rel="noopener noreferrer">Send Payment ID on WhatsApp</a>
+      <a class="btn btn-outline" href="mailto:info@youronementor.com">Email info@youronementor.com</a>
+    </div>
+
+    <p class="muted" style="margin-top:28px">A Razorpay receipt has also been emailed to you. Keep your Payment ID for reference.
+      Refunds are covered by our <a href="refund.html">refund policy</a>.</p>
+  </main>
+  <footer class="page-footer">
+    <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="refund.html">Refunds</a>
+  </footer>
+  <script>
+    (function () {
+      var p = new URLSearchParams(location.search);
+      var pid = p.get("pid") || "";
+      var program = p.get("program") || "";
+      var amount = p.get("amount") || "";
+      if (program) document.getElementById("ty-program").textContent = program;
+      if (amount) document.getElementById("ty-amount").textContent = "₹" + Number(amount).toLocaleString("en-IN");
+      if (pid) document.getElementById("ty-pid").textContent = pid;
+      var num = (window.TTM_CONFIG && window.TTM_CONFIG.WHATSAPP_NUMBER) || "917848942021";
+      var msg = "Hi Anshuman, I just enrolled" + (program ? " in " + program : "") +
+        (pid ? ". Payment ID: " + pid : "") + ". Please share my course access.";
+      document.getElementById("ty-wa").href = "https://wa.me/" + num + "?text=" + encodeURIComponent(msg);
+    })();
+  </script>
+</body>
+</html>
