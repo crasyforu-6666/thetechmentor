@@ -184,3 +184,5 @@
 [2026-11-06 13:27:16] ✅ Updated homepage index.html with new blog card
 [2026-11-06 13:27:16] ✅ Updated blog/index.html hub with new blog card
 [2026-11-06 13:27:16] 🎉 Successfully published article 'SAP Joule Copilot for Financial Close & Variance Analysis (FICO 2026 Guide)'!
+[2026-11-06 14:22:36] 🚀 Starting Autonomous Twice-Daily Blog Publishing Routine...
+[2026-11-06 14:22:36] ⏸️ ANTHROPIC_API_KEY is not set — skipping. (Template-only articles are no longer published: they hurt rankings.)
