@@ -287,7 +287,9 @@ def _request_gemini(system: str, user: str) -> dict:
     from google import genai
     from google.genai import types
 
-    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+    # v1beta is required for system instructions and JSON-schema output.
+    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"],
+                          http_options=types.HttpOptions(api_version="v1beta"))
     resp = client.models.generate_content(
         model=GEMINI_MODEL,
         contents=user,
