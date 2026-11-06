@@ -401,6 +401,10 @@ def screenshot_requests(article: dict):
     path = os.path.join(BASE_DIR, "docs", "SCREENSHOTS-TODO.md")
     os.makedirs(os.path.dirname(path), exist_ok=True)
     new = not os.path.exists(path)
+    if not new:
+        with open(path, encoding="utf-8") as f:
+            if f"images/blog/{article['slug']}/" in f.read():
+                return
     with open(path, "a", encoding="utf-8") as f:
         if new:
             f.write("# Screenshots to capture\n\nSave each as images/blog/<slug>/NN-short-description.png "
