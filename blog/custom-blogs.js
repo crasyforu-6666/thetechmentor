@@ -374,5 +374,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-06",
     excerpt: "How SAP Joule Copilot and GenAI agents accelerate the financial close in S/4HANA Finance: Real-time P&L variance explanation, automated accruals, and audit trail generation.",
     imageUrl: "https://youronementor.com/images/og-cover.png"
+  },
+  {
+    id: "post_1793976079410",
+    title: "SAP MM Automatic Purchase Order Creation (ME59N) from Purchase Requisition: A Practical Guide",
+    slug: "sap-mm-automatic-po-creation-me59n-pr-automation",
+    category: "Tutorial",
+    badge: "SAP MM TUTORIAL",
+    readTime: "13 min read",
+    date: "Nov 06, 2026",
+    isoDate: "2026-11-06",
+    excerpt: "Automate your SAP MM procurement process by understanding how to configure and troubleshoot automatic purchase order creation from purchase requisitions using ME59N. Boost efficiency and reduce manual effort.",
+    imageUrl: "https://youronementor.com/images/og-cover.png"
   }
 ];
