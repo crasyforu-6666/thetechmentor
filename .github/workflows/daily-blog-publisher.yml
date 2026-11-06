@@ -15,6 +15,9 @@ jobs:
   publish-blog:
     runs-on: ubuntu-latest
     name: Run Twice-Daily Content Research & SEO Publishing Routine
+    env:
+      # Secrets can't be referenced in step-level `if:`; expose a flag instead.
+      HAS_VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN != '' }}
     steps:
       - name: Checkout Codebase
         uses: actions/checkout@v4
@@ -39,13 +42,13 @@ jobs:
           file_pattern: "blog/* index.html logs/* sitemap.xml robots.txt"
 
       - name: Set up Node.js
-        if: ${{ secrets.VERCEL_TOKEN != '' }}
+        if: env.HAS_VERCEL_TOKEN == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Deploy Live to Vercel (youronementor.com)
-        if: ${{ secrets.VERCEL_TOKEN != '' }}
+        if: env.HAS_VERCEL_TOKEN == 'true'
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
