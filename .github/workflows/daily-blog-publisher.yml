@@ -29,6 +29,9 @@ jobs:
     timeout-minutes: 30
     name: Research, write and publish an SAP article
     env:
+      # Any one is enough. New articles use Gemini (free); rewrites use Claude Pro.
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
       - name: Checkout Codebase
@@ -42,7 +45,9 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install "anthropic>=2.6,<3"
+        run: |
+          pip install "anthropic>=2.6,<3" "google-genai>=3,<4"
+          if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ]; then npm install -g @anthropic-ai/claude-code; fi
 
       - name: Choose mode
         id: mode

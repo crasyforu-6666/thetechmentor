@@ -10,14 +10,14 @@ on our own Graphy/Teachable-style platform by early 2027.
 
 | System | Status | Notes |
 |---|---|---|
-| Blog: 3 articles/day | ✅ built, needs `ANTHROPIC_API_KEY` | 9:00 AM and 8:00 PM IST new articles; 2:30 PM IST rewrites one old thin post (17 queued). Writes with Claude, rejects anything under 1,500 words or with filler, adds FAQ + Article schema, internal links and a lead form. Without the key it publishes nothing (old template posts hurt rankings). |
+| Blog: 3 articles/day | ✅ built (Gemini free key for new posts, Claude Pro token for rewrites) | 9:00 AM and 8:00 PM IST new articles; 2:30 PM IST rewrites one old thin post (17 queued). Writes with Claude, rejects anything under 1,500 words or with filler, adds FAQ + Article schema, internal links and a lead form. Without the key it publishes nothing (old template posts hurt rankings). |
 | Editorial rules | ✅ | Reads `AGENTS.md` from the repo root if present, plus built-in standards in `scripts/ai_writer.py`. |
 | Deploy | ✅ | Vercel deploys every push to `main`. |
 | Sitemap / robots | ✅ | Rebuilt on every run; thin pages are `noindex` and left out until rewritten. |
 | Lead capture | ✅ code, needs Google Sheet link | Homepage form, blog opt-in on every post, payments → Google Sheet + email alert. |
 | Ad tracking | ✅ code, needs IDs | Meta Pixel + GA4 events: Lead, InitiateCheckout, Purchase. |
 
-Rough running cost of the blog writer: about $1/day (~₹2,500/month) at 3 articles/day.
+Running cost: ₹0 with the free Gemini key + Claude Pro token (paid ANTHROPIC_API_KEY optional).
 
 ---
 

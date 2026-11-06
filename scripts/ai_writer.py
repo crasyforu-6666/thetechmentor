@@ -6,7 +6,10 @@ Writes complete, expert-level SAP articles with Claude and renders them into the
 site's blog design. Every article must pass a quality gate before it can be
 published; if it fails twice, nothing is published (thin pages hurt rankings).
 
-Needs the ANTHROPIC_API_KEY environment variable (a GitHub Actions secret).
+Credentials (GitHub Actions secrets), any one is enough:
+  GEMINI_API_KEY           free Google AI Studio key  -> used for new articles
+  CLAUDE_CODE_OAUTH_TOKEN  Claude Pro/Max login token -> used for rewrites
+  ANTHROPIC_API_KEY        paid Anthropic API key
 Editorial rules are read from AGENTS.md in the repo root when it exists, so the
 owner's existing blog instructions always apply.
 """
@@ -235,8 +238,97 @@ def quality_problems(article: dict, taken_slugs: set, fixed_slug: str = None) ->
 
 
 # --------------------------------------------------------------------------- #
-# Claude call
+# Model backends
+#   gemini      - Google AI Studio free-tier key (GEMINI_API_KEY)
+#   claude-code - Claude Code CLI with a Claude Pro/Max login token (CLAUDE_CODE_OAUTH_TOKEN)
+#   anthropic   - paid Anthropic API key (ANTHROPIC_API_KEY)
 # --------------------------------------------------------------------------- #
+
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+CLAUDE_CODE_MODEL = os.environ.get("CLAUDE_CODE_MODEL", "")  # empty = account default
+
+
+def available_backends() -> list:
+    out = []
+    if os.environ.get("GEMINI_API_KEY"):
+        out.append("gemini")
+    if os.environ.get("CLAUDE_CODE_OAUTH_TOKEN"):
+        out.append("claude-code")
+    if os.environ.get("ANTHROPIC_API_KEY"):
+        out.append("anthropic")
+    return out
+
+
+def choose_backend(mode: str) -> str:
+    """Refreshes (quality-critical rewrites) prefer Claude; new posts prefer free Gemini."""
+    forced = os.environ.get("WRITER_BACKEND")
+    have = available_backends()
+    if forced:
+        if forced not in have:
+            raise RuntimeError(f"WRITER_BACKEND={forced} but its credential is not set")
+        return forced
+    order = ["claude-code", "anthropic", "gemini"] if mode == "refresh" else ["gemini", "claude-code", "anthropic"]
+    for b in order:
+        if b in have:
+            return b
+    raise RuntimeError("No writer credential set (GEMINI_API_KEY, CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY)")
+
+
+def _gemini_schema(node):
+    """Gemini's response schema doesn't accept additionalProperties; strip it."""
+    if isinstance(node, dict):
+        return {k: _gemini_schema(v) for k, v in node.items() if k != "additionalProperties"}
+    if isinstance(node, list):
+        return [_gemini_schema(v) for v in node]
+    return node
+
+
+def _request_gemini(system: str, user: str) -> dict:
+    from google import genai
+    from google.genai import types
+
+    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+    resp = client.models.generate_content(
+        model=GEMINI_MODEL,
+        contents=user,
+        config=types.GenerateContentConfig(
+            system_instruction=system,
+            response_mime_type="application/json",
+            response_json_schema=_gemini_schema(ARTICLE_SCHEMA),
+            max_output_tokens=32768,
+        ),
+    )
+    if not resp.text:
+        raise RuntimeError(f"Gemini returned no text (finish reason: {getattr(resp.candidates[0], 'finish_reason', '?') if resp.candidates else 'blocked'})")
+    return json.loads(resp.text)
+
+
+def _request_claude_code(system: str, user: str) -> dict:
+    import shutil
+    import subprocess
+
+    exe = shutil.which("claude")
+    if not exe:
+        raise RuntimeError("Claude Code CLI not installed (npm install -g @anthropic-ai/claude-code)")
+    cmd = [exe, "-p", "--output-format", "json", "--tools", "",
+           "--json-schema", json.dumps(ARTICLE_SCHEMA), "--system-prompt", system]
+    if CLAUDE_CODE_MODEL:
+        cmd += ["--model", CLAUDE_CODE_MODEL]
+    res = subprocess.run(cmd, input=user, capture_output=True, text=True, timeout=1500)
+    if res.returncode != 0:
+        raise RuntimeError(f"claude CLI failed ({res.returncode}): {(res.stderr or res.stdout)[-800:]}")
+    envelope = json.loads(res.stdout)
+    if envelope.get("is_error"):
+        raise RuntimeError(f"claude CLI error: {str(envelope.get('result'))[:800]}")
+    data = envelope.get("structured_output")
+    if isinstance(data, dict):
+        return data
+    text = envelope.get("result", "")
+    start, end = text.find("{"), text.rfind("}")
+    if start < 0 or end < 0:
+        raise RuntimeError("claude CLI returned no JSON article")
+    return json.loads(text[start:end + 1])
+
 
 def _request_article(client, system: str, user: str) -> dict:
     with client.beta.messages.stream(
@@ -260,9 +352,12 @@ def _request_article(client, system: str, user: str) -> dict:
 
 def write_article(topic: dict, mode: str = "new", fixed_slug: str = None, old_text: str = "") -> dict:
     """Returns a validated article dict, or raises RuntimeError if it can't meet the bar."""
-    import anthropic  # imported lazily so the module loads without the SDK installed
-
-    client = anthropic.Anthropic()
+    backend = choose_backend(mode)
+    client = None
+    if backend == "anthropic":
+        import anthropic  # imported lazily so the module loads without the SDK installed
+        client = anthropic.Anthropic()
+    print(f"[ai_writer] backend: {backend}")
     posts = existing_posts()
     taken = {s for s, _ in posts}
     others = [(s, t) for s, t in posts if s != fixed_slug]
@@ -299,11 +394,16 @@ def write_article(topic: dict, mode: str = "new", fixed_slug: str = None, old_te
     )
 
     last_problems = []
-    for attempt in range(2):
+    for attempt in range(3):
         prompt = user
         if last_problems:
             prompt += "\n\nYour previous draft failed these checks. Fix all of them:\n- " + "\n- ".join(last_problems)
-        article = _request_article(client, system, prompt)
+        if backend == "gemini":
+            article = _request_gemini(system, prompt)
+        elif backend == "claude-code":
+            article = _request_claude_code(system, prompt)
+        else:
+            article = _request_article(client, system, prompt)
         article["slug"] = fixed_slug or slugify(article.get("slug") or article["h1"])
         article["intro_html"] = sanitize(article["intro_html"])
         for s in article["sections"]:

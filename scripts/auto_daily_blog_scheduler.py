@@ -1529,10 +1529,10 @@ def refresh_thin_post() -> bool:
 def run_daily_publisher(preferred_module=None, dry_run=False):
     log_msg("🚀 Starting Autonomous Twice-Daily Blog Publishing Routine...")
     
-    if not os.environ.get("ANTHROPIC_API_KEY"):
-        log_msg("⏸️ ANTHROPIC_API_KEY is not set — skipping. (Template-only articles are no longer published: they hurt rankings.)")
-        return
     from scripts import ai_writer
+    if not ai_writer.available_backends():
+        log_msg("⏸️ No writer credential (GEMINI_API_KEY / CLAUDE_CODE_OAUTH_TOKEN / ANTHROPIC_API_KEY) — skipping. Template-only articles are no longer published.")
+        return
 
     target_mod = preferred_module or determine_next_module()
     mod_name = MODULE_META.get(target_mod, {}).get("name", "SAP")
@@ -1738,8 +1738,9 @@ if __name__ == "__main__":
         print("\n✅ Research Complete!\n")
     else:
         if args.mode == "refresh" and not args.dry_run:
-            if not os.environ.get("ANTHROPIC_API_KEY"):
-                log_msg("⏸️ ANTHROPIC_API_KEY is not set — skipping refresh.")
+            from scripts import ai_writer
+            if not ai_writer.available_backends():
+                log_msg("⏸️ No writer credential set — skipping refresh.")
                 sys.exit(0)
             if refresh_thin_post():
                 sys.exit(0)
