@@ -398,5 +398,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-06",
     excerpt: "Dive deep into SAP EWM Wave Management and Warehouse Order Creation Rules (WOCR). This guide covers configuration, optimization, and advanced techniques for EWM solution architects.",
     imageUrl: "https://youronementor.com/blog/covers/sap-ewm-wave-management-wocr-configuration.svg"
+  },
+  {
+    id: "post_1793997044033",
+    title: "SAP MM Consignment Procurement: Info Records, 411 K Movements & MRKO Settlement Masterclass",
+    slug: "sap-mm-consignment-procurement-mrko-settlement-411k",
+    category: "Tutorial",
+    badge: "SAP MM TUTORIAL",
+    readTime: "11 min read",
+    date: "Nov 06, 2026",
+    isoDate: "2026-11-06",
+    excerpt: "Dive deep into SAP MM consignment procurement. Learn how to configure master data, execute 411 K movements, and master MRKO settlement for vendor-owned stock.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-mm-consignment-procurement-mrko-settlement-411k.svg"
   }
 ];
