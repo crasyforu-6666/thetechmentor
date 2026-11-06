@@ -68,8 +68,14 @@ jobs:
       # Vercel is connected to this repo and deploys every push to main,
       # so committing the new article is what publishes it.
       - name: Commit and push
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "feat(blog): automated article (${{ steps.mode.outputs.mode }})"
-          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
-          file_pattern: "blog/* index.html logs/* sitemap.xml robots.txt"
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add blog index.html logs sitemap.xml robots.txt
+          if git diff --cached --quiet; then echo "Nothing to commit"; exit 0; fi
+          git commit -m "feat(blog): automated article (${{ steps.mode.outputs.mode }})"
+          for i in 1 2 3 4; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep $((i * 5))
+          done
+          exit 1
