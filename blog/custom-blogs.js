@@ -362,5 +362,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-09-08",
     excerpt: "Deep dive into the SAP S/4HANA Universal Journal (Table ACDOCA): Single source of truth, elimination of reconciliation between FI and CO, extension ledgers, and multi-GAAP reporting.",
     imageUrl: "https://youronementor.com/images/og-cover.svg"
+  },
+  {
+    id: "post_1793971636795",
+    title: "SAP Joule Copilot for Financial Close & Variance Analysis (FICO 2026 Guide)",
+    slug: "sap-joule-copilot-financial-close-variance-analysis-guide",
+    category: "Technology",
+    badge: "SAP JOULE AI 2026",
+    readTime: "13 min read",
+    date: "Nov 06, 2026",
+    isoDate: "2026-11-06",
+    excerpt: "How SAP Joule Copilot and GenAI agents accelerate the financial close in S/4HANA Finance: Real-time P&L variance explanation, automated accruals, and audit trail generation.",
+    imageUrl: "https://youronementor.com/images/og-cover.svg"
   }
 ];
