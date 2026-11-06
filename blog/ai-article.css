@@ -114,7 +114,7 @@
   background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 16%, #0b1220), color-mix(in srgb, var(--accent2) 14%, #0b1220));
   border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
 }
-.flow-steps { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.6rem; flex-wrap: wrap; counter-reset: none; }
+.ai-article .flow-steps { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.6rem; flex-wrap: wrap; counter-reset: none; }
 .flow-steps li {
   position: relative; flex: 1 1 150px; margin: 0; padding: 0.85rem 0.9rem; border-radius: 12px;
   background: rgba(5, 10, 18, 0.65); border: 1px solid rgba(255, 255, 255, 0.08);
@@ -185,7 +185,9 @@
   .ai-dek { font-size: 1.05rem; }
   .glance { grid-template-columns: 1fr 1fr; }
   .glance > div:nth-child(3) { grid-column: 1 / -1; }
-  .flow-steps { flex-direction: column; }
+  .ai-article .flow-steps { flex-direction: column; }
+  .flow-steps li { flex: none; }
+  .flow { padding: 1rem; }
   .flow-steps li:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -0.85rem; transform: translateX(-50%); }
   .h2-n { width: 2rem; height: 2rem; border-radius: 10px; font-size: 0.85rem; }
 }

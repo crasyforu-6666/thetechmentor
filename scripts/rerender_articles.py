@@ -101,6 +101,10 @@ def main():
         else:
             art = parse_page(page, slug)
         published = art.pop("published", None)
+        for sec in art["sections"]:
+            sec["heading"] = sec["heading"].replace("`", "")
+            sec["html"] = ai_writer.sanitize(sec["html"])
+        art["intro_html"] = ai_writer.sanitize(art["intro_html"])
         art["word_count"] = ai_writer.word_count(art)
         with open(path, "w", encoding="utf-8") as f:
             f.write(ai_writer.render_article(art, published_iso=published))

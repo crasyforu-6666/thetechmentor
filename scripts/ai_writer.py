@@ -221,9 +221,18 @@ class _Sanitizer(HTMLParser):
             self.out.append(f"&#{name};")
 
 
+def _backticks_to_code(fragment: str) -> str:
+    """Models sometimes write markdown `code`; turn it into <code> outside of tags."""
+    parts = re.split(r"(<[^>]+>)", fragment or "")
+    for i, part in enumerate(parts):
+        if not part.startswith("<"):
+            parts[i] = re.sub(r"`([^`<>]{1,80})`", r"<code>\1</code>", part)
+    return "".join(parts)
+
+
 def sanitize(fragment: str) -> str:
     p = _Sanitizer()
-    p.feed(fragment or "")
+    p.feed(_backticks_to_code(fragment or ""))
     p.close()
     return "".join(p.out)
 
@@ -446,7 +455,7 @@ def write_article(topic: dict, mode: str = "new", fixed_slug: str = None, old_te
         article["slug"] = fixed_slug or slugify(article.get("slug") or article["h1"])
         article["intro_html"] = sanitize(article["intro_html"])
         for s in article["sections"]:
-            s["heading"] = strip_tags(s["heading"])
+            s["heading"] = strip_tags(s["heading"]).replace("`", "")
             s["html"] = sanitize(s["html"])
         last_problems = quality_problems(article, taken, fixed_slug)
         if not last_problems:

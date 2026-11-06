@@ -43,6 +43,11 @@ def _e(s) -> str:
     return html.escape(str(s or ""), quote=True)
 
 
+def _rich(s) -> str:
+    """Escape plain text, then show `code` spans as <code> chips."""
+    return re.sub(r"`([^`]{1,80})`", r"<code>\1</code>", _e(s))
+
+
 # --------------------------------------------------------------------------- #
 # Cover image
 # --------------------------------------------------------------------------- #
@@ -170,7 +175,7 @@ def flow_html(steps: list) -> str:
     if not steps:
         return ""
     items = "".join(
-        f'<li><span class="flow-n">{i}</span><strong>{_e(s.get("title"))}</strong><span>{_e(s.get("detail"))}</span></li>'
+        f'<li><span class="flow-n">{i}</span><strong>{_rich(s.get("title"))}</strong><span>{_rich(s.get("detail"))}</span></li>'
         for i, s in enumerate(steps, 1)
     )
     return f'<div class="flow"><div class="flow-label">Process at a glance</div><ol class="flow-steps">{items}</ol></div>'
@@ -228,9 +233,9 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
         f'<h2 id="sec-{i}"><span class="h2-n">{i:02d}</span>{_e(s["heading"])}</h2>\n{s["html"]}\n'
         for i, s in enumerate(article["sections"], 1)
     )
-    takeaways = "".join(f"<li>{_e(x)}</li>" for x in article.get("key_takeaways", []))
+    takeaways = "".join(f"<li>{_rich(x)}</li>" for x in article.get("key_takeaways", []))
     faqs = "".join(
-        f'<details class="ai-faq"><summary>{_e(f["question"])}</summary><p>{_e(f["answer"])}</p></details>'
+        f'<details class="ai-faq"><summary>{_e(f["question"].replace("`", ""))}</summary><p>{_rich(f["answer"])}</p></details>'
         for f in article["faqs"]
     )
     chips = "".join(f"<code>{_e(c)}</code>" for c in tcodes)
@@ -309,7 +314,7 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
     <header class="ai-hero">
       <span class="ai-pill">{_e(article['badge'])}</span>
       <h1 class="blog-title">{_e(article['h1'])}</h1>
-      <p class="ai-dek">{_e(article.get('excerpt', ''))}</p>
+      <p class="ai-dek">{_e(article.get('excerpt', '').replace('`', ''))}</p>
       <div class="blog-meta">
         <div class="author-chip">
           <div class="author-avatar-ph">AB</div>
