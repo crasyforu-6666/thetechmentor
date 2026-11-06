@@ -1,0 +1,72 @@
+/* Typography and components for AI-written long-form articles (on top of blog.css). */
+.ai-article { color: var(--blog-text); font-size: 1.05rem; line-height: 1.8; }
+.ai-article p { color: #cbd5e1; margin: 0 0 1.15rem; }
+.ai-article h2 {
+  color: #fff; font-size: clamp(1.3rem, 3vw, 1.55rem); margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem; border-bottom: 1px solid var(--blog-card-border); scroll-margin-top: 80px;
+}
+.ai-article h3 { color: #e2e8f0; font-size: 1.15rem; margin: 1.75rem 0 0.75rem; }
+.ai-article h4 { color: #e2e8f0; font-size: 1rem; margin: 1.25rem 0 0.5rem; }
+.ai-article ul, .ai-article ol { color: #cbd5e1; padding-left: 1.35rem; margin: 0 0 1.25rem; }
+.ai-article li { margin-bottom: 0.45rem; }
+.ai-article a { color: var(--blog-accent-light); }
+.ai-article code {
+  background: #1e293b; color: #7dd3fc; padding: 0.1rem 0.4rem; border-radius: 4px;
+  font-size: 0.9em; overflow-wrap: anywhere;
+}
+.ai-article pre {
+  background: #080d14; border: 1px solid var(--blog-card-border); border-radius: 8px;
+  padding: 1rem; overflow-x: auto; margin: 0 0 1.25rem;
+}
+.ai-article pre code { background: none; padding: 0; }
+.ai-article blockquote {
+  border-left: 3px solid var(--blog-accent-light); margin: 1.5rem 0; padding: 0.5rem 1rem;
+  background: rgba(2, 132, 199, 0.08); border-radius: 0 8px 8px 0;
+}
+.ai-article table {
+  display: block; overflow-x: auto; width: 100%; border-collapse: collapse;
+  margin: 0 0 1.5rem; font-size: 0.92rem; background: #080d14;
+  border: 1px solid var(--blog-card-border); border-radius: 8px;
+}
+.ai-article th, .ai-article td {
+  padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--blog-card-border); text-align: left; vertical-align: top;
+}
+.ai-article th { background: #0f172a; color: #fff; white-space: nowrap; }
+.ai-box {
+  background: #080d14; border: 1px solid var(--blog-card-border); border-radius: 10px;
+  padding: 1.25rem 1.4rem; margin: 1.75rem 0;
+}
+.ai-box > strong { display: block; color: #fff; margin-bottom: 0.6rem; }
+.ai-box ul, .ai-box ol { margin: 0; }
+.ai-takeaways { border-left: 4px solid var(--blog-green); }
+.ai-toc a { text-decoration: none; }
+.ai-faq {
+  background: #080d14; border: 1px solid var(--blog-card-border); border-radius: 8px;
+  padding: 0.95rem 1.15rem; margin-bottom: 0.7rem;
+}
+.ai-faq summary { color: var(--blog-accent-light); font-weight: 600; cursor: pointer; }
+.ai-faq p { margin: 0.75rem 0 0; }
+.ai-optin {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.18), rgba(124, 58, 237, 0.16));
+  border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 12px; padding: 1.4rem; margin: 2.5rem 0;
+}
+.ai-optin > strong { color: #fff; font-size: 1.15rem; display: block; margin-bottom: 0.35rem; }
+.ai-optin form { display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin-top: 0.9rem; }
+.ai-optin input {
+  padding: 0.75rem 0.85rem; border-radius: 8px; border: 1px solid #334155;
+  background: #0b1220; color: #fff; font-size: 1rem; min-width: 0;
+}
+.ai-optin .btn { width: 100%; }
+.ai-badge { margin-bottom: 1rem; display: inline-block; }
+.page-footer-lite {
+  border-top: 1px solid var(--blog-card-border); color: var(--blog-muted);
+  text-align: center; padding: 1.5rem 16px 2.5rem; font-size: 0.9rem;
+}
+.page-footer-lite a { color: var(--blog-accent-light); }
+@media (max-width: 640px) {
+  .ai-article { font-size: 1rem; }
+  .blog-meta { flex-wrap: wrap; }
+}
+.ai-optin form[hidden], .ttm-optin-done[hidden] { display: none; }
+.ai-article a.btn { color: #fff; text-decoration: none; }
+.ai-article a.btn-outline { color: var(--blog-text); }

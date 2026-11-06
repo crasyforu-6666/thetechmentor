@@ -13,7 +13,7 @@
         currency: "INR",
         name: "YourOneMentor · Anshuman Behuria",
         description: programName || "SAP MM & EWM Self-Paced Track",
-        image: "https://youronementor.com/images/og-cover.svg",
+        image: "https://youronementor.com/images/og-cover.png",
         prefill: {
           name: userDetails.name || "",
           email: userDetails.email || "",
@@ -486,7 +486,11 @@
           blogMap.set(b.id, b);
         }
       });
-      const customBlogs = Array.from(blogMap.values());
+      // Newest first; on the homepage show at most 12 cards in total.
+      const customBlogs = Array.from(blogMap.values())
+        .sort((a, b) => String(b.isoDate || "").localeCompare(String(a.isoDate || "")))
+        .filter((b) => !homeBlogGrid.querySelector(`a[href*="${b.slug || b.id}"]`))
+        .slice(0, Math.max(0, 12 - homeBlogGrid.querySelectorAll(".blog-card").length));
 
       customBlogs.forEach(b => {
         let catKey = "tutorial";

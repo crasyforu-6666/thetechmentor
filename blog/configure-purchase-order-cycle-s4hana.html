@@ -3,15 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How to Configure a Complete Purchase Order Cycle in SAP S/4HANA | theTechMentor</title>
-  <meta name="description" content="Step-by-step configuration guide for the S/4HANA purchase order cycle: document types, number ranges, item categories, account assignment, and pricing procedures." />
+  <title>How to Configure a Complete Purchase Order Cycle in SAP</title>
+  <meta name="description" content="Step-by-step configuration guide for the S/4HANA purchase order cycle: document types, number ranges, item categories, account assignment, and pricing." />
   <link rel="canonical" href="https://youronementor.com/blog/configure-purchase-order-cycle-s4hana.html" />
   <meta property="og:title" content="How to Configure a Complete Purchase Order Cycle in SAP S/4HANA" />
   <meta property="og:description" content="A hands-on implementation walkthrough for SAP logistics consultants." />
-  <meta property="og:image" content="https://youronementor.com/images/og-cover.svg" />
+  <meta property="og:image" content="https://youronementor.com/images/og-cover.png" />
   <link rel="stylesheet" href="../styles.css" />
   <link rel="stylesheet" href="blog.css" />
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to Configure a Complete Purchase Order Cycle in SAP S/4HANA: Step-by-Step Guide", "description": "Step-by-step configuration guide for the S/4HANA purchase order cycle: document types, number ranges, item categories, account assignment, and pricing.", "image": "https://youronementor.com/images/og-cover.png", "author": {"@type": "Person", "name": "Anshuman Behuria", "url": "https://www.linkedin.com/in/anshuman-behuria-946860130"}, "publisher": {"@type": "Organization", "name": "theTechMentor", "url": "https://youronementor.com"}, "mainEntityOfPage": "https://youronementor.com/blog/configure-purchase-order-cycle-s4hana.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://youronementor.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://youronementor.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to Configure a Complete Purchase Order Cycle in SAP S/4HANA: Step-by-Step Guide", "item": "https://youronementor.com/blog/configure-purchase-order-cycle-s4hana.html"}]}]</script>
+  <meta name="robots" content="noindex,follow" />
+  <link rel="stylesheet" href="ai-article.css" />
+  <script src="../site-config.js"></script>
+  <script src="../tracking.js"></script>
 </head>
 <body>
   <div class="reading-progress" id="reading-progress-bar"></div>
@@ -99,6 +104,19 @@
         <li><strong>Invoice Receipt (IR):</strong> Vendor billed quantity & price via <code>MIRO</code></li>
       </ol>
 
+      <!-- LEAD OPT-IN -->
+      <div class="ai-optin" id="lead-optin">
+        <strong>Free: SAP MM &amp; EWM video course + interview kit</strong>
+        <p>Get the 40+ lesson playlist, the most-asked interview questions and our 90-day roadmap on WhatsApp.</p>
+        <form class="ttm-optin-form" data-source="blog:configure-purchase-order-cycle-s4hana">
+          <input name="name" required placeholder="Your name" autocomplete="name" />
+          <input name="phone" required placeholder="WhatsApp number" autocomplete="tel" inputmode="tel" />
+          <input name="email" type="email" placeholder="Email (optional)" autocomplete="email" />
+          <button type="submit" class="btn btn-primary">Send me the free kit</button>
+        </form>
+        <div class="ttm-optin-done" hidden></div>
+      </div>
+
       <!-- Embedded Course CTA -->
       <div class="blog-course-cta">
         <span class="tier-badge" style="background:#f59e0b; color:#000; font-weight:700; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; text-transform:uppercase;">Self-Paced Track</span>
@@ -173,5 +191,6 @@
 
   <script src="../script.js"></script>
   <script src="blog-comments.js"></script>
+  <script src="blog-leads.js"></script>
 </body>
 </html>

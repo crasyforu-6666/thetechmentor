@@ -3,15 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Setting Up Embedded EWM in SAP S/4HANA: Step-by-Step Walkthrough | theTechMentor</title>
+  <title>Setting Up Embedded EWM in SAP S/4HANA</title>
   <meta name="description" content="Technical guide for setting up embedded EWM in SAP S/4HANA: warehouse numbering, storage types, sectioning, bin structures, and integration parameters." />
   <link rel="canonical" href="https://youronementor.com/blog/embedded-ewm-s4hana-setup-walkthrough.html" />
   <meta property="og:title" content="Setting Up Embedded EWM in SAP S/4HANA: Step-by-Step Walkthrough" />
   <meta property="og:description" content="A comprehensive setup guide for SAP consultants implementing embedded warehouse management." />
-  <meta property="og:image" content="https://youronementor.com/images/og-cover.svg" />
+  <meta property="og:image" content="https://youronementor.com/images/og-cover.png" />
   <link rel="stylesheet" href="../styles.css" />
   <link rel="stylesheet" href="blog.css" />
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Setting Up Embedded EWM in S/4HANA: A Step-by-Step Architecture Walkthrough", "description": "Technical guide for setting up embedded EWM in SAP S/4HANA: warehouse numbering, storage types, sectioning, bin structures, and integration parameters.", "image": "https://youronementor.com/images/og-cover.png", "author": {"@type": "Person", "name": "Anshuman Behuria", "url": "https://www.linkedin.com/in/anshuman-behuria-946860130"}, "publisher": {"@type": "Organization", "name": "theTechMentor", "url": "https://youronementor.com"}, "mainEntityOfPage": "https://youronementor.com/blog/embedded-ewm-s4hana-setup-walkthrough.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://youronementor.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://youronementor.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Setting Up Embedded EWM in S/4HANA: A Step-by-Step Architecture Walkthrough", "item": "https://youronementor.com/blog/embedded-ewm-s4hana-setup-walkthrough.html"}]}]</script>
+  <meta name="robots" content="noindex,follow" />
+  <link rel="stylesheet" href="ai-article.css" />
+  <script src="../site-config.js"></script>
+  <script src="../tracking.js"></script>
 </head>
 <body>
   <div class="reading-progress" id="reading-progress-bar"></div>
@@ -81,6 +86,19 @@
 
       <h2 id="delivery-integration">3. Direct S/4HANA Delivery Integration</h2>
       <p>When an Inbound Delivery (<code>VL31N</code>) or Outbound Delivery (<code>VL01N</code>) is created in ERP, S/4HANA embedded EWM automatically instantiates corresponding Warehouse Requests without intermediary staging queues.</p>
+
+      <!-- LEAD OPT-IN -->
+      <div class="ai-optin" id="lead-optin">
+        <strong>Free: SAP MM &amp; EWM video course + interview kit</strong>
+        <p>Get the 40+ lesson playlist, the most-asked interview questions and our 90-day roadmap on WhatsApp.</p>
+        <form class="ttm-optin-form" data-source="blog:embedded-ewm-s4hana-setup-walkthrough">
+          <input name="name" required placeholder="Your name" autocomplete="name" />
+          <input name="phone" required placeholder="WhatsApp number" autocomplete="tel" inputmode="tel" />
+          <input name="email" type="email" placeholder="Email (optional)" autocomplete="email" />
+          <button type="submit" class="btn btn-primary">Send me the free kit</button>
+        </form>
+        <div class="ttm-optin-done" hidden></div>
+      </div>
 
       <div class="blog-course-cta">
         <span class="tier-badge" style="background:#10b981; color:#fff; font-weight:700; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; text-transform:uppercase;">EWM Masterclass</span>
@@ -154,5 +172,6 @@
 
   <script src="../script.js"></script>
   <script src="blog-comments.js"></script>
+  <script src="blog-leads.js"></script>
 </body>
 </html>

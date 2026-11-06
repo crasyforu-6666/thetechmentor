@@ -13,6 +13,7 @@ import datetime
 import random
 import subprocess
 import argparse
+import html
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if BASE_DIR not in sys.path:
@@ -1295,7 +1296,7 @@ def render_article_html(topic: dict) -> str:
   <link rel="canonical" href="https://youronementor.com/blog/{topic['slug']}.html" />
   <meta property="og:title" content="{topic['title']}" />
   <meta property="og:description" content="{topic['meta_desc']}" />
-  <meta property="og:image" content="https://youronementor.com/images/og-cover.svg" />
+  <meta property="og:image" content="https://youronementor.com/images/og-cover.png" />
   <link rel="stylesheet" href="../styles.css" />
   <link rel="stylesheet" href="blog.css" />
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
@@ -1427,25 +1428,112 @@ def render_article_html(topic: dict) -> str:
 </body>
 </html>"""
 
+# Niche-focused rotation: MM and EWM are the courses we sell; SD and Joule support them.
+ROTATION = ["mm", "ewm", "mm", "ewm", "joule", "sd"]
+
+
 def determine_next_module() -> str:
-    """Cycles through mm, ewm, sd, fico, joule based on recent publishing history."""
-    if not os.path.exists(AUTOMATION_LOG):
-        return random.choice(MODULES)
-    try:
+    """Cycles through ROTATION based on how many runs have been logged."""
+    runs = 0
+    if os.path.exists(AUTOMATION_LOG):
         with open(AUTOMATION_LOG, "r", encoding="utf-8") as f:
-            lines = f.readlines()
-        for line in reversed(lines):
-            for m in MODULES:
-                if f"[{m.upper()}]" in line or f"Target SAP Domain : [{m.upper()}]" in line:
-                    idx = MODULES.index(m)
-                    return MODULES[(idx + 1) % len(MODULES)]
-    except Exception:
-        pass
-    return random.choice(MODULES)
+            runs = sum(1 for line in f if "Starting Autonomous" in line)
+    return ROTATION[runs % len(ROTATION)]
+
+
+def _words(html_text: str) -> int:
+    import re as _re
+    body = _re.sub(r"(?is)<(script|style|head|nav|header|footer)[^>]*>.*?</\1>", " ", html_text)
+    return len(_re.sub(r"<[^>]+>", " ", body).split())
+
+
+TEMPLATE_MARKERS = ("Deep dive into key configuration parameters",
+                    "Understanding this configuration logic is essential")
+
+
+def find_thin_posts(min_words: int = 400) -> list:
+    """Old template posts not yet rewritten by the AI writer: very short pages first,
+    then longer pages that still contain the old generator's boilerplate."""
+    thin = []
+    for name in sorted(os.listdir(BLOG_DIR)):
+        if not name.endswith(".html") or name in ("index.html", "article.html"):
+            continue
+        with open(os.path.join(BLOG_DIR, name), encoding="utf-8", errors="ignore") as f:
+            page = f.read()
+        if 'class="article-content ai-article"' in page:
+            continue
+        w = _words(page)
+        if w < min_words or any(m in page for m in TEMPLATE_MARKERS):
+            thin.append((w, name[:-5], page))
+    thin.sort()
+    return thin
+
+
+def trim_grid(page: str, grid_marker: str, keep: int) -> str:
+    """Keep only the first `keep` blog cards inside the grid that starts at grid_marker."""
+    import re as _re
+    start = page.find(grid_marker)
+    if start < 0:
+        return page
+    head, rest = page[:start], page[start:]
+    cards = list(_re.finditer(r"\s*(<!--[^>]*-->\s*)?<article class=\"blog-card\".*?</article>", rest, _re.S))
+    for m in reversed(cards[keep:]):
+        rest = rest[:m.start()] + rest[m.end():]
+    return head + rest
+
+
+def _update_card_titles(slug: str, article: dict):
+    """Keep homepage/hub cards and custom-blogs.js in sync with a rewritten article's headline."""
+    import re as _re
+    title = html.escape(article["h1"])
+    for path in (os.path.join(BASE_DIR, "index.html"), os.path.join(BLOG_DIR, "index.html")):
+        with open(path, encoding="utf-8") as f:
+            page = f.read()
+        pat = _re.compile(r'(<(?:div|h2|h3)[^>]*class="blog-post-title"[^>]*>)([^<]*)(</(?:div|h2|h3)>(?:(?!</article>).)*?href="(?:blog/)?' + _re.escape(slug) + r'\.html")', _re.S)
+        new = pat.sub(lambda m: m.group(1) + title + m.group(3), page)
+        if new != page:
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(new)
+    js = os.path.join(BLOG_DIR, "custom-blogs.js")
+    with open(js, encoding="utf-8") as f:
+        data = f.read()
+    pat = _re.compile(r'(title:\s*)"(?:[^"\\]|\\.)*"(,\s*slug:\s*"' + _re.escape(slug) + r'")')
+    new = pat.sub(lambda m: m.group(1) + json.dumps(article["h1"]) + m.group(2), data)
+    if new != data:
+        with open(js, "w", encoding="utf-8") as f:
+            f.write(new)
+
+
+def refresh_thin_post() -> bool:
+    """Rewrite the thinnest old post in place (same URL). Returns True if one was rewritten."""
+    from scripts import ai_writer
+    thin = find_thin_posts()
+    if not thin:
+        log_msg("ℹ️ No thin posts left to refresh.")
+        return False
+    words, slug, page = thin[0]
+    import re as _re
+    h1 = _re.search(r"<h1[^>]*>(.*?)</h1>", page, _re.S)
+    title = ai_writer.strip_tags(h1.group(1)) if h1 else slug.replace("-", " ")
+    date_m = _re.search(r'"datePublished":\s*"(\d{4}-\d{2}-\d{2})', page) or _re.search(r'data-date="(\d{4}-\d{2}-\d{2})"', page)
+    log_msg(f"♻️ Refreshing thin post ({words} words): {slug}")
+    article = ai_writer.write_article({"title": title}, mode="refresh", fixed_slug=slug,
+                                      old_text=ai_writer.strip_tags(page))
+    with open(os.path.join(BLOG_DIR, f"{slug}.html"), "w", encoding="utf-8") as f:
+        f.write(ai_writer.render_article(article, published_iso=date_m.group(1) if date_m else None))
+    log_msg(f"✅ Rewrote {slug}.html — {article['word_count']} words, {len(article['faqs'])} FAQs")
+    _update_card_titles(slug, article)
+    return True
+
 
 def run_daily_publisher(preferred_module=None, dry_run=False):
     log_msg("🚀 Starting Autonomous Twice-Daily Blog Publishing Routine...")
     
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        log_msg("⏸️ ANTHROPIC_API_KEY is not set — skipping. (Template-only articles are no longer published: they hurt rankings.)")
+        return
+    from scripts import ai_writer
+
     target_mod = preferred_module or determine_next_module()
     mod_name = MODULE_META.get(target_mod, {}).get("name", "SAP")
     log_msg(f"🎯 Target SAP Domain : [{target_mod.upper()}] {mod_name}")
@@ -1481,9 +1569,20 @@ def run_daily_publisher(preferred_module=None, dry_run=False):
         print("=================== [END DRY RUN] ===================\n")
         return
 
-    # 2. Build HTML article
+    # 2. Write the article with Claude (quality-gated) and render it
+    article = ai_writer.write_article(topic, mode="new")
+    topic = dict(topic)
+    topic.update({
+        "title": article["h1"],
+        "slug": article["slug"],
+        "category": article["category"],
+        "badge": article["badge"],
+        "read_time": f"{max(5, round(article['word_count'] / 220))} min read",
+        "meta_desc": article["excerpt"],
+    })
+    log_msg(f"✍️ Article written: {article['h1']} ({article['word_count']} words)")
     article_path = os.path.join(BLOG_DIR, f"{topic['slug']}.html")
-    html_content = render_article_html(topic)
+    html_content = ai_writer.render_article(article)
 
     with open(article_path, "w", encoding="utf-8") as f:
         f.write(html_content)
@@ -1499,18 +1598,19 @@ def run_daily_publisher(preferred_module=None, dry_run=False):
             js_data = f.read()
         
         if topic['slug'] not in js_data:
+            j = json.dumps
             new_entry = f""",
   {{
-    id: "post_{int(time.time()*1000)}",
-    title: "{topic['title']}",
-    slug: "{topic['slug']}",
-    category: "{topic['category']}",
-    badge: "{topic['badge']}",
-    readTime: "{topic['read_time']}",
-    date: "{current_date_str}",
-    isoDate: "{current_iso_date}",
-    excerpt: "{topic['meta_desc']}",
-    imageUrl: "https://youronementor.com/images/og-cover.svg"
+    id: {j("post_" + str(int(time.time()*1000)))},
+    title: {j(topic['title'])},
+    slug: {j(topic['slug'])},
+    category: {j(topic['category'])},
+    badge: {j(topic['badge'])},
+    readTime: {j(topic['read_time'])},
+    date: {j(current_date_str)},
+    isoDate: {j(current_iso_date)},
+    excerpt: {j(topic['meta_desc'])},
+    imageUrl: "https://youronementor.com/images/og-cover.png"
   }}
 ];"""
             js_data = js_data.rstrip().rstrip(";").rstrip("]").rstrip() + new_entry
@@ -1552,8 +1652,8 @@ def run_daily_publisher(preferred_module=None, dry_run=False):
           <article class="blog-card" data-cat="{card_cat}" data-date="{current_iso_date}">
             <div class="blog-thumb" style="background:#ccfbf1;">📰</div>
             <div class="blog-body">
-              <span class="blog-post-badge {cat_badge_class}">{topic['badge'].upper()}</span>
-              <div class="blog-post-title">{topic['title']}</div>
+              <span class="blog-post-badge {cat_badge_class}">{html.escape(topic['badge'].upper())}</span>
+              <div class="blog-post-title">{html.escape(topic['title'])}</div>
               <div class="blog-meta-line">By Anshuman Behuria &middot; {topic['read_time']} &middot; {current_date_str}</div>
               <a href="blog/{topic['slug']}.html" class="blog-read-link">Read article &amp; join Q&amp;A &rarr;</a>
             </div>
@@ -1561,6 +1661,7 @@ def run_daily_publisher(preferred_module=None, dry_run=False):
             target_str = '<div class="blog-grid" id="blog-grid">'
             if target_str in h_data:
                 h_data = h_data.replace(target_str, target_str + "\n" + card_html)
+                h_data = trim_grid(h_data, target_str, keep=12)
                 with open(home_html, "w", encoding="utf-8") as f:
                     f.write(h_data)
                 log_msg("✅ Updated homepage index.html with new blog card")
@@ -1577,8 +1678,8 @@ def run_daily_publisher(preferred_module=None, dry_run=False):
         <article class="blog-card" data-cat="{card_cat}" data-date="{current_iso_date}">
           <div class="blog-thumb" style="background:#ccfbf1;">📰</div>
           <div class="blog-body">
-            <span class="blog-post-badge {cat_badge_class}">{topic['badge'].upper()}</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">{topic['title']}</h2>
+            <span class="blog-post-badge {cat_badge_class}">{html.escape(topic['badge'].upper())}</span>
+            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">{html.escape(topic['title'])}</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; {topic['read_time']} &middot; {current_date_str}</div>
             <a href="{topic['slug']}.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -1614,6 +1715,8 @@ if __name__ == "__main__":
     parser.add_argument("--module", choices=["mm", "ewm", "sd", "fico", "joule"], help="Target specific SAP module")
     parser.add_argument("--dry-run", action="store_true", help="Simulate topic discovery without writing files")
     parser.add_argument("--research", action="store_true", help="Research trending questions from Google Suggest live")
+    parser.add_argument("--mode", choices=["new", "refresh"], default="new",
+                        help="new: publish a new article; refresh: rewrite the thinnest old article (falls back to new)")
     args = parser.parse_args()
 
     if args.research:
@@ -1634,4 +1737,10 @@ if __name__ == "__main__":
                     print(f"    ↳ Google Ask: {q}")
         print("\n✅ Research Complete!\n")
     else:
+        if args.mode == "refresh" and not args.dry_run:
+            if not os.environ.get("ANTHROPIC_API_KEY"):
+                log_msg("⏸️ ANTHROPIC_API_KEY is not set — skipping refresh.")
+                sys.exit(0)
+            if refresh_thin_post():
+                sys.exit(0)
         run_daily_publisher(preferred_module=args.module, dry_run=args.dry_run)

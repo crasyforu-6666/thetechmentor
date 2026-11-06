@@ -34,7 +34,13 @@ def collect():
     for name in sorted(os.listdir(blog_dir)):
         if name.endswith(".html"):
             pages.append("blog/" + name)
-    return pages
+    return [p for p in pages if not is_noindex(p)]
+
+
+def is_noindex(rel):
+    with open(os.path.join(ROOT, rel), encoding="utf-8", errors="ignore") as f:
+        head = f.read(6000)
+    return 'name="robots" content="noindex' in head
 
 
 def url_for(rel):
