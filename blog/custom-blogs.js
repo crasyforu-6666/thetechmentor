@@ -386,5 +386,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-06",
     excerpt: "Automate your SAP MM procurement process by understanding how to configure and troubleshoot automatic purchase order creation from purchase requisitions using ME59N. Boost efficiency and reduce manual effort.",
     imageUrl: "https://youronementor.com/blog/covers/sap-mm-automatic-po-creation-me59n-pr-automation.svg"
+  },
+  {
+    id: "post_1793977088796",
+    title: "SAP EWM Wave Management & WOCR Configuration: A Deep Dive for Architects",
+    slug: "sap-ewm-wave-management-wocr-configuration",
+    category: "Tutorial",
+    badge: "SAP EWM TUTORIAL",
+    readTime: "12 min read",
+    date: "Nov 06, 2026",
+    isoDate: "2026-11-06",
+    excerpt: "Dive deep into SAP EWM Wave Management and Warehouse Order Creation Rules (WOCR). This guide covers configuration, optimization, and advanced techniques for EWM solution architects.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-ewm-wave-management-wocr-configuration.svg"
   }
 ];
