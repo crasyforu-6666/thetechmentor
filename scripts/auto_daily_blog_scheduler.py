@@ -1482,6 +1482,28 @@ def trim_grid(page: str, grid_marker: str, keep: int) -> str:
     return head + rest
 
 
+def set_card_cover(slug: str):
+    """Point existing homepage/hub cards and custom-blogs.js at the article's cover image."""
+    import re as _re
+    for path, prefix in ((os.path.join(BASE_DIR, "index.html"), "blog/"), (os.path.join(BLOG_DIR, "index.html"), "")):
+        with open(path, encoding="utf-8") as f:
+            page = f.read()
+        style = f"background:#0b1220 url('{prefix}covers/{slug}.svg') center/cover no-repeat;"
+        pat = _re.compile(r'(<article class="blog-card"[^>]*>\s*<div class="blog-thumb") style="[^"]*">[^<]*(</div>)((?:(?!</article>).)*?href="(?:blog/)?' + _re.escape(slug) + r'\.html")', _re.S)
+        new = pat.sub(lambda m: m.group(1) + f' style="{style}">' + m.group(2) + m.group(3), page)
+        if new != page:
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(new)
+    js = os.path.join(BLOG_DIR, "custom-blogs.js")
+    with open(js, encoding="utf-8") as f:
+        data = f.read()
+    pat = _re.compile(r'(slug:\s*"' + _re.escape(slug) + r'"(?:(?!\}).)*?imageUrl:\s*)"[^"]*"', _re.S)
+    new = pat.sub(lambda m: m.group(1) + json.dumps(f"https://youronementor.com/blog/covers/{slug}.svg"), data)
+    if new != data:
+        with open(js, "w", encoding="utf-8") as f:
+            f.write(new)
+
+
 def _update_card_titles(slug: str, article: dict):
     """Keep homepage/hub cards and custom-blogs.js in sync with a rewritten article's headline."""
     import re as _re
@@ -1523,6 +1545,7 @@ def refresh_thin_post() -> bool:
         f.write(ai_writer.render_article(article, published_iso=date_m.group(1) if date_m else None))
     log_msg(f"✅ Rewrote {slug}.html — {article['word_count']} words, {len(article['faqs'])} FAQs")
     _update_card_titles(slug, article)
+    set_card_cover(slug)
     return True
 
 
@@ -1610,7 +1633,7 @@ def run_daily_publisher(preferred_module=None, dry_run=False):
     date: {j(current_date_str)},
     isoDate: {j(current_iso_date)},
     excerpt: {j(topic['meta_desc'])},
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: {j("https://youronementor.com/blog/covers/" + topic['slug'] + ".svg")}
   }}
 ];"""
             js_data = js_data.rstrip().rstrip(";").rstrip("]").rstrip() + new_entry
@@ -1650,7 +1673,7 @@ def run_daily_publisher(preferred_module=None, dry_run=False):
             card_html = f"""
           <!-- Auto-Published on {current_date_str} [{target_mod.upper()}] -->
           <article class="blog-card" data-cat="{card_cat}" data-date="{current_iso_date}">
-            <div class="blog-thumb" style="background:#ccfbf1;">📰</div>
+            <div class="blog-thumb" style="background:#0b1220 url('blog/covers/{topic['slug']}.svg') center/cover no-repeat;"></div>
             <div class="blog-body">
               <span class="blog-post-badge {cat_badge_class}">{html.escape(topic['badge'].upper())}</span>
               <div class="blog-post-title">{html.escape(topic['title'])}</div>
@@ -1676,7 +1699,7 @@ def run_daily_publisher(preferred_module=None, dry_run=False):
             hub_card = f"""
         <!-- Auto-Published on {current_date_str} [{target_mod.upper()}] -->
         <article class="blog-card" data-cat="{card_cat}" data-date="{current_iso_date}">
-          <div class="blog-thumb" style="background:#ccfbf1;">📰</div>
+          <div class="blog-thumb" style="background:#0b1220 url('covers/{topic['slug']}.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge {cat_badge_class}">{html.escape(topic['badge'].upper())}</span>
             <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">{html.escape(topic['title'])}</h2>

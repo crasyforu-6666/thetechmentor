@@ -8,7 +8,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     readTime: "10 min read",
     date: "Aug 22, 2026",
     excerpt: "A complete, hands-on 90-day roadmap for freshers and aspiring SAP functional consultants to master SAP MM, S/4HANA Sourcing & Procurement, P2P lifecycle, and OBYC integration.",
-    imageUrl: "https://youronementor.com/images/og-cover.png",
+    imageUrl: "https://youronementor.com/blog/covers/how-to-master-sap-mm-in-3-months.svg",
     content: `
       <!-- TOP PDF DOWNLOAD CARD -->
       <div style="background:#080d14; border:1px solid #1e293b; border-left:4px solid #38bdf8; padding:1.25rem; border-radius:10px; margin:1.5rem 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
@@ -200,7 +200,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     readTime: "9 min read",
     date: "Aug 25, 2026",
     excerpt: "Discover how SAP Joule and autonomous AI agents transform S/4HANA MM procurement and EWM warehouse operations in 2026.",
-    imageUrl: "https://youronementor.com/images/og-cover.png",
+    imageUrl: "https://youronementor.com/blog/covers/autonomous-ai-sap-mm-ewm-2026-guide.svg",
     content: `
       <!-- TOP PDF DOWNLOAD CARD -->
       <div style="background:#080d14; border:1px solid #1e293b; border-left:4px solid #38bdf8; padding:1.25rem; border-radius:10px; margin:1.5rem 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
@@ -244,7 +244,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     readTime: "12 min read",
     date: "Aug 25, 2026",
     excerpt: "Master SAP MM OBYC automatic account determination, BSX, WRX, GBB valuation keys, and FI integration in S/4HANA.",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/sap-mm-obyc-account-determination-s4hana-masterclass.svg"
   },
   {
     id: "post_1787892656280",
@@ -254,7 +254,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     readTime: "15 min read",
     date: "Aug 28, 2026",
     excerpt: "Prepare for senior SAP EWM consultant interviews with 25 model questions on Storage Types, Wave Management, POSC, and LOSC.",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/top-25-sap-ewm-interview-questions-2026.svg"
   },
   {
     id: "post_1787892679924",
@@ -264,7 +264,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     readTime: "11 min read",
     date: "Aug 28, 2026",
     excerpt: "Detailed architectural comparison between MRP Live (MD01N) and Classic MRP (MD01) in S/4HANA Sourcing & Procurement.",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/sap-s4hana-mrp-live-classic-mrp-comparison.svg"
   },
   {
     id: "post_1788593713418",
@@ -274,7 +274,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     readTime: "10 min read",
     date: "Sep 05, 2026",
     excerpt: "Comprehensive comparison between Embedded EWM and Decentralized EWM on S/4HANA 2026 for supply chain leads and functional consultants.",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix.svg"
   },
   {
     id: "post_1788594806242",
@@ -284,7 +284,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     readTime: "13 min read",
     date: "Sep 05, 2026",
     excerpt: "Step-by-step configuration of Condition Types, Access Sequences, Calculation Schemata, and Schema Determination in SAP MM.",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/sap-mm-pricing-procedure-schema-s4hana-guide.svg"
   },
   {
     id: "post_1788595122055",
@@ -294,7 +294,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     readTime: "14 min read",
     date: "Sep 05, 2026",
     excerpt: "Master Process-Oriented (POSC) and Layout-Oriented (LOSC) Storage Control in SAP S/4HANA EWM with step-by-step customizing rules.",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/sap-ewm-posc-losc-storage-control-deep-dive.svg"
   },
   {
     id: "post_1788599800000",
@@ -304,7 +304,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     readTime: "12 min read",
     date: "Sep 05, 2026",
     excerpt: "Discover the top 5 highest-paying SAP S/4HANA modules in 2026 to crack ₹20+ LPA salaries in India. Complete career roadmap, market demand, and skill blueprints.",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/top-5-sap-modules-to-learn-in-2026-for-20-lpa-salary.svg"
   },
   {
     id: "post_1788602783210",
@@ -314,7 +314,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     readTime: "12 min read",
     date: "Sep 05, 2026",
     excerpt: "Learn how to configure Valuation Types, Valuation Categories, and Local/Global Rules for Split Valuation in SAP MM.",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/sap-mm-split-valuation-configuration-step-by-step.svg"
   },
   {
     id: "post_1788849656841",
@@ -325,7 +325,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     date: "Sep 08, 2026",
     isoDate: "2026-09-08",
     excerpt: "Comprehensive guide to mandatory Material Ledger in S/4HANA: Actual Costing (CKMLCP), multi-currency valuation, price variance settlement (PRD), and CKM3N analysis.",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/sap-s4hana-material-ledger-actual-costing-valuation-guide.svg"
   },
   {
     id: "post_1788850671122",
@@ -337,7 +337,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     date: "Sep 08, 2026",
     isoDate: "2026-09-08",
     excerpt: "Explore how SAP Joule and autonomous AI agents transform S/4HANA 2026: Natural language procurement triage, automated EWM wave replenishment, and Clean Core AI extensibility.",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/sap-joule-ai-s4hana-logistics-procurement-blueprint.svg"
   },
   {
     id: "post_1788850748007",
@@ -349,7 +349,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     date: "Sep 08, 2026",
     isoDate: "2026-09-08",
     excerpt: "Step-by-step configuration of SAP SD Pricing Procedure: Condition Tables (V/03), Access Sequences (V/07), Condition Types (V/06), Pricing Schema (V/08), and Determination (OVKK).",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/sap-sd-pricing-procedure-condition-technique-guide.svg"
   },
   {
     id: "post_1788851121813",
@@ -361,7 +361,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     date: "Sep 08, 2026",
     isoDate: "2026-09-08",
     excerpt: "Deep dive into the SAP S/4HANA Universal Journal (Table ACDOCA): Single source of truth, elimination of reconciliation between FI and CO, extension ledgers, and multi-GAAP reporting.",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/sap-s4hana-universal-journal-acdoca-guide.svg"
   },
   {
     id: "post_1793971636795",
@@ -373,7 +373,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     date: "Nov 06, 2026",
     isoDate: "2026-11-06",
     excerpt: "How SAP Joule Copilot and GenAI agents accelerate the financial close in S/4HANA Finance: Real-time P&L variance explanation, automated accruals, and audit trail generation.",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/sap-joule-copilot-financial-close-variance-analysis-guide.svg"
   },
   {
     id: "post_1793976079410",
@@ -385,6 +385,6 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     date: "Nov 06, 2026",
     isoDate: "2026-11-06",
     excerpt: "Automate your SAP MM procurement process by understanding how to configure and troubleshoot automatic purchase order creation from purchase requisitions using ME59N. Boost efficiency and reduce manual effort.",
-    imageUrl: "https://youronementor.com/images/og-cover.png"
+    imageUrl: "https://youronementor.com/blog/covers/sap-mm-automatic-po-creation-me59n-pr-automation.svg"
   }
 ];

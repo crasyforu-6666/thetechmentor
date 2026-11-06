@@ -46,7 +46,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install "anthropic>=2.6,<3" "google-genai>=3,<4"
+          pip install "anthropic>=2.6,<3" "google-genai>=3,<4" "cairosvg>=2.7"
           if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ]; then npm install -g @anthropic-ai/claude-code; fi
 
       - name: Choose mode
@@ -71,7 +71,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add blog index.html logs sitemap.xml robots.txt
+          git add blog index.html logs sitemap.xml robots.txt content docs/SCREENSHOTS-TODO.md 2>/dev/null || git add blog index.html logs sitemap.xml robots.txt content
           if git diff --cached --quiet; then echo "Nothing to commit"; exit 0; fi
           git commit -m "feat(blog): automated article (${{ steps.mode.outputs.mode }})"
           for i in 1 2 3 4; do

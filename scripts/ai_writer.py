@@ -64,6 +64,15 @@ EDITORIAL STANDARDS (theTechMentor)
   an "Interview questions on this topic" section where relevant.
 - Mention the training naturally at most once (e.g. practising on an S/4HANA
   sandbox); never be salesy. Never promise jobs, salaries or placement.
+- Make it visual and scannable, like a good training handout:
+  * at least one <table> (config steps, comparison, field values or error→fix);
+  * 3-5 callout boxes spread through the article using exactly
+    <aside class="tip">…</aside> (practical tip), <aside class="warning">…</aside>
+    (common mistake / risk), <aside class="note">…</aside> (ECC vs S/4 or
+    background) and <aside class="interview">…</aside> (how this is asked in interviews);
+  * every transaction code, table and SPRO node in <code>…</code>;
+  * short paragraphs (2-4 sentences), numbered lists for procedures;
+  * a process_flow of 3-6 steps when the topic is a process.
 - Internal links: link 2–4 related existing articles from the list provided,
   using their exact relative href (e.g. <a href="slug.html">anchor</a>).
 - Indian context where useful (salary bands in LPA, Indian companies hiring),
@@ -78,6 +87,26 @@ ARTICLE_SCHEMA = {
         "meta_description": {"type": "string", "description": "120-155 characters, includes keyword, ends with a reason to click"},
         "slug": {"type": "string", "description": "lowercase-hyphenated URL slug, 3-8 words, no year unless essential"},
         "category": {"type": "string", "enum": CATEGORIES},
+        "module": {"type": "string", "enum": ["MM", "EWM", "SD", "FICO", "AI", "Career"],
+                   "description": "Main SAP area; sets the article's colour theme"},
+        "level": {"type": "string", "description": "e.g. 'Beginner', 'Intermediate', 'Consultant'"},
+        "process_flow": {
+            "type": "array",
+            "description": "3-6 short steps summarising the main process (empty array if the topic is not a process)",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "title": {"type": "string", "description": "2-5 words, may include a T-code"},
+                    "detail": {"type": "string", "description": "one short sentence"},
+                },
+                "required": ["title", "detail"],
+                "additionalProperties": False,
+            },
+        },
+        "screenshot_ideas": {
+            "type": "array", "items": {"type": "string"},
+            "description": "3-5 SAP screens the author should capture to illustrate the article (T-code + what to show)",
+        },
         "badge": {"type": "string", "description": "Short uppercase label, e.g. 'SAP MM TUTORIAL'"},
         "excerpt": {"type": "string", "description": "1-2 sentence card summary, under 200 characters"},
         "intro_html": {"type": "string", "description": "1-3 <p> paragraphs"},
@@ -87,7 +116,7 @@ ARTICLE_SCHEMA = {
                 "type": "object",
                 "properties": {
                     "heading": {"type": "string", "description": "H2 text, no numbering"},
-                    "html": {"type": "string", "description": "Section body HTML: p, h3, ul, ol, li, table, thead, tbody, tr, th, td, strong, em, code, pre, blockquote, a"},
+                    "html": {"type": "string", "description": "Section body HTML: p, h3, ul, ol, li, table, thead, tbody, tr, th, td, strong, em, code, pre, blockquote, a, aside class=tip|warning|note|interview"},
                 },
                 "required": ["heading", "html"],
                 "additionalProperties": False,
@@ -107,8 +136,8 @@ ARTICLE_SCHEMA = {
             },
         },
     },
-    "required": ["seo_title", "h1", "meta_description", "slug", "category", "badge", "excerpt",
-                 "intro_html", "sections", "key_takeaways", "faqs"],
+    "required": ["seo_title", "h1", "meta_description", "slug", "category", "module", "level", "badge", "excerpt",
+                 "intro_html", "sections", "key_takeaways", "faqs", "process_flow", "screenshot_ideas"],
     "additionalProperties": False,
 }
 
@@ -143,7 +172,8 @@ def slugify(s: str) -> str:
 class _Sanitizer(HTMLParser):
     """Keeps a safe subset of HTML; drops scripts, styles, events and unknown tags."""
     ALLOWED = {"p", "h3", "h4", "ul", "ol", "li", "strong", "em", "b", "i", "code", "pre",
-               "table", "thead", "tbody", "tr", "th", "td", "blockquote", "a", "br"}
+               "table", "thead", "tbody", "tr", "th", "td", "blockquote", "a", "br", "aside"}
+    ASIDE_CLASSES = {"tip", "warning", "note", "interview"}
     VOID = {"br"}
 
     def __init__(self):
@@ -158,6 +188,9 @@ class _Sanitizer(HTMLParser):
         if self.skip or tag not in self.ALLOWED:
             return
         attr = ""
+        if tag == "aside":
+            cls = (dict(attrs).get("class") or "note").split()[0]
+            attr = f' class="{cls if cls in self.ASIDE_CLASSES else "note"}"'
         if tag == "a":
             href = dict(attrs).get("href", "") or ""
             if re.match(r"^(https://|[a-z0-9-]+\.html(#[\w-]+)?$|\.\./)", href):
@@ -230,6 +263,10 @@ def quality_problems(article: dict, taken_slugs: set, fixed_slug: str = None) ->
     for phrase in BANNED_PHRASES:
         if phrase in full:
             problems.append(f"Remove the boilerplate phrase '{phrase}'.")
+    if "<table>" not in full:
+        problems.append("Add at least one <table> (config steps, comparison or error-to-fix).")
+    if full.count("<aside") < 2:
+        problems.append('Add 3-5 callouts using <aside class="tip|warning|note|interview">.')
     paras = [strip_tags(p).lower() for p in re.findall(r"<p>(.*?)</p>", full, re.S)]
     paras = [p for p in paras if len(p) > 60]
     if len(paras) != len(set(paras)):
@@ -439,166 +476,14 @@ def related_posts(slug: str, h1: str, limit: int = 3) -> list:
 
 
 def render_article(article: dict, published_iso: str = None) -> str:
-    today = datetime.date.today()
-    published_iso = published_iso or today.isoformat()
-    published_human = datetime.date.fromisoformat(published_iso).strftime("%b %d, %Y")
-    modified_iso = today.isoformat()
-    slug = article["slug"]
-    url = f"{SITE}/blog/{slug}.html"
-    read_min = max(5, round(article.get("word_count", word_count(article)) / 220))
+    """Render with the visual design, save the article data and screenshot requests."""
+    from scripts import article_design as design
 
-    toc = "".join(
-        f'<li><a href="#sec-{i}">{_e(s["heading"])}</a></li>' for i, s in enumerate(article["sections"], 1)
-    ) + '<li><a href="#faqs">Frequently asked questions</a></li>'
-
-    sections = "".join(
-        f'<h2 id="sec-{i}">{_e(s["heading"])}</h2>\n{s["html"]}\n' for i, s in enumerate(article["sections"], 1)
-    )
-    takeaways = "".join(f"<li>{_e(t)}</li>" for t in article.get("key_takeaways", []))
-    faqs = "".join(
-        f'<details class="ai-faq"><summary>{_e(f["question"])}</summary><p>{_e(f["answer"])}</p></details>'
-        for f in article["faqs"]
-    )
-    related = "".join(
-        f'<li><a href="{s}.html">{_e(t)}</a></li>' for s, t in related_posts(slug, article["h1"])
-    )
-
-    ld = [
-        {
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": article["h1"][:110],
-            "description": article["meta_description"],
-            "image": OG_IMAGE,
-            "datePublished": published_iso,
-            "dateModified": modified_iso,
-            "author": {"@type": "Person", "name": "Anshuman Behuria",
-                       "url": "https://www.linkedin.com/in/anshuman-behuria-946860130"},
-            "publisher": {"@type": "Organization", "name": "theTechMentor", "url": SITE},
-            "mainEntityOfPage": url,
-            "wordCount": article.get("word_count", word_count(article)),
-        },
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{SITE}/"},
-                {"@type": "ListItem", "position": 2, "name": "Blog", "item": f"{SITE}/blog/"},
-                {"@type": "ListItem", "position": 3, "name": article["h1"][:110], "item": url},
-            ],
-        },
-        {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                {"@type": "Question", "name": f["question"],
-                 "acceptedAnswer": {"@type": "Answer", "text": f["answer"]}}
-                for f in article["faqs"]
-            ],
-        },
-    ]
-    ld_json = json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")
-
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{_e(article['seo_title'])}</title>
-  <meta name="description" content="{_e(article['meta_description'])}" />
-  <link rel="canonical" href="{url}" />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="{url}" />
-  <meta property="og:title" content="{_e(article['h1'])}" />
-  <meta property="og:description" content="{_e(article['meta_description'])}" />
-  <meta property="og:image" content="{OG_IMAGE}" />
-  <meta property="og:site_name" content="theTechMentor" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="article:published_time" content="{published_iso}" />
-  <meta property="article:modified_time" content="{modified_iso}" />
-  <link rel="stylesheet" href="../styles.css?v=4" />
-  <link rel="stylesheet" href="blog.css" />
-  <link rel="stylesheet" href="ai-article.css" />
-  <script type="application/ld+json">{ld_json}</script>
-  <script src="../site-config.js"></script>
-  <script src="../tracking.js"></script>
-</head>
-<body>
-  <div class="reading-progress" id="reading-progress-bar"></div>
-  <header class="header">
-    <nav class="nav container">
-      <a href="../index.html" class="logo"><span class="logo-mark">SAP</span><span class="logo-text">theTechMentor</span></a>
-      <ul class="nav-links">
-        <li><a href="../index.html#courses">Live Batches</a></li>
-        <li><a href="../index.html#self-paced">Self-Paced</a></li>
-        <li><a href="index.html">Blog</a></li>
-        <li><a href="../index.html#pricing">Pricing</a></li>
-        <li><a href="../index.html#enroll" class="btn btn-sm">Enroll Now</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main class="blog-article-wrap">
-    <nav class="blog-breadcrumb" aria-label="Breadcrumb">
-      <a href="../index.html">Home</a> &gt; <a href="index.html">Blog</a> &gt; <span>{_e(article['category'])}</span>
-    </nav>
-
-    <header class="blog-header">
-      <span class="sp-badge sp-badge--teal ai-badge">{_e(article['badge'])}</span>
-      <h1 class="blog-title">{_e(article['h1'])}</h1>
-      <div class="blog-meta">
-        <div class="author-chip">
-          <div class="author-avatar-ph">AB</div>
-          <div class="author-info"><strong>Anshuman Behuria</strong><span>SAP MM &amp; EWM Consultant · 12+ yrs</span></div>
-        </div>
-        <span>•</span><span>Updated <time datetime="{modified_iso}">{today.strftime('%b %d, %Y')}</time></span>
-        <span>•</span><span>⏱️ {read_min} min read</span>
-      </div>
-    </header>
-
-    <article class="article-content ai-article">
-      {article['intro_html']}
-
-      <div class="ai-box ai-takeaways"><strong>Key takeaways</strong><ul>{takeaways}</ul></div>
-
-      <nav class="ai-box ai-toc" aria-label="Contents"><strong>In this guide</strong><ol>{toc}</ol></nav>
-
-      {sections}
-
-      <div class="ai-optin" id="lead-optin">
-        <strong>Free: SAP MM &amp; EWM video course + interview kit</strong>
-        <p>Get the 40+ lesson playlist, the most-asked interview questions and our 90-day roadmap on WhatsApp.</p>
-        <form class="ttm-optin-form" data-source="blog:{slug}">
-          <input name="name" required placeholder="Your name" autocomplete="name" />
-          <input name="phone" required placeholder="WhatsApp number" autocomplete="tel" inputmode="tel" />
-          <input name="email" type="email" placeholder="Email (optional)" autocomplete="email" />
-          <button type="submit" class="btn btn-primary">Send me the free kit</button>
-        </form>
-        <div class="ttm-optin-done" hidden></div>
-      </div>
-
-      <h2 id="faqs">Frequently asked questions</h2>
-      {faqs}
-
-      <div class="ai-box"><strong>Related guides</strong><ul>{related}</ul></div>
-
-      <div class="blog-course-cta">
-        <h3>Learn SAP MM &amp; EWM hands-on with Anshuman Behuria</h3>
-        <p>Live weekend batches or self-paced videos, with S/4HANA practice server access and interview preparation.</p>
-        <div class="blog-cta-actions">
-          <a href="../index.html#pricing" class="btn btn-primary">See programs &amp; fees</a>
-          <a href="../index.html#enroll" class="btn btn-outline">Book a free 15-min call</a>
-        </div>
-      </div>
-    </article>
-  </main>
-
-  <footer class="page-footer-lite">
-    <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../refund.html">Refunds</a>
-    <p>© {today.year} theTechMentor · Anshuman Behuria. SAP is a registered trademark of SAP SE; this site is not affiliated with SAP SE.</p>
-  </footer>
-  <script src="blog-leads.js"></script>
-</body>
-</html>
-"""
+    published_iso = published_iso or datetime.date.today().isoformat()
+    article.setdefault("module", "MM")
+    article.setdefault("process_flow", [])
+    wc = article.get("word_count") or word_count(article)
+    page = design.render(article, related_posts(article["slug"], article["h1"]), wc, published_iso)
+    design.save_article(article, published_iso)
+    design.screenshot_requests(article)
+    return page
