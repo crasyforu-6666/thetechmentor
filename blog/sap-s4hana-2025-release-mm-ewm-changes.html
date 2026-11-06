@@ -3,34 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SAP S/4HANA 2025/2026 Release</title>
-  <meta name="description" content="Explore critical architecture and functional innovations in recent SAP S/4HANA releases for Materials Management and Extended Warehouse Management." />
+  <title>SAP S/4HANA 2025 Release: MM &amp; EWM Changes Explained</title>
+  <meta name="description" content="SAP S/4HANA 2025 release changes for MM and EWM consultants: what to learn, what is deprecated and how to verify them. Read the guide." />
   <link rel="canonical" href="https://youronementor.com/blog/sap-s4hana-2025-release-mm-ewm-changes.html" />
-  <meta property="og:title" content="SAP S/4HANA 2025/2026 Release: Key Changes for MM & EWM Consultants" />
-  <meta property="og:description" content="Stay ahead with the latest S/4HANA innovations, Fiori apps, and logistics features." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://youronementor.com/blog/sap-s4hana-2025-release-mm-ewm-changes.html" />
+  <meta property="og:title" content="SAP S/4HANA 2025 Release: What Has Changed for MM &amp; EWM Consultants" />
+  <meta property="og:description" content="SAP S/4HANA 2025 release changes for MM and EWM consultants: what to learn, what is deprecated and how to verify them. Read the guide." />
   <meta property="og:image" content="https://youronementor.com/images/og-cover.png" />
-  <link rel="stylesheet" href="../styles.css" />
+  <meta property="og:site_name" content="theTechMentor" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="article:published_time" content="2026-11-06" />
+  <meta property="article:modified_time" content="2026-11-06" />
+  <link rel="stylesheet" href="../styles.css?v=4" />
   <link rel="stylesheet" href="blog.css" />
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "SAP S/4HANA Release Highlights: What Has Changed for MM & EWM Consultants?", "description": "Explore critical architecture and functional innovations in recent SAP S/4HANA releases for Materials Management and Extended Warehouse Management.", "image": "https://youronementor.com/images/og-cover.png", "author": {"@type": "Person", "name": "Anshuman Behuria", "url": "https://www.linkedin.com/in/anshuman-behuria-946860130"}, "publisher": {"@type": "Organization", "name": "theTechMentor", "url": "https://youronementor.com"}, "mainEntityOfPage": "https://youronementor.com/blog/sap-s4hana-2025-release-mm-ewm-changes.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://youronementor.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://youronementor.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "SAP S/4HANA Release Highlights: What Has Changed for MM & EWM Consultants?", "item": "https://youronementor.com/blog/sap-s4hana-2025-release-mm-ewm-changes.html"}]}]</script>
-  <meta name="robots" content="noindex,follow" />
   <link rel="stylesheet" href="ai-article.css" />
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "SAP S/4HANA 2025 Release: What Has Changed for MM & EWM Consultants", "description": "SAP S/4HANA 2025 release changes for MM and EWM consultants: what to learn, what is deprecated and how to verify them. Read the guide.", "image": "https://youronementor.com/images/og-cover.png", "datePublished": "2026-11-06", "dateModified": "2026-11-06", "author": {"@type": "Person", "name": "Anshuman Behuria", "url": "https://www.linkedin.com/in/anshuman-behuria-946860130"}, "publisher": {"@type": "Organization", "name": "theTechMentor", "url": "https://youronementor.com"}, "mainEntityOfPage": "https://youronementor.com/blog/sap-s4hana-2025-release-mm-ewm-changes.html", "wordCount": 1865}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://youronementor.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://youronementor.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "SAP S/4HANA 2025 Release: What Has Changed for MM & EWM Consultants", "item": "https://youronementor.com/blog/sap-s4hana-2025-release-mm-ewm-changes.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which SAP S/4HANA release is the 2025 release?", "acceptedAnswer": {"@type": "Answer", "text": "SAP S/4HANA 2025 is the on-premise release shipped in the 2025 annual cycle, following 2023 and 2024. Check the exact feature pack and support package level in System > Status and on the SAP Help Portal for your system."}}, {"@type": "Question", "name": "Do I need to relearn MM for the 2025 release?", "acceptedAnswer": {"@type": "Answer", "text": "No. The core of S/4HANA MM (Business Partner, MATDOC, MRP Live, Material Ledger) is stable across recent releases. You mainly need to update your knowledge of Fiori apps and any new options listed in What's New."}}, {"@type": "Question", "name": "Does embedded EWM still use CIF or qRFC?", "acceptedAnswer": {"@type": "Answer", "text": "Embedded EWM runs in the same system, so it does not transfer master data via CIF and does not use qRFC for ERP-to-EWM delivery replication. Decentralized EWM does need those mechanisms. Configuration for the integration is still required."}}, {"@type": "Question", "name": "Is SAP WM removed from S/4HANA?", "acceptedAnswer": {"@type": "Answer", "text": "No, WM is available under the compatibility scope, but SAP treats EWM as the strategic solution. Confirm the current usage-rights dates in the compatibility scope note before advising a client."}}, {"@type": "Question", "name": "Which transactions are obsolete in S/4HANA MM?", "acceptedAnswer": {"@type": "Answer", "text": "Older inventory transactions such as MB01, MB1A, MB1B and MB1C are replaced by MIGO. Several others are simplified; the Simplification Item List and the Fiori apps library show the exact replacements."}}, {"@type": "Question", "name": "Where can I verify what is new in my release?", "acceptedAnswer": {"@type": "Answer", "text": "Use What's New in SAP S/4HANA, the Simplification Item List, the Feature Scope Description and the SAP Fiori apps reference library, all on the SAP Help Portal and SAP Fiori library site."}}, {"@type": "Question", "name": "Is the SAP S/4HANA Cloud edition the same as on-premise?", "acceptedAnswer": {"@type": "Answer", "text": "No. Cloud Public Edition has a restricted set of classic transactions, a different update cadence and extensibility model. Always confirm which edition a client uses before discussing features."}}]}]</script>
   <script src="../site-config.js"></script>
   <script src="../tracking.js"></script>
 </head>
 <body>
   <div class="reading-progress" id="reading-progress-bar"></div>
-
   <header class="header">
     <nav class="nav container">
-      <a href="../index.html" class="logo">
-        <span class="logo-mark">SAP</span>
-        <span class="logo-text">theTechMentor</span>
-      </a>
+      <a href="../index.html" class="logo"><span class="logo-mark">SAP</span><span class="logo-text">theTechMentor</span></a>
       <ul class="nav-links">
         <li><a href="../index.html#courses">Live Batches</a></li>
         <li><a href="../index.html#self-paced">Self-Paced</a></li>
-        <li><a href="index.html" style="color:var(--blog-accent-light); font-weight:600;">Blog Hub</a></li>
+        <li><a href="index.html">Blog</a></li>
         <li><a href="../index.html#pricing">Pricing</a></li>
         <li><a href="../index.html#enroll" class="btn btn-sm">Enroll Now</a></li>
       </ul>
@@ -38,38 +39,50 @@
   </header>
 
   <main class="blog-article-wrap">
-    <div class="blog-breadcrumb">
-      <a href="../index.html">Home</a> &gt; <a href="index.html">Blog</a> &gt; <span>SAP News</span>
-    </div>
+    <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a> &gt; <a href="index.html">Blog</a> &gt; <span>SAP news</span>
+    </nav>
 
     <header class="blog-header">
-      <span class="sp-badge sp-badge--teal" style="margin-bottom:1rem; display:inline-block;">SAP Updates</span>
-      <h1 class="blog-title">SAP S/4HANA Release Highlights: What Has Changed for MM &amp; EWM Consultants?</h1>
-      
+      <span class="sp-badge sp-badge--teal ai-badge">SAP S/4HANA RELEASE GUIDE</span>
+      <h1 class="blog-title">SAP S/4HANA 2025 Release: What Has Changed for MM &amp; EWM Consultants</h1>
       <div class="blog-meta">
         <div class="author-chip">
           <div class="author-avatar-ph">AB</div>
-          <div class="author-info">
-            <strong>Anshuman Behuria</strong>
-            <span>Lead SAP S/4HANA Trainer</span>
-          </div>
+          <div class="author-info"><strong>Anshuman Behuria</strong><span>SAP MM &amp; EWM Consultant · 12+ yrs</span></div>
         </div>
-        <span>•</span>
-        <span>⏱️ 8 min read</span>
+        <span>•</span><span>Updated <time datetime="2026-11-06">Nov 06, 2026</time></span>
+        <span>•</span><span>⏱️ 8 min read</span>
       </div>
     </header>
 
-    <article class="article-content">
-      <p>As SAP continues to evolve the S/4HANA core, staying up-to-date with recent feature enhancements and deprecated legacy structures is crucial for consultants facing implementation milestones and client design workshops.</p>
+    <article class="article-content ai-article">
+      <p>Every October, SAP ships a new S/4HANA on-premise release, and every October, LinkedIn fills up with "top 10 new features" posts that are half marketing and half guesswork. If you are an MM or EWM consultant, or you are switching into one of these roles, you do not need a brochure. You need to know which changes affect your configuration, your Fiori usage, your interview answers and your project estimates.</p><p>This guide covers the SAP S/4HANA 2025 release from an MM and EWM point of view, but with a deliberate bias: I separate the <em>structural</em> changes that have been true since S/4HANA 1709 and still catch people out from the <em>release-specific</em> enhancements, which you must always confirm in SAP's own documents. By the end you will know where to look, what to test in a sandbox, and how to talk about releases in an interview without making claims you cannot defend.</p>
 
-      <h2>Key Architectural Innovations in S/4HANA</h2>
-      <ul>
-        <li><strong>Fiori-First Procurement:</strong> New intuitive apps for Purchase Requisition management, Supplier Evaluation, and Real-Time Spend Analytics.</li>
-        <li><strong>Embedded EWM Integration Simplification:</strong> Direct delivery integration without redundant CIF or qRFC overhead.</li>
-        <li><strong>Machine Learning in MRP Live:</strong> Predictive lead times and auto-suggestions for preferred vendor sourcing.</li>
-      </ul>
+      <div class="ai-box ai-takeaways"><strong>Key takeaways</strong><ul><li>Structural S/4HANA changes (Business Partner, MATDOC, MRP Live, Universal Journal) matter more in interviews and projects than release-specific trivia.</li><li>Verify every new-release claim in What&#x27;s New, the Simplification Item List, the Fiori apps library and the Feature Scope Description.</li><li>Embedded EWM simplifies integration (no CIF master data transfer, no qRFC for deliveries) but still needs configuration.</li><li>Classic WM remains in the compatibility scope but EWM is the strategic warehouse solution.</li><li>Practise each release in a sandbox: BP, MIGO, MATDOC, MD01N and /SCWM/MON give a quick differences checklist.</li></ul></div>
 
-      <!-- LEAD OPT-IN -->
+      <nav class="ai-box ai-toc" aria-label="Contents"><strong>In this guide</strong><ol><li><a href="#sec-1">How to read an S/4HANA release as an MM or EWM consultant</a></li><li><a href="#sec-2">Structural changes that still define S/4HANA MM</a></li><li><a href="#sec-3">Procurement and Fiori: what to practise</a></li><li><a href="#sec-4">MRP Live and planning: separating fact from hype</a></li><li><a href="#sec-5">EWM in S/4HANA: embedded integration, corrected</a></li><li><a href="#sec-6">Legacy functions: classic WM and what to tell clients</a></li><li><a href="#sec-7">Testing a new release in a sandbox: a checklist</a></li><li><a href="#sec-8">Common mistakes when following release news</a></li><li><a href="#sec-9">Interview questions on this topic</a></li><li><a href="#faqs">Frequently asked questions</a></li></ol></nav>
+
+      <h2 id="sec-1">How to read an S/4HANA release as an MM or EWM consultant</h2>
+<p>SAP's on-premise S/4HANA releases are named by year (2022, 2023, 2024, 2025) and come with feature packs and support packages. Two versions of the truth exist in any project: the marketing summary and the technical documentation. As a consultant you work from the second.</p><p>These are the sources I open first on any new release:</p><ol><li><strong>What's New in SAP S/4HANA (on SAP Help Portal)</strong> – the official list of changes by area, including Sourcing and Procurement, Inventory Management and Extended Warehouse Management.</li><li><strong>Simplification Item List</strong> – tells you what was removed, replaced or changed in behaviour compared with ECC. This is the document that drives migration effort.</li><li><strong>Feature Scope Description</strong> – states which functions are in scope under the standard licence.</li><li><strong>SAP Fiori apps reference library</strong> – shows which apps exist, their required back-end components and whether they need extra configuration.</li><li><strong>Compatibility Scope Matrix (SAP Note 2269324)</strong> – lists legacy functions such as classic WM that are still usable but not strategic. Always check the current version of the note, as dates have been revised before.</li></ol><p>A rule I teach batches: if a feature is not in What's New or the Fiori library, do not repeat it in a workshop. Several popular blog posts, including an earlier version of this one, listed items like "machine learning in MRP Live" without naming the app or the release. Treat any such claim as unverified until you find the app ID or the Help Portal entry.</p>
+<h2 id="sec-2">Structural changes that still define S/4HANA MM</h2>
+<p>Whatever the release year, these changes separate an S/4HANA MM consultant from an ECC one. Interviewers test them far more often than new-release trivia.</p><table><thead><tr><th>Area</th><th>ECC behaviour</th><th>S/4HANA behaviour</th></tr></thead><tbody><tr><td>Vendor master</td><td>XK01/XK02 and table LFA1 as the master</td><td>Business Partner (transaction <code>BP</code>) is the lead object; vendor data is linked through CVI (tables <code>CVI_VEND_LINK</code>, <code>CVI_CUST_LINK</code>)</td></tr><tr><td>Material number</td><td>18 characters</td><td>Up to 40 characters supported (field length extension must be activated)</td></tr><tr><td>Inventory documents</td><td>Tables MKPF and MSEG plus aggregate tables like MARC history</td><td>Single table <code>MATDOC</code>; MKPF/MSEG remain as compatibility views (NSDM)</td></tr><tr><td>Stock aggregates</td><td>Updated physically in MARD, MCHB, etc.</td><td>Calculated on the fly from MATDOC and MATDOC_EXTRACT; MARD etc. kept as views</td></tr><tr><td>MRP</td><td>MD01 and MD02 classic runs</td><td>MRP Live, run via <code>MD01N</code>, executed in the database</td></tr><tr><td>Financial posting</td><td>Separate FI documents and CO objects</td><td>Universal Journal, table <code>ACDOCA</code></td></tr><tr><td>Material ledger</td><td>Optional</td><td>Mandatory and active for valuation</td></tr></tbody></table><p>Two practical consequences. First, any custom report that reads MSEG directly or relies on aggregate tables must be tested; performance and results can differ. Second, the Business Partner conversion is a prerequisite for the system conversion, not an afterthought; vendor master load issues usually surface in the CVI synchronisation step.</p><p>For the finance side of this change, read my notes on the <a href="sap-s4hana-universal-journal-acdoca-guide.html">Universal Journal (ACDOCA)</a> and the <a href="sap-s4hana-material-ledger-actual-costing-valuation-guide.html">Material Ledger and actual costing</a>.</p>
+<h2 id="sec-3">Procurement and Fiori: what to practise</h2>
+<p>The classic GUI transactions ME21N, ME51N, MIGO and MIRO still exist in S/4HANA, and most projects continue to use them for power users. What has changed over successive releases is the growing Fiori layer on top. The apps I expect consultants to be comfortable with are:</p><ul><li><strong>Manage Purchase Requisitions</strong> and <strong>Manage Purchase Orders</strong> – the working lists for requestors and buyers.</li><li><strong>Monitor Purchase Order Items</strong> and the overdue-items style monitors – used by expediters.</li><li><strong>Manage Supplier Invoices / Create Supplier Invoice</strong> – the Fiori counterpart to MIRO.</li><li><strong>Manage Stock</strong> and <strong>Material Documents Overview</strong> – the Fiori replacement for MMBE and MB51 style checks.</li><li><strong>Purchase Requisition Processing / Assign and Process Purchase Requisitions</strong> – the sourcing worklist replacing much of ME57 and ME59N manual effort.</li></ul><p>Exact app names and IDs change across releases, so look them up in the Fiori apps reference library for your release and note the required OData services and roles. A very common error is that the tile appears but shows no data because the service is not activated in <code>/IWFND/MAINT_SERVICE</code> or the catalog is not assigned to the business role.</p><p>Do not abandon fundamentals for apps. A buyer who cannot explain the document flow still fails the interview. Revisit the <a href="configure-purchase-order-cycle-s4hana.html">complete purchase order cycle configuration</a> and the <a href="sap-mm-automatic-po-creation-me59n-pr-automation.html">ME59N automatic PO creation guide</a> to see how the classic and Fiori worlds line up.</p>
+<h2 id="sec-4">MRP Live and planning: separating fact from hype</h2>
+<p>MRP Live (<code>MD01N</code>) has been the S/4HANA planning run since the early releases. It runs on HANA, processes materials in parallel and handles only the materials with changes when you use net-change logic. Several things differ from classic MRP:</p><ul><li>Planning is database-driven, so some user exits and BAdIs from classic MRP are not called; custom logic must be reviewed against the Simplification Item List.</li><li>Material-level planning parameters, such as the MRP type and lot-size procedure, remain in the MRP views.</li><li>Results are still analysed in <code>MD04</code> (stock/requirements list) and <code>MD05</code>, with Fiori apps like Monitor Material Coverage and Manage Planned Orders layered on top.</li></ul><p>If a client asks whether the 2025 release brings machine learning to MRP Live, the honest answer is: check What's New and the Fiori library for your release and for the licence of predictive features. Do not promise it in a design workshop. The differences between the two runs are laid out in <a href="sap-s4hana-mrp-live-classic-mrp-comparison.html">MRP Live vs Classic MRP</a>.</p>
+<h2 id="sec-5">EWM in S/4HANA: embedded integration, corrected</h2>
+<p>One claim often repeated is that embedded EWM removes "CIF or qRFC overhead". It is true in a precise sense, and misleading if said loosely.</p><table><thead><tr><th>Aspect</th><th>Embedded EWM</th><th>Decentralized EWM</th></tr></thead><tbody><tr><td>System landscape</td><td>Runs in the same S/4HANA client and database</td><td>Separate system, connected to S/4HANA or ERP</td></tr><tr><td>Master data transfer</td><td>Uses the same material, plant and business partner data; no CIF transfer of material master. Warehouse-specific data is maintained through product master views and, where needed, transaction <code>/SCWM/MAT1</code></td><td>Master data moved via CIF or its successor tooling such as Core Interface</td></tr><tr><td>Delivery integration</td><td>ERP delivery and warehouse request are created in the same system; delivery is replicated to EWM as inbound/outbound delivery request, in-system</td><td>Delivery replication via qRFC</td></tr><tr><td>Basic setup tool</td><td>Number of steps reduced; the integration still requires configuration</td><td>Full RFC, queue and logical system setup</td></tr><tr><td>Scale and release independence</td><td>Tied to the S/4HANA release cycle</td><td>Can be upgraded independently</td></tr></tbody></table><p>So the integration is simpler, not absent. You still configure plant-to-warehouse assignments, warehouse numbers, delivery document types and the warehouse request. The monitoring tools include <code>/SCWM/MON</code> (Warehouse Monitor) and <code>/SCWM/PRDI</code> (Process inbound delivery). Queue problems in embedded landscapes are mostly about the delivery processing, not RFC.</p><p>Also note that within S/4HANA the EWM options include <em>Basic Warehouse Management</em> and <em>Extended Warehouse Management</em>, with different licence entitlements. Check the Feature Scope Description before promising wave management or advanced slotting to a client.</p><p>The architecture walkthrough is in <a href="embedded-ewm-s4hana-setup-walkthrough.html">Setting Up Embedded EWM in S/4HANA</a>, and the choice between the two models is covered in the <a href="s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix.html">embedded vs decentralized decision matrix</a>.</p>
+<h2 id="sec-6">Legacy functions: classic WM and what to tell clients</h2>
+<p>Warehouse Management (WM, the LE-WM module) is part of the compatibility scope of S/4HANA. Your clients can still run it, but SAP positions EWM as the strategic solution. This matters for estimation:</p><ul><li>A greenfield client with complex warehousing should be steered toward EWM.</li><li>A brownfield client with a stable WM setup may prefer to convert first and migrate later. Check the compatibility scope dates in the current SAP Note rather than quoting a year from memory.</li><li>Migration from WM to EWM is a project in itself: storage types become storage types in EWM, but control (storage control, activity areas, resources) is redesigned, not copied. See <a href="sap-ewm-posc-losc-storage-control-deep-dive.html">POSC vs LOSC storage control</a> for the key design concept.</li></ul><p>Other items often cited as removed from ECC include old inventory transactions such as MB01, MB1A, MB1B and MB1C. Use <code>MIGO</code> or the Fiori posting apps. Many older reports are replaced or reworked, so run a custom code check with the ABAP Test Cockpit before conversion.</p>
+<h2 id="sec-7">Testing a new release in a sandbox: a checklist</h2>
+<p>The best way to learn a release is to try it. If you have access to an S/4HANA sandbox (the SAP Cloud Appliance Library offers trial systems, subject to availability and cost), run through this list:</p><ol><li>Open <code>SPRO</code> and the IMG for Materials Management and Extended Warehouse Management. Note new nodes compared with your previous release.</li><li>Check the system version in <code>System &gt; Status</code> and the component version of S4CORE.</li><li>Create a business partner with vendor role through <code>BP</code>, then verify the link in <code>CVI_VEND_LINK</code> via SE16N.</li><li>Create a material with MM01 and display stock via a Fiori app and via <code>MMBE</code>. Compare results.</li><li>Post a goods receipt with <code>MIGO</code>, then look at the entry in <code>MATDOC</code> and in ACDOCA.</li><li>Run <code>MD01N</code> for a single plant, then review <code>MD04</code>.</li><li>In embedded EWM, create an inbound delivery, check the warehouse request in <code>/SCWM/MON</code>, and complete putaway.</li><li>Write down every difference from what you read. This list becomes your interview and workshop material.</li></ol><p>For deeper practice, the roadmap in <a href="how-to-master-sap-mm-in-3-months.html">How to Master SAP MM in 3 Months</a> shows how to sequence these exercises.</p>
+<h2 id="sec-8">Common mistakes when following release news</h2>
+<ul><li><strong>Confusing S/4HANA Cloud Public Edition with on-premise.</strong> Features and extensibility differ; cloud editions receive updates more frequently, and some classic transactions are not available there.</li><li><strong>Quoting features without a source.</strong> If you cannot show the Help Portal link, say you are verifying.</li><li><strong>Ignoring the Simplification Item List.</strong> It decides conversion effort more than any new feature does.</li><li><strong>Assuming tiles equal configuration.</strong> A Fiori app needs activated services, roles and often back-end customising.</li><li><strong>Treating AI features as automatic.</strong> Joule and AI scenarios need licence, connectivity and data quality. See the <a href="sap-joule-ai-s4hana-logistics-procurement-blueprint.html">Joule logistics blueprint</a> and the <a href="autonomous-ai-sap-mm-ewm-2026-guide.html">autonomous AI guide</a> for realistic expectations.</li></ul>
+<h2 id="sec-9">Interview questions on this topic</h2>
+<ol><li><strong>What is the biggest data model change in S/4HANA Inventory Management?</strong> The introduction of MATDOC as a single document table and the removal of physically stored aggregates, with compatibility views for MKPF, MSEG, MARD and others.</li><li><strong>Why is Business Partner mandatory?</strong> It is the single master for customers and suppliers; CVI synchronises BP with legacy vendor and customer tables.</li><li><strong>How does embedded EWM differ from decentralized in integration?</strong> Embedded shares the database and client, so no CIF master data transfer and no qRFC for deliveries; decentralized requires both.</li><li><strong>Is classic WM removed in S/4HANA?</strong> No, it sits in the compatibility scope, but EWM is strategic.</li><li><strong>How do you stay current with releases?</strong> Name the sources: What's New, the Simplification Item List, Fiori library and Feature Scope Description.</li></ol><p>For wider preparation, use <a href="top-30-sap-mm-interview-questions-2026.html">Top 30 SAP MM interview questions</a> and <a href="top-25-sap-ewm-interview-questions-2026.html">Top 25 SAP EWM interview questions</a>.</p>
+
+
       <div class="ai-optin" id="lead-optin">
         <strong>Free: SAP MM &amp; EWM video course + interview kit</strong>
         <p>Get the 40+ lesson playlist, the most-asked interview questions and our 90-day roadmap on WhatsApp.</p>
@@ -82,78 +95,26 @@
         <div class="ttm-optin-done" hidden></div>
       </div>
 
+      <h2 id="faqs">Frequently asked questions</h2>
+      <details class="ai-faq"><summary>Which SAP S/4HANA release is the 2025 release?</summary><p>SAP S/4HANA 2025 is the on-premise release shipped in the 2025 annual cycle, following 2023 and 2024. Check the exact feature pack and support package level in System &gt; Status and on the SAP Help Portal for your system.</p></details><details class="ai-faq"><summary>Do I need to relearn MM for the 2025 release?</summary><p>No. The core of S/4HANA MM (Business Partner, MATDOC, MRP Live, Material Ledger) is stable across recent releases. You mainly need to update your knowledge of Fiori apps and any new options listed in What&#x27;s New.</p></details><details class="ai-faq"><summary>Does embedded EWM still use CIF or qRFC?</summary><p>Embedded EWM runs in the same system, so it does not transfer master data via CIF and does not use qRFC for ERP-to-EWM delivery replication. Decentralized EWM does need those mechanisms. Configuration for the integration is still required.</p></details><details class="ai-faq"><summary>Is SAP WM removed from S/4HANA?</summary><p>No, WM is available under the compatibility scope, but SAP treats EWM as the strategic solution. Confirm the current usage-rights dates in the compatibility scope note before advising a client.</p></details><details class="ai-faq"><summary>Which transactions are obsolete in S/4HANA MM?</summary><p>Older inventory transactions such as MB01, MB1A, MB1B and MB1C are replaced by MIGO. Several others are simplified; the Simplification Item List and the Fiori apps library show the exact replacements.</p></details><details class="ai-faq"><summary>Where can I verify what is new in my release?</summary><p>Use What&#x27;s New in SAP S/4HANA, the Simplification Item List, the Feature Scope Description and the SAP Fiori apps reference library, all on the SAP Help Portal and SAP Fiori library site.</p></details><details class="ai-faq"><summary>Is the SAP S/4HANA Cloud edition the same as on-premise?</summary><p>No. Cloud Public Edition has a restricted set of classic transactions, a different update cadence and extensibility model. Always confirm which edition a client uses before discussing features.</p></details>
+
+      <div class="ai-box"><strong>Related guides</strong><ul><li><a href="autonomous-ai-sap-mm-ewm-2026-guide.html">Autonomous AI in SAP S/4HANA MM &amp; EWM: 2026 Guide</a></li><li><a href="embedded-ewm-s4hana-setup-walkthrough.html">Setting Up Embedded EWM in S/4HANA: A Step-by-Step Architecture Walkthrough</a></li><li><a href="s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix.html">SAP S/4HANA 2026 Embedded EWM vs Decentral EWM: Complete Decision Matrix</a></li></ul></div>
+
       <div class="blog-course-cta">
-        <span class="tier-badge" style="background:#f59e0b; color:#000; font-weight:700; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; text-transform:uppercase;">Unified Bundle</span>
-        <h3>Stay Ahead with Current S/4HANA Live Sessions & Recordings</h3>
-        <p>Master modern S/4HANA logistics tools with hands-on practice on live server environments.</p>
+        <h3>Learn SAP MM &amp; EWM hands-on with Anshuman Behuria</h3>
+        <p>Live weekend batches or self-paced videos, with S/4HANA practice server access and interview preparation.</p>
         <div class="blog-cta-actions">
-          <button type="button" class="btn btn-primary razorpay-link" data-amount="10999" data-program="MM + EWM Self-Paced Bundle">
-            Get Complete Bundle — ₹10,999 ↗
-          </button>
-          <a href="../index.html#courses" class="btn btn-outline">View Batches</a>
+          <a href="../index.html#pricing" class="btn btn-primary">See programs &amp; fees</a>
+          <a href="../index.html#enroll" class="btn btn-outline">Book a free 15-min call</a>
         </div>
       </div>
     </article>
-
-    <section class="comments-section" id="comments-section">
-      <div class="comments-header">
-        <h3>💬 Community Discussion</h3>
-        <span class="comments-count-badge" id="comments-count">Loading...</span>
-      </div>
-
-      <div class="comment-form-card">
-        <div class="comment-form-title">
-          <span>✍️</span> Have a question or comment about recent S/4HANA releases?
-        </div>
-        <form id="new-comment-form">
-          <div class="form-row">
-            <input type="text" id="commenter-name" class="comment-input" placeholder="Your Name *" required />
-            <input type="email" id="commenter-email" class="comment-input" placeholder="Your Email (Optional)" />
-          </div>
-          <textarea id="commenter-message" class="comment-textarea" placeholder="Share your experience or ask a question..." required></textarea>
-          <div class="comment-form-footer">
-            <span style="font-size:0.85rem; color:var(--blog-muted);">⚡ Instant community feedback.</span>
-            <button type="submit" class="comment-submit-btn">Post Comment 🚀</button>
-          </div>
-        </form>
-      </div>
-
-      <div class="comments-list" id="comments-list-container"></div>
-    </section>
   </main>
 
-  <footer class="footer" style="margin-top:5rem;">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a href="../index.html" class="logo">
-          <span class="logo-mark">SAP</span>
-          <span class="logo-text">theTechMentor</span>
-        </a>
-        <p>SAP MM &amp; EWM training by <strong>Anshuman Behuria</strong>.</p>
-      </div>
-      <div>
-        <h4>Quick links</h4>
-        <ul>
-          <li><a href="../index.html#courses">Live Batches</a></li>
-          <li><a href="../index.html#self-paced">Self-Paced</a></li>
-          <li><a href="index.html">Blog Hub</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:info@youronementor.com">info@youronementor.com</a></li>
-          <li><a href="https://wa.me/917848942021" target="_blank">WhatsApp: +91 78489 42021</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom container">
-      <p>&copy; 2026 theTechMentor · Anshuman Behuria. All rights reserved.</p>
-    </div>
+  <footer class="page-footer-lite">
+    <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../refund.html">Refunds</a>
+    <p>© 2026 theTechMentor · Anshuman Behuria. SAP is a registered trademark of SAP SE; this site is not affiliated with SAP SE.</p>
   </footer>
-
-  <script src="../script.js"></script>
-  <script src="blog-comments.js"></script>
   <script src="blog-leads.js"></script>
 </body>
 </html>
