@@ -25,3 +25,11 @@ Folder: `images/blog/sap-s4hana-o2c-process-fi-vkoa/`
 - [ ] 03: VKOA: Configuration screen for condition type KOFI, showing access sequence and condition table.
 - [ ] 04: OVG6: Access Sequence for Account Determination, detailing tables used.
 - [ ] 05: VOV6: Item Category determination for a sales order type.
+
+## SAP MM Pricing Procedure (Calculation Schema) Configuration Guide for S/4HANA
+Folder: `images/blog/sap-mm-pricing-procedure-schema-s4hana-guide/`
+- [ ] 01: M/08 Define Calculation Schema: control screen of ZM0000 showing steps, From/To and account keys
+- [ ] 02: M/07 access sequence ZPB0 with accesses and the Exclusive flag
+- [ ] 03: M/06 condition type PB00 detail screen showing access sequence and calculation type
+- [ ] 04: ME21N item Conditions tab showing PB00, RA01 and freight lines
+- [ ] 05: Condition Analysis screen listing accesses that found or missed a record

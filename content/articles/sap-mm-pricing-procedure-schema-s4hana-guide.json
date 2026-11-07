@@ -1,0 +1,119 @@
+{
+ "seo_title": "SAP MM Pricing Procedure: Calculation Schema Guide",
+ "h1": "SAP MM Pricing Procedure (Calculation Schema) Configuration Guide for S/4HANA",
+ "meta_description": "Learn SAP MM pricing procedure configuration: condition types, access sequences, calculation schema RM0000 and schema determination in S/4HANA. Read the.",
+ "slug": "sap-mm-pricing-procedure-schema-s4hana-guide",
+ "category": "Tutorial",
+ "module": "MM",
+ "level": "Intermediate",
+ "badge": "SAP MM TUTORIAL",
+ "excerpt": "Configure the SAP MM pricing procedure end to end: field catalog, condition tables, access sequences, condition types, calculation schema and schema determination, with errors and interview questions.",
+ "intro_html": "<p>Purchase order prices in SAP do not come from a single field. They are calculated by the condition technique, driven by a calculation schema (the MM name for a pricing procedure). When a PO shows the wrong net price, a freight condition is missing, or a discount is not picked up, the cause nearly always sits somewhere in this chain.</p><p>This guide walks through the SAP MM pricing procedure configuration in the order you would build it: field catalog, condition tables, access sequences, condition types, the calculation schema, and schema determination. You will also see how to test it, which errors to expect, and how interviewers ask about it. The menu paths are the same in ECC and S/4HANA, and I flag the differences where they exist.</p>",
+ "sections": [
+  {
+   "heading": "How condition technique works in MM purchasing",
+   "html": "<p>Condition technique is the mechanism SAP uses to find prices, discounts, surcharges, freight and taxes automatically. In MM it is used in purchasing documents (info records, contracts, scheduling agreements, POs) and also in output determination and some other areas.</p><p>The building blocks are chained together like this:</p><ol><li><strong>Field catalog</strong>: the list of fields that may be used in condition tables.</li><li><strong>Condition table</strong>: a key combination of fields, for example Vendor + Material.</li><li><strong>Access sequence</strong>: an ordered list of condition tables searched for a valid record.</li><li><strong>Condition type</strong>: represents a price element (gross price, discount, freight) and points to an access sequence.</li><li><strong>Calculation schema</strong>: the ordered list of condition types with calculation logic.</li><li><strong>Schema determination</strong>: assigns the schema to the document based on purchasing org, vendor schema group and (optionally) document schema.</li></ol><p>Condition records (maintained in <code>MEK1</code>, <code>MEK1</code> for conditions with validity, or inside info records via <code>ME11</code> / <code>ME12</code>) hold the actual values. Without a record, the access sequence finds nothing and the condition stays empty.</p><aside class=\"note\"><strong>MM vs SD:</strong> The concept is identical to SD pricing, but MM uses application <code>M</code> and usage <code>A</code>, with condition types starting with <code>P</code> (for example <code>PB00</code>) and schemas starting with <code>RM</code>. If you know SD, see our <a href=\"sap-sd-pricing-procedure-condition-technique-guide.html\">SAP SD pricing procedure guide</a> for the sales-side comparison.</aside>"
+  },
+  {
+   "heading": "Standard objects you should know before configuring",
+   "html": "<p>SAP delivers a working set. In most projects you copy and modify these rather than build from scratch.</p><table><thead><tr><th>Object</th><th>Standard name</th><th>Meaning</th></tr></thead><tbody><tr><td>Calculation schema</td><td><code>RM0000</code></td><td>Standard purchasing schema (also <code>RM1000</code> for some scenarios, check your system)</td></tr><tr><td>Gross price</td><td><code>PB00</code></td><td>Manual/record-based gross price, no tax</td></tr><tr><td>Gross price (with qty relation)</td><td><code>PBXX</code></td><td>Gross price entered manually in PO</td></tr><tr><td>Discount % on net value</td><td><code>RA01</code></td><td>Percentage discount</td></tr><tr><td>Discount absolute</td><td><code>RB00</code></td><td>Absolute discount</td></tr><tr><td>Freight absolute</td><td><code>FRB1</code></td><td>Freight, absolute amount</td></tr><tr><td>Freight %</td><td><code>FRC1</code></td><td>Freight, quantity-based</td></tr><tr><td>Delivery cost / planned</td><td><code>ZB00</code></td><td>Surcharge absolute (verify in your release)</td></tr><tr><td>Input tax</td><td><code>NAVS</code></td><td>Non-deductible input tax</td></tr><tr><td>Tax</td><td><code>JIN1</code> etc.</td><td>India GST: condition types are tax-procedure based (<code>TAXINN</code>)</td></tr></tbody></table><p>Always confirm names in your own system with <code>M/06</code> (condition types) and <code>M/08</code> style views through SPRO, because clients often carry custom Z copies.</p><aside class=\"tip\">Do not edit standard <code>PB00</code> or <code>RM0000</code>. Copy to <code>ZPB0</code> / <code>ZM0000</code> so that upgrades and support packs never overwrite your logic.</aside>"
+  },
+  {
+   "heading": "Step 1: Field catalog, condition tables and access sequences",
+   "html": "<p>The SPRO path is <code>SPRO → Materials Management → Purchasing → Conditions → Define Price Determination Process</code>. Everything in this section lives under that node.</p><h3>Maintain condition tables</h3><ol><li>Open <em>Maintain Condition Tables</em> (<code>M/03</code> to create, <code>M/04</code> change, <code>M/05</code> display).</li><li>Choose a number in the customer range (501 and above).</li><li>Select fields from the field catalog, for example Vendor, Material, Plant.</li><li>Generate. SAP creates a physical table named <code>A</code> + number (for example <code>A501</code>).</li></ol><p>If a field is missing, add it to the field catalog first in <em>Maintain Field Catalog</em>. Fields must exist in structure <code>KOMG</code> (the communication structure) or be added by an enhancement.</p><h3>Maintain access sequence</h3><ol><li>Open <em>Define Access Sequences</em> (<code>M/07</code>).</li><li>Create a sequence such as <code>ZPB0</code>.</li><li>Under <em>Accesses</em> add tables in priority order: specific first, general last.</li><li>Per access, check the <em>Exclusive</em> flag and map fields under <em>Fields</em>.</li></ol><table><thead><tr><th>Access no.</th><th>Table</th><th>Key</th><th>Purpose</th></tr></thead><tbody><tr><td>10</td><td>Standard <code>A017</code> style</td><td>Vendor / Material / Plant / Info rec. category</td><td>Plant-specific price</td></tr><tr><td>20</td><td>Standard <code>A018</code> style</td><td>Vendor / Material / Info rec. category</td><td>Client-wide price</td></tr><tr><td>30</td><td>Custom <code>A501</code></td><td>Vendor / Material group</td><td>Fallback discount</td></tr></tbody></table><p>Table numbers above are examples of the standard pattern; check your system for the exact numbers.</p><aside class=\"warning\">If the access is marked <em>Exclusive</em> and finds a record, SAP stops searching even if a later access has a better price. Mis-ticking this is a classic cause of unexpected prices.</aside>"
+  },
+  {
+   "heading": "Step 2: Defining condition types",
+   "html": "<p>Path: <code>SPRO → Materials Management → Purchasing → Conditions → Define Price Determination Process → Define Condition Types</code> (<code>M/06</code>). Always copy an existing type.</p><table><thead><tr><th>Field</th><th>What it controls</th><th>Typical value</th></tr></thead><tbody><tr><td>Access sequence</td><td>Where to search for records</td><td><code>ZPB0</code></td></tr><tr><td>Condition class</td><td>Price, discount/surcharge, taxes</td><td>B = prices, A = discount/surcharge</td></tr><tr><td>Calculation type</td><td>Percentage, quantity, fixed amount, weight</td><td>C = quantity, A = percentage</td></tr><tr><td>Condition category</td><td>Freight, tax, etc.</td><td>Blank, or <code>B</code> for freight</td></tr><tr><td>Plus/minus</td><td>Discount (negative) or surcharge (positive)</td><td>A = negative only</td></tr><tr><td>Manual entries / header &amp; item condition</td><td>Whether users can enter it in the PO</td><td>Item condition ticked</td></tr><tr><td>Scale basis</td><td>Value or quantity scale</td><td>B = value scale, C = quantity</td></tr></tbody></table><aside class=\"tip\">For a delivery cost (freight) that should be planned and then invoiced via <code>MIRO</code>, tick the <em>delivery costs</em> category and set the condition so that it is accrued at goods receipt. Without this, freight posts at invoice only.</aside><p>Also set <em>Group condition</em>, <em>Rounding rule</em>, and the validity default. Use condition categories carefully, because they change posting behaviour in valuation, not just pricing.</p>"
+  },
+  {
+   "heading": "Step 3: Building the calculation schema",
+   "html": "<p>Path: <code>SPRO → Materials Management → Purchasing → Conditions → Define Price Determination Process → Define Calculation Schema</code> (<code>M/08</code>). Copy <code>RM0000</code> to <code>ZM0000</code>, then open <em>Control</em>.</p><p>Each line is a step in the calculation. The important columns:</p><table><thead><tr><th>Column</th><th>Meaning</th></tr></thead><tbody><tr><td>Step / Counter</td><td>Sequence of the line; counter allows several condition types on the same step</td></tr><tr><td>Condition type</td><td>The type to be determined</td></tr><tr><td>From / To</td><td>Reference to earlier steps used as a base for the calculation</td></tr><tr><td>Manual</td><td>Only entered by hand, not determined automatically</td></tr><tr><td>Required</td><td>Mandatory condition</td></tr><tr><td>Statistical</td><td>Shown but does not alter net value</td></tr><tr><td>Subtotal</td><td>Stores amount in a field (for example, to be used in a later formula)</td></tr><tr><td>Requirement / Alt. calc. type / Alt. cond. base value</td><td>Routine numbers for logic</td></tr><tr><td>Account key / Accruals</td><td>Posting key for FI/MM, used with <code>OBYC</code></td></tr></tbody></table><h3>Worked example</h3><p>A client buys steel rods. Gross price is ₹100 per kg for 1,000 kg. The vendor gives a 5% discount and charges ₹2,000 freight, and 18% GST applies.</p><table><thead><tr><th>Step</th><th>Cond. type</th><th>From</th><th>Value</th><th>Result</th></tr></thead><tbody><tr><td>10</td><td><code>PBXX</code> / <code>PB00</code></td><td></td><td>₹100 × 1,000</td><td>₹1,00,000</td></tr><tr><td>20</td><td><code>RA01</code></td><td>10</td><td>-5%</td><td>-₹5,000</td></tr><tr><td>100</td><td>Subtotal (net)</td><td>10 to 20</td><td></td><td>₹95,000</td></tr><tr><td>110</td><td><code>FRB1</code></td><td></td><td>₹2,000</td><td>₹2,000 (accrued / delivery cost)</td></tr><tr><td>200</td><td>Effective value</td><td>100 to 110</td><td></td><td>₹97,000</td></tr><tr><td>300</td><td><code>JIN1</code>-type GST</td><td>100</td><td>18%</td><td>₹17,100</td></tr></tbody></table><p>Note that tax in India is handled through the tax procedure (<code>TAXINN</code>), not the main MM schema, so GST conditions are calculated from the base you define in the tax procedure. Treat the last row as an illustration of the base.</p><aside class=\"interview\">\"What is the difference between a subtotal and a statistical condition?\" A subtotal only stores an intermediate value for later steps; a statistical condition is displayed but excluded from the net price and from posting.</aside>"
+  },
+  {
+   "heading": "Step 4: Schema determination",
+   "html": "<p>The schema must be found automatically on the PO. Configuration is under <code>SPRO → Materials Management → Purchasing → Conditions → Define Price Determination Process → Define Schema Determination</code>.</p><ol><li><strong>Define schema group, vendor</strong> (<code>OLMEKV</code> style path): create a group such as <code>Z1</code>.</li><li><strong>Assign the group to the vendor</strong> in the vendor master, Purchasing data (<code>XK02</code> in ECC, <code>BP</code> in S/4HANA), field <em>Schema Group, Vendor</em>.</li><li><strong>Define schema group, purchasing organization</strong> and assign it to the purchasing organization.</li><li><strong>Define the schema group for the document</strong> only if you need to vary the schema by document type. Assign the schema group to the document type (for example <code>NB</code>) in <code>OMET</code> style document settings.</li><li><strong>Assign schema to the combination</strong> using <em>Calculation Schema → Schema Determination → Determine the Schema</em>: purchasing org schema group + vendor schema group (+ document schema).</li></ol><table><thead><tr><th>Purch. org schema grp</th><th>Vendor schema grp</th><th>Schema</th></tr></thead><tbody><tr><td><code>01</code></td><td><code>Z1</code> (domestic)</td><td><code>ZM0000</code></td></tr><tr><td><code>01</code></td><td><code>Z2</code> (import)</td><td><code>ZMIMP</code></td></tr></tbody></table><aside class=\"note\"><strong>S/4HANA:</strong> The vendor is a Business Partner, so the schema group field is maintained in <code>BP</code> under the vendor purchasing role. Customizing paths remain unchanged.</aside><p>Schema determination in the purchase order cycle works together with the rest of procurement; see <a href=\"configure-purchase-order-cycle-s4hana.html\">how to configure a complete PO cycle</a> for the surrounding steps.</p>"
+  },
+  {
+   "heading": "Testing, freight, discounts and the Fiori experience",
+   "html": "<h3>Creating condition records</h3><p>Use <code>MEK1</code> (create), <code>MEK2</code> (change), <code>MEK3</code> (display) for conditions with validity periods. In S/4HANA, the Fiori app <em>Manage Purchasing Info Records</em> and the Manage Purchase Contracts app also maintain conditions, though condition types and access sequences are still configured in SPRO.</p><h3>Test procedure</h3><ol><li>Create a vendor with schema group <code>Z1</code>.</li><li>Maintain a <code>PB00</code> record in <code>MEK1</code> or info record <code>ME11</code> for the material.</li><li>Create a PO in <code>ME21N</code> (or Fiori <em>Manage Purchase Orders</em>).</li><li>In the item, open the <em>Conditions</em> tab and check that the gross price, discount and freight lines appear.</li><li>Use the analysis function (<em>Analysis</em> button on the condition screen) to see which access found a record, or why none did.</li></ol><aside class=\"tip\">The <em>Analysis</em> button is the fastest debugging tool. It lists every access, its table, and the result for each condition type, so you can see the exact missing key.</aside><h3>Posting impact</h3><p>Condition types feeding delivery costs or price differences post through account keys, such as <code>FRE</code> (freight) and <code>FR1</code>. These use <code>OBYC</code>. For details, see <a href=\"sap-mm-obyc-account-determination-s4hana-masterclass.html\">our OBYC masterclass</a>.</p>"
+  },
+  {
+   "heading": "Common errors and troubleshooting",
+   "html": "<table><thead><tr><th>Symptom / message</th><th>Likely cause</th><th>Fix</th></tr></thead><tbody><tr><td>Price is zero; PO warning \"Net price = 0\" (message <code>06 023</code>)</td><td>No valid condition record or wrong access</td><td>Use condition Analysis, create the record in <code>MEK1</code> or info record</td></tr><tr><td>\"Calculation schema not found\" / no schema in PO header</td><td>Schema determination incomplete</td><td>Check vendor schema group, purchasing org group and the assignment table</td></tr><tr><td>Condition type not shown in PO</td><td>Not in the schema, or marked statistical/manual</td><td>Add it to the schema in <code>M/08</code></td></tr><tr><td>Discount calculated on wrong base</td><td>Incorrect From/To references</td><td>Fix the From column or use a subtotal</td></tr><tr><td>Record exists but not found</td><td>Validity dates, vendor schema group or field mapping in the access</td><td>Check validity and the access Fields view</td></tr><tr><td>Freight not accrued</td><td>Missing account key / accrual setting</td><td>Set account key (for example <code>FRE</code>) and accrual in the schema line</td></tr></tbody></table><aside class=\"warning\">Changing a calculation schema does not update existing POs automatically. Reprice open documents using <em>Update pricing</em> on the condition screen or create new documents.</aside>"
+  },
+  {
+   "heading": "Interview questions on this topic",
+   "html": "<ol><li><strong>What are the components of condition technique?</strong> Field catalog, condition tables, access sequences, condition types, calculation schema and condition records.</li><li><strong>How does SAP find the schema in a PO?</strong> Through the vendor schema group, the purchasing org schema group and, optionally, the document schema group.</li><li><strong>What does the Exclusive indicator do?</strong> It stops the access sequence at the first successful access.</li><li><strong>Where do you maintain a condition record with validity?</strong> <code>MEK1</code>, or in the info record or contract.</li><li><strong>How do you add a new freight condition?</strong> Copy <code>FRB1</code>, assign the access sequence, add to the schema, and set account keys.</li></ol><aside class=\"interview\">Interviewers often give a scenario: \"A PO has no price even though info record exists.\" Walk through schema determination, the access sequence, validity, and the Analysis function. More such questions are in our <a href=\"top-30-sap-mm-interview-questions-2026.html\">Top 30 SAP MM interview questions</a>.</aside><p>If you are building your SAP MM skills step by step, practising these configurations on an S/4HANA sandbox is the quickest way to make them stick. Our <a href=\"how-to-master-sap-mm-in-3-months.html\">3-month SAP MM plan</a> shows where pricing fits in.</p>"
+  }
+ ],
+ "key_takeaways": [
+  "MM pricing uses the same condition technique as SD: field catalog, condition tables, access sequences, condition types, calculation schema and condition records.",
+  "The standard schema is RM0000 and gross price is PB00; always copy to Z objects instead of changing standard ones.",
+  "The schema is found by combining the purchasing organization schema group, the vendor schema group and optionally a document schema group.",
+  "Use the Analysis button on the PO condition screen to find out why a price is missing.",
+  "Account keys and accruals in the schema link pricing to FI postings through OBYC.",
+  "Changing a schema does not reprice existing POs; update pricing or create new documents."
+ ],
+ "faqs": [
+  {
+   "question": "What is the calculation schema in SAP MM?",
+   "answer": "It is the MM equivalent of the SD pricing procedure. It is an ordered list of condition types with rules for base, subtotals, account keys and accruals, and it determines how the net price of a purchase order item is calculated. The standard schema is RM0000."
+  },
+  {
+   "question": "Which T-code is used to define the calculation schema in MM?",
+   "answer": "Use M/08 or the SPRO path Materials Management > Purchasing > Conditions > Define Price Determination Process > Define Calculation Schema. Related codes include M/06 for condition types and M/07 for access sequences."
+  },
+  {
+   "question": "How does SAP determine the pricing schema in a purchase order?",
+   "answer": "Through schema determination, which combines the purchasing organization's schema group, the vendor's schema group and, optionally, the document's schema group. The combination is assigned to a calculation schema in customizing."
+  },
+  {
+   "question": "Why is my PO price zero even though a condition record exists?",
+   "answer": "Common reasons are an expired validity date, a vendor in a different schema group, a condition type missing from the schema, or an access sequence that does not match the record's key. Use the Analysis function on the condition screen to see the exact result."
+  },
+  {
+   "question": "Where do I maintain condition records in purchasing?",
+   "answer": "Use MEK1, MEK2 and MEK3 to create, change and display conditions, or maintain them directly in purchasing info records (ME11/ME12) and contracts. In S/4HANA, Fiori apps are also available."
+  },
+  {
+   "question": "Is MM pricing different in S/4HANA?",
+   "answer": "The condition technique and customizing paths remain the same. The main differences are that vendors are maintained as Business Partners and that many users work in Fiori apps instead of classic GUI transactions."
+  }
+ ],
+ "process_flow": [
+  {
+   "title": "Field catalog & tables",
+   "detail": "Create condition tables with M/03 using fields from the catalog."
+  },
+  {
+   "title": "Access sequence (M/07)",
+   "detail": "Order tables from most specific to most general."
+  },
+  {
+   "title": "Condition types (M/06)",
+   "detail": "Copy standard types and link the access sequence."
+  },
+  {
+   "title": "Calculation schema (M/08)",
+   "detail": "Add steps, From/To, subtotals and account keys."
+  },
+  {
+   "title": "Schema determination",
+   "detail": "Assign vendor, purchasing org and document groups to the schema."
+  },
+  {
+   "title": "Test in ME21N",
+   "detail": "Create condition records and check the PO Conditions tab."
+  }
+ ],
+ "screenshot_ideas": [
+  "M/08 Define Calculation Schema: control screen of ZM0000 showing steps, From/To and account keys",
+  "M/07 access sequence ZPB0 with accesses and the Exclusive flag",
+  "M/06 condition type PB00 detail screen showing access sequence and calculation type",
+  "ME21N item Conditions tab showing PB00, RA01 and freight lines",
+  "Condition Analysis screen listing accesses that found or missed a record"
+ ],
+ "word_count": 1953,
+ "published": "2026-11-07"
+}

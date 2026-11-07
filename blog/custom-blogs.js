@@ -278,7 +278,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
   },
   {
     id: "post_1788594806242",
-    title: "SAP MM Pricing Procedure (Calculation Schema) Configuration Guide",
+    title: "SAP MM Pricing Procedure (Calculation Schema) Configuration Guide for S/4HANA",
     slug: "sap-mm-pricing-procedure-schema-s4hana-guide",
     category: "Tutorial",
     readTime: "13 min read",
