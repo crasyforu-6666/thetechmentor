@@ -17,3 +17,11 @@ Folder: `images/blog/sap-mm-consignment-procurement-mrko-settlement-411k/`
 - [ ] 03: MIGO: Goods Receipt for Purchase Order with movement type 101 K.
 - [ ] 04: MB54: Consignment Stock at Vendor screen showing owned vs consignment stock.
 - [ ] 05: MRKO: Settlement screen showing selection criteria and processed items.
+
+## SAP S/4HANA Order-to-Cash (O2C) Process Flow: Deep Dive into FI Integration & VKOA
+Folder: `images/blog/sap-s4hana-o2c-process-fi-vkoa/`
+- [ ] 01: VA01: Sales Order item overview with pricing and ATP check results.
+- [ ] 02: VL02N: Post Goods Issue screen showing stock movements and accounting documents created.
+- [ ] 03: VKOA: Configuration screen for condition type KOFI, showing access sequence and condition table.
+- [ ] 04: OVG6: Access Sequence for Account Determination, detailing tables used.
+- [ ] 05: VOV6: Item Category determination for a sales order type.

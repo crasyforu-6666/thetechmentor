@@ -410,5 +410,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-06",
     excerpt: "Dive deep into SAP MM consignment procurement. Learn how to configure master data, execute 411 K movements, and master MRKO settlement for vendor-owned stock.",
     imageUrl: "https://youronementor.com/blog/covers/sap-mm-consignment-procurement-mrko-settlement-411k.svg"
+  },
+  {
+    id: "post_1794025405967",
+    title: "SAP S/4HANA Order-to-Cash (O2C) Process Flow: Deep Dive into FI Integration & VKOA",
+    slug: "sap-s4hana-o2c-process-fi-vkoa",
+    category: "Tutorial",
+    badge: "SAP SD TUTORIAL",
+    readTime: "14 min read",
+    date: "Nov 07, 2026",
+    isoDate: "2026-11-07",
+    excerpt: "Explore the SAP S/4HANA O2C process flow end-to-end, focusing on financial integration and VKOA configuration. A practical guide for SD and FICO consultants.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-s4hana-o2c-process-fi-vkoa.svg"
   }
 ];
