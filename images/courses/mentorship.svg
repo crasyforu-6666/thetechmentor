@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ea580c"/><stop offset="1" stop-color="#db2777"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 H0 V40" fill="none" stroke="#ffffff" stroke-opacity=".08" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="1060" cy="90" r="210" fill="#ffffff" opacity=".08"/>
+  <circle cx="1130" cy="560" r="150" fill="#000000" opacity=".10"/>
+  
+  <text x="70" y="264" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="62" font-weight="800" fill="#ffffff">1-on-1 SAP Career</text><text x="70" y="338" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="62" font-weight="800" fill="#ffffff">Mentorship</text>
+  <g transform="translate(905 200)"><rect x="30" y="150" width="40" height="70" rx="6" fill="#fff" opacity=".5"/><rect x="90" y="110" width="40" height="110" rx="6" fill="#fff" opacity=".7"/>
+      <rect x="150" y="70" width="40" height="150" rx="6" fill="#fff" opacity=".9"/><path d="M30 110 L100 70 L150 85 L225 30" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="225" cy="30" r="12" fill="#fff"/></g>
+  <rect x="70" y="520" width="6" height="52" rx="3" fill="#ffffff"/>
+  <text x="92" y="545" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">theTechMentor</text>
+  <text x="92" y="575" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="20" fill="#ffffff" opacity=".85">SAP S/4HANA Academy · youronementor.com</text>
+</svg>

@@ -112,8 +112,12 @@ def cover_svg(article: dict) -> str:
         for i, line in enumerate(lines)
     )
     icon = _ICONS[t["icon"]].replace("{a}", t["a"])
-    badge = _e(t["name"].upper())
+    badge = _e((article.get("cover_badge") or t["name"]).upper())
     badge_w = 28 + len(badge) * 15
+    badge_svg = "" if article.get("cover_badge") == "" else (
+        f'<rect x="70" y="60" width="{badge_w}" height="46" rx="23" fill="#ffffff" opacity=".18"/>'
+        f'<text x="{70 + badge_w // 2}" y="91" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="22" '
+        f'font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="2">{badge}</text>')
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -127,13 +131,12 @@ def cover_svg(article: dict) -> str:
   <rect width="1200" height="630" fill="url(#grid)"/>
   <circle cx="1060" cy="90" r="210" fill="#ffffff" opacity=".08"/>
   <circle cx="1130" cy="560" r="150" fill="#000000" opacity=".10"/>
-  <rect x="70" y="60" width="{badge_w}" height="46" rx="23" fill="#ffffff" opacity=".18"/>
-  <text x="{70 + badge_w // 2}" y="91" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="2">{badge}</text>
+  {badge_svg}
   {text}
   <g transform="translate(905 200)">{icon}</g>
   <rect x="70" y="520" width="6" height="52" rx="3" fill="#ffffff"/>
-  <text x="92" y="545" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">Anshuman Behuria · theTechMentor</text>
-  <text x="92" y="575" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="20" fill="#ffffff" opacity=".85">S/4HANA training · youronementor.com</text>
+  <text x="92" y="545" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">theTechMentor</text>
+  <text x="92" y="575" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="20" fill="#ffffff" opacity=".85">SAP S/4HANA Academy · youronementor.com</text>
 </svg>'''
 
 
@@ -286,11 +289,10 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
   <meta property="article:modified_time" content="{modified_iso}" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" />
-  <link rel="stylesheet" href="../styles.css?v=4" />
-  <link rel="stylesheet" href="blog.css" />
-  <link rel="stylesheet" href="ai-article.css?v=2" />
-  <link rel="stylesheet" href="../theme-2030.css?v=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+  <link rel="icon" href="../images/logo-mark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../site.css?v=1" />
+  <link rel="stylesheet" href="ai-article.css?v=3" />
   <script type="application/ld+json">{ld_json}</script>
   <script src="../site-config.js"></script>
   <script src="../tracking.js"></script>
@@ -298,14 +300,15 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
 <body class="ai-page" style="--accent:{t['a']};--accent2:{t['b']};--accent-soft:{t['soft']};">
   <div class="reading-progress" id="reading-progress-bar"></div>
   <header class="header">
-    <nav class="nav container">
-      <a href="../index.html" class="logo"><span class="logo-mark">SAP</span><span class="logo-text">theTechMentor</span></a>
+    <nav class="nav wrap" aria-label="Main">
+      <a href="../index.html" class="brand" aria-label="theTechMentor home"><img src="../images/logo-mark.svg" alt="" width="36" height="36" /><span>the<b>Tech</b>Mentor</span></a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul class="nav-links">
-        <li><a href="../index.html#courses">Live Batches</a></li>
-        <li><a href="../index.html#self-paced">Self-Paced</a></li>
+        <li><a href="../index.html#courses">Courses</a></li>
+        <li><a href="../index.html#paths">Career paths</a></li>
         <li><a href="index.html">Blog</a></li>
-        <li><a href="../index.html#pricing">Pricing</a></li>
-        <li><a href="../index.html#enroll" class="btn btn-sm">Enroll Now</a></li>
+        <li><a href="../index.html#advisor" class="btn btn-ghost btn-sm">Free counselling</a></li>
+        <li><a href="../index.html#courses" class="btn btn-primary btn-sm">Explore courses</a></li>
       </ul>
     </nav>
   </header>
@@ -322,7 +325,7 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
       <div class="blog-meta">
         <div class="author-chip">
           <div class="author-avatar-ph">AB</div>
-          <div class="author-info"><strong>Anshuman Behuria</strong><span>SAP MM &amp; EWM Consultant · 12+ yrs</span></div>
+          <div class="author-info"><strong>Anshuman Behuria</strong><span>Lead SAP Mentor · theTechMentor</span></div>
         </div>
         <span>Updated <time datetime="{modified_iso}">{today.strftime('%b %d, %Y')}</time></span>
       </div>
@@ -363,7 +366,7 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
       {related_cards(related)}
 
       <div class="blog-course-cta ai-cta">
-        <h3>Learn SAP MM &amp; EWM hands-on with Anshuman Behuria</h3>
+        <h3>Learn SAP hands-on with theTechMentor</h3>
         <p>Live weekend batches or self-paced videos, with S/4HANA practice server access and interview preparation.</p>
         <div class="blog-cta-actions">
           <a href="../index.html#pricing" class="btn btn-primary">See programs &amp; fees</a>
@@ -373,11 +376,21 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
     </article>
   </main>
 
-  <footer class="page-footer-lite">
-    <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../refund.html">Refunds</a>
-    <p>© {today.year} theTechMentor · Anshuman Behuria. SAP is a registered trademark of SAP SE; this site is not affiliated with SAP SE.</p>
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="brand brand-light"><img src="../images/logo-mark.svg" alt="" width="32" height="32" /><span>the<b>Tech</b>Mentor</span></a>
+        <p>Online SAP S/4HANA academy for logistics, procurement and warehouse careers.</p>
+      </div>
+      <div><h4>Courses</h4><ul><li><a href="../index.html#courses">All courses</a></li><li><a href="../index.html#paths">Career paths</a></li><li><a href="../index.html#formats">Live vs self-paced</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="index.html">Blog</a></li><li><a href="../index.html#faq">FAQ</a></li><li><a href="../index.html#advisor">Free counselling</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="mailto:info@youronementor.com">info@youronementor.com</a></li><li><a href="https://wa.me/917848942021" target="_blank" rel="noopener noreferrer">WhatsApp +91 78489 42021</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li><li><a href="../refund.html">Refunds</a></li></ul></div>
+    </div>
+    <div class="wrap footer-bottom"><p>© {today.year} theTechMentor. SAP and S/4HANA are trademarks of SAP SE; theTechMentor is not affiliated with SAP SE.</p></div>
   </footer>
   <script src="blog-leads.js"></script>
+  <script>document.querySelector(".nav-toggle")?.addEventListener("click",function(){{var l=document.querySelector(".nav-links");var o=l.classList.toggle("open");this.setAttribute("aria-expanded",String(o));}});</script>
 </body>
 </html>
 """

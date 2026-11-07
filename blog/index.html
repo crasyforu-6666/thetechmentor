@@ -4,58 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SAP MM & EWM Knowledge Hub & Blog | theTechMentor</title>
-  <meta name="description" content="In-depth SAP MM, EWM, and S/4HANA guides, interview preparation questions, configuration blueprints, and career advice by Anshuman Behuria." />
+  <meta name="description" content="In-depth SAP MM, EWM, and S/4HANA guides, interview preparation questions, configuration blueprints, and career advice from theTechMentor's SAP mentors." />
   <link rel="canonical" href="https://youronementor.com/blog/" />
   <meta property="og:title" content="SAP MM & EWM Knowledge Hub & Blog | theTechMentor" />
   <meta property="og:description" content="Practical guides, interview prep, and career advice for SAP supply chain consultants." />
   <meta property="og:image" content="https://youronementor.com/images/og-cover.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" />
-  <link rel="stylesheet" href="../styles.css" />
-  <link rel="stylesheet" href="blog.css" />
-  <link rel="stylesheet" href="../theme-2030.css?v=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+  <link rel="icon" href="../images/logo-mark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../site.css?v=1" />
+  <style>
+    .hub-hero { background: radial-gradient(800px 300px at 80% 0%, #e0e7ff, transparent 70%), radial-gradient(600px 300px at 0% 100%, #e0f2fe, transparent 70%), #fff; padding: 3rem 0 2rem; text-align: center; }
+    .hub-hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; margin: .3rem 0 .8rem; }
+    .hub-hero p { color: #475569; font-size: 1.1rem; max-width: 680px; margin: 0 auto; }
+    .hub-search { max-width: 560px; margin: 1.5rem auto 0; }
+    .hub-search input { width: 100%; padding: .9rem 1.2rem; font: 500 1rem Inter, sans-serif; border: 1px solid #e2e8f0; border-radius: 14px; box-shadow: 0 10px 30px -12px rgba(15,23,42,.18); outline: none; }
+    .hub-search input:focus { border-color: #2563eb; }
+    .blog-tabs { display: flex; justify-content: center; gap: .5rem; flex-wrap: wrap; margin: 1.5rem 0 2rem; }
+    .blog-tab { border: 1px solid #e2e8f0; background: #fff; border-radius: 999px; padding: .5rem 1rem; font: 600 .9rem Inter, sans-serif; color: #334155; cursor: pointer; }
+    .blog-tab.active { background: #0f172a; color: #fff; border-color: #0f172a; }
+    #hub-blog-grid .blog-card:nth-child(n+9) { display: flex; }
+    @media (max-width: 640px) { #hub-blog-grid .blog-card:nth-child(n+5) { display: flex; } }
+    .hub-main { padding-bottom: 4rem; }
+  </style>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
   <!-- Header -->
   <header class="header">
-    <nav class="nav container">
-      <a href="../index.html" class="logo">
-        <span class="logo-mark">SAP</span>
-        <span class="logo-text">theTechMentor</span>
-      </a>
+    <nav class="nav wrap" aria-label="Main">
+      <a href="../index.html" class="brand" aria-label="theTechMentor home"><img src="../images/logo-mark.svg" alt="" width="36" height="36" /><span>the<b>Tech</b>Mentor</span></a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul class="nav-links">
-        <li><a href="../index.html#courses">Live Batches</a></li>
-        <li><a href="../index.html#self-paced">Self-Paced</a></li>
-        <li><a href="index.html" style="color:var(--blog-accent-light); font-weight:600;">Blog Hub</a></li>
-        <li><a href="../index.html#pricing">Pricing</a></li>
-        <li><a href="../index.html#enroll" class="btn btn-sm">Enroll Now</a></li>
+        <li><a href="../index.html#courses">Courses</a></li>
+        <li><a href="../index.html#paths">Career paths</a></li>
+        <li><a href="index.html" aria-current="page">Blog</a></li>
+        <li><a href="../index.html#advisor" class="btn btn-ghost btn-sm">Free counselling</a></li>
+        <li><a href="../index.html#courses" class="btn btn-primary btn-sm">Explore courses</a></li>
       </ul>
     </nav>
   </header>
 
-  <main style="padding-top: 110px; padding-bottom: 80px;">
-    <div class="container">
-      
-      <!-- Hub Header Banner -->
-      <div style="text-align: center; max-width: 750px; margin: 0 auto 3rem auto;">
-        <span class="section-label">Learning &amp; Career Hub</span>
-        <h1 style="font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 800; color: #fff; margin: 0.5rem 0 1rem 0;">
-          Insights for SAP Professionals
-        </h1>
-        <p style="color: var(--blog-muted); font-size: 1.15rem; line-height: 1.6;">
-          Practical implementation guides, interview preparation, and career transition roadmaps &mdash; written by Anshuman Behuria and alumni.
-        </p>
-
-        <!-- Search Bar -->
-        <div style="margin-top: 1.75rem; position: relative; max-width: 500px; margin-inline: auto;">
-          <input type="text" id="blog-search-input" class="comment-input" placeholder="🔍 Search tutorials, interview questions, S/4HANA..." style="padding: 0.9rem 1.25rem; font-size: 1rem; border-radius: 30px;" />
-        </div>
+  <main class="hub-main">
+    <section class="hub-hero">
+      <div class="wrap">
+        <p class="eyebrow">theTechMentor learning hub</p>
+        <h1>Free SAP guides &amp; interview prep</h1>
+        <p>In-depth S/4HANA tutorials, configuration walkthroughs, interview questions and career roadmaps from theTechMentor's SAP mentors — new articles every day.</p>
+        <div class="hub-search"><input type="text" id="blog-search-input"  placeholder="Search tutorials, interview questions, S/4HANA..." /></div>
       </div>
-
+    </section>
+    <div class="wrap">
       <!-- Filter Tabs -->
-      <div class="blog-tabs" style="display:flex; justify-content:center; gap:0.5rem; flex-wrap:wrap; margin-bottom: 2.5rem;">
+      <div class="blog-tabs">
         <button type="button" class="blog-tab active" data-filter="all">All posts</button>
         <button type="button" class="blog-tab" data-filter="interview">Interview prep</button>
         <button type="button" class="blog-tab" data-filter="tutorial">Tutorials</button>
@@ -71,7 +73,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-s4hana-o2c-process-fi-vkoa.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--blue">SAP SD TUTORIAL</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP S/4HANA Order-to-Cash (O2C) Process Flow: Deep Dive into FI Integration &amp; VKOA</h2>
+            <h2 class="blog-post-title">SAP S/4HANA Order-to-Cash (O2C) Process Flow: Deep Dive into FI Integration &amp; VKOA</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 14 min read &middot; Nov 07, 2026</div>
             <a href="sap-s4hana-o2c-process-fi-vkoa.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -82,7 +84,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-mm-consignment-procurement-mrko-settlement-411k.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">SAP MM TUTORIAL</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP MM Consignment Procurement: Info Records, 411 K Movements &amp; MRKO Settlement Masterclass</h2>
+            <h2 class="blog-post-title">SAP MM Consignment Procurement: Info Records, 411 K Movements &amp; MRKO Settlement Masterclass</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 11 min read &middot; Nov 06, 2026</div>
             <a href="sap-mm-consignment-procurement-mrko-settlement-411k.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -93,7 +95,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-ewm-wave-management-wocr-configuration.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">SAP EWM TUTORIAL</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP EWM Wave Management &amp; WOCR Configuration: A Deep Dive for Architects</h2>
+            <h2 class="blog-post-title">SAP EWM Wave Management &amp; WOCR Configuration: A Deep Dive for Architects</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 12 min read &middot; Nov 06, 2026</div>
             <a href="sap-ewm-wave-management-wocr-configuration.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -104,7 +106,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-mm-automatic-po-creation-me59n-pr-automation.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">SAP MM TUTORIAL</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP MM Automatic Purchase Order Creation (ME59N) from Purchase Requisition: A Practical Guide</h2>
+            <h2 class="blog-post-title">SAP MM Automatic Purchase Order Creation (ME59N) from Purchase Requisition: A Practical Guide</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 13 min read &middot; Nov 06, 2026</div>
             <a href="sap-mm-automatic-po-creation-me59n-pr-automation.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -115,7 +117,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-joule-copilot-financial-close-variance-analysis-guide.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">SAP JOULE AI 2026</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP Joule Copilot for Financial Close & Variance Analysis (FICO 2026 Guide)</h2>
+            <h2 class="blog-post-title">SAP Joule Copilot for Financial Close & Variance Analysis (FICO 2026 Guide)</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 13 min read &middot; Nov 06, 2026</div>
             <a href="sap-joule-copilot-financial-close-variance-analysis-guide.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -126,7 +128,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-s4hana-universal-journal-acdoca-guide.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--blue">SAP FICO BLUEPRINT</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP S/4HANA Universal Journal (ACDOCA): Architecture & Configuration Guide</h2>
+            <h2 class="blog-post-title">SAP S/4HANA Universal Journal (ACDOCA): Architecture & Configuration Guide</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 14 min read &middot; Sep 08, 2026</div>
             <a href="sap-s4hana-universal-journal-acdoca-guide.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -137,7 +139,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-sd-pricing-procedure-condition-technique-guide.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--blue">SAP SD MASTERCLASS</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP SD Pricing Procedure & Condition Technique: Complete Step-by-Step Guide</h2>
+            <h2 class="blog-post-title">SAP SD Pricing Procedure & Condition Technique: Complete Step-by-Step Guide</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 15 min read &middot; Sep 08, 2026</div>
             <a href="sap-sd-pricing-procedure-condition-technique-guide.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -148,7 +150,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-joule-ai-s4hana-logistics-procurement-blueprint.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">SAP JOULE AI 2026</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP Joule AI in S/4HANA Logistics & Procurement: 2026 Architect Blueprint</h2>
+            <h2 class="blog-post-title">SAP Joule AI in S/4HANA Logistics & Procurement: 2026 Architect Blueprint</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 14 min read &middot; Sep 08, 2026</div>
             <a href="sap-joule-ai-s4hana-logistics-procurement-blueprint.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -159,7 +161,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-s4hana-material-ledger-actual-costing-valuation-guide.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">SAP MM ADVANCED</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP S/4HANA Material Ledger & Actual Costing: Valuation Masterclass</h2>
+            <h2 class="blog-post-title">SAP S/4HANA Material Ledger & Actual Costing: Valuation Masterclass</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 14 min read &middot; Sep 08, 2026</div>
             <a href="sap-s4hana-material-ledger-actual-costing-valuation-guide.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -169,7 +171,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-mm-split-valuation-configuration-step-by-step.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">SAP MM ADVANCED</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP MM Split Valuation Configuration: S/4HANA Inventory Valuation Masterclass</h2>
+            <h2 class="blog-post-title">SAP MM Split Valuation Configuration: S/4HANA Inventory Valuation Masterclass</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 12 min read</div>
             <a href="sap-mm-split-valuation-configuration-step-by-step.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -181,7 +183,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/top-5-sap-modules-to-learn-in-2026-for-20-lpa-salary.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--amber">CAREER STRATEGY 2026</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">Top 5 SAP Modules to Learn in 2026 for a ₹20+ LPA Salary</h2>
+            <h2 class="blog-post-title">Top 5 SAP Modules to Learn in 2026 for a ₹20+ LPA Salary</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 12 min read &middot; Sep 05, 2026</div>
             <a href="top-5-sap-modules-to-learn-in-2026-for-20-lpa-salary.html" class="blog-read-link">Read roadmap &amp; salary benchmarks &rarr;</a>
           </div>
@@ -192,7 +194,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-ewm-posc-losc-storage-control-deep-dive.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">SAP EWM MASTERCLASS</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP EWM POSC vs LOSC Storage Control: S/4HANA Deep Dive Blueprint</h2>
+            <h2 class="blog-post-title">SAP EWM POSC vs LOSC Storage Control: S/4HANA Deep Dive Blueprint</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 14 min read &middot; Sep 05, 2026</div>
             <a href="sap-ewm-posc-losc-storage-control-deep-dive.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -203,7 +205,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-mm-pricing-procedure-schema-s4hana-guide.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">SAP MM BLUEPRINT</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP MM Pricing Procedure (Calculation Schema) Configuration Guide</h2>
+            <h2 class="blog-post-title">SAP MM Pricing Procedure (Calculation Schema) Configuration Guide</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 13 min read &middot; Sep 05, 2026</div>
             <a href="sap-mm-pricing-procedure-schema-s4hana-guide.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -214,7 +216,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">SAP EWM 2026</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP S/4HANA 2026 Embedded EWM vs Decentral EWM Matrix</h2>
+            <h2 class="blog-post-title">SAP S/4HANA 2026 Embedded EWM vs Decentral EWM Matrix</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 10 min read &middot; Sep 05, 2026</div>
             <a href="s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -225,7 +227,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/top-25-sap-ewm-interview-questions-2026.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--blue">INTERVIEW PREP 2026</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">Top 25 SAP EWM Interview Questions &amp; Answers for 2026</h2>
+            <h2 class="blog-post-title">Top 25 SAP EWM Interview Questions &amp; Answers for 2026</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 15 min read &middot; Aug 28, 2026</div>
             <a href="top-25-sap-ewm-interview-questions-2026.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -236,7 +238,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-s4hana-mrp-live-classic-mrp-comparison.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">S/4HANA 2026</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP S/4HANA MRP Live vs Classic MRP: Performance &amp; Functional Matrix</h2>
+            <h2 class="blog-post-title">SAP S/4HANA MRP Live vs Classic MRP: Performance &amp; Functional Matrix</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 11 min read &middot; Aug 28, 2026</div>
             <a href="sap-s4hana-mrp-live-classic-mrp-comparison.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -247,7 +249,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-mm-obyc-account-determination-s4hana-masterclass.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">SAP MM MASTERCLASS</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP MM OBYC Account Determination: S/4HANA Automatic Posting Masterclass</h2>
+            <h2 class="blog-post-title">SAP MM OBYC Account Determination: S/4HANA Automatic Posting Masterclass</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 12 min read &middot; Aug 25, 2026</div>
             <a href="sap-mm-obyc-account-determination-s4hana-masterclass.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -258,7 +260,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/autonomous-ai-sap-mm-ewm-2026-guide.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">SAP UPDATES 2026</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">Autonomous AI in SAP S/4HANA MM &amp; EWM: 2026 Guide</h2>
+            <h2 class="blog-post-title">Autonomous AI in SAP S/4HANA MM &amp; EWM: 2026 Guide</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 9 min read &middot; Aug 24, 2026</div>
             <a href="autonomous-ai-sap-mm-ewm-2026-guide.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -269,7 +271,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/how-to-master-sap-mm-in-3-months.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--amber">CAREER BLUEPRINT 2026</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">How to Master SAP MM in 3 Months &mdash; 90-Day S/4HANA Career Roadmap</h2>
+            <h2 class="blog-post-title">How to Master SAP MM in 3 Months &mdash; 90-Day S/4HANA Career Roadmap</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 10 min read &middot; Aug 22, 2026</div>
             <a href="how-to-master-sap-mm-in-3-months.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -280,7 +282,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/top-30-sap-mm-interview-questions-2026.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--blue">Interview prep</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">Top 30 SAP MM interview questions for 2026 &mdash; with model answers</h2>
+            <h2 class="blog-post-title">Top 30 SAP MM interview questions for 2026 &mdash; with model answers</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 12 min read &middot; Aug 15, 2026</div>
             <a href="top-30-sap-mm-interview-questions-2026.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -291,7 +293,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-mm-vs-ewm-career-guide.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--amber">Career</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP MM vs EWM: which course should you start with in 2026?</h2>
+            <h2 class="blog-post-title">SAP MM vs EWM: which course should you start with in 2026?</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 7 min read &middot; Aug 10, 2026</div>
             <a href="sap-mm-vs-ewm-career-guide.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -302,7 +304,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/configure-purchase-order-cycle-s4hana.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--green">Tutorial</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">How to configure a complete purchase order cycle in S/4HANA</h2>
+            <h2 class="blog-post-title">How to configure a complete purchase order cycle in S/4HANA</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 15 min read &middot; Jul 20, 2026</div>
             <a href="configure-purchase-order-cycle-s4hana.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -313,7 +315,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/embedded-ewm-s4hana-setup-walkthrough.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--purple">Tutorial</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">Setting up embedded EWM in S/4HANA: a step-by-step walkthrough</h2>
+            <h2 class="blog-post-title">Setting up embedded EWM in S/4HANA: a step-by-step walkthrough</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 14 min read &middot; Jun 15, 2026</div>
             <a href="embedded-ewm-s4hana-setup-walkthrough.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -324,7 +326,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/ewm-wave-management-explained.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--purple">Interview prep</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">EWM wave management explained &mdash; the question every interviewer asks</h2>
+            <h2 class="blog-post-title">EWM wave management explained &mdash; the question every interviewer asks</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 9 min read &middot; May 10, 2026</div>
             <a href="ewm-wave-management-explained.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -335,7 +337,7 @@
           <div class="blog-thumb" style="background:#0b1220 url('covers/sap-s4hana-2025-release-mm-ewm-changes.svg') center/cover no-repeat;"></div>
           <div class="blog-body">
             <span class="blog-post-badge blog-post-badge--teal">SAP news</span>
-            <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0;">SAP S/4HANA 2025 Release: What Has Changed for MM &amp; EWM Consultants</h2>
+            <h2 class="blog-post-title">SAP S/4HANA 2025 Release: What Has Changed for MM &amp; EWM Consultants</h2>
             <div class="blog-meta-line">By Anshuman Behuria &middot; 8 min read &middot; Apr 05, 2026</div>
             <a href="sap-s4hana-2025-release-mm-ewm-changes.html" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
           </div>
@@ -361,34 +363,17 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="container footer-grid">
+    <div class="wrap footer-grid">
       <div class="footer-brand">
-        <a href="../index.html" class="logo">
-          <span class="logo-mark">SAP</span>
-          <span class="logo-text">theTechMentor</span>
-        </a>
-        <p>SAP MM &amp; EWM training by <strong>Anshuman Behuria</strong>.</p>
+        <a href="../index.html" class="brand brand-light"><img src="../images/logo-mark.svg" alt="" width="32" height="32" /><span>the<b>Tech</b>Mentor</span></a>
+        <p>Online SAP S/4HANA academy for logistics, procurement and warehouse careers.</p>
       </div>
-      <div>
-        <h4>Quick links</h4>
-        <ul>
-          <li><a href="../index.html#courses">Live Batches</a></li>
-          <li><a href="../index.html#self-paced">Self-Paced Track</a></li>
-          <li><a href="index.html">Blog Articles</a></li>
-          <li><a href="../index.html#pricing">Pricing</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:info@youronementor.com">info@youronementor.com</a></li>
-          <li><a href="https://wa.me/917848942021" target="_blank">WhatsApp: +91 78489 42021</a></li>
-        </ul>
-      </div>
+      <div><h4>Courses</h4><ul><li><a href="../index.html#courses">All courses</a></li><li><a href="../index.html#paths">Career paths</a></li><li><a href="../index.html#formats">Live vs self-paced</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="index.html">Blog</a></li><li><a href="../index.html#faq">FAQ</a></li><li><a href="../index.html#advisor">Free counselling</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="mailto:info@youronementor.com">info@youronementor.com</a></li><li><a href="https://wa.me/917848942021" target="_blank" rel="noopener noreferrer">WhatsApp +91 78489 42021</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li><li><a href="../refund.html">Refunds</a></li></ul></div>
     </div>
-    <div class="footer-bottom container">
-      <p>&copy; 2026 theTechMentor · Anshuman Behuria. All rights reserved.</p>
-    </div>
+    <div class="wrap footer-bottom"><p>© 2026 theTechMentor. SAP and S/4HANA are trademarks of SAP SE; theTechMentor is not affiliated with SAP SE.</p></div>
   </footer>
 
   <script src="custom-blogs.js"></script>
@@ -434,7 +419,7 @@
             </div>
             <div class="blog-body">
               <span class="blog-post-badge ${badgeClass}">${b.category || 'Tutorial'}</span>
-              <h2 class="blog-post-title" style="font-size:1.15rem; margin:0.5rem 0; color:#fff;">${b.title}</h2>
+              <h2 class="blog-post-title">${b.title}</h2>
               <div class="blog-meta-line">By Anshuman Behuria &middot; ${b.readTime || '8 min read'} &middot; ${dateStr}</div>
               <a href="${targetHref}" class="blog-read-link">Read article &amp; join discussion &rarr;</a>
             </div>

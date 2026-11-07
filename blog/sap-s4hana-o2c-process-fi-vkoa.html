@@ -18,11 +18,10 @@
   <meta property="article:modified_time" content="2026-11-07" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" />
-  <link rel="stylesheet" href="../styles.css?v=4" />
-  <link rel="stylesheet" href="blog.css" />
-  <link rel="stylesheet" href="ai-article.css?v=2" />
-  <link rel="stylesheet" href="../theme-2030.css?v=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+  <link rel="icon" href="../images/logo-mark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../site.css?v=1" />
+  <link rel="stylesheet" href="ai-article.css?v=3" />
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "SAP S/4HANA Order-to-Cash (O2C) Process Flow: Deep Dive into FI Integration & VKOA", "description": "Master the SAP S/4HANA Order-to-Cash (O2C) process flow, from sales order to cash. Learn critical FI integration points and configure VKOA for revenue.", "image": "https://youronementor.com/blog/covers/sap-s4hana-o2c-process-fi-vkoa.png", "datePublished": "2026-11-07", "dateModified": "2026-11-07", "author": {"@type": "Person", "name": "Anshuman Behuria", "url": "https://www.linkedin.com/in/anshuman-behuria-946860130"}, "publisher": {"@type": "Organization", "name": "theTechMentor", "url": "https://youronementor.com"}, "mainEntityOfPage": "https://youronementor.com/blog/sap-s4hana-o2c-process-fi-vkoa.html", "wordCount": 3023}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://youronementor.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://youronementor.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "SAP S/4HANA Order-to-Cash (O2C) Process Flow: Deep Dive into FI Integration & VKOA", "item": "https://youronementor.com/blog/sap-s4hana-o2c-process-fi-vkoa.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What are the financial accounting entries generated at Post Goods Issue (PGI)?", "acceptedAnswer": {"@type": "Answer", "text": "At Post Goods Issue (PGI) in SAP S/4HANA, two primary financial entries are generated. The Cost of Goods Sold (COGS) account is debited, and the Inventory account is credited. These postings reflect the transfer of ownership of the goods and the reduction of inventory from your books, with G/L accounts determined via OBYC configuration."}}, {"@type": "Question", "name": "How does Shipping Point Determination work in SAP SD?", "acceptedAnswer": {"@type": "Answer", "text": "Shipping Point Determination in SAP SD is an automatic process based on a combination of three key factors: the Shipping Conditions from the customer master or sales document type, the Loading Group from the material master, and the Delivering Plant from the sales order item. These three values are matched against a customizing table (transaction OVL2) to propose the most suitable shipping point for the delivery."}}, {"@type": "Question", "name": "What causes the error 'Account determination for entry XXXX KOFI not possible' during billing?", "acceptedAnswer": {"@type": "Answer", "text": "This error during billing indicates that the system could not find a suitable General Ledger (G/L) account for revenue posting via the VKOA configuration. The most common causes are a missing entry in VKOA for the specific combination of Chart of Accounts, Sales Organization, Distribution Channel, Division, Customer Group, Material Group, and Account Key, or an incorrect access sequence setup for condition type KOFI."}}, {"@type": "Question", "name": "What is the role of VKOA in the SAP S/4HANA O2C process?", "acceptedAnswer": {"@type": "Answer", "text": "VKOA (Revenue Account Determination) is a critical configuration point in the SAP S/4HANA O2C process that links Sales and Distribution (SD) billing documents to Financial Accounting (FI). Its primary role is to automatically determine the correct General Ledger (G/L) accounts where revenue and sales deductions should be posted, ensuring accurate financial reporting and compliance after an invoice is created and released to accounting."}}, {"@type": "Question", "name": "How does aATP improve O2C efficiency compared to classic ATP?", "acceptedAnswer": {"@type": "Answer", "text": "Advanced Available-to-Promise (aATP) significantly improves O2C efficiency by providing more sophisticated and real-time order commitment capabilities than classic ATP. It offers functionalities like Product Allocation for strategic prioritization, Backorder Processing for intelligent rescheduling, and Supply Protection to reserve stock for critical demands. These features lead to more reliable delivery promises, reduced manual effort in managing backorders, and improved customer satisfaction in dynamic supply chain environments."}}]}]</script>
   <script src="../site-config.js"></script>
   <script src="../tracking.js"></script>
@@ -30,14 +29,15 @@
 <body class="ai-page" style="--accent:#ea580c;--accent2:#db2777;--accent-soft:#ffedd5;">
   <div class="reading-progress" id="reading-progress-bar"></div>
   <header class="header">
-    <nav class="nav container">
-      <a href="../index.html" class="logo"><span class="logo-mark">SAP</span><span class="logo-text">theTechMentor</span></a>
+    <nav class="nav wrap" aria-label="Main">
+      <a href="../index.html" class="brand" aria-label="theTechMentor home"><img src="../images/logo-mark.svg" alt="" width="36" height="36" /><span>the<b>Tech</b>Mentor</span></a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul class="nav-links">
-        <li><a href="../index.html#courses">Live Batches</a></li>
-        <li><a href="../index.html#self-paced">Self-Paced</a></li>
+        <li><a href="../index.html#courses">Courses</a></li>
+        <li><a href="../index.html#paths">Career paths</a></li>
         <li><a href="index.html">Blog</a></li>
-        <li><a href="../index.html#pricing">Pricing</a></li>
-        <li><a href="../index.html#enroll" class="btn btn-sm">Enroll Now</a></li>
+        <li><a href="../index.html#advisor" class="btn btn-ghost btn-sm">Free counselling</a></li>
+        <li><a href="../index.html#courses" class="btn btn-primary btn-sm">Explore courses</a></li>
       </ul>
     </nav>
   </header>
@@ -54,7 +54,7 @@
       <div class="blog-meta">
         <div class="author-chip">
           <div class="author-avatar-ph">AB</div>
-          <div class="author-info"><strong>Anshuman Behuria</strong><span>SAP MM &amp; EWM Consultant · 12+ yrs</span></div>
+          <div class="author-info"><strong>Anshuman Behuria</strong><span>Lead SAP Mentor · theTechMentor</span></div>
         </div>
         <span>Updated <time datetime="2026-11-07">Nov 07, 2026</time></span>
       </div>
@@ -109,7 +109,7 @@
       <div class="related"><div class="flow-label">Keep learning</div><div class="rel-grid"><a class="rel-card" href="sap-ewm-posc-losc-storage-control-deep-dive.html"><img src="covers/sap-ewm-posc-losc-storage-control-deep-dive.svg" alt="" loading="lazy" /><span>SAP EWM POSC vs LOSC Storage Control: S/4HANA Deep Dive Blueprint</span></a><a class="rel-card" href="configure-purchase-order-cycle-s4hana.html"><img src="covers/configure-purchase-order-cycle-s4hana.svg" alt="" loading="lazy" /><span>How to Configure a Complete Purchase Order Cycle in SAP S/4HANA: Step-by-Step Guide</span></a><a class="rel-card" href="sap-ewm-wave-management-wocr-configuration.html"><img src="covers/sap-ewm-wave-management-wocr-configuration.svg" alt="" loading="lazy" /><span>SAP EWM Wave Management &amp; WOCR Configuration: A Deep Dive for Architects</span></a></div></div>
 
       <div class="blog-course-cta ai-cta">
-        <h3>Learn SAP MM &amp; EWM hands-on with Anshuman Behuria</h3>
+        <h3>Learn SAP hands-on with theTechMentor</h3>
         <p>Live weekend batches or self-paced videos, with S/4HANA practice server access and interview preparation.</p>
         <div class="blog-cta-actions">
           <a href="../index.html#pricing" class="btn btn-primary">See programs &amp; fees</a>
@@ -119,10 +119,20 @@
     </article>
   </main>
 
-  <footer class="page-footer-lite">
-    <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../refund.html">Refunds</a>
-    <p>© 2026 theTechMentor · Anshuman Behuria. SAP is a registered trademark of SAP SE; this site is not affiliated with SAP SE.</p>
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="brand brand-light"><img src="../images/logo-mark.svg" alt="" width="32" height="32" /><span>the<b>Tech</b>Mentor</span></a>
+        <p>Online SAP S/4HANA academy for logistics, procurement and warehouse careers.</p>
+      </div>
+      <div><h4>Courses</h4><ul><li><a href="../index.html#courses">All courses</a></li><li><a href="../index.html#paths">Career paths</a></li><li><a href="../index.html#formats">Live vs self-paced</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="index.html">Blog</a></li><li><a href="../index.html#faq">FAQ</a></li><li><a href="../index.html#advisor">Free counselling</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="mailto:info@youronementor.com">info@youronementor.com</a></li><li><a href="https://wa.me/917848942021" target="_blank" rel="noopener noreferrer">WhatsApp +91 78489 42021</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li><li><a href="../refund.html">Refunds</a></li></ul></div>
+    </div>
+    <div class="wrap footer-bottom"><p>© 2026 theTechMentor. SAP and S/4HANA are trademarks of SAP SE; theTechMentor is not affiliated with SAP SE.</p></div>
   </footer>
   <script src="blog-leads.js"></script>
+  <script>document.querySelector(".nav-toggle")?.addEventListener("click",function(){var l=document.querySelector(".nav-links");var o=l.classList.toggle("open");this.setAttribute("aria-expanded",String(o));});</script>
 </body>
 </html>

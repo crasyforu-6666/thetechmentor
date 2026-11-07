@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d9488"/><stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 H0 V40" fill="none" stroke="#ffffff" stroke-opacity=".08" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="1060" cy="90" r="210" fill="#ffffff" opacity=".08"/>
+  <circle cx="1130" cy="560" r="150" fill="#000000" opacity=".10"/>
+  
+  <text x="70" y="264" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="62" font-weight="800" fill="#ffffff">MM + EWM Complete</text><text x="70" y="338" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="62" font-weight="800" fill="#ffffff">Self-Paced Bundle</text>
+  <g transform="translate(905 200)"><rect x="35" y="35" width="190" height="190" rx="18" fill="none" stroke="#fff" stroke-width="8" opacity=".9"/>
+      <line x1="130" y1="35" x2="130" y2="225" stroke="#fff" stroke-width="6" opacity=".6"/>
+      <text x="82" y="145" font-family="DejaVu Sans, Arial, sans-serif" font-size="64" font-weight="700" fill="#fff" text-anchor="middle">Dr</text>
+      <text x="178" y="145" font-family="DejaVu Sans, Arial, sans-serif" font-size="64" font-weight="700" fill="#fff" text-anchor="middle" opacity=".8">Cr</text></g>
+  <rect x="70" y="520" width="6" height="52" rx="3" fill="#ffffff"/>
+  <text x="92" y="545" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">theTechMentor</text>
+  <text x="92" y="575" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="20" fill="#ffffff" opacity=".85">SAP S/4HANA Academy · youronementor.com</text>
+</svg>

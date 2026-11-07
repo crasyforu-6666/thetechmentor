@@ -11,14 +11,13 @@
   <rect width="1200" height="630" fill="url(#grid)"/>
   <circle cx="1060" cy="90" r="210" fill="#ffffff" opacity=".08"/>
   <circle cx="1130" cy="560" r="150" fill="#000000" opacity=".10"/>
-  <rect x="70" y="60" width="148" height="46" rx="23" fill="#ffffff" opacity=".18"/>
-  <text x="144" y="91" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="2">SAP FICO</text>
+  <rect x="70" y="60" width="148" height="46" rx="23" fill="#ffffff" opacity=".18"/><text x="144" y="91" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="2">SAP FICO</text>
   <text x="70" y="234" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="56" font-weight="800" fill="#ffffff">SAP S/4HANA Material</text><text x="70" y="302" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="56" font-weight="800" fill="#ffffff">Ledger &amp; Actual</text><text x="70" y="370" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="56" font-weight="800" fill="#ffffff">Costing</text>
   <g transform="translate(905 200)"><rect x="35" y="35" width="190" height="190" rx="18" fill="none" stroke="#fff" stroke-width="8" opacity=".9"/>
       <line x1="130" y1="35" x2="130" y2="225" stroke="#fff" stroke-width="6" opacity=".6"/>
       <text x="82" y="145" font-family="DejaVu Sans, Arial, sans-serif" font-size="64" font-weight="700" fill="#fff" text-anchor="middle">Dr</text>
       <text x="178" y="145" font-family="DejaVu Sans, Arial, sans-serif" font-size="64" font-weight="700" fill="#fff" text-anchor="middle" opacity=".8">Cr</text></g>
   <rect x="70" y="520" width="6" height="52" rx="3" fill="#ffffff"/>
-  <text x="92" y="545" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">Anshuman Behuria · theTechMentor</text>
-  <text x="92" y="575" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="20" fill="#ffffff" opacity=".85">S/4HANA training · youronementor.com</text>
+  <text x="92" y="545" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">theTechMentor</text>
+  <text x="92" y="575" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="20" fill="#ffffff" opacity=".85">SAP S/4HANA Academy · youronementor.com</text>
 </svg>

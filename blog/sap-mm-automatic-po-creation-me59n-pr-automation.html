@@ -18,11 +18,10 @@
   <meta property="article:modified_time" content="2026-11-07" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" />
-  <link rel="stylesheet" href="../styles.css?v=4" />
-  <link rel="stylesheet" href="blog.css" />
-  <link rel="stylesheet" href="ai-article.css?v=2" />
-  <link rel="stylesheet" href="../theme-2030.css?v=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+  <link rel="icon" href="../images/logo-mark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../site.css?v=1" />
+  <link rel="stylesheet" href="ai-article.css?v=3" />
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "SAP MM Automatic Purchase Order Creation (ME59N) from Purchase Requisition: A Practical Guide", "description": "Master SAP MM automatic PO creation from PR using ME59N. Learn configuration, prerequisites, common errors, and optimize procurement efficiency in S/4HANA.", "image": "https://youronementor.com/blog/covers/sap-mm-automatic-po-creation-me59n-pr-automation.png", "datePublished": "2026-11-06", "dateModified": "2026-11-07", "author": {"@type": "Person", "name": "Anshuman Behuria", "url": "https://www.linkedin.com/in/anshuman-behuria-946860130"}, "publisher": {"@type": "Organization", "name": "theTechMentor", "url": "https://youronementor.com"}, "mainEntityOfPage": "https://youronementor.com/blog/sap-mm-automatic-po-creation-me59n-pr-automation.html", "wordCount": 2839}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://youronementor.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://youronementor.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "SAP MM Automatic Purchase Order Creation (ME59N) from Purchase Requisition: A Practical Guide", "item": "https://youronementor.com/blog/sap-mm-automatic-po-creation-me59n-pr-automation.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the primary function of ME59N in SAP MM?", "acceptedAnswer": {"@type": "Answer", "text": "ME59N is an SAP MM transaction code used to automatically create purchase orders (POs) from eligible purchase requisitions (PRs). Its main purpose is to automate routine procurement tasks, reduce manual effort for buyers, and accelerate the procure-to-pay cycle by converting PRs into POs based on predefined master data and configuration."}}, {"@type": "Question", "name": "Which master data must be correctly configured for ME59N to work?", "acceptedAnswer": {"@type": "Answer", "text": "For ME59N to function, you need correctly configured Material Master (with 'Automatic PO' indicator), Vendor Business Partner (with 'Automatic PO' indicator in purchasing data), a valid Purchasing Info Record (with pricing), and often a Source List entry for unique vendor determination. Incomplete or incorrect setup of any of these will lead to errors."}}, {"@type": "Question", "name": "Can ME59N create multiple POs from a single PR, or group multiple PRs into one PO?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, ME59N is designed with flexible grouping and splitting logic. It can group multiple PRs (or PR items) into a single PO if they share the same vendor, purchasing organization, company code, and PO document type. Conversely, a single PR with items that require different vendors or PO document types will be split into multiple POs."}}, {"@type": "Question", "name": "What should I do if ME59N gives an error 'Source not determined'?", "acceptedAnswer": {"@type": "Answer", "text": "If you encounter a 'Source not determined' error, first check the Purchasing Info Record (ME12) for the material and vendor to ensure it's valid and has a price. Then, verify the Source List (ME02) for an active entry linking the material, plant, and vendor. Finally, confirm the 'Automatic PO' indicators are checked in both the Material Master and Vendor Business Partner."}}, {"@type": "Question", "name": "Is ME59N available in SAP S/4HANA, and are there any differences from ECC?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, ME59N is fully available and functions similarly in SAP S/4HANA as it did in ECC. The core logic and prerequisites remain the same. The main difference in S/4HANA is that vendor master data is now managed through the Business Partner (BP) concept (transaction BP), so you'll configure the 'Automatic PO' indicator within the BP record rather than directly in the old vendor master (FK01/MK01)."}}, {"@type": "Question", "name": "How can I test ME59N without creating actual purchase orders?", "acceptedAnswer": {"@type": "Answer", "text": "You can test ME59N safely by using the 'Test run' checkbox on the selection screen, or by setting the 'Creation indicator' to '2 - Create POs, but do not save'. Both options simulate the PO creation process and generate a log of potential POs and any errors, allowing you to troubleshoot and correct issues without impacting live data."}}]}]</script>
   <script src="../site-config.js"></script>
   <script src="../tracking.js"></script>
@@ -30,14 +29,15 @@
 <body class="ai-page" style="--accent:#0284c7;--accent2:#6366f1;--accent-soft:#e0f2fe;">
   <div class="reading-progress" id="reading-progress-bar"></div>
   <header class="header">
-    <nav class="nav container">
-      <a href="../index.html" class="logo"><span class="logo-mark">SAP</span><span class="logo-text">theTechMentor</span></a>
+    <nav class="nav wrap" aria-label="Main">
+      <a href="../index.html" class="brand" aria-label="theTechMentor home"><img src="../images/logo-mark.svg" alt="" width="36" height="36" /><span>the<b>Tech</b>Mentor</span></a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul class="nav-links">
-        <li><a href="../index.html#courses">Live Batches</a></li>
-        <li><a href="../index.html#self-paced">Self-Paced</a></li>
+        <li><a href="../index.html#courses">Courses</a></li>
+        <li><a href="../index.html#paths">Career paths</a></li>
         <li><a href="index.html">Blog</a></li>
-        <li><a href="../index.html#pricing">Pricing</a></li>
-        <li><a href="../index.html#enroll" class="btn btn-sm">Enroll Now</a></li>
+        <li><a href="../index.html#advisor" class="btn btn-ghost btn-sm">Free counselling</a></li>
+        <li><a href="../index.html#courses" class="btn btn-primary btn-sm">Explore courses</a></li>
       </ul>
     </nav>
   </header>
@@ -54,7 +54,7 @@
       <div class="blog-meta">
         <div class="author-chip">
           <div class="author-avatar-ph">AB</div>
-          <div class="author-info"><strong>Anshuman Behuria</strong><span>SAP MM &amp; EWM Consultant · 12+ yrs</span></div>
+          <div class="author-info"><strong>Anshuman Behuria</strong><span>Lead SAP Mentor · theTechMentor</span></div>
         </div>
         <span>Updated <time datetime="2026-11-07">Nov 07, 2026</time></span>
       </div>
@@ -109,7 +109,7 @@
       <div class="related"><div class="flow-label">Keep learning</div><div class="rel-grid"><a class="rel-card" href="configure-purchase-order-cycle-s4hana.html"><img src="covers/configure-purchase-order-cycle-s4hana.svg" alt="" loading="lazy" /><span>How to Configure a Complete Purchase Order Cycle in SAP S/4HANA: Step-by-Step Guide</span></a><a class="rel-card" href="sap-mm-obyc-account-determination-s4hana-masterclass.html"><img src="covers/sap-mm-obyc-account-determination-s4hana-masterclass.svg" alt="" loading="lazy" /><span>SAP MM OBYC Account Determination: S/4HANA Automatic Posting Masterclass</span></a><a class="rel-card" href="sap-s4hana-o2c-process-fi-vkoa.html"><img src="covers/sap-s4hana-o2c-process-fi-vkoa.svg" alt="" loading="lazy" /><span>SAP S/4HANA Order-to-Cash (O2C) Process Flow: Deep Dive into FI Integration &amp; VKOA</span></a></div></div>
 
       <div class="blog-course-cta ai-cta">
-        <h3>Learn SAP MM &amp; EWM hands-on with Anshuman Behuria</h3>
+        <h3>Learn SAP hands-on with theTechMentor</h3>
         <p>Live weekend batches or self-paced videos, with S/4HANA practice server access and interview preparation.</p>
         <div class="blog-cta-actions">
           <a href="../index.html#pricing" class="btn btn-primary">See programs &amp; fees</a>
@@ -119,10 +119,20 @@
     </article>
   </main>
 
-  <footer class="page-footer-lite">
-    <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../refund.html">Refunds</a>
-    <p>© 2026 theTechMentor · Anshuman Behuria. SAP is a registered trademark of SAP SE; this site is not affiliated with SAP SE.</p>
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="brand brand-light"><img src="../images/logo-mark.svg" alt="" width="32" height="32" /><span>the<b>Tech</b>Mentor</span></a>
+        <p>Online SAP S/4HANA academy for logistics, procurement and warehouse careers.</p>
+      </div>
+      <div><h4>Courses</h4><ul><li><a href="../index.html#courses">All courses</a></li><li><a href="../index.html#paths">Career paths</a></li><li><a href="../index.html#formats">Live vs self-paced</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="index.html">Blog</a></li><li><a href="../index.html#faq">FAQ</a></li><li><a href="../index.html#advisor">Free counselling</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="mailto:info@youronementor.com">info@youronementor.com</a></li><li><a href="https://wa.me/917848942021" target="_blank" rel="noopener noreferrer">WhatsApp +91 78489 42021</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li><li><a href="../refund.html">Refunds</a></li></ul></div>
+    </div>
+    <div class="wrap footer-bottom"><p>© 2026 theTechMentor. SAP and S/4HANA are trademarks of SAP SE; theTechMentor is not affiliated with SAP SE.</p></div>
   </footer>
   <script src="blog-leads.js"></script>
+  <script>document.querySelector(".nav-toggle")?.addEventListener("click",function(){var l=document.querySelector(".nav-links");var o=l.classList.toggle("open");this.setAttribute("aria-expanded",String(o));});</script>
 </body>
 </html>
