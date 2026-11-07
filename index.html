@@ -23,7 +23,11 @@
   <meta name="twitter:description" content="Live & self-paced SAP logistics training. Free course playlist included." />
   <meta name="twitter:image" content="https://youronementor.com/images/og-cover.png" />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" />
   <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="theme-2030.css?v=1" />
 
   <script type="application/ld+json">
   {
@@ -120,11 +124,19 @@
     <section class="hero">
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-orbit" aria-hidden="true">
+        <span style="--x:8%;--y:22%;--d:0s">ME21N</span>
+        <span style="--x:84%;--y:18%;--d:1.2s">/SCWM/MON</span>
+        <span style="--x:4%;--y:68%;--d:2.1s">MIGO</span>
+        <span style="--x:88%;--y:64%;--d:.6s">MIRO</span>
+        <span style="--x:16%;--y:88%;--d:1.6s">OBYC</span>
+        <span style="--x:76%;--y:86%;--d:2.6s">VL10B</span>
+      </div>
       <div class="container hero-inner">
-        <div class="hero-badge">Next weekend live batch — enrolling now · max 25 seats</div>
+        <div class="hero-badge"><span class="live-dot" aria-hidden="true"></span>Next weekend live batch — enrolling now · max 25 seats</div>
         <h1 class="hero-title">
           Become job-ready in
-          <em>SAP MM</em> & <em>EWM</em>
+          <span class="grad-text">SAP MM &amp; EWM</span>
         </h1>
         <p class="hero-subtitle">
           End-to-end logistics training with live SAP access, real business scenarios,
@@ -132,6 +144,7 @@
         </p>
         <div class="hero-actions">
           <a href="#learn" class="btn btn-primary">Watch free course playlist</a>
+          <a href="#enroll" class="btn btn-glass">Book a free 15-min call →</a>
         </div>
         <div class="hero-stats">
           <div class="stat">
@@ -1310,5 +1323,6 @@
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script src="blog/custom-blogs.js"></script>
   <script src="script.js?v=5" defer></script>
+  <script src="theme-2030.js?v=1" defer></script>
 </body>
 </html>
