@@ -10,7 +10,7 @@ on our own Graphy/Teachable-style platform by early 2027.
 
 | System | Status | Notes |
 |---|---|---|
-| Blog: 3 articles/day | ✅ built (Gemini free key for new posts, Claude Pro token for rewrites) | 9:00 AM and 8:00 PM IST new articles; 2:30 PM IST rewrites one old thin post (17 queued). Writes with Claude, rejects anything under 1,500 words or with filler, adds FAQ + Article schema, internal links and a lead form. Without the key it publishes nothing (old template posts hurt rankings). |
+| Blog: 3 articles/day (≈8:47 AM, 2:13 PM, 7:37 PM IST) | ✅ built (Gemini free key for new posts, Claude Pro token for rewrites) | 9:00 AM and 8:00 PM IST new articles; 2:30 PM IST rewrites one old thin post (17 queued). Writes with Claude, rejects anything under 1,500 words or with filler, adds FAQ + Article schema, internal links and a lead form. Without the key it publishes nothing (old template posts hurt rankings). |
 | Editorial rules | ✅ | Reads `AGENTS.md` from the repo root if present, plus built-in standards in `scripts/ai_writer.py`. |
 | Deploy | ✅ | Vercel deploys every push to `main`. |
 | Sitemap / robots | ✅ | Rebuilt on every run; thin pages are `noindex` and left out until rewritten. |
