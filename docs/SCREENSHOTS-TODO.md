@@ -33,3 +33,11 @@ Folder: `images/blog/sap-mm-pricing-procedure-schema-s4hana-guide/`
 - [ ] 03: M/06 condition type PB00 detail screen showing access sequence and calculation type
 - [ ] 04: ME21N item Conditions tab showing PB00, RA01 and freight lines
 - [ ] 05: Condition Analysis screen listing accesses that found or missed a record
+
+## SAP MM Batch Management and Batch Determination in S/4HANA: A Masterclass
+Folder: `images/blog/sap-mm-batch-management-s4hana-configuration/`
+- [ ] 01: OMCT: Batch Level Configuration
+- [ ] 02: CL02: Class Type 023 and Characteristics (LOBM_HSDAT, LOBM_VERPR)
+- [ ] 03: V/C7: Define Batch Search Strategy Type for Inventory Management
+- [ ] 04: VCH1: Create Condition Record for Batch Determination (e.g., movement type, material)
+- [ ] 05: MIGO: Goods Receipt screen showing automatic batch determination

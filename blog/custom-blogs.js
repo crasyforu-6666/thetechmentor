@@ -422,5 +422,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-07",
     excerpt: "Explore the SAP S/4HANA O2C process flow end-to-end, focusing on financial integration and VKOA configuration. A practical guide for SD and FICO consultants.",
     imageUrl: "https://youronementor.com/blog/covers/sap-s4hana-o2c-process-fi-vkoa.svg"
+  },
+  {
+    id: "post_1794076996103",
+    title: "SAP MM Batch Management and Batch Determination in S/4HANA: A Masterclass",
+    slug: "sap-mm-batch-management-s4hana-configuration",
+    category: "Tutorial",
+    badge: "SAP MM TUTORIAL",
+    readTime: "11 min read",
+    date: "Nov 07, 2026",
+    isoDate: "2026-11-07",
+    excerpt: "This masterclass delves into SAP MM Batch Management and S/4HANA Batch Determination, covering architecture, classification, strategy configuration, and troubleshooting for efficient inventory control.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-mm-batch-management-s4hana-configuration.svg"
   }
 ];
