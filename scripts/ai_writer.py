@@ -253,6 +253,27 @@ def existing_posts() -> list:
 # Quality gate
 # --------------------------------------------------------------------------- #
 
+def _trim(text: str, limit: int) -> str:
+    text = re.sub(r"\s+", " ", text or "").strip()
+    if len(text) <= limit:
+        return text
+    cut = text[:limit].rsplit(" ", 1)[0].rstrip(",;:-—|&")
+    return cut
+
+
+def normalize_lengths(article: dict):
+    """Fix title/description lengths mechanically instead of rejecting a good article."""
+    t = re.sub(r"\s*\|\s*theTechMentor\s*$", "", article.get("seo_title") or article.get("h1", ""))
+    if len(t) > 62:
+        head = re.split(r"\s*[:—|]\s*", t)[0]
+        t = head if 30 <= len(head) <= 62 else _trim(t, 60)
+    article["seo_title"] = t
+    d = article.get("meta_description", "")
+    if len(d) > 158:
+        d = _trim(d, 154).rstrip(".") + "."
+    article["meta_description"] = d
+
+
 def quality_problems(article: dict, taken_slugs: set, fixed_slug: str = None) -> list:
     problems = []
     words = word_count(article)
@@ -457,6 +478,7 @@ def write_article(topic: dict, mode: str = "new", fixed_slug: str = None, old_te
         for s in article["sections"]:
             s["heading"] = strip_tags(s["heading"]).replace("`", "")
             s["html"] = sanitize(s["html"])
+        normalize_lengths(article)
         last_problems = quality_problems(article, taken, fixed_slug)
         if not last_problems:
             article["word_count"] = word_count(article)
