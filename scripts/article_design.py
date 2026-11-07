@@ -324,7 +324,7 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
       <p class="ai-dek">{_e(article.get('excerpt', '').replace('`', ''))}</p>
       <div class="blog-meta">
         <div class="author-chip">
-          <div class="author-avatar-ph">AB</div>
+          <img class="author-photo" src="../images/anshuman-behuria-96.jpg" alt="Anshuman Behuria" width="40" height="40" />
           <div class="author-info"><strong>Anshuman Behuria</strong><span>Lead SAP Mentor · theTechMentor</span></div>
         </div>
         <span>Updated <time datetime="{modified_iso}">{today.strftime('%b %d, %Y')}</time></span>
