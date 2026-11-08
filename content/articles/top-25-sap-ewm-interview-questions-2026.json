@@ -1,0 +1,106 @@
+{
+ "seo_title": "Top 25 SAP EWM Interview Questions and Answers 2026",
+ "h1": "Top 25 SAP EWM Interview Questions & Answers for 2026 (With Model Answers)",
+ "meta_description": "Top 25 SAP EWM interview questions with model answers on storage types, POSC/LOSC, waves, queues and troubleshooting. Prepare for consultant rounds.",
+ "slug": "top-25-sap-ewm-interview-questions-2026",
+ "category": "Interview prep",
+ "module": "EWM",
+ "level": "Intermediate to Consultant",
+ "badge": "SAP EWM INTERVIEW PREP",
+ "excerpt": "25 SAP EWM interview questions with model answers: warehouse structure, POSC vs LOSC, waves, queues, RF and real troubleshooting scenarios.",
+ "intro_html": "<p>Most candidates don't fail SAP EWM interviews because they miss definitions. They fail because they can't connect the steps: how a delivery becomes a warehouse request, then a warehouse task, then a goods issue. Interviewers probe that chain relentlessly.</p><p>This guide gives you the <strong>top 25 SAP EWM interview questions</strong> with model answers, grouped by topic: architecture, warehouse structure, process and storage control, execution, and troubleshooting. The answers use transaction codes, tables and sample values, the way a working consultant would speak. Use them to shape your own answers rather than to memorise.</p>",
+ "sections": [
+  {
+   "heading": "How SAP EWM interviews are structured",
+   "html": "<p>Expect three rounds. The first is a screening on basics: what EWM is, how it differs from WM, embedded versus decentralized. The second is a configuration deep-dive on storage types, activity areas, warehouse process types and strategies. The third is scenario-based: something broke, find the cause.</p><table><thead><tr><th>Round</th><th>What is tested</th><th>How to prepare</th></tr></thead><tbody><tr><td>Screening</td><td>Terminology, architecture, WM vs EWM</td><td>Draw the inbound and outbound document flow from memory</td></tr><tr><td>Configuration</td><td>Warehouse structure, process types, strategies</td><td>Know the SPRO path under <code>SCM Extended Warehouse Management</code> and the master data behind it</td></tr><tr><td>Scenario</td><td>Stuck queues, missing stock, wrong bin determination</td><td>Practise on an S/4HANA sandbox and break things deliberately</td></tr></tbody></table><aside class=\"tip\">Answer every question in three parts: definition, how it is configured or used (with a T-code), and one project example. That structure alone separates you from most candidates.</aside>"
+  },
+  {
+   "heading": "Architecture and basics (Questions 1-5)",
+   "html": "<h3>Q1. What is SAP EWM and how is it different from classic WM?</h3><p>EWM is the advanced warehouse application that handles inbound, outbound, internal movements, physical inventory, resource management, labour and yard processes. Classic WM (Warehouse Management in ERP) is essentially a bin-level stock tracker driven by transfer orders. EWM adds warehouse tasks, queues, wave picking, handling units as first-class objects, and flexible process and storage control.</p><h3>Q2. Embedded vs decentralized EWM?</h3><p>Embedded EWM runs inside the S/4HANA system on the same database, using the core interface (CIF-free, with direct integration). Decentralized EWM runs on a separate system connected to S/4HANA or ECC through the Core Interface and qRFC. Embedded is simpler and the common default for new S/4HANA projects; decentralized suits very high-volume or independent-release-cycle warehouses. See the <a href=\"s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix.html\">embedded vs decentral decision matrix</a> and the <a href=\"embedded-ewm-s4hana-setup-walkthrough.html\">embedded EWM setup walkthrough</a>.</p><aside class=\"interview\">A frequent follow-up: \"What differs in master data?\" In decentralized, you distribute material, plant and business partner data via CIF/BDoc; in embedded, you use the integration with business partner and product master directly, with warehouse-specific data in <code>/SCWM/MAT1</code>.</aside><h3>Q3. What are the basic inbound and outbound document types?</h3><p>Inbound: Inbound Delivery in ERP, which creates an Inbound Delivery Notification and then a Warehouse Request and Warehouse Task. Outbound: Outbound Delivery Order, then Warehouse Request, wave, Warehouse Order and Warehouse Task, then posting goods issue. Warehouse Orders group tasks for execution by a worker.</p><h3>Q4. What is a Warehouse Task vs a Warehouse Order?</h3><p>A Warehouse Task (WT) is the smallest move instruction: product, quantity, source bin, destination bin. A Warehouse Order (WO) bundles multiple WTs into a work package for one resource or worker, built using Warehouse Order Creation Rules (WOCR). Tables: <code>/SCWM/ORDIM_O</code> (open WTs), <code>/SCWM/ORDIM_C</code> (confirmed WTs).</p><h3>Q5. What is a Handling Unit and why is it central?</h3><p>A Handling Unit (HU) is a physical unit (pallet, carton) with a unique identifier and packaging material. In EWM, stock is usually managed at HU level, and EWM can use HU-managed or non-HU bins depending on storage type settings. Many processes, including pick-HU and storage control, depend on HU data."
+  },
+  {
+   "heading": "Warehouse structure and master data (Questions 6-10)",
+   "html": "<h3>Q6. Explain the EWM warehouse structure.</h3><p>Hierarchy: Warehouse Number, Storage Type, Storage Section, Storage Bin. Separately, bins are grouped into Activity Areas for picking, putaway, inventory and labour. Each storage type has a role (high rack, pick area, staging area, work centre).</p><h3>Q7. How do you create storage bins?</h3><p>Use <code>/SCWM/LS01</code> for single bins and <code>/SCWM/LS10</code> to maintain them. Mass creation: <code>/SCWM/LS01</code> with bin structure, or <code>/SCWM/LS02</code> to change. Bin type and section drive capacity checks.</p><h3>Q8. What is an Activity Area and why use it?</h3><p>Activity Areas group bins for a specific activity so that the system can sort tasks and define picking paths. Define them in SPRO under <code>Extended Warehouse Management &gt; Master Data &gt; Activity Area &gt; Define Activity Area</code>, then assign bins with <code>/SCWM/LS11</code> or via bin maintenance. For labour, they feed work sequences and sort criteria.</p><h3>Q9. Where is warehouse product master maintained?</h3><p>Use <code>/SCWM/MAT1</code>. It holds warehouse-specific data such as putaway control indicator, storage type search sequence, unit of measure, and capacity data. The product comes from the S/4HANA material master (<code>MM01</code>).</p><aside class=\"warning\">If a product is not created in the warehouse view, putaway fails with an error that the product is not maintained for the warehouse. Always check the warehouse data first.</aside><h3>Q10. What are the main bin determination strategies?</h3><p>Putaway strategies include fixed bin, open storage, addition to existing stock, and bulk storage. Picking can use FIFO, LIFO, partial quantity, FEFO and stock removal rules. Strategies are set in the storage type and condition-based determination uses Condition Records via <code>/SCWM/PUTSTRAT</code> style configuration. Slotting is covered in <a href=\"sap-ewm-slotting-rearrangement-optimization.html\">this slotting and rearrangement guide</a>."
+  },
+  {
+   "heading": "Process and storage control (Questions 11-15)",
+   "html": "<h3>Q11. What is Warehouse Process Type (WPT)?</h3><p>The WPT defines how a type of movement behaves: whether it creates a confirmation, whether it requires a pick-HU, which storage type is the default, and which activity it represents. It is determined in the warehouse request via Warehouse Process Type determination, based on document type, item type and other criteria.</p><h3>Q12. POSC vs LOSC: what is the difference?</h3><p>Process-oriented Storage Control (POSC) models a whole process, such as goods receipt with unpacking, quality inspection and putaway, as a sequence of steps in a Storage Process. Layout-oriented Storage Control (LOSC) models the physical layout, such as moving from receiving area via a conveyor to a high rack, as predefined routes between storage types. POSC is external, process-driven; LOSC is internal, layout-driven. They can be combined. Full blueprint: <a href=\"sap-ewm-posc-losc-storage-control-deep-dive.html\">POSC vs LOSC storage control deep dive</a>.</p><table><thead><tr><th>Aspect</th><th>POSC</th><th>LOSC</th></tr></thead><tbody><tr><td>Driver</td><td>Business process steps</td><td>Physical layout / routing</td></tr><tr><td>Configuration</td><td>Storage Process, determined by WPT</td><td>Layout-oriented storage control indicator and intermediate storage types</td></tr><tr><td>Typical use</td><td>Unpack, QC, value-added services, putaway</td><td>Conveyor, pick point, ID point, lift</td></tr><tr><td>Determined by</td><td>Process-oriented indicator on WPT</td><td>Warehouse storage control setting per storage type pair</td></tr></tbody></table><aside class=\"interview\">Interviewers love: \"Customer wants QC after unloading and then a pallet moved through an ID point to AS/RS. Which do you use?\" Answer: POSC for the QC step, LOSC for the ID-point-to-AS/RS route, combined.</aside><h3>Q13. What are Pick Points and ID Points?</h3><p>A Pick Point is a staging location where a picker or a conveyor delivers goods before the next step. An ID Point is where the HU is identified (scanned) before a putaway. Both are modelled through storage control and bins at the intermediate location.</p><h3>Q14. What is Putaway Control Indicator vs Storage Type Search Sequence?</h3><p>The Putaway Control Indicator (set on the product) selects the storage type search sequence, which lists storage types in the order EWM tries to find a destination bin. Both are in the product master and configuration under <code>Goods Receipt Process &gt; Strategies</code>.</p><h3>Q15. How does EWM handle quality inspection in the warehouse?</h3><p>EWM supports Quality Inspection Engine integration through the Quality Management system: an inspection document is created on goods receipt, stock sits in a Q-type stock category or a QC storage type, and usage decision triggers a posting change and the next putaway step. Details vary by release and by embedded vs decentral setups."
+  },
+  {
+   "heading": "Execution: waves, queues and resources (Questions 16-20)",
+   "html": "<h3>Q16. What is wave management?</h3><p>A wave groups warehouse request items for release as a single batch of picking work. You create and release waves via <code>/SCWM/WAVE</code>. Waves are defined through Wave Templates, which set wave category, capacity, cut-off times and release rules. Deep dives: <a href=\"ewm-wave-management-explained.html\">EWM wave management explained</a> and <a href=\"sap-ewm-wave-management-wocr-configuration.html\">wave and WOCR configuration</a>.</p><h3>Q17. What is a Warehouse Order Creation Rule (WOCR)?</h3><p>WOCR defines how warehouse tasks are grouped into warehouse orders. Criteria include maximum number of items, maximum weight or volume, activity area, queue, and sort. The WOCR is assigned through the Warehouse Order Creation Rule determination with filter conditions.</p><h3>Q18. What is a queue and how is it used?</h3><p>A queue is a logical group of warehouse orders that a resource is allowed to process. Queue determination uses storage type, activity area and activity. Resources log on to queues in RF or via <code>/SCWM/RSRC</code>, and the system assigns WOs only from those queues.</p><aside class=\"tip\">When a task sits unassigned, check the queue first. A mismatch between queue and resource-group assignment is the number-one reason a worker sees nothing on their RF device.</aside><h3>Q19. What is Resource Management?</h3><p>Resource Management lets you maintain resource types (forklift, picker), resource groups and resources, and the queue types they can handle. It supports RF sign-on, work-order assignment, and monitoring of workload.</p><h3>Q20. What is the Warehouse Monitor?</h3><p><code>/SCWM/MON</code> is the central reporting and analysis tool in EWM. Nodes include Stock and Bin, Documents, Resources, Queues, Work Orders and Exceptions. You use it for troubleshooting and to display documents, stock by HU, and stuck processes."
+  },
+  {
+   "heading": "Scenario and troubleshooting questions (Questions 21-25)",
+   "html": "<h3>Q21. Goods receipt is posted but putaway task was not created. Why?</h3><p>Check these in order: (1) Is the delivery in a status that triggers automatic WT creation? (2) Does the WPT have the automatic creation indicator? (3) Is there a valid storage type search sequence on the product? (4) Is the product maintained for the warehouse in <code>/SCWM/MAT1</code>? Use the application log with <code>/SCWM/ERP_LOG</code> or <code>SLG1</code> to read the message.</p><h3>Q22. System cannot determine a destination bin. What do you check?</h3><p>Check the putaway control indicator, the storage type search sequence, whether the storage type is active, whether bins are blocked for putaway, and capacity checks on the bin type.</p><table><thead><tr><th>Symptom</th><th>Likely cause</th><th>Where to check</th></tr></thead><tbody><tr><td>No destination bin</td><td>Search sequence missing or bins blocked</td><td>Product master, <code>/SCWM/LS01</code> blocking indicators</td></tr><tr><td>Task not assigned to worker</td><td>Queue or resource mismatch</td><td><code>/SCWM/RSRC</code>, queue config</td></tr><tr><td>Wave does not release</td><td>Wave template criteria not met</td><td><code>/SCWM/WAVE</code>, template</td></tr><tr><td>Stock mismatch ERP vs EWM</td><td>Posting change or inbound/outbound not complete</td><td><code>/SCWM/MON</code>, reconciliation reports</td></tr><tr><td>Delivery not in EWM</td><td>Distribution or integration error</td><td>Queues in <code>SMQ1</code>/<code>SMQ2</code> for decentralized, application log for embedded</td></tr></tbody></table><h3>Q23. Stock differs between ERP and EWM. How do you reconcile?</h3><p>In the S/4HANA embedded model, run the stock comparison report via the reconciliation transactions provided by SAP, and review open documents. Typical causes are incomplete postings, manual stock changes, or failures in goods movement posting. Resolve by completing or cancelling the open EWM document and re-posting.</p><aside class=\"warning\">Never fix stock mismatch by directly changing database tables. Always use standard posting changes or physical inventory adjustments, and document the reason.</aside><h3>Q24. How do you handle a stuck inbound delivery?</h3><p>Open the delivery in the monitor, read the document status and log, correct the master data or configuration, and reprocess. If the issue is integration (decentralized), process the stuck qRFC queue after fixing the root cause.</p><h3>Q25. How would you design a pick process for a high-volume e-commerce warehouse?</h3><p>Use wave picking with wave templates by carrier cut-off, pick by order or by consolidation group, a pick point with LOSC if there is a conveyor, and WOCR limits tuned to cart capacity. Add slotting to place fast-movers in golden zone bins, and use RF for execution. Also mention AI-driven support in newer releases, see <a href=\"autonomous-ai-sap-mm-ewm-2026-guide.html\">autonomous AI in MM &amp; EWM</a>.</p>"
+  },
+  {
+   "heading": "Common mistakes candidates make",
+   "html": "<ul><li><strong>Confusing WM and EWM terms.</strong> Saying \"transfer order\" instead of warehouse task signals classic-WM experience only.</li><li><strong>Quoting T-codes from memory incorrectly.</strong> If unsure, say you would find it in the SAP Easy Access menu under Extended Warehouse Management rather than guessing.</li><li><strong>Ignoring embedded vs decentral differences.</strong> Always state which landscape your example comes from.</li><li><strong>Skipping the why.</strong> Explaining that WOCR exists to control worker workload is worth more than reciting its fields.</li><li><strong>No hands-on story.</strong> Even a sandbox exercise counts when described with specific values, such as a bin type with a 1,000 kg capacity.</li></ul><aside class=\"note\">Release details differ. Check the latest changes in <a href=\"sap-s4hana-2025-release-mm-ewm-changes.html\">the S/4HANA 2025 release notes summary</a> before claiming a feature is available, and know your system's release.</aside><p>If you are deciding between tracks, read <a href=\"sap-mm-vs-ewm-career-guide.html\">SAP MM vs EWM</a>; for the procurement side of interviews see <a href=\"top-30-sap-mm-interview-questions-2026.html\">Top 30 SAP MM interview questions</a>.</p>"
+  }
+ ],
+ "key_takeaways": [
+  "Always explain the chain: delivery, warehouse request, wave, warehouse order, warehouse task, confirmation.",
+  "Know POSC (process steps) versus LOSC (physical layout) and when to combine them.",
+  "Be ready to name real T-codes such as /SCWM/MON, /SCWM/WAVE, /SCWM/MAT1 and /SCWM/LS01.",
+  "Troubleshoot in a fixed order: master data, strategy, queue and resource, then integration.",
+  "State whether your example is embedded or decentralized EWM."
+ ],
+ "faqs": [
+  {
+   "question": "Is SAP EWM hard to crack in interviews?",
+   "answer": "It is demanding because interviewers test scenarios, not definitions. If you can explain the inbound and outbound document flow and troubleshoot a missing task, you are ahead of most candidates."
+  },
+  {
+   "question": "Do I need SAP MM knowledge before EWM?",
+   "answer": "Yes, a working knowledge of material master, goods movements and delivery processing helps a lot, since EWM integrates with them. See the MM roadmap article for a structured start."
+  },
+  {
+   "question": "Which T-codes should I memorise for EWM interviews?",
+   "answer": "Focus on /SCWM/MON (monitor), /SCWM/WAVE, /SCWM/MAT1, /SCWM/LS01, /SCWM/RSRC and /SCWM/PRDI-style document displays you have actually used. Understanding purpose matters more than memorising."
+  },
+  {
+   "question": "Is embedded EWM more common than decentralized in 2026?",
+   "answer": "For new S/4HANA projects, embedded EWM is the usual starting choice because of simpler landscape and licensing considerations. Decentralized is still used for specific high-volume or independence requirements."
+  },
+  {
+   "question": "How long does it take to prepare for an EWM interview?",
+   "answer": "With prior SAP experience, a few weeks of focused hands-on practice. Freshers usually need a few months to build both the concepts and sandbox practice."
+  }
+ ],
+ "process_flow": [
+  {
+   "title": "Delivery / Notification",
+   "detail": "ERP delivery creates the EWM warehouse request."
+  },
+  {
+   "title": "Wave creation: /SCWM/WAVE",
+   "detail": "Items are grouped and released as a wave."
+  },
+  {
+   "title": "Warehouse Order creation",
+   "detail": "WOCR bundles warehouse tasks into work packages."
+  },
+  {
+   "title": "Queue and resource assignment",
+   "detail": "Resources pick up orders via RF."
+  },
+  {
+   "title": "Confirmation",
+   "detail": "Tasks are confirmed and stock moves between bins."
+  },
+  {
+   "title": "Goods issue / receipt posting",
+   "detail": "Posting updates stock and the ERP delivery."
+  }
+ ],
+ "screenshot_ideas": [
+  "/SCWM/MON: warehouse monitor showing the Queues and Work Orders nodes",
+  "/SCWM/WAVE: wave template and a released wave",
+  "/SCWM/MAT1: warehouse product master with putaway control indicator",
+  "/SCWM/LS01: storage bin creation screen with storage type and section",
+  "SPRO: Define Activity Area under EWM Master Data"
+ ],
+ "word_count": 2049,
+ "published": "2026-11-08"
+}

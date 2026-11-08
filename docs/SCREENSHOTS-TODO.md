@@ -51,3 +51,11 @@ Folder: `images/blog/sap-ewm-slotting-rearrangement-optimization/`
 - [ ] 05: /SCWM/SLOT: Initial selection screen for slotting run
 - [ ] 06: /SCWM/SLOT: Log output after executing a slotting run
 - [ ] 07: /SCWM/RARR: Screen for executing rearrangement
+
+## Top 25 SAP EWM Interview Questions & Answers for 2026 (With Model Answers)
+Folder: `images/blog/top-25-sap-ewm-interview-questions-2026/`
+- [ ] 01: /SCWM/MON: warehouse monitor showing the Queues and Work Orders nodes
+- [ ] 02: /SCWM/WAVE: wave template and a released wave
+- [ ] 03: /SCWM/MAT1: warehouse product master with putaway control indicator
+- [ ] 04: /SCWM/LS01: storage bin creation screen with storage type and section
+- [ ] 05: SPRO: Define Activity Area under EWM Master Data
