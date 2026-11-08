@@ -59,3 +59,11 @@ Folder: `images/blog/top-25-sap-ewm-interview-questions-2026/`
 - [ ] 03: /SCWM/MAT1: warehouse product master with putaway control indicator
 - [ ] 04: /SCWM/LS01: storage bin creation screen with storage type and section
 - [ ] 05: SPRO: Define Activity Area under EWM Master Data
+
+## Mastering the SAP MM Subcontracting Process in S/4HANA: Special Stock 'O' Lifecycle
+Folder: `images/blog/sap-mm-subcontracting-process-s4hana-special-stock-o/`
+- [ ] 01: ME21N: Purchase Order screen showing item category 'L' and component overview.
+- [ ] 02: CS03: Display Bill of Material (BOM) for a subcontracting material, highlighting components.
+- [ ] 03: ME2O: Subcontracting Monitor screen, displaying components provided to vendor.
+- [ ] 04: MIGO: Goods Receipt screen (Movement Type 101 O) for the finished product.
+- [ ] 05: MMBE: Stock Overview showing special stock 'O' at vendor.

@@ -446,5 +446,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-08",
     excerpt: "Optimize your SAP EWM warehouse storage and operations with advanced slotting and rearrangement techniques. This guide covers configuration, condition technique, and execution for maximum efficiency.",
     imageUrl: "https://youronementor.com/blog/covers/sap-ewm-slotting-rearrangement-optimization.svg"
+  },
+  {
+    id: "post_1794163755930",
+    title: "Mastering the SAP MM Subcontracting Process in S/4HANA: Special Stock 'O' Lifecycle",
+    slug: "sap-mm-subcontracting-process-s4hana-special-stock-o",
+    category: "Tutorial",
+    badge: "SAP MM TUTORIAL",
+    readTime: "14 min read",
+    date: "Nov 08, 2026",
+    isoDate: "2026-11-08",
+    excerpt: "Master the SAP MM subcontracting process in S/4HANA. Understand master data, PO creation with item category L, component provision, goods receipt for special stock 'O', and financial implications.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-mm-subcontracting-process-s4hana-special-stock-o.svg"
   }
 ];
