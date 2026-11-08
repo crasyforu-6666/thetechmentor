@@ -41,3 +41,13 @@ Folder: `images/blog/sap-mm-batch-management-s4hana-configuration/`
 - [ ] 03: V/C7: Define Batch Search Strategy Type for Inventory Management
 - [ ] 04: VCH1: Create Condition Record for Batch Determination (e.g., movement type, material)
 - [ ] 05: MIGO: Goods Receipt screen showing automatic batch determination
+
+## SAP EWM Slotting and Rearrangement: Master Warehouse Optimization
+Folder: `images/blog/sap-ewm-slotting-rearrangement-optimization/`
+- [ ] 01: SPRO: Define Field Catalog for Slotting Strategy Determination
+- [ ] 02: SPRO: Define Condition Table for Slotting Strategy Determination
+- [ ] 03: SPRO: Define Access Sequence for Slotting Strategy Determination
+- [ ] 04: SPRO: Define Slotting Strategy Profile
+- [ ] 05: /SCWM/SLOT: Initial selection screen for slotting run
+- [ ] 06: /SCWM/SLOT: Log output after executing a slotting run
+- [ ] 07: /SCWM/RARR: Screen for executing rearrangement

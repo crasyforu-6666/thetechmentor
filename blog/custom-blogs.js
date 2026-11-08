@@ -434,5 +434,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-07",
     excerpt: "This masterclass delves into SAP MM Batch Management and S/4HANA Batch Determination, covering architecture, classification, strategy configuration, and troubleshooting for efficient inventory control.",
     imageUrl: "https://youronementor.com/blog/covers/sap-mm-batch-management-s4hana-configuration.svg"
+  },
+  {
+    id: "post_1794133432010",
+    title: "SAP EWM Slotting and Rearrangement: Master Warehouse Optimization",
+    slug: "sap-ewm-slotting-rearrangement-optimization",
+    category: "Tutorial",
+    badge: "SAP EWM TUTORIAL",
+    readTime: "9 min read",
+    date: "Nov 08, 2026",
+    isoDate: "2026-11-08",
+    excerpt: "Optimize your SAP EWM warehouse storage and operations with advanced slotting and rearrangement techniques. This guide covers configuration, condition technique, and execution for maximum efficiency.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-ewm-slotting-rearrangement-optimization.svg"
   }
 ];
