@@ -67,3 +67,11 @@ Folder: `images/blog/sap-mm-subcontracting-process-s4hana-special-stock-o/`
 - [ ] 03: ME2O: Subcontracting Monitor screen, displaying components provided to vendor.
 - [ ] 04: MIGO: Goods Receipt screen (Movement Type 101 O) for the finished product.
 - [ ] 05: MMBE: Stock Overview showing special stock 'O' at vendor.
+
+## SAP EWM Wave Management and WOCR Configuration: A Deep Dive for Solution Architects
+Folder: `images/blog/sap-ewm-wave-management-wocr-configuration-architect-guide-html/`
+- [ ] 01: /SCWM/WAVET - Wave Template definition with release profiles and capacity checks
+- [ ] 02: /SCWM/WDGCM - Condition Record for Wave Determination showing access sequence and condition type
+- [ ] 03: SPRO path for Define Warehouse Order Creation Rules - Overview of existing WOCRs
+- [ ] 04: SPRO path for Define Limit Values for Warehouse Order Creation Rules - Example of a limit rule
+- [ ] 05: /SCWM/MON - Wave Monitor showing status, assigned items, and WO creation status

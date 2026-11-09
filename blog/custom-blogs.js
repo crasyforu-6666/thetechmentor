@@ -458,5 +458,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-08",
     excerpt: "Master the SAP MM subcontracting process in S/4HANA. Understand master data, PO creation with item category L, component provision, goods receipt for special stock 'O', and financial implications.",
     imageUrl: "https://youronementor.com/blog/covers/sap-mm-subcontracting-process-s4hana-special-stock-o.svg"
+  },
+  {
+    id: "post_1794223953357",
+    title: "SAP EWM Wave Management and WOCR Configuration: A Deep Dive for Solution Architects",
+    slug: "sap-ewm-wave-management-wocr-configuration-architect-guide-html",
+    category: "Tutorial",
+    badge: "SAP EWM TUTORIAL",
+    readTime: "9 min read",
+    date: "Nov 09, 2026",
+    isoDate: "2026-11-09",
+    excerpt: "This deep dive explores advanced SAP EWM Wave Management and Warehouse Order Creation Rule (WOCR) configuration. Learn to design robust outbound strategies for optimal warehouse performance.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-ewm-wave-management-wocr-configuration-architect-guide-html.svg"
   }
 ];
