@@ -75,3 +75,10 @@ Folder: `images/blog/sap-ewm-wave-management-wocr-configuration-architect-guide-
 - [ ] 03: SPRO path for Define Warehouse Order Creation Rules - Overview of existing WOCRs
 - [ ] 04: SPRO path for Define Limit Values for Warehouse Order Creation Rules - Example of a limit rule
 - [ ] 05: /SCWM/MON - Wave Monitor showing status, assigned items, and WO creation status
+
+## Embedded EWM vs Decentralized EWM on S/4HANA: A Practical Decision Matrix
+Folder: `images/blog/s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix/`
+- [ ] 01: SPRO: Extended Warehouse Management > Interfaces > ERP Integration, showing plant/storage location assignment to a warehouse number
+- [ ] 02: SMQ1 / SMQ2 queue monitor showing a blocked qRFC queue in a decentralized setup
+- [ ] 03: Outbound delivery in ERP (VL03N) with its warehouse request status
+- [ ] 04: EWM Warehouse Management Monitor (/SCWM/MON) showing inbound and outbound documents

@@ -268,7 +268,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
   },
   {
     id: "post_1788593713418",
-    title: "SAP S/4HANA 2026 Embedded EWM vs Decentral EWM: Complete Decision Matrix",
+    title: "Embedded EWM vs Decentralized EWM on S/4HANA: A Practical Decision Matrix",
     slug: "s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix",
     category: "Tutorial",
     readTime: "10 min read",
