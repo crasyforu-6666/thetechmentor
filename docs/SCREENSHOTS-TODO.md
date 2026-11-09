@@ -82,3 +82,11 @@ Folder: `images/blog/s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix/`
 - [ ] 02: SMQ1 / SMQ2 queue monitor showing a blocked qRFC queue in a decentralized setup
 - [ ] 03: Outbound delivery in ERP (VL03N) with its warehouse request status
 - [ ] 04: EWM Warehouse Management Monitor (/SCWM/MON) showing inbound and outbound documents
+
+## Top 30 SAP MM Interview Questions & Scenario-Based Answers for S/4HANA 2026
+Folder: `images/blog/top-sap-mm-interview-questions-2026-scenario-based/`
+- [ ] 01: SPRO: Assign Plant to Company Code (Enterprise Structure -> Assignment -> Logistics - General -> Assign Plant to Company Code)
+- [ ] 02: Transaction BP: Business Partner creation screen, showing General Data and Supplier role
+- [ ] 03: Transaction OMR6: Tolerance Keys for Price Variances configuration
+- [ ] 04: Transaction OMJJ: Movement Type configuration details for a specific movement type
+- [ ] 05: SPRO: Flexible Workflow configuration for Purchase Orders (Materials Management -> Purchasing -> Purchase Order -> Release Procedure for Purchase Orders -> Define Flexible Workflow for Purchase Orders)

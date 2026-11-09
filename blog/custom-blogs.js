@@ -470,5 +470,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-09",
     excerpt: "This deep dive explores advanced SAP EWM Wave Management and Warehouse Order Creation Rule (WOCR) configuration. Learn to design robust outbound strategies for optimal warehouse performance.",
     imageUrl: "https://youronementor.com/blog/covers/sap-ewm-wave-management-wocr-configuration-architect-guide-html.svg"
+  },
+  {
+    id: "post_1794266753766",
+    title: "Top 30 SAP MM Interview Questions & Scenario-Based Answers for S/4HANA 2026",
+    slug: "top-sap-mm-interview-questions-2026-scenario-based",
+    category: "Interview prep",
+    badge: "SAP MM INTERVIEW PREP",
+    readTime: "29 min read",
+    date: "Nov 09, 2026",
+    isoDate: "2026-11-09",
+    excerpt: "Prepare for your SAP MM interview with scenario-based answers to the top 30 questions for 2026. Gain S/4HANA insights and practical troubleshooting tips to stand out.",
+    imageUrl: "https://youronementor.com/blog/covers/top-sap-mm-interview-questions-2026-scenario-based.svg"
   }
 ];
