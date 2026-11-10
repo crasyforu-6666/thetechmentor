@@ -494,5 +494,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-10",
     excerpt: "Dive deep into the SAP S/4HANA Order-to-Cash (O2C) process flow, covering sales order, delivery, billing, and cash, with crucial FI integration points like VKOA.",
     imageUrl: "https://youronementor.com/blog/covers/sap-s4hana-order-to-cash-o2c-process-flow-fi-integration-guide-html.svg"
+  },
+  {
+    id: "post_1794343680470",
+    title: "Mastering the SAP MM Subcontracting Process in S/4HANA: Advanced Special Stock 'O' Management",
+    slug: "sap-mm-subcontracting-advanced-management-s4hana-stock-o",
+    category: "Tutorial",
+    badge: "SAP MM TUTORIAL",
+    readTime: "11 min read",
+    date: "Nov 10, 2026",
+    isoDate: "2026-11-10",
+    excerpt: "Learn to master the SAP MM subcontracting process in S/4HANA, focusing on special stock 'O' management, advanced financial postings, and troubleshooting common issues.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-mm-subcontracting-advanced-management-s4hana-stock-o.svg"
   }
 ];

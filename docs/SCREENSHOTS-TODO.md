@@ -98,3 +98,12 @@ Folder: `images/blog/sap-s4hana-order-to-cash-o2c-process-flow-fi-integration-gu
 - [ ] 03: Accounting document generated after PGI (via VF03, then Environment -> Accounting Documents), highlighting COGS and Inventory entries.
 - [ ] 04: VKOA - Overview of revenue account determination table, showing an example rule.
 - [ ] 05: VF01 - Billing document creation, showing the generated invoice and its net value.
+
+## Mastering the SAP MM Subcontracting Process in S/4HANA: Advanced Special Stock 'O' Management
+Folder: `images/blog/sap-mm-subcontracting-advanced-management-s4hana-stock-o/`
+- [ ] 01: CS01: BOM for finished material with components and by-products.
+- [ ] 02: ME11: Subcontracting info record with Item Category L.
+- [ ] 03: ME21N: Subcontracting PO (item category L) with component overview.
+- [ ] 04: ME2O: SC Stock Monitoring for Vendor screen showing components in stock 'O'.
+- [ ] 05: MIGO: Goods Receipt for finished product showing 101, 543, and 545/544 movements.
+- [ ] 06: OBYC: Configuration for GBB/VBO and FRL keys.
