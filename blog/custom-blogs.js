@@ -482,5 +482,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-09",
     excerpt: "Prepare for your SAP MM interview with scenario-based answers to the top 30 questions for 2026. Gain S/4HANA insights and practical troubleshooting tips to stand out.",
     imageUrl: "https://youronementor.com/blog/covers/top-sap-mm-interview-questions-2026-scenario-based.svg"
+  },
+  {
+    id: "post_1794309209427",
+    title: "Mastering the SAP S/4HANA Order-to-Cash (O2C) Process Flow with Comprehensive FI Integration and VKOA",
+    slug: "sap-s4hana-order-to-cash-o2c-process-flow-fi-integration-guide-html",
+    category: "Tutorial",
+    badge: "SAP SD TUTORIAL",
+    readTime: "12 min read",
+    date: "Nov 10, 2026",
+    isoDate: "2026-11-10",
+    excerpt: "Dive deep into the SAP S/4HANA Order-to-Cash (O2C) process flow, covering sales order, delivery, billing, and cash, with crucial FI integration points like VKOA.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-s4hana-order-to-cash-o2c-process-flow-fi-integration-guide-html.svg"
   }
 ];

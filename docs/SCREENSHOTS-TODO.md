@@ -90,3 +90,11 @@ Folder: `images/blog/top-sap-mm-interview-questions-2026-scenario-based/`
 - [ ] 03: Transaction OMR6: Tolerance Keys for Price Variances configuration
 - [ ] 04: Transaction OMJJ: Movement Type configuration details for a specific movement type
 - [ ] 05: SPRO: Flexible Workflow configuration for Purchase Orders (Materials Management -> Purchasing -> Purchase Order -> Release Procedure for Purchase Orders -> Define Flexible Workflow for Purchase Orders)
+
+## Mastering the SAP S/4HANA Order-to-Cash (O2C) Process Flow with Comprehensive FI Integration and VKOA
+Folder: `images/blog/sap-s4hana-order-to-cash-o2c-process-flow-fi-integration-guide-html/`
+- [ ] 01: VA01 - Sales Order creation screen, showing item details and quantities.
+- [ ] 02: VL02N - Post Goods Issue screen, confirming delivery completion.
+- [ ] 03: Accounting document generated after PGI (via VF03, then Environment -> Accounting Documents), highlighting COGS and Inventory entries.
+- [ ] 04: VKOA - Overview of revenue account determination table, showing an example rule.
+- [ ] 05: VF01 - Billing document creation, showing the generated invoice and its net value.
