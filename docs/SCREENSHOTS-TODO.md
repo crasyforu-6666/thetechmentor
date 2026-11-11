@@ -107,3 +107,11 @@ Folder: `images/blog/sap-mm-subcontracting-advanced-management-s4hana-stock-o/`
 - [ ] 04: ME2O: SC Stock Monitoring for Vendor screen showing components in stock 'O'.
 - [ ] 05: MIGO: Goods Receipt for finished product showing 101, 543, and 545/544 movements.
 - [ ] 06: OBYC: Configuration for GBB/VBO and FRL keys.
+
+## SAP EWM Yard Management: Transportation Unit, Dock Door, and Check-In Guide
+Folder: `images/blog/sap-ewm-yard-management-tu-dock-door-check-in-guide/`
+- [ ] 01: /SCWM/YCHECK - Check-in screen with TU details.
+- [ ] 02: /SCWM/TU - Transportation Unit screen showing assigned deliveries.
+- [ ] 03: /SCWM/MON - Yard Monitor displaying TU status, location, and dock door availability.
+- [ ] 04: SPRO: Define Yard Bins configuration screen.
+- [ ] 05: SPRO: Define Means of Transport configuration screen.

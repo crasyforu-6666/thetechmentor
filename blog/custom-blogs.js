@@ -506,5 +506,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-10",
     excerpt: "Learn to master the SAP MM subcontracting process in S/4HANA, focusing on special stock 'O' management, advanced financial postings, and troubleshooting common issues.",
     imageUrl: "https://youronementor.com/blog/covers/sap-mm-subcontracting-advanced-management-s4hana-stock-o.svg"
+  },
+  {
+    id: "post_1794394761846",
+    title: "SAP EWM Yard Management: Transportation Unit, Dock Door, and Check-In Guide",
+    slug: "sap-ewm-yard-management-tu-dock-door-check-in-guide",
+    category: "Tutorial",
+    badge: "SAP EWM TUTORIAL",
+    readTime: "12 min read",
+    date: "Nov 11, 2026",
+    isoDate: "2026-11-11",
+    excerpt: "Learn to implement and optimize SAP EWM Yard Management, covering Transportation Units (TUs), dock door processes, and the full vehicle check-in to check-out cycle.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-ewm-yard-management-tu-dock-door-check-in-guide.svg"
   }
 ];

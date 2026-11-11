@@ -319,3 +319,14 @@
 [2026-11-10 20:48:00] ✅ Updated homepage index.html with new blog card
 [2026-11-10 20:48:00] ✅ Updated blog/index.html hub with new blog card
 [2026-11-10 20:48:00] 🎉 Successfully published article 'Mastering the SAP MM Subcontracting Process in S/4HANA: Advanced Special Stock 'O' Management'!
+[2026-11-11 10:57:17] 🚀 Starting Autonomous Twice-Daily Blog Publishing Routine...
+[2026-11-11 10:57:17] 🎯 Target SAP Domain : [EWM] SAP EWM / Warehouse Logistics
+[2026-11-11 10:57:17] 📌 Selected Trending Topic: SAP EWM Yard Management: Transportation Unit (TU), Dock Door & Check-In Guide
+[2026-11-11 10:57:17] 📌 Primary SEO Keyword : sap ewm yard management transportation unit tu check in
+[2026-11-11 10:57:17] 📌 Target Article Slug  : sap-ewm-yard-management-tu-door-appointment
+[2026-11-11 10:59:21] ✍️ Article written: SAP EWM Yard Management: Transportation Unit, Dock Door, and Check-In Guide (2634 words)
+[2026-11-11 10:59:21] ✅ Generated Article Page: /home/runner/work/thetechmentor/thetechmentor/blog/sap-ewm-yard-management-tu-dock-door-check-in-guide.html
+[2026-11-11 10:59:21] ✅ Updated blog/custom-blogs.js repository file
+[2026-11-11 10:59:21] ✅ Updated homepage index.html with new blog card
+[2026-11-11 10:59:21] ✅ Updated blog/index.html hub with new blog card
+[2026-11-11 10:59:21] 🎉 Successfully published article 'SAP EWM Yard Management: Transportation Unit, Dock Door, and Check-In Guide'!
