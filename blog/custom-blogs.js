@@ -288,7 +288,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
   },
   {
     id: "post_1788595122055",
-    title: "SAP EWM POSC vs LOSC Storage Control: S/4HANA Deep Dive Blueprint",
+    title: "SAP EWM POSC vs LOSC Storage Control: A Practical S/4HANA Guide",
     slug: "sap-ewm-posc-losc-storage-control-deep-dive",
     category: "Tutorial",
     readTime: "14 min read",

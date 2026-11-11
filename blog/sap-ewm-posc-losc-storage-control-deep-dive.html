@@ -3,95 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SAP EWM POSC vs LOSC Storage Control</title>
-  <meta name="description" content="Master Process-Oriented (POSC) and Layout-Oriented (LOSC) Storage Control in SAP S/4HANA EWM with step-by-step customizing rules." />
+  <title>SAP EWM POSC vs LOSC Storage Control Explained</title>
+  <meta name="description" content="SAP EWM POSC vs LOSC storage control explained: when to use each, SPRO setup, worked examples, common mistakes and interview answers. Read before you design." />
   <link rel="canonical" href="https://youronementor.com/blog/sap-ewm-posc-losc-storage-control-deep-dive.html" />
-  <meta property="og:title" content="SAP EWM POSC vs LOSC Storage Control: S/4HANA Deep Dive Blueprint" />
-  <meta property="og:description" content="Master Process-Oriented (POSC) and Layout-Oriented (LOSC) Storage Control in SAP S/4HANA EWM with step-by-step customizing rules." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://youronementor.com/blog/sap-ewm-posc-losc-storage-control-deep-dive.html" />
+  <meta property="og:title" content="SAP EWM POSC vs LOSC Storage Control: A Practical S/4HANA Guide" />
+  <meta property="og:description" content="SAP EWM POSC vs LOSC storage control explained: when to use each, SPRO setup, worked examples, common mistakes and interview answers. Read before you design." />
   <meta property="og:image" content="https://youronementor.com/blog/covers/sap-ewm-posc-losc-storage-control-deep-dive.png" />
+  <meta property="og:site_name" content="theTechMentor" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="article:published_time" content="2026-11-11" />
+  <meta property="article:modified_time" content="2026-11-11" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" />
-  <link rel="stylesheet" href="../styles.css" />
-  <link rel="stylesheet" href="blog.css" />
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "SAP EWM POSC vs LOSC Storage Control: S/4HANA Deep Dive Blueprint", "description": "Master Process-Oriented (POSC) and Layout-Oriented (LOSC) Storage Control in SAP S/4HANA EWM with step-by-step customizing rules.", "image": "https://youronementor.com/images/og-cover.png", "author": {"@type": "Person", "name": "Anshuman Behuria", "url": "https://www.linkedin.com/in/anshuman-behuria-946860130"}, "publisher": {"@type": "Organization", "name": "theTechMentor", "url": "https://youronementor.com"}, "mainEntityOfPage": "https://youronementor.com/blog/sap-ewm-posc-losc-storage-control-deep-dive.html"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://youronementor.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://youronementor.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "SAP EWM POSC vs LOSC Storage Control: S/4HANA Deep Dive Blueprint", "item": "https://youronementor.com/blog/sap-ewm-posc-losc-storage-control-deep-dive.html"}]}]</script>
-  <meta name="robots" content="noindex,follow" />
-  <link rel="stylesheet" href="ai-article.css" />
-  <link rel="stylesheet" href="../theme-2030.css?v=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+  <link rel="icon" href="../images/logo-mark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../site.css?v=1" />
+  <link rel="stylesheet" href="ai-article.css?v=3" />
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "SAP EWM POSC vs LOSC Storage Control: A Practical S/4HANA Guide", "description": "SAP EWM POSC vs LOSC storage control explained: when to use each, SPRO setup, worked examples, common mistakes and interview answers. Read before you design.", "image": "https://youronementor.com/blog/covers/sap-ewm-posc-losc-storage-control-deep-dive.png", "datePublished": "2026-11-11", "dateModified": "2026-11-11", "author": {"@type": "Person", "name": "Anshuman Behuria", "url": "https://www.linkedin.com/in/anshuman-behuria-946860130"}, "publisher": {"@type": "Organization", "name": "theTechMentor", "url": "https://youronementor.com"}, "mainEntityOfPage": "https://youronementor.com/blog/sap-ewm-posc-losc-storage-control-deep-dive.html", "wordCount": 1919}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://youronementor.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://youronementor.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "SAP EWM POSC vs LOSC Storage Control: A Practical S/4HANA Guide", "item": "https://youronementor.com/blog/sap-ewm-posc-losc-storage-control-deep-dive.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the main difference between POSC and LOSC in SAP EWM?", "acceptedAnswer": {"@type": "Answer", "text": "POSC defines intermediate steps by business process, such as unloading, counting or deconsolidation. LOSC defines them by physical layout, such as routing via a conveyor, I-point or transfer bin."}}, {"@type": "Question", "name": "Can POSC and LOSC be used together?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Many warehouses use POSC for the overall business process and add LOSC where the physical layout needs an intermediate stop inside a step."}}, {"@type": "Question", "name": "Is storage control available in embedded EWM in S/4HANA?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Storage control works in both embedded and decentralized EWM, and the customizing concepts are the same. The landscape differs, but the warehouse task logic does not."}}, {"@type": "Question", "name": "Which T-codes help to check storage control results?", "acceptedAnswer": {"@type": "Answer", "text": "Use /SCWM/MON for the warehouse monitor, /SCWM/TO to display warehouse tasks, /SCWM/TO_CONF to confirm them and /SCWM/ADHU to create a WT for a handling unit manually."}}, {"@type": "Question", "name": "Why is the second warehouse task not created after I confirm the first?", "acceptedAnswer": {"@type": "Answer", "text": "Typical causes are a missing next step in the sequence, a missing determination for the warehouse process type, or missing or blocked intermediate bin data. Check the open tasks and the monitor first."}}, {"@type": "Question", "name": "Should a beginner learn POSC or LOSC first?", "acceptedAnswer": {"@type": "Answer", "text": "Start with POSC, as it is more common and follows the business process. Learn LOSC once you are comfortable with storage types, sections and bins, since it depends on layout master data."}}]}]</script>
   <script src="../site-config.js"></script>
   <script src="../tracking.js"></script>
-  <link rel="icon" href="../images/logo-mark.svg" type="image/svg+xml" />
 </head>
-<body>
+<body class="ai-page" style="--accent:#059669;--accent2:#0ea5e9;--accent-soft:#d1fae5;">
   <div class="reading-progress" id="reading-progress-bar"></div>
-
   <header class="header">
-    <nav class="nav container">
-      <a href="../index.html" class="logo">
-        <img class="logo-img" src="../images/logo-mark.svg" width="32" height="32" alt="" />
-        <span class="logo-text">the<b>Tech</b>Mentor</span>
-      </a>
+    <nav class="nav wrap" aria-label="Main">
+      <a href="../index.html" class="brand" aria-label="theTechMentor home"><img src="../images/logo-mark.svg" alt="" width="36" height="36" /><span>the<b>Tech</b>Mentor</span></a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul class="nav-links">
         <li><a href="../index.html#courses">Courses</a></li>
         <li><a href="../index.html#paths">Career paths</a></li>
-        <li><a href="index.html" style="color:var(--blog-accent-light); font-weight:600;">Blog Hub</a></li>
-        <li><a href="../index.html#advisor">Free counselling</a></li>
-        <li><a href="../index.html#courses" class="btn btn-sm">Explore courses</a></li>
+        <li><a href="index.html">Blog</a></li>
+        <li><a href="../index.html#advisor" class="btn btn-ghost btn-sm">Free counselling</a></li>
+        <li><a href="../index.html#courses" class="btn btn-primary btn-sm">Explore courses</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="blog-article-wrap">
-    <div class="blog-breadcrumb">
+  <main class="blog-article-wrap ai-wrap">
+    <nav class="blog-breadcrumb" aria-label="Breadcrumb">
       <a href="../index.html">Home</a> &gt; <a href="index.html">Blog</a> &gt; <span>Tutorial</span>
-    </div>
+    </nav>
 
-    <header class="blog-header">
-      <span class="sp-badge sp-badge--teal" style="margin-bottom:1rem; display:inline-block;">SAP EWM Masterclass</span>
-      <h1 class="blog-title">SAP EWM POSC vs LOSC Storage Control: S/4HANA Deep Dive Blueprint</h1>
-      
+    <header class="ai-hero">
+      <span class="ai-pill">SAP EWM TUTORIAL</span>
+      <h1 class="blog-title">SAP EWM POSC vs LOSC Storage Control: A Practical S/4HANA Guide</h1>
+      <p class="ai-dek">Understand how SAP EWM splits a movement into several warehouse tasks using process-oriented (POSC) and layout-oriented (LOSC) storage control, and how to choose, configure and troubleshoot each.</p>
       <div class="blog-meta">
         <div class="author-chip">
-          <img class="author-photo" src="../images/anshuman-behuria-96.jpg" alt="Anshuman Behuria" width="40" height="40" style="width:40px;height:40px;border-radius:50%;object-fit:cover" />
-          <div class="author-info">
-            <strong>Anshuman Behuria</strong>
-            <span>Lead SAP S/4HANA Trainer</span>
-          </div>
+          <img class="author-photo" src="../images/anshuman-behuria-96.jpg" alt="Anshuman Behuria" width="40" height="40" />
+          <div class="author-info"><strong>Anshuman Behuria</strong><span>Lead SAP Mentor · theTechMentor</span></div>
         </div>
-        <span>•</span>
-        <span>Sep 05, 2026</span>
-        <span>•</span>
-        <span>⏱️ 14 min read</span>
+        <span>Updated <time datetime="2026-11-11">Nov 11, 2026</time></span>
       </div>
+      <img class="ai-cover" src="covers/sap-ewm-posc-losc-storage-control-deep-dive.svg" width="1200" height="630" alt="SAP EWM POSC vs LOSC Storage Control: A Practical S/4HANA Guide" />
     </header>
 
-    <article class="article-content">
+    <article class="article-content ai-article">
+      <div class="glance"><div><span>Module</span><strong>SAP EWM</strong></div><div><span>Read time</span><strong>9 min</strong></div><div><span>Level</span><strong>Intermediate to Consultant</strong></div><div class="glance-codes"><span>T-codes covered</span><p><code>/SCWM/ORDIM_O</code><code>/SCWM/ORDIM_C</code><code>/SCWM/LS01</code><code>/SCWM/TO</code><code>/SCWM/MON</code><code>/SCWM/TO_CONF</code><code>/SCWM/RFUI</code><code>/SCWM/ADHU</code></p></div></div>
 
-      <!-- TARGET METADATA GRID -->
-      <div style="background: #080d14; border: 1px solid #1e293b; border-radius: 10px; padding: 1.5rem; margin-bottom: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
-        <div style="border-left: 3px solid #0284c7; padding-left: 0.85rem;">
-          <span style="color: #94a3b8; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; display: block;">Target Role:</span>
-          <strong style="color: #fff; font-size: 0.95rem;">SAP EWM Senior Consultant / Warehouse Architect</strong>
-        </div>
-      </div>
+      <div class="ai-intro"><p>A pallet arrives at the dock, needs to be unloaded, checked, deconsolidated and then put away to a high-bay rack through a conveyor. If SAP EWM created a single warehouse task from the door to the final bin, none of those stops would be visible, controllable or confirmable. Storage control is the EWM mechanism that breaks one logical movement into several steps.</p><p>This guide explains <strong>SAP EWM POSC vs LOSC storage control</strong>: what each method does, how they differ, where they are configured, how they combine, and what usually goes wrong in projects. By the end you should be able to choose the right method for a given warehouse scenario, sketch the customizing, and answer the typical interview questions on it.</p><p>The concepts apply to both embedded EWM in S/4HANA and decentralized EWM. Where the menu path or behaviour is something you should verify in your own release, I say so.</p></div>
 
-      <p style="font-size: 1.05rem; line-height: 1.75; color: #cbd5e1; margin-bottom: 2rem;">
-        Mastering S/4HANA supply chain architecture requires deep functional knowledge and practical configuration experience. This technical guide breaks down <strong>SAP EWM POSC vs LOSC Storage Control: S/4HANA Deep Dive Blueprint</strong> with actionable step-by-step blueprints.
-      </p>
+      <div class="ai-box ai-takeaways"><div class="box-label">⚡ Key takeaways</div><ul><li>Storage control splits one logical movement into several warehouse tasks, each confirmed separately.</li><li>POSC models business steps such as unloading, inspection and deconsolidation; LOSC models physical routing through intermediate storage types, sections or bins.</li><li>POSC and LOSC can be combined: POSC for the process, LOSC for physical transit points within a step.</li><li>Most failures come from missing determination settings or missing bin master data, not from the rule itself.</li><li>Test the full cycle with /SCWM/MON, /SCWM/TO and /SCWM/TO_CONF before transporting, and keep the number of steps minimal.</li></ul></div>
 
-      <h2 style="color: #fff; font-size: 1.5rem; font-weight: 700; margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 1px solid #1e293b;">1. Configuring Multi-Step Inbound Deconsolidation, Inspection & Putaway</h2><p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7;">Deep dive into key configuration parameters, best practices, and real-world project insights for POSC Foundations.</p><h2 style="color: #fff; font-size: 1.5rem; font-weight: 700; margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 1px solid #1e293b;">2. Handling Intermediate Storage Bins, Conveyor Belts & Automated Systems</h2><p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7;">Deep dive into key configuration parameters, best practices, and real-world project insights for LOSC Rules.</p><h2 style="color: #fff; font-size: 1.5rem; font-weight: 700; margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 1px solid #1e293b;">3. Integrating POSC + LOSC in Complex Distribution Centers</h2><p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7;">Deep dive into key configuration parameters, best practices, and real-world project insights for Combined Scenarios.</p><h2 style="color: #fff; font-size: 1.5rem; font-weight: 700; margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 1px solid #1e293b;">4. SPRO Path, Storage Process Steps, and Warehouse Task Creation Logic</h2><p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7;">Deep dive into key configuration parameters, best practices, and real-world project insights for Customizing Blueprint.</p>
+      <div class="flow"><div class="flow-label">Process at a glance</div><ol class="flow-steps"><li><span class="flow-n">1</span><strong>Goods receipt posted</strong><span>The HU arrives in the GR zone and the inbound delivery is processed.</span></li><li><span class="flow-n">2</span><strong>Storage control determined</strong><span>EWM finds the storage process (POSC) and any layout rule (LOSC) for the movement.</span></li><li><span class="flow-n">3</span><strong>First WT created</strong><span>A warehouse task moves the HU to the first step, for example deconsolidation.</span></li><li><span class="flow-n">4</span><strong>Confirm with /SCWM/TO_CONF</strong><span>The operator or RF device confirms the task.</span></li><li><span class="flow-n">5</span><strong>Next WT created</strong><span>EWM creates the follow-up task for the next step until the final bin.</span></li></ol></div>
 
-      <!-- TIP CALLOUT -->
-      <div style="background: #0c1929; border-left: 4px solid #0284c7; padding: 1.25rem; border-radius: 6px; margin: 1.75rem 0;">
-        <strong style="color: #38bdf8; font-size: 1.05rem; display: block; margin-bottom: 0.3rem;">💡 CONSULTANT BEST PRACTICE</strong>
-        <p style="color: #cbd5e1; font-size: 0.95rem; margin: 0;">
-          Always validate your configuration in a sandbox environment before transporting customizing requests to Quality/Production.
-        </p>
-      </div>
+      <nav class="ai-box ai-toc" aria-label="Contents"><div class="box-label">📑 In this guide</div><ol><li><a href="#sec-1"><span>01</span>What storage control means in SAP EWM</a></li><li><a href="#sec-2"><span>02</span>POSC vs LOSC: side-by-side comparison</a></li><li><a href="#sec-3"><span>03</span>How process-oriented storage control works</a></li><li><a href="#sec-4"><span>04</span>How layout-oriented storage control works</a></li><li><a href="#sec-5"><span>05</span>Combining POSC and LOSC in one warehouse</a></li><li><a href="#sec-6"><span>06</span>Testing storage control step by step</a></li><li><a href="#sec-7"><span>07</span>Common mistakes and troubleshooting</a></li><li><a href="#sec-8"><span>08</span>Interview questions on this topic</a></li><li><a href="#faqs"><span>?</span>Frequently asked questions</a></li></ol></nav>
 
-      <!-- LEAD OPT-IN -->
+      <h2 id="sec-1"><span class="h2-n">01</span>What storage control means in SAP EWM</h2>
+<p>By default, when EWM creates a warehouse task (WT) for a putaway, it moves the product from a source bin to a destination bin in one go. <strong>Storage control</strong> lets you insert intermediate steps, so the movement becomes a chain of warehouse tasks. Each task is confirmed separately, usually by a different person or resource, and often in a different area of the warehouse.</p><p>EWM offers two ways to define those intermediate steps:</p><ul><li><strong>Process-oriented storage control (POSC)</strong> – you define the steps by business process: unloading, counting, quality inspection, deconsolidation, packing, loading and so on.</li><li><strong>Layout-oriented storage control (LOSC)</strong> – you define the steps by physical warehouse layout: the product has to travel via a specific intermediate storage type, section or bin, such as a conveyor, an identification point or a lift.</li></ul><p>The simplest way to remember it: POSC answers <em>"what must happen to this goods?"</em> and LOSC answers <em>"which physical route must it take?"</em></p><aside class="note"><strong>ECC vs S/4HANA:</strong> In ECC WM there was no real equivalent. You used interim storage types and two-step movements manually. Storage control in EWM is available in both embedded and decentralized EWM, and the concepts are identical. Check the <a href="embedded-ewm-s4hana-setup-walkthrough.html">embedded EWM setup walkthrough</a> if you need the system architecture first.</aside>
+<h2 id="sec-2"><span class="h2-n">02</span>POSC vs LOSC: side-by-side comparison</h2>
+<table><thead><tr><th>Aspect</th><th>POSC (process-oriented)</th><th>LOSC (layout-oriented)</th></tr></thead><tbody><tr><td>Driven by</td><td>Business process steps</td><td>Physical layout and routing</td></tr><tr><td>Typical steps</td><td>Unload, count, inspect, deconsolidate, putaway, pack, stage, load</td><td>Via conveyor, I-point, lift, transfer bin, intermediate storage type</td></tr><tr><td>Step definition</td><td>Storage process with external and internal process steps</td><td>Storage control for source and destination storage types with intermediate storage type, section or bin</td></tr><tr><td>Used across documents</td><td>Yes, can link with inbound/outbound delivery processing and the warehouse process type</td><td>Mainly within the warehouse movement itself (putaway, picking, stock removal)</td></tr><tr><td>Who sees it</td><td>Process planners, warehouse manager</td><td>Layout planners, automation/MFS engineers</td></tr><tr><td>Typical example</td><td>Goods receipt, then quality inspection area, then deconsolidation, then putaway</td><td>Pallet goes from GR zone to conveyor entry, then to the high-bay rack</td></tr><tr><td>Can be combined?</td><td>Yes. POSC defines the business steps, and LOSC can add physical stops inside a step.</td></tr></tbody></table><p>In practice, POSC is the more common starting point in projects. LOSC appears when the warehouse has real physical constraints: automated storage, narrow-aisle zones with transfer points, or separate floors.</p>
+<h2 id="sec-3"><span class="h2-n">03</span>How process-oriented storage control works</h2>
+<p>POSC splits a process into <strong>external steps</strong> and <strong>internal steps</strong>. External steps are the business activities that are visible to the outside (for example unloading, deconsolidation or counting). Internal steps are the system-level technical steps in between. You group them into a <strong>storage process</strong> and assign that to the warehouse movement through the warehouse process type and determination settings.</p><h3>Worked example: inbound with inspection and deconsolidation</h3><p>Assume a mixed pallet arrives from a vendor in Pune. The business needs to unload, deconsolidate the mixed pallet into single-product HUs and then put them away.</p><ol><li>Storage process <code>Z_INB1</code> is defined with the steps: unloading, deconsolidation, putaway.</li><li>The goods receipt is posted into the GR zone (storage type e.g. <code>9010</code>).</li><li>EWM creates the first WT for the movement from the door to the deconsolidation work centre.</li><li>When that WT is confirmed, the next WT is created from the work centre to the final putaway bin.</li></ol><p>Each step has its own WT, so the stock position always tells you exactly where the HU is. The open tasks sit in <code>/SCWM/ORDIM_O</code> and confirmed ones in <code>/SCWM/ORDIM_C</code>.</p><h3>Where to configure it</h3><p>The path starts in <code>SPRO &gt; SCM Extended Warehouse Management &gt; Extended Warehouse Management &gt; Cross-Process Settings &gt; Warehouse Task</code> and then the node for process-oriented storage control. The exact node names vary slightly between releases, so open the node list in your system and verify. You will typically work through:</p><table><thead><tr><th>Step</th><th>What you define</th></tr></thead><tbody><tr><td>1</td><td>Storage process steps (external and internal) and their allowed combinations</td></tr><tr><td>2</td><td>The storage process (sequence of steps)</td></tr><tr><td>3</td><td>The determination of the storage process for a movement, together with the warehouse process type</td></tr><tr><td>4</td><td>Warehouse process types for each step if different handling is needed</td></tr></tbody></table><aside class="tip"><strong>Tip:</strong> Name your storage processes by business meaning, for example <code>Z_INB_QI</code> for inbound with inspection, not <code>Z001</code>. When you are three years into the project, nobody will remember what 001 was.</aside>
+<h2 id="sec-4"><span class="h2-n">04</span>How layout-oriented storage control works</h2>
+<p>LOSC is about <strong>physical routing</strong>. You tell EWM that goods travelling from storage type A to storage type B must pass through an intermediate storage type, section or bin. The intermediate stop might be an I-point where a pallet is scanned and checked, a conveyor entry, or a transfer bin of a lift.</p><h3>Worked example: automated high-bay</h3><p>Products going to the high-bay storage type <code>0200</code> must first go through the conveyor entry point <code>0900</code>.</p><ol><li>Putaway searches the destination bin in <code>0200</code> as normal.</li><li>Because a layout-oriented rule exists for the route from GR zone to <code>0200</code>, EWM inserts the intermediate step via <code>0900</code>.</li><li>WT 1 moves the HU from the GR zone to the conveyor entry bin.</li><li>WT 2, normally triggered after confirmation or by the automation interface, moves it into the rack.</li></ol><p>In an automated warehouse, the second step is often not confirmed by a person at all. The material flow system (MFS) or a PLC communicates the completion. If you are designing that, involve the automation vendor early.</p><h3>Where to configure it</h3><p>Settings sit under the same Warehouse Task area in SPRO, in the layout-oriented storage control node. You define, per combination of the relevant storage types and conditions, the intermediate storage type, section and bin, and the allowed sequence. Be very exact with the master data: storage types, sections and the intermediate bins must exist (<code>/SCWM/LS01</code> creates storage bins) and the bins must be allowed for the product or HU type.</p><aside class="warning"><strong>Warning:</strong> LOSC steps go wrong most often because of missing bin master data or wrong storage-type roles. The rule is correct, but the system finds no suitable intermediate bin, and the WT fails or falls back to direct putaway.</aside>
+<h2 id="sec-5"><span class="h2-n">05</span>Combining POSC and LOSC in one warehouse</h2>
+<p>Large distribution centres use both. POSC defines the business process steps that matter for documents and control; LOSC then adds physical transit points inside a step where the layout needs them.</p><h3>Example: pharma distribution centre</h3><ol><li>POSC defines: unload, quality inspection, putaway.</li><li>After quality inspection is released, the putaway step targets an automated mini-load area.</li><li>LOSC adds the conveyor entry and lift transfer bin for that destination.</li></ol><p>Result: three business steps, but four or five physical warehouse tasks. The business sees three milestones; the operators see the actual physical hops.</p><h3>Design guidance</h3><ul><li>Start with POSC to model the process. Add LOSC only for real physical constraints.</li><li>Do not create a POSC step just to represent a conveyor. Use LOSC.</li><li>Do not use LOSC to represent a business activity such as inspection. That belongs in POSC.</li><li>Keep the number of steps minimal. Each step adds a WT, a confirmation and a possible failure point.</li></ul><aside class="interview"><strong>Interview angle:</strong> "The customer wants a conveyor transfer between the goods receipt area and the rack. POSC or LOSC?" The answer is LOSC, because it is a physical layout route. Then add that if there is also an inspection requirement, that part is POSC.</aside>
+<h2 id="sec-6"><span class="h2-n">06</span>Testing storage control step by step</h2>
+<p>Before you hand over, simulate a full cycle in a sandbox. If you are practising on an S/4HANA sandbox, use this order:</p><ol><li>Create an inbound delivery and post goods receipt in the delivery processing.</li><li>Check the created WT with <code>/SCWM/TO</code> or via the warehouse monitor <code>/SCWM/MON</code>. Confirm that only the first step has been created.</li><li>Confirm the WT, either in <code>/SCWM/TO_CONF</code> or through the RF framework (<code>/SCWM/RFUI</code>).</li><li>Check that the next WT has been created automatically and that its source is the destination of the previous task.</li><li>Repeat until the HU reaches the final bin and stock is in the correct storage type.</li><li>Test the exceptions: cancel a WT, put a quantity difference in a step, and test a bin that is full.</li></ol><p>You can also create a WT manually for a HU using <code>/SCWM/ADHU</code>, which is handy for isolating whether the problem is the storage control determination or the putaway strategy.</p><aside class="tip"><strong>Tip:</strong> In the monitor, look at the HU's current location and the warehouse task list together. If the HU is stuck in an intermediate bin and no follow-up WT exists, the issue is nearly always in the determination, not in the stock data.</aside>
+<h2 id="sec-7"><span class="h2-n">07</span>Common mistakes and troubleshooting</h2>
+<table><thead><tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr></thead><tbody><tr><td>Only one direct WT is created, no intermediate steps</td><td>Storage process or layout rule not determined for the warehouse process type</td><td>Check the determination settings and the warehouse process type assigned to the movement</td></tr><tr><td>Follow-up WT is not created after confirmation</td><td>Next step not defined, or the HU is not the object being moved</td><td>Review the step sequence; make sure the step is HU-based where required</td></tr><tr><td>Intermediate bin not found</td><td>Missing bin master data or bin blocked</td><td>Create or unblock bins in <code>/SCWM/LS01</code>/<code>/SCWM/LS02</code> and check the storage type role</td></tr><tr><td>Stock sits in the GR zone for ever</td><td>Putaway step not triggered or the follow-up WT blocked by a posting change</td><td>Check open WTs in <code>/SCWM/ORDIM_O</code> and process in monitor</td></tr><tr><td>Too many WTs, users complain</td><td>Over-engineered steps</td><td>Remove steps that do not carry a business or physical purpose</td></tr></tbody></table><aside class="warning"><strong>Warning:</strong> Do not transport storage control customizing without the related warehouse process type, storage type and bin master data. The configuration depends on all of them, and a partial transport is the commonest cause of a "works in DEV, fails in QA" issue.</aside><p>The wave side of the same scenario, for outbound, is covered in the <a href="sap-ewm-wave-management-wocr-configuration.html">wave management and WOCR guide</a>, and bin determination quality is linked to <a href="sap-ewm-slotting-rearrangement-optimization.html">slotting and rearrangement</a>.</p>
+<h2 id="sec-8"><span class="h2-n">08</span>Interview questions on this topic</h2>
+<ol><li><strong>What is the difference between POSC and LOSC?</strong> POSC models business process steps (unload, inspect, deconsolidate). LOSC models physical routing through intermediate storage types, sections or bins.</li><li><strong>Can you use both together?</strong> Yes. POSC gives the process framework and LOSC adds physical transit stops inside it.</li><li><strong>How many WTs are created for a three-step process?</strong> One per step, created in sequence as each is confirmed, unless the design says otherwise.</li><li><strong>Where would you look if the second step is not created?</strong> Determination settings, the warehouse process type, the step sequence, and the open tasks in the monitor.</li><li><strong>Is storage control different in embedded and decentralized EWM?</strong> The concept and customizing are the same. The difference is the system landscape, as discussed in the <a href="s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix.html">embedded vs decentralized decision matrix</a>.</li></ol><aside class="interview"><strong>Interview angle:</strong> Give an example from a project, even a small one. Saying "in our case the pallet had to pass an I-point, so we used LOSC" is worth more than a textbook definition. More practice questions are in the <a href="top-25-sap-ewm-interview-questions-2026.html">top 25 EWM interview questions</a>.</aside>
+
+
+      
+
       <div class="ai-optin" id="lead-optin">
+        <div class="optin-icon">🎁</div>
         <strong>Free: SAP MM &amp; EWM video course + interview kit</strong>
         <p>Get the 40+ lesson playlist, the most-asked interview questions and our 90-day roadmap on WhatsApp.</p>
         <form class="ttm-optin-form" data-source="blog:sap-ewm-posc-losc-storage-control-deep-dive">
@@ -103,22 +105,36 @@
         <div class="ttm-optin-done" hidden></div>
       </div>
 
-      <!-- COURSE CTA CARD -->
-      <div class="blog-course-cta">
-        <span class="tier-badge" style="background:#f59e0b; color:#000; font-weight:700; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; text-transform:uppercase;">Accelerate Your Career</span>
-        <h3>Master SAP MM &amp; EWM S/4HANA Live with Anshuman Behuria</h3>
-        <p>Get 24/7 server access, real project blueprints, and 1-on-1 interview preparation.</p>
+      <h2 id="faqs"><span class="h2-n">?</span>Frequently asked questions</h2>
+      <details class="ai-faq"><summary>What is the main difference between POSC and LOSC in SAP EWM?</summary><p>POSC defines intermediate steps by business process, such as unloading, counting or deconsolidation. LOSC defines them by physical layout, such as routing via a conveyor, I-point or transfer bin.</p></details><details class="ai-faq"><summary>Can POSC and LOSC be used together?</summary><p>Yes. Many warehouses use POSC for the overall business process and add LOSC where the physical layout needs an intermediate stop inside a step.</p></details><details class="ai-faq"><summary>Is storage control available in embedded EWM in S/4HANA?</summary><p>Yes. Storage control works in both embedded and decentralized EWM, and the customizing concepts are the same. The landscape differs, but the warehouse task logic does not.</p></details><details class="ai-faq"><summary>Which T-codes help to check storage control results?</summary><p>Use /SCWM/MON for the warehouse monitor, /SCWM/TO to display warehouse tasks, /SCWM/TO_CONF to confirm them and /SCWM/ADHU to create a WT for a handling unit manually.</p></details><details class="ai-faq"><summary>Why is the second warehouse task not created after I confirm the first?</summary><p>Typical causes are a missing next step in the sequence, a missing determination for the warehouse process type, or missing or blocked intermediate bin data. Check the open tasks and the monitor first.</p></details><details class="ai-faq"><summary>Should a beginner learn POSC or LOSC first?</summary><p>Start with POSC, as it is more common and follows the business process. Learn LOSC once you are comfortable with storage types, sections and bins, since it depends on layout master data.</p></details>
+
+      <div class="related"><div class="flow-label">Keep learning</div><div class="rel-grid"><a class="rel-card" href="s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix.html"><img src="covers/s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix.svg" alt="" loading="lazy" /><span>Embedded EWM vs Decentralized EWM on S/4HANA: A Practical Decision Matrix</span></a><a class="rel-card" href="autonomous-ai-sap-mm-ewm-2026-guide.html"><img src="covers/autonomous-ai-sap-mm-ewm-2026-guide.svg" alt="" loading="lazy" /><span>Autonomous AI in SAP S/4HANA MM &amp; EWM: 2026 Guide</span></a><a class="rel-card" href="embedded-ewm-s4hana-setup-walkthrough.html"><img src="covers/embedded-ewm-s4hana-setup-walkthrough.svg" alt="" loading="lazy" /><span>Setting Up Embedded EWM in S/4HANA: A Step-by-Step Architecture Walkthrough</span></a></div></div>
+
+      <div class="blog-course-cta ai-cta">
+        <h3>Learn SAP hands-on with theTechMentor</h3>
+        <p>Live weekend batches or self-paced videos, with S/4HANA practice server access and interview preparation.</p>
         <div class="blog-cta-actions">
-          <button type="button" class="btn btn-primary razorpay-link" data-amount="10999" data-program="MM + EWM Self-Paced Bundle">
-            Get Complete Bundle — ₹10,999 ↗
-          </button>
-          <a href="../index.html#courses" class="btn btn-outline">View Batches</a>
+          <a href="../index.html#pricing" class="btn btn-primary">See programs &amp; fees</a>
+          <a href="../index.html#enroll" class="btn btn-outline">Book a free 15-min call</a>
         </div>
       </div>
-
     </article>
   </main>
-  <script src="../script.js?v=5" defer></script>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="brand brand-light"><img src="../images/logo-mark.svg" alt="" width="32" height="32" /><span>the<b>Tech</b>Mentor</span></a>
+        <p>Online SAP S/4HANA academy for logistics, procurement and warehouse careers.</p>
+      </div>
+      <div><h4>Courses</h4><ul><li><a href="../index.html#courses">All courses</a></li><li><a href="../index.html#paths">Career paths</a></li><li><a href="../index.html#formats">Live vs self-paced</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="index.html">Blog</a></li><li><a href="../index.html#faq">FAQ</a></li><li><a href="../index.html#advisor">Free counselling</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="mailto:info@youronementor.com">info@youronementor.com</a></li><li><a href="https://wa.me/917848942021" target="_blank" rel="noopener noreferrer">WhatsApp +91 78489 42021</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li><li><a href="../refund.html">Refunds</a></li></ul></div>
+    </div>
+    <div class="wrap footer-bottom"><p>© 2026 theTechMentor. SAP and S/4HANA are trademarks of SAP SE; theTechMentor is not affiliated with SAP SE.</p></div>
+  </footer>
   <script src="blog-leads.js"></script>
+  <script>document.querySelector(".nav-toggle")?.addEventListener("click",function(){var l=document.querySelector(".nav-links");var o=l.classList.toggle("open");this.setAttribute("aria-expanded",String(o));});</script>
 </body>
 </html>

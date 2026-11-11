@@ -123,3 +123,11 @@ Folder: `images/blog/top-30-sap-mm-interview-questions-2026/`
 - [ ] 03: Transaction OMR6: Tolerance Keys for Price Variances configuration
 - [ ] 04: Transaction OMJJ: Movement Type configuration details for a specific movement type
 - [ ] 05: SPRO: Flexible Workflow configuration for Purchase Orders (Materials Management -> Purchasing -> Purchase Order -> Release Procedure for Purchase Orders -> Define Flexible Workflow for Purchase Orders)
+
+## SAP EWM POSC vs LOSC Storage Control: A Practical S/4HANA Guide
+Folder: `images/blog/sap-ewm-posc-losc-storage-control-deep-dive/`
+- [ ] 01: SPRO path under Cross-Process Settings > Warehouse Task showing the storage control nodes
+- [ ] 02: Storage process definition with its sequence of steps
+- [ ] 03: Warehouse monitor /SCWM/MON showing open warehouse tasks for a HU in an intermediate bin
+- [ ] 04: /SCWM/TO display of two chained warehouse tasks with source and destination bins
+- [ ] 05: /SCWM/LS01 intermediate bin created in the conveyor storage type
