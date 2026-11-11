@@ -1,0 +1,29 @@
+{
+  "redirects": [
+    {
+      "source": "/blog/top-sap-mm-interview-questions-2026-scenario-based.html",
+      "destination": "/blog/top-30-sap-mm-interview-questions-2026.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/sap-ewm-wave-management-wocr-configuration-architect-guide-html.html",
+      "destination": "/blog/sap-ewm-wave-management-wocr-configuration.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/sap-s4hana-order-to-cash-o2c-process-flow-fi-integration-guide-html.html",
+      "destination": "/blog/sap-s4hana-o2c-process-fi-vkoa.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/sap-mm-subcontracting-advanced-management-s4hana-stock-o.html",
+      "destination": "/blog/sap-mm-subcontracting-process-s4hana-special-stock-o.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ewm-wave-management-explained.html",
+      "destination": "/blog/sap-ewm-wave-management-wocr-configuration.html",
+      "permanent": true
+    }
+  ]
+}

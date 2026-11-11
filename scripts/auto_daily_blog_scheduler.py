@@ -1533,10 +1533,19 @@ def refresh_thin_post() -> bool:
     if not thin:
         log_msg("ℹ️ No thin posts left to refresh.")
         return False
-    words, slug, page = thin[0]
+    from scripts import topic_guard
     import re as _re
-    h1 = _re.search(r"<h1[^>]*>(.*?)</h1>", page, _re.S)
-    title = ai_writer.strip_tags(h1.group(1)) if h1 else slug.replace("-", " ")
+    for words, slug, page in thin:
+        h1 = _re.search(r"<h1[^>]*>(.*?)</h1>", page, _re.S)
+        title = ai_writer.strip_tags(h1.group(1)) if h1 else slug.replace("-", " ")
+        dup = topic_guard.find_duplicate(title, exclude_slug=slug, ai_only=True)
+        if dup:
+            topic_guard.retire(slug, dup[0], log=log_msg)
+            continue
+        break
+    else:
+        log_msg("ℹ️ All remaining thin posts were duplicates and have been redirected.")
+        return False
     date_m = _re.search(r'"datePublished":\s*"(\d{4}-\d{2}-\d{2})', page) or _re.search(r'data-date="(\d{4}-\d{2}-\d{2})"', page)
     log_msg(f"♻️ Refreshing thin post ({words} words): {slug}")
     article = ai_writer.write_article({"title": title}, mode="refresh", fixed_slug=slug,
@@ -1570,8 +1579,31 @@ def run_daily_publisher(preferred_module=None, dry_run=False):
             t_copy["module"] = m
             TOPIC_DATABASE[m].append(t_copy)
 
-    # 1. Discover or Synthesize Trending SEO Topic via Google Suggest & Blueprints
-    topic = discover_trending_topic(target_mod)
+    # 1. Pick a topic that has not been covered yet (curated backlog first, then research)
+    from scripts import topic_guard
+    topic = topic_guard.next_topic(log=log_msg)
+    if topic:
+        topic.setdefault("slug", ai_writer.slugify(topic["title"]))
+        topic.setdefault("category", "Tutorial")
+        topic.setdefault("badge", f"SAP {topic['module']}")
+        topic.setdefault("read_time", "12 min read")
+        topic.setdefault("meta_desc", topic["title"])
+        target_mod = {"MM": "mm", "EWM": "ewm", "SD": "sd", "AI": "joule", "Career": "mm"}.get(topic["module"], target_mod)
+        try:
+            topic["faqs"] = [(q, "") for q in fetch_google_suggestions(topic["keyword"])][:6]
+        except Exception:
+            topic["faqs"] = []
+    else:
+        for _ in range(8):
+            cand = discover_trending_topic(target_mod)
+            dup = topic_guard.find_duplicate(cand["title"])
+            if not dup:
+                topic = cand
+                break
+            log_msg(f"⏭️ Skipping researched topic '{cand['title']}' — already covered by {dup[0]}")
+        if not topic:
+            log_msg("⚠️ No new non-duplicate topic found — nothing published this run.")
+            return
     log_msg(f"📌 Selected Trending Topic: {topic['title']}")
     log_msg(f"📌 Primary SEO Keyword : {topic['keyword']}")
     log_msg(f"📌 Target Article Slug  : {topic['slug']}")
@@ -1592,8 +1624,20 @@ def run_daily_publisher(preferred_module=None, dry_run=False):
         print("=================== [END DRY RUN] ===================\n")
         return
 
-    # 2. Write the article with Claude (quality-gated) and render it
+    # 2. Write the article (quality-gated) and make sure the result isn't a duplicate either
     article = ai_writer.write_article(topic, mode="new")
+    dup = topic_guard.find_duplicate(article["h1"], exclude_slug=article["slug"])
+    if dup:
+        topic_guard.mark_used(topic["title"], dup[0], "(rejected after writing: duplicate)")
+        log_msg(f"⏭️ Written article '{article['h1']}' duplicates {dup[0]} — not published.")
+        if getattr(run_daily_publisher, "_retry", False):
+            return None
+        run_daily_publisher._retry = True
+        try:
+            return run_daily_publisher(preferred_module, dry_run)
+        finally:
+            run_daily_publisher._retry = False
+    topic_guard.mark_used(topic["title"], article["slug"], article["h1"])
     topic = dict(topic)
     topic.update({
         "title": article["h1"],

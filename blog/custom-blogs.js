@@ -460,54 +460,6 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     imageUrl: "https://youronementor.com/blog/covers/sap-mm-subcontracting-process-s4hana-special-stock-o.svg"
   },
   {
-    id: "post_1794223953357",
-    title: "SAP EWM Wave Management and WOCR Configuration: A Deep Dive for Solution Architects",
-    slug: "sap-ewm-wave-management-wocr-configuration-architect-guide-html",
-    category: "Tutorial",
-    badge: "SAP EWM TUTORIAL",
-    readTime: "9 min read",
-    date: "Nov 09, 2026",
-    isoDate: "2026-11-09",
-    excerpt: "This deep dive explores advanced SAP EWM Wave Management and Warehouse Order Creation Rule (WOCR) configuration. Learn to design robust outbound strategies for optimal warehouse performance.",
-    imageUrl: "https://youronementor.com/blog/covers/sap-ewm-wave-management-wocr-configuration-architect-guide-html.svg"
-  },
-  {
-    id: "post_1794266753766",
-    title: "Top 30 SAP MM Interview Questions & Scenario-Based Answers for S/4HANA 2026",
-    slug: "top-sap-mm-interview-questions-2026-scenario-based",
-    category: "Interview prep",
-    badge: "SAP MM INTERVIEW PREP",
-    readTime: "29 min read",
-    date: "Nov 09, 2026",
-    isoDate: "2026-11-09",
-    excerpt: "Prepare for your SAP MM interview with scenario-based answers to the top 30 questions for 2026. Gain S/4HANA insights and practical troubleshooting tips to stand out.",
-    imageUrl: "https://youronementor.com/blog/covers/top-sap-mm-interview-questions-2026-scenario-based.svg"
-  },
-  {
-    id: "post_1794309209427",
-    title: "Mastering the SAP S/4HANA Order-to-Cash (O2C) Process Flow with Comprehensive FI Integration and VKOA",
-    slug: "sap-s4hana-order-to-cash-o2c-process-flow-fi-integration-guide-html",
-    category: "Tutorial",
-    badge: "SAP SD TUTORIAL",
-    readTime: "12 min read",
-    date: "Nov 10, 2026",
-    isoDate: "2026-11-10",
-    excerpt: "Dive deep into the SAP S/4HANA Order-to-Cash (O2C) process flow, covering sales order, delivery, billing, and cash, with crucial FI integration points like VKOA.",
-    imageUrl: "https://youronementor.com/blog/covers/sap-s4hana-order-to-cash-o2c-process-flow-fi-integration-guide-html.svg"
-  },
-  {
-    id: "post_1794343680470",
-    title: "Mastering the SAP MM Subcontracting Process in S/4HANA: Advanced Special Stock 'O' Management",
-    slug: "sap-mm-subcontracting-advanced-management-s4hana-stock-o",
-    category: "Tutorial",
-    badge: "SAP MM TUTORIAL",
-    readTime: "11 min read",
-    date: "Nov 10, 2026",
-    isoDate: "2026-11-10",
-    excerpt: "Learn to master the SAP MM subcontracting process in S/4HANA, focusing on special stock 'O' management, advanced financial postings, and troubleshooting common issues.",
-    imageUrl: "https://youronementor.com/blog/covers/sap-mm-subcontracting-advanced-management-s4hana-stock-o.svg"
-  },
-  {
     id: "post_1794394761846",
     title: "SAP EWM Yard Management: Transportation Unit, Dock Door, and Check-In Guide",
     slug: "sap-ewm-yard-management-tu-dock-door-check-in-guide",

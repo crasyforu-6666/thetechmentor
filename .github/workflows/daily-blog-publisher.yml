@@ -1,21 +1,18 @@
-name: Three-Times-Daily SAP Blog Publisher
+name: SAP Blog Publisher (3 articles/day)
 
 on:
   schedule:
-    # Off-peak minutes: GitHub delays or drops jobs scheduled at :00 / :30.
-    # 8:47 AM IST  = 03:17 UTC -> new article
-    - cron: '17 3 * * *'
-    # 2:13 PM IST  = 08:43 UTC -> rewrite one old thin article (or new if none left)
-    - cron: '43 8 * * *'
-    # 7:37 PM IST  = 14:07 UTC -> new article
-    - cron: '7 14 * * *'
+    # Hourly check (off-peak minute). GitHub delays/skips cron runs, so each run
+    # publishes only what today's plan still owes (scripts/publish_due.py):
+    # 1 new article by 8:45 AM IST, 1 rewrite by 2:10 PM, 2nd new by 7:35 PM.
+    - cron: '23 * * * *'
   workflow_dispatch:
     inputs:
       mode:
-        description: "new = publish a new article, refresh = rewrite the thinnest old one"
+        description: "auto = whatever is due now, new = publish a new article, refresh = rewrite an old thin one"
         type: choice
-        options: [new, refresh]
-        default: new
+        options: [auto, new, refresh]
+        default: auto
 
 permissions:
   contents: write
@@ -50,20 +47,14 @@ jobs:
           pip install "anthropic>=2.6,<3" "google-genai>=3,<4" "cairosvg>=2.7"
           if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ]; then npm install -g @anthropic-ai/claude-code; fi
 
-      - name: Choose mode
-        id: mode
+      - name: Write and publish what is due
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event.schedule }}" = "43 8 * * *" ]; then
-            echo "mode=refresh" >> "$GITHUB_OUTPUT"
+          MODE="${{ github.event.inputs.mode }}"
+          if [ -z "$MODE" ] || [ "$MODE" = "auto" ]; then
+            python3 scripts/publish_due.py
           else
-            echo "mode=new" >> "$GITHUB_OUTPUT"
+            python3 scripts/auto_daily_blog_scheduler.py --mode "$MODE"
           fi
-
-      - name: Write and publish article
-        run: |
-          python3 scripts/auto_daily_blog_scheduler.py --mode "${{ steps.mode.outputs.mode }}"
           python3 scripts/build_sitemap.py
 
       # Vercel is connected to this repo and deploys every push to main,
@@ -72,9 +63,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add blog index.html logs sitemap.xml robots.txt content docs/SCREENSHOTS-TODO.md 2>/dev/null || git add blog index.html logs sitemap.xml robots.txt content
+          git add -A blog index.html logs sitemap.xml robots.txt content docs vercel.json
           if git diff --cached --quiet; then echo "Nothing to commit"; exit 0; fi
-          git commit -m "feat(blog): automated article (${{ steps.mode.outputs.mode }})"
+          git commit -m "feat(blog): automated article"
           for i in 1 2 3 4; do
             git pull --rebase origin main && git push origin HEAD:main && exit 0
             sleep $((i * 5))

@@ -1,0 +1,93 @@
+[
+ {
+  "topic": "Embedded EWM vs Decentralized EWM on S/4HANA: A Practical Decision Matrix",
+  "module": "",
+  "slug": "s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix",
+  "title": "Embedded EWM vs Decentralized EWM on S/4HANA: A Practical Decision Matrix",
+  "date": "2026-11-11"
+ },
+ {
+  "topic": "SAP EWM Slotting and Rearrangement: Master Warehouse Optimization",
+  "module": "",
+  "slug": "sap-ewm-slotting-rearrangement-optimization",
+  "title": "SAP EWM Slotting and Rearrangement: Master Warehouse Optimization",
+  "date": "2026-11-11"
+ },
+ {
+  "topic": "SAP EWM Wave Management & WOCR Configuration: A Deep Dive for Architects",
+  "module": "",
+  "slug": "sap-ewm-wave-management-wocr-configuration",
+  "title": "SAP EWM Wave Management & WOCR Configuration: A Deep Dive for Architects",
+  "date": "2026-11-11"
+ },
+ {
+  "topic": "SAP EWM Yard Management: Transportation Unit, Dock Door, and Check-In Guide",
+  "module": "",
+  "slug": "sap-ewm-yard-management-tu-dock-door-check-in-guide",
+  "title": "SAP EWM Yard Management: Transportation Unit, Dock Door, and Check-In Guide",
+  "date": "2026-11-11"
+ },
+ {
+  "topic": "SAP MM Automatic Purchase Order Creation (ME59N) from Purchase Requisition: A Practical Guide",
+  "module": "",
+  "slug": "sap-mm-automatic-po-creation-me59n-pr-automation",
+  "title": "SAP MM Automatic Purchase Order Creation (ME59N) from Purchase Requisition: A Practical Guide",
+  "date": "2026-11-11"
+ },
+ {
+  "topic": "SAP MM Batch Management and Batch Determination in S/4HANA: A Masterclass",
+  "module": "",
+  "slug": "sap-mm-batch-management-s4hana-configuration",
+  "title": "SAP MM Batch Management and Batch Determination in S/4HANA: A Masterclass",
+  "date": "2026-11-11"
+ },
+ {
+  "topic": "SAP MM Consignment Procurement: Info Records, 411 K Movements & MRKO Settlement Masterclass",
+  "module": "",
+  "slug": "sap-mm-consignment-procurement-mrko-settlement-411k",
+  "title": "SAP MM Consignment Procurement: Info Records, 411 K Movements & MRKO Settlement Masterclass",
+  "date": "2026-11-11"
+ },
+ {
+  "topic": "SAP MM Pricing Procedure (Calculation Schema) Configuration Guide for S/4HANA",
+  "module": "",
+  "slug": "sap-mm-pricing-procedure-schema-s4hana-guide",
+  "title": "SAP MM Pricing Procedure (Calculation Schema) Configuration Guide for S/4HANA",
+  "date": "2026-11-11"
+ },
+ {
+  "topic": "Mastering the SAP MM Subcontracting Process in S/4HANA: Special Stock 'O' Lifecycle",
+  "module": "",
+  "slug": "sap-mm-subcontracting-process-s4hana-special-stock-o",
+  "title": "Mastering the SAP MM Subcontracting Process in S/4HANA: Special Stock 'O' Lifecycle",
+  "date": "2026-11-11"
+ },
+ {
+  "topic": "SAP S/4HANA 2025 Release: What Has Changed for MM & EWM Consultants",
+  "module": "",
+  "slug": "sap-s4hana-2025-release-mm-ewm-changes",
+  "title": "SAP S/4HANA 2025 Release: What Has Changed for MM & EWM Consultants",
+  "date": "2026-11-11"
+ },
+ {
+  "topic": "SAP S/4HANA Order-to-Cash (O2C) Process Flow: Deep Dive into FI Integration & VKOA",
+  "module": "",
+  "slug": "sap-s4hana-o2c-process-fi-vkoa",
+  "title": "SAP S/4HANA Order-to-Cash (O2C) Process Flow: Deep Dive into FI Integration & VKOA",
+  "date": "2026-11-11"
+ },
+ {
+  "topic": "Top 25 SAP EWM Interview Questions & Answers for 2026 (With Model Answers)",
+  "module": "",
+  "slug": "top-25-sap-ewm-interview-questions-2026",
+  "title": "Top 25 SAP EWM Interview Questions & Answers for 2026 (With Model Answers)",
+  "date": "2026-11-11"
+ },
+ {
+  "topic": "Top 30 SAP MM Interview Questions & Scenario-Based Answers for S/4HANA 2026",
+  "module": "",
+  "slug": "top-30-sap-mm-interview-questions-2026",
+  "title": "Top 30 SAP MM Interview Questions & Scenario-Based Answers for S/4HANA 2026",
+  "date": "2026-11-11"
+ }
+]

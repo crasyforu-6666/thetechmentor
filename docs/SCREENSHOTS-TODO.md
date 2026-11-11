@@ -115,3 +115,11 @@ Folder: `images/blog/sap-ewm-yard-management-tu-dock-door-check-in-guide/`
 - [ ] 03: /SCWM/MON - Yard Monitor displaying TU status, location, and dock door availability.
 - [ ] 04: SPRO: Define Yard Bins configuration screen.
 - [ ] 05: SPRO: Define Means of Transport configuration screen.
+
+## Top 30 SAP MM Interview Questions & Scenario-Based Answers for S/4HANA 2026
+Folder: `images/blog/top-30-sap-mm-interview-questions-2026/`
+- [ ] 01: SPRO: Assign Plant to Company Code (Enterprise Structure -> Assignment -> Logistics - General -> Assign Plant to Company Code)
+- [ ] 02: Transaction BP: Business Partner creation screen, showing General Data and Supplier role
+- [ ] 03: Transaction OMR6: Tolerance Keys for Price Variances configuration
+- [ ] 04: Transaction OMJJ: Movement Type configuration details for a specific movement type
+- [ ] 05: SPRO: Flexible Workflow configuration for Purchase Orders (Materials Management -> Purchasing -> Purchase Order -> Release Procedure for Purchase Orders -> Define Flexible Workflow for Purchase Orders)

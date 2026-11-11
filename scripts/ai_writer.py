@@ -165,7 +165,9 @@ def word_count(article: dict) -> int:
 
 
 def slugify(s: str) -> str:
-    s = re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+    s = re.sub(r"\.?html?$", "", (s or "").strip().lower())
+    s = re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+    s = re.sub(r"-html?$", "", s)
     return re.sub(r"-{2,}", "-", s)[:80].strip("-")
 
 
@@ -467,12 +469,25 @@ def write_article(topic: dict, mode: str = "new", fixed_slug: str = None, old_te
         prompt = user
         if last_problems:
             prompt += "\n\nYour previous draft failed these checks. Fix all of them:\n- " + "\n- ".join(last_problems)
-        if backend == "gemini":
-            article = _request_gemini(system, prompt)
-        elif backend == "claude-code":
-            article = _request_claude_code(system, prompt)
-        else:
-            article = _request_article(client, system, prompt)
+        article = None
+        for b in [backend] + [x for x in available_backends() if x != backend]:
+            try:
+                if b == "gemini":
+                    article = _request_gemini(system, prompt)
+                elif b == "claude-code":
+                    article = _request_claude_code(system, prompt)
+                else:
+                    if client is None:
+                        import anthropic
+                        client = anthropic.Anthropic()
+                    article = _request_article(client, system, prompt)
+                if b != backend:
+                    print(f"[ai_writer] fell back to: {b}")
+                break
+            except Exception as exc:  # rate limit, quota, outage: try the next writer
+                print(f"[ai_writer] {b} failed: {str(exc)[:300]}")
+        if article is None:
+            raise RuntimeError("All writer backends failed")
         article["slug"] = fixed_slug or slugify(article.get("slug") or article["h1"])
         article["intro_html"] = sanitize(article["intro_html"])
         for s in article["sections"]:

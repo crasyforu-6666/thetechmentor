@@ -12,7 +12,7 @@
   <circle cx="1060" cy="90" r="210" fill="#ffffff" opacity=".08"/>
   <circle cx="1130" cy="560" r="150" fill="#000000" opacity=".10"/>
   <rect x="70" y="60" width="118" height="46" rx="23" fill="#ffffff" opacity=".18"/><text x="129" y="91" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="2">SAP MM</text>
-  <text x="70" y="234" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="56" font-weight="800" fill="#ffffff">Top 30 SAP MM</text><text x="70" y="302" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="56" font-weight="800" fill="#ffffff">Interview Questions &amp;</text><text x="70" y="370" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="56" font-weight="800" fill="#ffffff">Answers (2026 Edition)</text>
+  <text x="70" y="234" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="56" font-weight="800" fill="#ffffff">Top SAP MM Interview</text><text x="70" y="302" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="56" font-weight="800" fill="#ffffff">Questions &amp;</text><text x="70" y="370" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-size="56" font-weight="800" fill="#ffffff">Scenario-Based Answers…</text>
   <g transform="translate(905 200)"><rect x="40" y="30" width="150" height="190" rx="14" fill="none" stroke="#fff" stroke-width="8" opacity=".9"/>
       <line x1="70" y1="80" x2="160" y2="80" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
       <line x1="70" y1="115" x2="160" y2="115" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".7"/>
