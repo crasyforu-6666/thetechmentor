@@ -24,74 +24,413 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
-  <link rel="stylesheet" href="site.css?v=1" />
+  <link rel="stylesheet" href="site.css?v=2" />
 
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "theTechMentor",
+      "url": "https://youronementor.com/",
+      "email": "info@youronementor.com",
+      "telephone": "+91-7848942021",
+      "sameAs": [
+        "https://www.linkedin.com/in/anshuman-behuria-946860130",
+        "https://www.youtube.com/playlist?list=PL71i23QiQd9VSrHTuXQyiOlLsi8NnGbSp",
+        "https://smarteduverse.graphy.com/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "name": "Anshuman Behuria",
+      "jobTitle": "Lead SAP MM & EWM Mentor",
+      "image": "https://youronementor.com/images/anshuman-behuria.jpg",
+      "url": "https://www.linkedin.com/in/anshuman-behuria-946860130",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "theTechMentor"
+      }
+    },
+    {
+      "@type": "Course",
+      "name": "SAP MM (Materials Management)",
+      "description": "SAP MM (Materials Management) on SAP S/4HANA: Procure-to-Pay (P2P), MIGO, MIRO, OBYC, split valuation, FI/SD integration.",
+      "provider": {
         "@type": "Organization",
         "name": "theTechMentor",
-        "url": "https://youronementor.com/",
-        "email": "info@youronementor.com",
-        "telephone": "+91-7848942021",
-        "sameAs": [
-          "https://www.linkedin.com/in/anshuman-behuria-946860130",
-          "https://www.youtube.com/playlist?list=PL71i23QiQd9VSrHTuXQyiOlLsi8NnGbSp",
-          "https://smarteduverse.graphy.com/"
-        ]
+        "sameAs": "https://youronementor.com/"
       },
-      {
-        "@type": "Person",
-        "name": "Anshuman Behuria",
-        "jobTitle": "Lead SAP MM & EWM Mentor",
-        "image": "https://youronementor.com/images/anshuman-behuria.jpg",
-        "url": "https://www.linkedin.com/in/anshuman-behuria-946860130",
-        "worksFor": { "@type": "Organization", "name": "theTechMentor" }
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "5000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "30000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT35H"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP SD (Sales & Distribution)",
+      "description": "SAP SD (Sales & Distribution) on SAP S/4HANA: Order-to-Cash (O2C), pricing procedure, condition technique, billing, VKOA, credit management.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
       },
-      {
-        "@type": "Course",
-        "name": "SAP Materials Management (MM) — Live",
-        "description": "Instructor-led SAP MM on S/4HANA: procure-to-pay, inventory, integration.",
-        "provider": { "@type": "Organization", "name": "theTechMentor" },
-        "instructor": { "@type": "Person", "name": "Anshuman Behuria" },
-        "offers": { "@type": "Offer", "price": "24999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
-        "courseMode": "Blended",
-        "educationalLevel": "Professional"
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "5000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "30000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT35H"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP FICO (Finance & Controlling)",
+      "description": "SAP FICO (Finance & Controlling) on SAP S/4HANA: Universal Journal (ACDOCA), General Ledger, AP/AR, Asset Accounting, cost center & profit center accounting.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
       },
-      {
-        "@type": "Course",
-        "name": "SAP Extended Warehouse Management (EWM) — Live",
-        "description": "Live SAP EWM training: warehousing, RF, waves, embedded EWM on S/4HANA.",
-        "provider": { "@type": "Organization", "name": "theTechMentor" },
-        "instructor": { "@type": "Person", "name": "Anshuman Behuria" },
-        "offers": { "@type": "Offer", "price": "29999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
-        "courseMode": "Blended",
-        "educationalLevel": "Professional"
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "5000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "35000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT40H"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP ABAP (Advanced Business Application Programming)",
+      "description": "SAP ABAP (Advanced Business Application Programming) on SAP S/4HANA: ABAP on HANA, CDS views, AMDP, OData services, enhancements, reports & SmartForms.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
       },
-      {
-        "@type": "Course",
-        "name": "SAP MM & EWM Self-Paced Bundle",
-        "description": "On-demand SAP MM and EWM video library with workbooks and lifetime access.",
-        "provider": { "@type": "Organization", "name": "theTechMentor" },
-        "instructor": { "@type": "Person", "name": "Anshuman Behuria" },
-        "offers": { "@type": "Offer", "price": "10999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
-        "courseMode": "Online",
-        "educationalLevel": "Professional"
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "5000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "30000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT40H"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP BASIS (System Administration)",
+      "description": "SAP BASIS (System Administration) on SAP S/4HANA: S/4HANA architecture, HANA DB administration, user & role security, transport management (STMS), kernel upgrades.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
       },
-      {
-        "@type": "Course",
-        "name": "SAP MM Career Transition Program",
-        "description": "Comprehensive self-paced SAP MM career transition track including standard classes, real-time interview preparation, and 2 months SAP S/4HANA server access.",
-        "provider": { "@type": "Organization", "name": "theTechMentor" },
-        "instructor": { "@type": "Person", "name": "Anshuman Behuria" },
-        "offers": { "@type": "Offer", "price": "8999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
-        "courseMode": "Online",
-        "educationalLevel": "Professional"
-      }
-    ]
-  }
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "5000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "35000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT35H"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP EWM (Extended Warehouse Management)",
+      "description": "SAP EWM (Extended Warehouse Management) on SAP S/4HANA: Inbound/outbound processing, wave management, RF framework, slotting, POSC/LOSC, yard management.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "7000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "35000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT40H"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP TM (Transportation Management)",
+      "description": "SAP TM (Transportation Management) on SAP S/4HANA: Freight order management, carrier selection, charge calculation, shipper/LSP scenarios, S/4HANA embedded TM.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "7000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "35000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT40H"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP Logistics (End-to-End Supply Chain)",
+      "description": "SAP Logistics (End-to-End Supply Chain) on SAP S/4HANA: Integrated MM + SD + EWM + TM workflows across procurement, order fulfilment and warehouse execution.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "7000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "35000",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT45H"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
   <script src="site-config.js"></script>
   <script src="tracking.js"></script>
@@ -135,18 +474,19 @@
         <div class="hero-copy">
           <p class="eyebrow">SAP S/4HANA Academy · Online</p>
           <h1>Learn SAP from practitioners.<br /><span class="hl">Get job-ready</span> in 90 days.</h1>
-          <p class="lead">Live weekend batches and self-paced courses in SAP MM, EWM and S/4HANA logistics — with real practice servers, project scenarios, interview preparation and placement support.</p>
+          <p class="lead">Recorded and live mentored courses in SAP MM, SD, FICO, ABAP, BASIS, EWM, TM and end-to-end Logistics on S/4HANA — with practice servers, project scenarios, interview preparation and placement support.</p>
           <form class="hero-search" role="search" onsubmit="return false;">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <input type="search" id="hero-search" placeholder="Search SAP MM, EWM, MIGO, wave management…" aria-label="Search courses" />
+            <input type="search" id="hero-search" placeholder="Search SAP MM, FICO, ABAP, EWM, MIGO, CDS views…" aria-label="Search courses" />
             <button type="button" class="btn btn-primary" id="hero-search-btn">Search</button>
           </form>
           <div class="popular">
             <span>Popular:</span>
-            <button type="button" data-q="mm">SAP MM</button>
+            <button type="button" data-q="sap mm">SAP MM</button>
+            <button type="button" data-q="fico">SAP FICO</button>
+            <button type="button" data-q="abap">SAP ABAP</button>
             <button type="button" data-q="ewm">SAP EWM</button>
-            <button type="button" data-q="self">Self-paced</button>
-            <button type="button" data-q="career">Career program</button>
+            <button type="button" data-jump="live">Live batches</button>
           </div>
           <ul class="hero-proof">
             <li><strong>1,000+</strong> learners trained</li>
@@ -156,7 +496,7 @@
         </div>
         <div class="hero-visual" aria-hidden="true">
           <div class="hv-card hv-main">
-            <img src="images/courses/sap-mm-live.svg" alt="" />
+            <img src="images/courses/mm.svg" alt="" />
             <div class="hv-body">
               <span class="tag tag-live">Live batch</span>
               <strong>SAP MM — Live Weekend Batch</strong>
@@ -188,137 +528,281 @@
         <div class="sec-head">
           <div>
             <p class="eyebrow">Course catalog</p>
-            <h2>Explore SAP courses</h2>
-            <p class="sub">Choose a live batch for guided learning, or a self-paced course to learn on your own schedule.</p>
+            <h2>Explore SAP S/4HANA courses</h2>
+            <p class="sub">8 SAP modules, each available as recorded self-paced classes or live mentored weekend batches.</p>
           </div>
-          <div class="filters" role="tablist" aria-label="Filter courses">
-            <button type="button" class="chip active" data-filter="all">All courses</button>
-            <button type="button" class="chip" data-filter="live">Live batches</button>
-            <button type="button" class="chip" data-filter="self">Self-paced</button>
-            <button type="button" class="chip" data-filter="career">Career programs</button>
+        </div>
+        <div class="filters" role="toolbar" aria-label="Filter courses">
+          <button type="button" class="chip active" data-filter="all">All</button>
+          <button type="button" class="chip" data-filter="recorded">Recorded Sessions</button>
+          <button type="button" class="chip" data-filter="live">Live Mentored</button>
+          <button type="button" class="chip" data-filter="functional">Functional</button>
+          <button type="button" class="chip" data-filter="technical">Technical</button>
+          <button type="button" class="chip" data-filter="supply">Supply Chain</button>
+        </div>
+
+        <div class="cat-section" id="recorded">
+          <div class="cat-head">
+            <div>
+              <h3>Recorded Sessions — Self-Paced Mastery</h3>
+              <p class="sub">Learn on your own schedule with HD recorded classes, configuration workbooks, and lifetime access.</p>
+            </div>
+            <p class="cat-price">₹5,000 core modules · ₹7,000 EWM, TM &amp; Logistics</p>
+          </div>
+          <div class="catalog">
+          <article class="course" data-format="recorded" data-cats="functional supply" data-tags="materials management procurement purchasing p2p migo miro obyc split valuation inventory sap mm recorded">
+            <div class="course-thumb"><img src="images/courses/mm.svg" alt="SAP MM (Materials Management)" loading="lazy" width="1200" height="630" /><span class="tag tag-self">Recorded</span></div>
+            <div class="course-body">
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Recorded Session</p>
+              <h3>SAP MM (Materials Management)</h3>
+              <p class="skills"><b>Skills:</b> Procure-to-Pay (P2P), MIGO, MIRO, OBYC, split valuation, FI/SD integration</p>
+              <ul class="meta"><li>35+ hours HD video</li><li>Lifetime access</li><li>Certificate</li></ul>
+              <p class="feat">Configuration workbook · T-code cheat sheets · 7-day money-back guarantee</p>
+              <div class="price"><strong>₹5,000</strong><span class="emi">one-time</span></div>
+              <div class="actions">
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP MM" data-format="Recorded Session" data-price="5000" data-program="SAP MM — Recorded Session (₹5,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP MM" data-format="Recorded Session" data-price="5000" data-program="SAP MM — Recorded Session (₹5,000)">Ask an advisor</button>
+              </div>
+            </div>
+          </article>
+          <article class="course" data-format="recorded" data-cats="functional supply" data-tags="sales distribution o2c order to cash pricing condition technique billing vkoa credit sap sd recorded">
+            <div class="course-thumb"><img src="images/courses/sd.svg" alt="SAP SD (Sales &amp; Distribution)" loading="lazy" width="1200" height="630" /><span class="tag tag-self">Recorded</span></div>
+            <div class="course-body">
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Recorded Session</p>
+              <h3>SAP SD (Sales &amp; Distribution)</h3>
+              <p class="skills"><b>Skills:</b> Order-to-Cash (O2C), pricing procedure, condition technique, billing, VKOA, credit management</p>
+              <ul class="meta"><li>35+ hours HD video</li><li>Lifetime access</li><li>Certificate</li></ul>
+              <p class="feat">Configuration workbook · T-code cheat sheets · 7-day money-back guarantee</p>
+              <div class="price"><strong>₹5,000</strong><span class="emi">one-time</span></div>
+              <div class="actions">
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP SD" data-format="Recorded Session" data-price="5000" data-program="SAP SD — Recorded Session (₹5,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP SD" data-format="Recorded Session" data-price="5000" data-program="SAP SD — Recorded Session (₹5,000)">Ask an advisor</button>
+              </div>
+            </div>
+          </article>
+          <article class="course" data-format="recorded" data-cats="functional" data-tags="finance controlling fi co acdoca universal journal general ledger gl ap ar asset accounting cost center profit center sap fico recorded">
+            <div class="course-thumb"><img src="images/courses/fico.svg" alt="SAP FICO (Finance &amp; Controlling)" loading="lazy" width="1200" height="630" /><span class="tag tag-self">Recorded</span></div>
+            <div class="course-body">
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Recorded Session</p>
+              <h3>SAP FICO (Finance &amp; Controlling)</h3>
+              <p class="skills"><b>Skills:</b> Universal Journal (ACDOCA), General Ledger, AP/AR, Asset Accounting, cost center &amp; profit center accounting</p>
+              <ul class="meta"><li>40+ hours HD video</li><li>Lifetime access</li><li>Certificate</li></ul>
+              <p class="feat">Configuration workbook · T-code cheat sheets · 7-day money-back guarantee</p>
+              <div class="price"><strong>₹5,000</strong><span class="emi">one-time</span></div>
+              <div class="actions">
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP FICO" data-format="Recorded Session" data-price="5000" data-program="SAP FICO — Recorded Session (₹5,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP FICO" data-format="Recorded Session" data-price="5000" data-program="SAP FICO — Recorded Session (₹5,000)">Ask an advisor</button>
+              </div>
+            </div>
+          </article>
+          <article class="course" data-format="recorded" data-cats="technical" data-tags="abap developer programming hana cds amdp odata fiori enhancements badi reports smartforms technical sap abap recorded">
+            <div class="course-thumb"><img src="images/courses/abap.svg" alt="SAP ABAP (Advanced Business Application Programming)" loading="lazy" width="1200" height="630" /><span class="tag tag-self">Recorded</span></div>
+            <div class="course-body">
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Recorded Session</p>
+              <h3>SAP ABAP (Advanced Business Application Programming)</h3>
+              <p class="skills"><b>Skills:</b> ABAP on HANA, CDS views, AMDP, OData services, enhancements, reports &amp; SmartForms</p>
+              <ul class="meta"><li>40+ hours HD video</li><li>Lifetime access</li><li>Certificate</li></ul>
+              <p class="feat">Configuration workbook · T-code cheat sheets · 7-day money-back guarantee</p>
+              <div class="price"><strong>₹5,000</strong><span class="emi">one-time</span></div>
+              <div class="actions">
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP ABAP" data-format="Recorded Session" data-price="5000" data-program="SAP ABAP — Recorded Session (₹5,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP ABAP" data-format="Recorded Session" data-price="5000" data-program="SAP ABAP — Recorded Session (₹5,000)">Ask an advisor</button>
+              </div>
+            </div>
+          </article>
+          <article class="course" data-format="recorded" data-cats="technical" data-tags="basis administration admin hana database security roles stms transport kernel upgrade technical sap basis recorded">
+            <div class="course-thumb"><img src="images/courses/basis.svg" alt="SAP BASIS (System Administration)" loading="lazy" width="1200" height="630" /><span class="tag tag-self">Recorded</span></div>
+            <div class="course-body">
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Recorded Session</p>
+              <h3>SAP BASIS (System Administration)</h3>
+              <p class="skills"><b>Skills:</b> S/4HANA architecture, HANA DB administration, user &amp; role security, transport management (STMS), kernel upgrades</p>
+              <ul class="meta"><li>35+ hours HD video</li><li>Lifetime access</li><li>Certificate</li></ul>
+              <p class="feat">Configuration workbook · T-code cheat sheets · 7-day money-back guarantee</p>
+              <div class="price"><strong>₹5,000</strong><span class="emi">one-time</span></div>
+              <div class="actions">
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP BASIS" data-format="Recorded Session" data-price="5000" data-program="SAP BASIS — Recorded Session (₹5,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP BASIS" data-format="Recorded Session" data-price="5000" data-program="SAP BASIS — Recorded Session (₹5,000)">Ask an advisor</button>
+              </div>
+            </div>
+          </article>
+          <article class="course" data-format="recorded" data-cats="functional supply" data-tags="extended warehouse management ewm inbound outbound wave rf slotting posc losc yard sap ewm recorded">
+            <div class="course-thumb"><img src="images/courses/ewm.svg" alt="SAP EWM (Extended Warehouse Management)" loading="lazy" width="1200" height="630" /><span class="tag tag-self">Recorded</span><span class="tag tag-hot">Specialized</span></div>
+            <div class="course-body">
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Recorded Session</p>
+              <h3>SAP EWM (Extended Warehouse Management)</h3>
+              <p class="skills"><b>Skills:</b> Inbound/outbound processing, wave management, RF framework, slotting, POSC/LOSC, yard management</p>
+              <ul class="meta"><li>40+ hours HD video</li><li>Lifetime access</li><li>Certificate</li></ul>
+              <p class="feat">Configuration workbook · T-code cheat sheets · 7-day money-back guarantee</p>
+              <div class="price"><strong>₹7,000</strong><span class="emi">one-time</span></div>
+              <div class="actions">
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP EWM" data-format="Recorded Session" data-price="7000" data-program="SAP EWM — Recorded Session (₹7,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP EWM" data-format="Recorded Session" data-price="7000" data-program="SAP EWM — Recorded Session (₹7,000)">Ask an advisor</button>
+              </div>
+            </div>
+          </article>
+          <article class="course" data-format="recorded" data-cats="functional supply" data-tags="transportation management tm freight order carrier selection charge calculation shipper lsp logistics sap tm recorded">
+            <div class="course-thumb"><img src="images/courses/tm.svg" alt="SAP TM (Transportation Management)" loading="lazy" width="1200" height="630" /><span class="tag tag-self">Recorded</span><span class="tag tag-hot">Specialized</span></div>
+            <div class="course-body">
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Recorded Session</p>
+              <h3>SAP TM (Transportation Management)</h3>
+              <p class="skills"><b>Skills:</b> Freight order management, carrier selection, charge calculation, shipper/LSP scenarios, S/4HANA embedded TM</p>
+              <ul class="meta"><li>40+ hours HD video</li><li>Lifetime access</li><li>Certificate</li></ul>
+              <p class="feat">Configuration workbook · T-code cheat sheets · 7-day money-back guarantee</p>
+              <div class="price"><strong>₹7,000</strong><span class="emi">one-time</span></div>
+              <div class="actions">
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP TM" data-format="Recorded Session" data-price="7000" data-program="SAP TM — Recorded Session (₹7,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP TM" data-format="Recorded Session" data-price="7000" data-program="SAP TM — Recorded Session (₹7,000)">Ask an advisor</button>
+              </div>
+            </div>
+          </article>
+          <article class="course" data-format="recorded" data-cats="supply functional" data-tags="logistics supply chain end to end mm sd ewm tm integrated procurement fulfilment warehouse sap logistics recorded">
+            <div class="course-thumb"><img src="images/courses/logistics.svg" alt="SAP Logistics (End-to-End Supply Chain)" loading="lazy" width="1200" height="630" /><span class="tag tag-self">Recorded</span><span class="tag tag-hot">Complete Suite</span></div>
+            <div class="course-body">
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Recorded Session</p>
+              <h3>SAP Logistics (End-to-End Supply Chain)</h3>
+              <p class="skills"><b>Skills:</b> Integrated MM + SD + EWM + TM workflows across procurement, order fulfilment and warehouse execution</p>
+              <ul class="meta"><li>45+ hours HD video</li><li>Lifetime access</li><li>Certificate</li></ul>
+              <p class="feat">Configuration workbook · T-code cheat sheets · 7-day money-back guarantee</p>
+              <div class="price"><strong>₹7,000</strong><span class="emi">one-time</span></div>
+              <div class="actions">
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP Logistics" data-format="Recorded Session" data-price="7000" data-program="SAP Logistics — Recorded Session (₹7,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP Logistics" data-format="Recorded Session" data-price="7000" data-program="SAP Logistics — Recorded Session (₹7,000)">Ask an advisor</button>
+              </div>
+            </div>
+          </article>
           </div>
         </div>
 
-        <div class="catalog" id="catalog">
-          <article class="course" data-type="live" data-tags="sap mm materials management procurement p2p migo miro live">
-            <div class="course-thumb"><img src="images/courses/sap-mm-live.svg" alt="SAP MM live batch" loading="lazy" /><span class="tag tag-live">Live</span></div>
+        <div class="cat-section" id="live">
+          <div class="cat-head">
+            <div>
+              <h3>Live Mentored Sessions — Weekend Batches</h3>
+              <p class="sub">Instructor-led live weekend classes (Sat–Sun) with 24/7 S/4HANA practice server access, real-time project scenarios, and mock interviews.</p>
+            </div>
+            <p class="cat-price">₹30,000 MM, SD, ABAP · ₹35,000 FICO, BASIS, EWM, TM &amp; Logistics</p>
+          </div>
+          <div class="catalog">
+          <article class="course" data-format="live" data-cats="functional supply" data-tags="materials management procurement purchasing p2p migo miro obyc split valuation inventory sap mm live">
+            <div class="course-thumb"><img src="images/courses/mm.svg" alt="SAP MM (Materials Management)" loading="lazy" width="1200" height="630" /><span class="tag tag-live">Live · Weekend</span></div>
             <div class="course-body">
-              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor</p>
-              <h3>SAP MM (Materials Management) — Live Weekend Batch</h3>
-              <p class="skills"><b>Skills:</b> Procure-to-pay, MIGO, MIRO, OBYC, split valuation, FI/SD integration</p>
-              <ul class="meta"><li>6 weeks</li><li>Beginner → Consultant</li><li>S/4HANA server</li></ul>
-              <div class="price"><strong>₹24,999</strong><span class="emi">EMI available</span></div>
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Live Mentored Session</p>
+              <h3>SAP MM (Materials Management)</h3>
+              <p class="skills"><b>Skills:</b> Procure-to-Pay (P2P), MIGO, MIRO, OBYC, split valuation, FI/SD integration</p>
+              <ul class="meta"><li>Sat–Sun live</li><li>6-month S/4HANA server</li><li>EMI available</li></ul>
+              <p class="feat">24-hr recordings · Capstone project · Resume &amp; LinkedIn review · Mock interviews</p>
+              <div class="price"><strong>₹30,000</strong><span class="emi">EMI available</span></div>
               <div class="actions">
-                <button type="button" class="btn btn-primary razorpay-link" data-amount="24999" data-program="SAP MM Live Batch">Enroll now</button>
-                <button type="button" class="btn btn-ghost open-screening-modal" data-program="SAP MM Live Batch">Ask an advisor</button>
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP MM" data-format="Live Mentored Session" data-price="30000" data-program="SAP MM — Live Mentored Session (₹30,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP MM" data-format="Live Mentored Session" data-price="30000" data-program="SAP MM — Live Mentored Session (₹30,000)">Ask an advisor</button>
               </div>
             </div>
           </article>
-
-          <article class="course" data-type="live" data-tags="sap ewm extended warehouse management wave rf yard live">
-            <div class="course-thumb"><img src="images/courses/sap-ewm-live.svg" alt="SAP EWM live batch" loading="lazy" /><span class="tag tag-live">Live</span><span class="tag tag-hot">Most popular</span></div>
+          <article class="course" data-format="live" data-cats="functional supply" data-tags="sales distribution o2c order to cash pricing condition technique billing vkoa credit sap sd live">
+            <div class="course-thumb"><img src="images/courses/sd.svg" alt="SAP SD (Sales &amp; Distribution)" loading="lazy" width="1200" height="630" /><span class="tag tag-live">Live · Weekend</span></div>
             <div class="course-body">
-              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor</p>
-              <h3>SAP EWM (Extended Warehouse Management) — Live Weekend Batch</h3>
-              <p class="skills"><b>Skills:</b> Inbound/outbound, waves, RF framework, slotting, yard management</p>
-              <ul class="meta"><li>8 weeks</li><li>Intermediate</li><li>S/4HANA server</li></ul>
-              <div class="price"><strong>₹29,999</strong><span class="emi">EMI available</span></div>
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Live Mentored Session</p>
+              <h3>SAP SD (Sales &amp; Distribution)</h3>
+              <p class="skills"><b>Skills:</b> Order-to-Cash (O2C), pricing procedure, condition technique, billing, VKOA, credit management</p>
+              <ul class="meta"><li>Sat–Sun live</li><li>6-month S/4HANA server</li><li>EMI available</li></ul>
+              <p class="feat">24-hr recordings · Capstone project · Resume &amp; LinkedIn review · Mock interviews</p>
+              <div class="price"><strong>₹30,000</strong><span class="emi">EMI available</span></div>
               <div class="actions">
-                <button type="button" class="btn btn-primary razorpay-link" data-amount="29999" data-program="SAP EWM Live Batch">Enroll now</button>
-                <button type="button" class="btn btn-ghost open-screening-modal" data-program="SAP EWM Live Batch">Ask an advisor</button>
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP SD" data-format="Live Mentored Session" data-price="30000" data-program="SAP SD — Live Mentored Session (₹30,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP SD" data-format="Live Mentored Session" data-price="30000" data-program="SAP SD — Live Mentored Session (₹30,000)">Ask an advisor</button>
               </div>
             </div>
           </article>
-
-          <article class="course" data-type="live career" data-tags="mm ewm combo bundle logistics consultant live career">
-            <div class="course-thumb"><img src="images/courses/mm-ewm-combo.svg" alt="MM and EWM combo" loading="lazy" /><span class="tag tag-live">Live</span><span class="tag tag-save">Save 20%</span></div>
+          <article class="course" data-format="live" data-cats="functional" data-tags="finance controlling fi co acdoca universal journal general ledger gl ap ar asset accounting cost center profit center sap fico live">
+            <div class="course-thumb"><img src="images/courses/fico.svg" alt="SAP FICO (Finance &amp; Controlling)" loading="lazy" width="1200" height="630" /><span class="tag tag-live">Live · Weekend</span></div>
             <div class="course-body">
-              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor</p>
-              <h3>SAP Logistics Consultant — MM + EWM Live Combo</h3>
-              <p class="skills"><b>Skills:</b> End-to-end procurement and warehousing on S/4HANA</p>
-              <ul class="meta"><li>14 weeks</li><li>Beginner → Consultant</li><li>2 courses</li></ul>
-              <div class="price"><strong>₹43,999</strong><s>₹54,998</s><span class="emi">EMI available</span></div>
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Live Mentored Session</p>
+              <h3>SAP FICO (Finance &amp; Controlling)</h3>
+              <p class="skills"><b>Skills:</b> Universal Journal (ACDOCA), General Ledger, AP/AR, Asset Accounting, cost center &amp; profit center accounting</p>
+              <ul class="meta"><li>Sat–Sun live</li><li>6-month S/4HANA server</li><li>EMI available</li></ul>
+              <p class="feat">24-hr recordings · Capstone project · Resume &amp; LinkedIn review · Mock interviews</p>
+              <div class="price"><strong>₹35,000</strong><span class="emi">EMI available</span></div>
               <div class="actions">
-                <button type="button" class="btn btn-primary razorpay-link" data-amount="43999" data-program="MM + EWM Live Combo">Enroll now</button>
-                <button type="button" class="btn btn-ghost open-screening-modal" data-program="MM + EWM Live Combo">Ask an advisor</button>
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP FICO" data-format="Live Mentored Session" data-price="35000" data-program="SAP FICO — Live Mentored Session (₹35,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP FICO" data-format="Live Mentored Session" data-price="35000" data-program="SAP FICO — Live Mentored Session (₹35,000)">Ask an advisor</button>
               </div>
             </div>
           </article>
-
-          <article class="course" data-type="self" data-tags="sap mm self paced materials management video">
-            <div class="course-thumb"><img src="images/courses/sap-mm-self.svg" alt="SAP MM self-paced" loading="lazy" /><span class="tag tag-self">Self-paced</span></div>
+          <article class="course" data-format="live" data-cats="technical" data-tags="abap developer programming hana cds amdp odata fiori enhancements badi reports smartforms technical sap abap live">
+            <div class="course-thumb"><img src="images/courses/abap.svg" alt="SAP ABAP (Advanced Business Application Programming)" loading="lazy" width="1200" height="630" /><span class="tag tag-live">Live · Weekend</span></div>
             <div class="course-body">
-              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor</p>
-              <h3>SAP MM Complete Course — Self-Paced</h3>
-              <p class="skills"><b>Includes:</b> 35+ hours video, configuration workbook, T-code library, certificate</p>
-              <ul class="meta"><li>35+ hours</li><li>Beginner</li><li>Lifetime access</li></ul>
-              <div class="price"><strong>₹4,999</strong><s>₹9,999</s><span class="off">50% off</span></div>
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Live Mentored Session</p>
+              <h3>SAP ABAP (Advanced Business Application Programming)</h3>
+              <p class="skills"><b>Skills:</b> ABAP on HANA, CDS views, AMDP, OData services, enhancements, reports &amp; SmartForms</p>
+              <ul class="meta"><li>Sat–Sun live</li><li>6-month S/4HANA server</li><li>EMI available</li></ul>
+              <p class="feat">24-hr recordings · Capstone project · Resume &amp; LinkedIn review · Mock interviews</p>
+              <div class="price"><strong>₹30,000</strong><span class="emi">EMI available</span></div>
               <div class="actions">
-                <button type="button" class="btn btn-primary razorpay-link" data-amount="4999" data-program="SAP MM Self-Paced">Buy now</button>
-                <a href="#curriculum" class="btn btn-ghost">Curriculum</a>
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP ABAP" data-format="Live Mentored Session" data-price="30000" data-program="SAP ABAP — Live Mentored Session (₹30,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP ABAP" data-format="Live Mentored Session" data-price="30000" data-program="SAP ABAP — Live Mentored Session (₹30,000)">Ask an advisor</button>
               </div>
             </div>
           </article>
-
-          <article class="course" data-type="self career" data-tags="sap mm career transition program interview server">
-            <div class="course-thumb"><img src="images/courses/sap-mm-career.svg" alt="SAP MM career program" loading="lazy" /><span class="tag tag-self">Self-paced</span><span class="tag tag-hot">Career</span></div>
+          <article class="course" data-format="live" data-cats="technical" data-tags="basis administration admin hana database security roles stms transport kernel upgrade technical sap basis live">
+            <div class="course-thumb"><img src="images/courses/basis.svg" alt="SAP BASIS (System Administration)" loading="lazy" width="1200" height="630" /><span class="tag tag-live">Live · Weekend</span></div>
             <div class="course-body">
-              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor</p>
-              <h3>SAP MM Career Transition Program</h3>
-              <p class="skills"><b>Includes:</b> core classes, real-time interview class, 2 months S/4HANA server</p>
-              <ul class="meta"><li>Self-paced</li><li>Job-ready track</li><li>2-month server</li></ul>
-              <div class="price"><strong>₹8,999</strong><s>₹10,999</s></div>
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Live Mentored Session</p>
+              <h3>SAP BASIS (System Administration)</h3>
+              <p class="skills"><b>Skills:</b> S/4HANA architecture, HANA DB administration, user &amp; role security, transport management (STMS), kernel upgrades</p>
+              <ul class="meta"><li>Sat–Sun live</li><li>6-month S/4HANA server</li><li>EMI available</li></ul>
+              <p class="feat">24-hr recordings · Capstone project · Resume &amp; LinkedIn review · Mock interviews</p>
+              <div class="price"><strong>₹35,000</strong><span class="emi">EMI available</span></div>
               <div class="actions">
-                <button type="button" class="btn btn-primary razorpay-link" data-amount="8999" data-program="SAP MM Career Transition Program">Buy now</button>
-                <button type="button" class="btn btn-ghost open-screening-modal" data-program="SAP MM Career Transition Program">Ask an advisor</button>
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP BASIS" data-format="Live Mentored Session" data-price="35000" data-program="SAP BASIS — Live Mentored Session (₹35,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP BASIS" data-format="Live Mentored Session" data-price="35000" data-program="SAP BASIS — Live Mentored Session (₹35,000)">Ask an advisor</button>
               </div>
             </div>
           </article>
-
-          <article class="course" data-type="self" data-tags="mm ewm bundle self paced complete best value">
-            <div class="course-thumb"><img src="images/courses/mm-ewm-bundle.svg" alt="MM and EWM self-paced bundle" loading="lazy" /><span class="tag tag-self">Self-paced</span><span class="tag tag-save">Best value</span></div>
+          <article class="course" data-format="live" data-cats="functional supply" data-tags="extended warehouse management ewm inbound outbound wave rf slotting posc losc yard sap ewm live">
+            <div class="course-thumb"><img src="images/courses/ewm.svg" alt="SAP EWM (Extended Warehouse Management)" loading="lazy" width="1200" height="630" /><span class="tag tag-live">Live · Weekend</span></div>
             <div class="course-body">
-              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor</p>
-              <h3>MM + EWM Complete Self-Paced Bundle</h3>
-              <p class="skills"><b>Includes:</b> 70+ hours, both workbooks, capstone templates, ₹5,000 credit toward a live batch</p>
-              <ul class="meta"><li>70+ hours</li><li>All levels</li><li>Lifetime access</li></ul>
-              <div class="price"><strong>₹10,999</strong><s>₹18,999</s><span class="off">42% off</span></div>
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Live Mentored Session</p>
+              <h3>SAP EWM (Extended Warehouse Management)</h3>
+              <p class="skills"><b>Skills:</b> Inbound/outbound processing, wave management, RF framework, slotting, POSC/LOSC, yard management</p>
+              <ul class="meta"><li>Sat–Sun live</li><li>6-month S/4HANA server</li><li>EMI available</li></ul>
+              <p class="feat">24-hr recordings · Capstone project · Resume &amp; LinkedIn review · Mock interviews</p>
+              <div class="price"><strong>₹35,000</strong><span class="emi">EMI available</span></div>
               <div class="actions">
-                <button type="button" class="btn btn-primary razorpay-link" data-amount="10999" data-program="MM + EWM Self-Paced Bundle">Buy now</button>
-                <a href="#formats" class="btn btn-ghost">Compare</a>
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP EWM" data-format="Live Mentored Session" data-price="35000" data-program="SAP EWM — Live Mentored Session (₹35,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP EWM" data-format="Live Mentored Session" data-price="35000" data-program="SAP EWM — Live Mentored Session (₹35,000)">Ask an advisor</button>
               </div>
             </div>
           </article>
-
-          <article class="course" data-type="self" data-tags="sap ewm self paced warehouse rf wave">
-            <div class="course-thumb"><img src="images/courses/sap-ewm-self.svg" alt="SAP EWM self-paced" loading="lazy" /><span class="tag tag-self">Self-paced</span></div>
+          <article class="course" data-format="live" data-cats="functional supply" data-tags="transportation management tm freight order carrier selection charge calculation shipper lsp logistics sap tm live">
+            <div class="course-thumb"><img src="images/courses/tm.svg" alt="SAP TM (Transportation Management)" loading="lazy" width="1200" height="630" /><span class="tag tag-live">Live · Weekend</span></div>
             <div class="course-body">
-              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor</p>
-              <h3>SAP EWM Complete Course — Self-Paced</h3>
-              <p class="skills"><b>Includes:</b> 40+ hours video, process flows, RF &amp; warehouse labs, certificate</p>
-              <ul class="meta"><li>40+ hours</li><li>Intermediate</li><li>Lifetime access</li></ul>
-              <div class="price"><strong>₹6,999</strong><s>₹12,999</s><span class="off">46% off</span></div>
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Live Mentored Session</p>
+              <h3>SAP TM (Transportation Management)</h3>
+              <p class="skills"><b>Skills:</b> Freight order management, carrier selection, charge calculation, shipper/LSP scenarios, S/4HANA embedded TM</p>
+              <ul class="meta"><li>Sat–Sun live</li><li>6-month S/4HANA server</li><li>EMI available</li></ul>
+              <p class="feat">24-hr recordings · Capstone project · Resume &amp; LinkedIn review · Mock interviews</p>
+              <div class="price"><strong>₹35,000</strong><span class="emi">EMI available</span></div>
               <div class="actions">
-                <button type="button" class="btn btn-primary razorpay-link" data-amount="6999" data-program="SAP EWM Self-Paced">Buy now</button>
-                <a href="#curriculum" class="btn btn-ghost">Curriculum</a>
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP TM" data-format="Live Mentored Session" data-price="35000" data-program="SAP TM — Live Mentored Session (₹35,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP TM" data-format="Live Mentored Session" data-price="35000" data-program="SAP TM — Live Mentored Session (₹35,000)">Ask an advisor</button>
               </div>
             </div>
           </article>
-
-          <article class="course" data-type="career" data-tags="mentorship one on one 1:1 career placement resume interview">
-            <div class="course-thumb"><img src="images/courses/mentorship.svg" alt="1-on-1 mentorship" loading="lazy" /><span class="tag tag-live">1-on-1</span></div>
+          <article class="course" data-format="live" data-cats="supply functional" data-tags="logistics supply chain end to end mm sd ewm tm integrated procurement fulfilment warehouse sap logistics live">
+            <div class="course-thumb"><img src="images/courses/logistics.svg" alt="SAP Logistics (End-to-End Supply Chain)" loading="lazy" width="1200" height="630" /><span class="tag tag-live">Live · Weekend</span></div>
             <div class="course-body">
-              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor</p>
-              <h3>1-on-1 SAP Career Mentorship &amp; Placement Support</h3>
-              <p class="skills"><b>Includes:</b> live batch, 1-on-1 strategy calls, resume &amp; LinkedIn rewrite, mock interviews, referrals</p>
-              <ul class="meta"><li>Personal mentor</li><li>6-month server</li><li>Limited seats</li></ul>
-              <div class="price"><strong>₹25,000</strong><span class="emi">EMI available</span></div>
+              <p class="provider"><img src="images/logo-mark.svg" alt="" width="18" height="18" /> theTechMentor · Live Mentored Session</p>
+              <h3>SAP Logistics (End-to-End Supply Chain)</h3>
+              <p class="skills"><b>Skills:</b> Integrated MM + SD + EWM + TM workflows across procurement, order fulfilment and warehouse execution</p>
+              <ul class="meta"><li>Sat–Sun live</li><li>6-month S/4HANA server</li><li>EMI available</li></ul>
+              <p class="feat">24-hr recordings · Capstone project · Resume &amp; LinkedIn review · Mock interviews</p>
+              <div class="price"><strong>₹35,000</strong><span class="emi">EMI available</span></div>
               <div class="actions">
-                <button type="button" class="btn btn-primary razorpay-link" data-amount="25000" data-program="1-on-1 Mentorship">Enroll now</button>
-                <button type="button" class="btn btn-ghost open-screening-modal" data-program="1-on-1 Mentorship">Apply</button>
+                <button type="button" class="btn btn-primary open-screening-modal" data-action="enroll" data-course="SAP Logistics" data-format="Live Mentored Session" data-price="35000" data-program="SAP Logistics — Live Mentored Session (₹35,000)">Enroll now</button>
+                <button type="button" class="btn btn-ghost open-screening-modal" data-action="ask" data-course="SAP Logistics" data-format="Live Mentored Session" data-price="35000" data-program="SAP Logistics — Live Mentored Session (₹35,000)">Ask an advisor</button>
               </div>
             </div>
           </article>
+          </div>
         </div>
         <p class="no-results" id="no-results" hidden>No course matches that search. <button type="button" class="link" data-reset>Show all courses</button></p>
       </div>
@@ -380,7 +864,7 @@
             <span class="path-tag">For IT support &amp; career switchers</span>
             <h3>SAP Logistics Consultant (MM + EWM)</h3>
             <ol><li>MM foundation</li><li>EWM on top of MM</li><li>End-to-end integration</li><li>Placement support</li></ol>
-            <a href="#courses" class="btn btn-ghost" data-jump="combo">View combo</a>
+            <a href="#courses" class="btn btn-ghost" data-jump="logistics">View Logistics course</a>
           </div>
         </div>
       </div>
@@ -427,22 +911,21 @@
     <section class="section" id="formats">
       <div class="wrap">
         <div class="sec-head center"><div><p class="eyebrow">Learning formats</p><h2>Choose how you want to learn</h2></div></div>
-        <div class="formats">
+        <div class="formats formats-2">
           <div class="format">
-            <h3>Self-paced</h3><p class="fprice">from ₹4,999</p>
-            <ul><li>HD video lessons, lifetime access</li><li>Configuration workbooks &amp; cheat sheets</li><li>Community Q&amp;A</li><li>Certificate of completion</li><li>7-day money-back guarantee</li></ul>
-            <a href="#courses" class="btn btn-ghost" data-jump="self">Browse self-paced</a>
+            <h3>Recorded Sessions</h3>
+            <p class="fprice">Starting at ₹5,000</p>
+            <p class="fsplit">₹5,000 core modules | ₹7,000 EWM, TM &amp; Logistics</p>
+            <ul><li>35–45+ hours of HD recorded classes</li><li>Configuration workbook &amp; T-code cheat sheets</li><li>Lifetime access — learn at your pace</li><li>Certificate of completion</li><li>7-day money-back guarantee</li></ul>
+            <a href="#recorded" class="btn btn-ghost" data-jump="recorded">Browse recorded courses</a>
           </div>
           <div class="format featured">
             <span class="ribbon">Most popular</span>
-            <h3>Live weekend batch</h3><p class="fprice">from ₹24,999</p>
-            <ul><li>50+ hours of live classes (Sat–Sun)</li><li>6 months S/4HANA practice server</li><li>End-to-end business scenarios</li><li>Capstone project + recordings</li><li>Max 25 learners per batch</li></ul>
-            <a href="#courses" class="btn btn-primary" data-jump="live">See live batches</a>
-          </div>
-          <div class="format">
-            <h3>1-on-1 mentorship</h3><p class="fprice">₹25,000</p>
-            <ul><li>Everything in the live batch</li><li>Personal strategy calls</li><li>Resume &amp; LinkedIn rewrite</li><li>Dedicated mock interviews</li><li>Referral &amp; interview support</li></ul>
-            <button type="button" class="btn btn-ghost open-screening-modal" data-program="1-on-1 Mentorship">Apply for mentorship</button>
+            <h3>Live Mentored Sessions</h3>
+            <p class="fprice">Starting at ₹30,000</p>
+            <p class="fsplit">₹30,000 MM, SD, ABAP | ₹35,000 FICO, BASIS, EWM, TM &amp; Logistics</p>
+            <ul><li>Live weekend classes (Sat–Sun) + recordings within 24 hours</li><li>6 months S/4HANA practice server access</li><li>Capstone implementation project</li><li>Resume &amp; LinkedIn review + mock interviews</li><li>EMI available</li></ul>
+            <a href="#live" class="btn btn-primary" data-jump="live">See live batches</a>
           </div>
         </div>
       </div>
@@ -611,6 +1094,11 @@
         <div class="form-card">
           <form class="enroll-form screening-form" id="enroll-form" novalidate>
             <h3>Book your free counselling call</h3>
+            <div class="form-row form-2">
+            <div><label for="app-course">Course *</label><select id="app-course" name="course" required><option value="">Select course</option><option value="SAP MM">SAP MM</option><option value="SAP SD">SAP SD</option><option value="SAP FICO">SAP FICO</option><option value="SAP ABAP">SAP ABAP</option><option value="SAP BASIS">SAP BASIS</option><option value="SAP EWM">SAP EWM</option><option value="SAP TM">SAP TM</option><option value="SAP Logistics">SAP Logistics</option><option value="Not sure yet">Not sure yet</option></select></div>
+            <div><label for="app-format">Format *</label><select id="app-format" name="format" required><option value="">Select format</option><option value="Recorded Session">Recorded Session</option><option value="Live Mentored Session">Live Mentored Session</option><option value="Not sure yet">Not sure yet</option></select></div>
+          </div>
+          <p class="price-line" id="app-price-line" hidden></p>
             <div class="form-row"><label for="name">Full name *</label><input type="text" id="name" name="name" required placeholder="Your name" autocomplete="name" /></div>
             <div class="form-row"><label for="email">Email *</label><input type="email" id="email" name="email" required placeholder="you@email.com" autocomplete="email" /></div>
             <div class="form-row"><label for="phone">Phone / WhatsApp *</label><input type="tel" id="phone" name="phone" required placeholder="+91 98765 43210" autocomplete="tel" /></div>
@@ -629,7 +1117,7 @@
                 <option value="Within 30 Days">Within 30 days</option>
                 <option value="1-3 Months">In 1–3 months</option>
               </select></div>
-            <div class="form-row"><label for="app-budget">Ready to invest ₹5,000–₹25,000 in your career? *</label>
+            <div class="form-row"><label for="app-budget">Ready to invest ₹5,000–₹35,000 in your career? *</label>
               <select id="app-budget" name="budget" required>
                 <option value="">Select</option>
                 <option value="Yes">Yes, I'm ready to invest</option>
@@ -679,8 +1167,8 @@
         <p>Online SAP S/4HANA academy for logistics, procurement and warehouse careers.</p>
       </div>
       <div><h4>Courses</h4><ul>
-        <li><a href="#courses" data-jump="mm">SAP MM</a></li><li><a href="#courses" data-jump="ewm">SAP EWM</a></li>
-        <li><a href="#courses" data-jump="self">Self-paced</a></li><li><a href="#courses" data-jump="career">Career programs</a></li></ul></div>
+        <li><a href="#recorded" data-jump="recorded">Recorded Sessions</a></li><li><a href="#live" data-jump="live">Live Mentored Sessions</a></li>
+        <li><a href="#courses" data-jump="functional">Functional</a></li><li><a href="#courses" data-jump="technical">Technical</a></li><li><a href="#courses" data-jump="supply">Supply Chain</a></li></ul></div>
       <div><h4>Resources</h4><ul>
         <li><a href="blog/index.html">Blog</a></li><li><a href="https://www.youtube.com/playlist?list=PL71i23QiQd9VSrHTuXQyiOlLsi8NnGbSp" target="_blank" rel="noopener noreferrer">Free videos</a></li>
         <li><a href="#faq">FAQ</a></li><li><a href="#advisor">Free counselling</a></li></ul></div>
@@ -704,6 +1192,13 @@
         <h3 id="modal-title">Talk to a career advisor</h3>
         <p class="sub small">About: <strong id="modal-selected-program">Free counselling (15 min)</strong></p>
         <form class="screening-form modal-form" id="modal-screening-form" novalidate>
+          <div class="form-row form-2">
+            <div><label for="modal-course">Course *</label><select id="modal-course" name="course" required><option value="">Select course</option><option value="SAP MM">SAP MM</option><option value="SAP SD">SAP SD</option><option value="SAP FICO">SAP FICO</option><option value="SAP ABAP">SAP ABAP</option><option value="SAP BASIS">SAP BASIS</option><option value="SAP EWM">SAP EWM</option><option value="SAP TM">SAP TM</option><option value="SAP Logistics">SAP Logistics</option><option value="Not sure yet">Not sure yet</option></select></div>
+            <div><label for="modal-format">Format *</label><select id="modal-format" name="format" required><option value="">Select format</option><option value="Recorded Session">Recorded Session</option><option value="Live Mentored Session">Live Mentored Session</option><option value="Not sure yet">Not sure yet</option></select></div>
+          </div>
+          <p class="price-line" id="modal-price-line" hidden></p>
+          <button type="button" class="btn btn-primary btn-block" id="modal-pay-btn" hidden>Pay now</button>
+          <p class="pay-note" id="modal-pay-note" hidden>Secure checkout via Razorpay · or request a call back below</p>
           <div class="form-row"><label for="modal-name">Full name *</label><input type="text" id="modal-name" name="name" required placeholder="Your name" autocomplete="name" /></div>
           <div class="form-row"><label for="modal-email">Email *</label><input type="email" id="modal-email" name="email" required placeholder="you@email.com" autocomplete="email" /></div>
           <div class="form-row"><label for="modal-phone">Phone / WhatsApp *</label><input type="tel" id="modal-phone" name="phone" required placeholder="+91 98765 43210" autocomplete="tel" /></div>
@@ -722,13 +1217,13 @@
               <option value="Within 30 Days">Within 30 days</option>
               <option value="1-3 Months">In 1–3 months</option>
             </select></div>
-          <div class="form-row"><label for="modal-budget">Ready to invest ₹5,000–₹25,000 in your career? *</label>
+          <div class="form-row"><label for="modal-budget">Ready to invest ₹5,000–₹35,000 in your career? *</label>
             <select id="modal-budget" name="budget" required>
               <option value="">Select</option>
               <option value="Yes">Yes, I'm ready to invest</option>
               <option value="No">Not now — just exploring free resources</option>
             </select></div>
-          <button type="submit" class="btn btn-primary btn-block">Request a call back</button>
+          <button type="submit" class="btn btn-ghost btn-block" id="modal-submit">Request a call back</button>
         </form>
         <div class="modal-routing-result" id="modal-routing-result" hidden></div>
       </div>
@@ -742,7 +1237,7 @@
 
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script src="blog/custom-blogs.js"></script>
-  <script src="script.js?v=6" defer></script>
-  <script src="home.js?v=1" defer></script>
+  <script src="script.js?v=7" defer></script>
+  <script src="home.js?v=2" defer></script>
 </body>
 </html>

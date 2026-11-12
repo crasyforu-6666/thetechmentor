@@ -148,7 +148,7 @@ button.link { background: none; border: 0; color: var(--blue); font: inherit; cu
 .course:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
 .course[hidden] { display: none; }
 .course-thumb { position: relative; }
-.course-thumb img { aspect-ratio: 1200 / 630; object-fit: cover; width: 100%; }
+.course-thumb img { aspect-ratio: 1200 / 630; object-fit: cover; width: 100%; height: auto; }
 .course-thumb .tag { position: absolute; top: .6rem; left: .6rem; }
 .course-thumb .tag + .tag { left: auto; right: .6rem; }
 .course-body { display: flex; flex-direction: column; gap: .45rem; padding: 1rem 1.05rem 1.15rem; flex: 1; }
@@ -331,3 +331,25 @@ button.link { background: none; border: 0; color: var(--blue); font: inherit; cu
 }
 
 .author-photo { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex: 0 0 auto; }
+
+/* ---------- Catalog sections (recorded / live) ---------- */
+.filters { margin: -0.5rem 0 1.75rem; }
+.cat-section { margin-top: 1.5rem; padding-top: 1.5rem; }
+.cat-section + .cat-section { border-top: 1px solid var(--line); margin-top: 3rem; padding-top: 2.5rem; }
+.cat-section[hidden] { display: none; }
+.cat-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.cat-head h3 { font-size: clamp(1.3rem, 2.4vw, 1.65rem); margin-bottom: .35rem; }
+.cat-head .sub { margin: 0; }
+.cat-price { margin: 0; font-weight: 700; font-size: .88rem; color: var(--blue); background: var(--blue-50); border: 1px solid #c7d6f5; border-radius: 999px; padding: .45rem .9rem; }
+#live .cat-price { color: #b91c1c; background: #fef2f2; border-color: #fecaca; }
+.feat { font-size: .78rem; color: var(--muted); margin: .1rem 0 0; }
+.formats-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 900px; margin-inline: auto; }
+.fsplit { margin: -.6rem 0 1rem; font-size: .88rem; font-weight: 600; color: var(--ink-2); }
+.form-2 { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
+.form-2 > div { display: grid; gap: .35rem; }
+.price-line { background: var(--blue-50); border: 1px solid #c7d6f5; color: var(--ink); border-radius: 10px; padding: .6rem .8rem; font-size: .9rem; margin: -.2rem 0 .9rem; }
+.pay-note { text-align: center; color: var(--muted); font-size: .8rem; margin: .4rem 0 1rem; }
+#modal-pay-btn { background: #f97316; box-shadow: 0 8px 20px -8px rgba(249, 115, 22, .7); }
+#modal-pay-btn:hover { background: #ea580c; }
+@media (max-width: 900px) { .formats-2 { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .form-2 { grid-template-columns: 1fr; } }

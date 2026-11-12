@@ -23,7 +23,7 @@ SHOT_DIR = os.path.join(BASE_DIR, "images", "blog")
 SITE = "https://youronementor.com"
 DEFAULT_OG = f"{SITE}/images/og-cover.png"
 
-MODULES = ["MM", "EWM", "SD", "FICO", "AI", "Career"]
+MODULES = ["MM", "EWM", "SD", "FICO", "AI", "Career", "ABAP", "BASIS", "TM", "LOG"]
 
 THEMES = {
     "MM":     {"name": "SAP MM",  "a": "#0284c7", "b": "#6366f1", "soft": "#e0f2fe", "icon": "procure"},
@@ -32,6 +32,10 @@ THEMES = {
     "FICO":   {"name": "SAP FICO", "a": "#0d9488", "b": "#4f46e5", "soft": "#ccfbf1", "icon": "ledger"},
     "AI":     {"name": "SAP AI · Joule", "a": "#7c3aed", "b": "#db2777", "soft": "#ede9fe", "icon": "spark"},
     "Career": {"name": "SAP Career", "a": "#d97706", "b": "#dc2626", "soft": "#fef3c7", "icon": "rocket"},
+    "ABAP":   {"name": "SAP ABAP", "a": "#4f46e5", "b": "#06b6d4", "soft": "#e0e7ff", "icon": "code"},
+    "BASIS":  {"name": "SAP BASIS", "a": "#334155", "b": "#0ea5e9", "soft": "#e2e8f0", "icon": "server"},
+    "TM":     {"name": "SAP TM", "a": "#c2410c", "b": "#f59e0b", "soft": "#ffedd5", "icon": "truck"},
+    "LOG":    {"name": "SAP Logistics", "a": "#0f766e", "b": "#7c3aed", "soft": "#ccfbf1", "icon": "network"},
 }
 
 
@@ -88,6 +92,24 @@ _ICONS = {
       <text x="178" y="145" font-family="DejaVu Sans, Arial, sans-serif" font-size="64" font-weight="700" fill="#fff" text-anchor="middle" opacity=".8">Cr</text>''',
     "spark": '''<path d="M130 20 L150 105 L235 125 L150 145 L130 230 L110 145 L25 125 L110 105 Z" fill="#fff" opacity=".95"/>
       <circle cx="215" cy="45" r="16" fill="#fff" opacity=".7"/><circle cx="50" cy="210" r="11" fill="#fff" opacity=".6"/>''',
+    "code": '''<rect x="20" y="40" width="220" height="170" rx="16" fill="none" stroke="#fff" stroke-width="8" opacity=".9"/>
+      <line x1="20" y1="78" x2="240" y2="78" stroke="#fff" stroke-width="6" opacity=".6"/>
+      <path d="M85 110 L55 140 L85 170" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M175 110 L205 140 L175 170" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="145" y1="100" x2="115" y2="180" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity=".8"/>''',
+    "server": '''<rect x="40" y="30" width="180" height="56" rx="12" fill="none" stroke="#fff" stroke-width="8"/>
+      <rect x="40" y="102" width="180" height="56" rx="12" fill="none" stroke="#fff" stroke-width="8" opacity=".8"/>
+      <rect x="40" y="174" width="180" height="56" rx="12" fill="none" stroke="#fff" stroke-width="8" opacity=".6"/>
+      <circle cx="190" cy="58" r="8" fill="#fff"/><circle cx="190" cy="130" r="8" fill="#fff"/><circle cx="190" cy="202" r="8" fill="#fff"/>
+      <line x1="66" y1="58" x2="130" y2="58" stroke="#fff" stroke-width="7" stroke-linecap="round"/>''',
+    "truck": '''<rect x="15" y="70" width="140" height="100" rx="10" fill="none" stroke="#fff" stroke-width="8"/>
+      <path d="M155 100 H205 L240 135 V170 H155 Z" fill="none" stroke="#fff" stroke-width="8" stroke-linejoin="round"/>
+      <circle cx="60" cy="190" r="22" fill="#fff"/><circle cx="200" cy="190" r="22" fill="#fff"/>
+      <line x1="40" y1="105" x2="120" y2="105" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".7"/>''',
+    "network": '''<circle cx="130" cy="125" r="34" fill="#fff" opacity=".95"/>
+      <circle cx="40" cy="45" r="22" fill="#fff" opacity=".8"/><circle cx="220" cy="45" r="22" fill="#fff" opacity=".8"/>
+      <circle cx="40" cy="210" r="22" fill="#fff" opacity=".8"/><circle cx="220" cy="210" r="22" fill="#fff" opacity=".8"/>
+      <path d="M58 60 L105 102 M202 60 L155 102 M58 195 L105 148 M202 195 L155 148" stroke="#fff" stroke-width="7" stroke-linecap="round"/>''',
     "rocket": '''<path d="M130 20 C180 50 195 120 170 180 H90 C65 120 80 50 130 20 Z" fill="#fff" opacity=".95"/>
       <circle cx="130" cy="95" r="22" fill="{a}"/><path d="M90 150 L55 195 L95 185 Z M170 150 L205 195 L165 185 Z" fill="#fff" opacity=".7"/>
       <path d="M110 190 L130 240 L150 190 Z" fill="#fde68a"/>''',

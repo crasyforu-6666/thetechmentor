@@ -9,10 +9,10 @@
     if (typeof window.Razorpay !== "undefined") {
       const options = {
         key: RAZORPAY_KEY_ID,
-        amount: (amountInRupees || 4999) * 100, // Amount in paise (499900 = ₹4,999)
+        amount: (amountInRupees || 5000) * 100, // amount in paise
         currency: "INR",
         name: "YourOneMentor · Anshuman Behuria",
-        description: programName || "SAP MM & EWM Self-Paced Track",
+        description: programName || "SAP MM — Recorded Session",
         image: "https://youronementor.com/images/og-cover.png",
         prefill: {
           name: userDetails.name || "",
@@ -20,7 +20,7 @@
           contact: userDetails.phone || ""
         },
         notes: {
-          program: programName || "SAP MM & EWM Self-Paced Track"
+          program: programName || "SAP MM — Recorded Session"
         },
         theme: {
           color: "#0070b8"
@@ -35,7 +35,7 @@
               email: userDetails.email || "student@example.com",
               phone: userDetails.phone || "",
               course: programName || "SAP MM & EWM Track",
-              amount: amountInRupees || 4999,
+              amount: amountInRupees || 5000,
               status: "Paid",
               method: "Razorpay Checkout"
             });
@@ -43,8 +43,8 @@
           } catch (e) {
             console.error(e);
           }
-          const paidProgram = programName || "SAP MM & EWM Self-Paced Track";
-          const paidAmount = amountInRupees || 4999;
+          const paidProgram = programName || "SAP MM — Recorded Session";
+          const paidAmount = amountInRupees || 5000;
           const paymentId = response.razorpay_payment_id || "";
           if (window.ttmTrack) {
             window.ttmTrack("purchase", { value: paidAmount, content_name: paidProgram, transaction_id: paymentId });
@@ -71,7 +71,7 @@
       };
 
       if (window.ttmTrack) {
-        window.ttmTrack("begin_checkout", { value: amountInRupees || 4999, content_name: programName || "" });
+        window.ttmTrack("begin_checkout", { value: amountInRupees || 5000, content_name: programName || "" });
       }
       const rzp = new window.Razorpay(options);
       rzp.open();
@@ -86,8 +86,8 @@
     link.href = RAZORPAY_URL;
     link.addEventListener("click", (e) => {
       e.preventDefault();
-      const amount = parseInt(link.dataset.amount || "4999", 10);
-      const program = link.dataset.program || "SAP MM & EWM Self-Paced Track";
+      const amount = parseInt(link.dataset.amount || "5000", 10);
+      const program = link.dataset.program || "SAP MM — Recorded Session";
       payWithRazorpay(amount, program);
     });
   });
@@ -409,9 +409,11 @@
 
     // Deliver the lead to the owner (Google Sheet + email) and to ad tracking.
     const programLabel = document.getElementById("modal-selected-program");
-    const selectedProgram = formEl.id === "modal-screening-form" && programLabel
-      ? programLabel.textContent
-      : "Strategy Call (15-Min)";
+    const pickedCourse = formData.get("course") || "";
+    const pickedFormat = formData.get("format") || "";
+    const selectedProgram = pickedCourse && pickedFormat
+      ? `${pickedCourse} — ${pickedFormat}`
+      : (formEl.id === "modal-screening-form" && programLabel ? programLabel.textContent : "Free counselling call");
     if (window.ttmSend) {
       window.ttmSend({
         type: "lead",
@@ -444,11 +446,11 @@
     } else {
       outputEl.innerHTML = `
         <div class="routing-card routing-redirect">
-          <h4>Notice: Self-Paced Track Recommended</h4>
-          <p>Thank you for your response, ${name}! Live 1-on-1 strategy call slots are reserved for candidates ready to invest in live mentorship. Based on your budget readiness, our Self-Paced Programs are the best fit for your journey.</p>
+          <h4>Recorded Sessions recommended</h4>
+          <p>Thanks ${name}! Live mentored batches start at ₹30,000. Based on your budget, our Recorded Sessions (from ₹5,000, lifetime access) are the best place to start — you can move to a live batch later.</p>
           <div style="display:flex; flex-direction:column; gap:0.5rem;">
-            <button type="button" onclick="payWithRazorpay(4999, 'SAP MM Self-Paced Track')" class="btn btn-primary btn-block">Enroll in MM Self-Paced (₹4,999) ↗</button>
-            <button type="button" onclick="payWithRazorpay(10999, 'MM + EWM Self-Paced Bundle')" class="btn btn-primary btn-block" style="background:var(--gold); border-color:var(--gold);">Enroll in Full Bundle (₹10,999) ↗</button>
+            <a href="#recorded" class="btn btn-primary btn-block" onclick="document.getElementById('screening-modal-backdrop').hidden=true">Browse recorded courses — from ₹5,000</a>
+            <button type="button" onclick="payWithRazorpay(5000, 'SAP MM — Recorded Session')" class="btn btn-ghost btn-block">Start SAP MM recorded course (₹5,000)</button>
           </div>
           <p style="margin-top: 0.75rem; font-size: 0.85rem;">🔓 <strong>Free Video Access:</strong> <a href="https://www.youtube.com/playlist?list=PL71i23QiQd9VSrHTuXQyiOlLsi8NnGbSp" target="_blank" rel="noopener noreferrer" style="color: #3db8f5; text-decoration: underline;">Watch Free Video Playlist on YouTube ↗</a></p>
         </div>
@@ -462,6 +464,12 @@
   pageForm?.addEventListener("submit", (e) => {
     if (pageOutput) {
       handleScreeningSubmit(e, pageForm, pageOutput);
+    }
+  });
+
+  modalForm?.addEventListener("submit", (e) => {
+    if (modalResult) {
+      handleScreeningSubmit(e, modalForm, modalResult);
     }
   });
 
