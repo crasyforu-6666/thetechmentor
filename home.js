@@ -4,8 +4,8 @@
 
   /* ---------- Prices (single source on the page) ---------- */
   var PRICES = {
-    "Recorded Session": { "SAP MM": 5000, "SAP SD": 5000, "SAP FICO": 5000, "SAP ABAP": 5000, "SAP BASIS": 5000, "SAP EWM": 7000, "SAP TM": 7000, "SAP Logistics": 7000 },
-    "Live Mentored Session": { "SAP MM": 30000, "SAP SD": 30000, "SAP ABAP": 30000, "SAP FICO": 35000, "SAP BASIS": 35000, "SAP EWM": 35000, "SAP TM": 35000, "SAP Logistics": 35000 }
+    "Recorded Session": { "SAP MM": 4999, "SAP SD": 4999, "SAP FICO": 4999, "SAP ABAP": 4999, "SAP BASIS": 4999, "SAP EWM": 6999, "SAP TM": 6999, "SAP Logistics": 6999 },
+    "Live Mentored Session": { "SAP MM": 29999, "SAP SD": 29999, "SAP ABAP": 29999, "SAP FICO": 34999, "SAP BASIS": 34999, "SAP EWM": 34999, "SAP TM": 34999, "SAP Logistics": 34999 }
   };
   function inr(n) { return "₹" + Number(n).toLocaleString("en-IN"); }
   function priceFor(course, format) { return (PRICES[format] || {})[course] || null; }

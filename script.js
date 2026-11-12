@@ -9,7 +9,7 @@
     if (typeof window.Razorpay !== "undefined") {
       const options = {
         key: RAZORPAY_KEY_ID,
-        amount: (amountInRupees || 5000) * 100, // amount in paise
+        amount: (amountInRupees || 4999) * 100, // amount in paise
         currency: "INR",
         name: "YourOneMentor · Anshuman Behuria",
         description: programName || "SAP MM — Recorded Session",
@@ -35,7 +35,7 @@
               email: userDetails.email || "student@example.com",
               phone: userDetails.phone || "",
               course: programName || "SAP MM & EWM Track",
-              amount: amountInRupees || 5000,
+              amount: amountInRupees || 4999,
               status: "Paid",
               method: "Razorpay Checkout"
             });
@@ -44,7 +44,7 @@
             console.error(e);
           }
           const paidProgram = programName || "SAP MM — Recorded Session";
-          const paidAmount = amountInRupees || 5000;
+          const paidAmount = amountInRupees || 4999;
           const paymentId = response.razorpay_payment_id || "";
           if (window.ttmTrack) {
             window.ttmTrack("purchase", { value: paidAmount, content_name: paidProgram, transaction_id: paymentId });
@@ -71,7 +71,7 @@
       };
 
       if (window.ttmTrack) {
-        window.ttmTrack("begin_checkout", { value: amountInRupees || 5000, content_name: programName || "" });
+        window.ttmTrack("begin_checkout", { value: amountInRupees || 4999, content_name: programName || "" });
       }
       const rzp = new window.Razorpay(options);
       rzp.open();
@@ -86,7 +86,7 @@
     link.href = RAZORPAY_URL;
     link.addEventListener("click", (e) => {
       e.preventDefault();
-      const amount = parseInt(link.dataset.amount || "5000", 10);
+      const amount = parseInt(link.dataset.amount || "4999", 10);
       const program = link.dataset.program || "SAP MM — Recorded Session";
       payWithRazorpay(amount, program);
     });
@@ -447,10 +447,10 @@
       outputEl.innerHTML = `
         <div class="routing-card routing-redirect">
           <h4>Recorded Sessions recommended</h4>
-          <p>Thanks ${name}! Live mentored batches start at ₹30,000. Based on your budget, our Recorded Sessions (from ₹5,000, lifetime access) are the best place to start — you can move to a live batch later.</p>
+          <p>Thanks ${name}! Live mentored batches start at ₹29,999. Based on your budget, our Recorded Sessions (from ₹4,999, lifetime access) are the best place to start — you can move to a live batch later.</p>
           <div style="display:flex; flex-direction:column; gap:0.5rem;">
-            <a href="#recorded" class="btn btn-primary btn-block" onclick="document.getElementById('screening-modal-backdrop').hidden=true">Browse recorded courses — from ₹5,000</a>
-            <button type="button" onclick="payWithRazorpay(5000, 'SAP MM — Recorded Session')" class="btn btn-ghost btn-block">Start SAP MM recorded course (₹5,000)</button>
+            <a href="#recorded" class="btn btn-primary btn-block" onclick="document.getElementById('screening-modal-backdrop').hidden=true">Browse recorded courses — from ₹4,999</a>
+            <button type="button" onclick="payWithRazorpay(4999, 'SAP MM — Recorded Session')" class="btn btn-ghost btn-block">Start SAP MM recorded course (₹4,999)</button>
           </div>
           <p style="margin-top: 0.75rem; font-size: 0.85rem;">🔓 <strong>Free Video Access:</strong> <a href="https://www.youtube.com/playlist?list=PL71i23QiQd9VSrHTuXQyiOlLsi8NnGbSp" target="_blank" rel="noopener noreferrer" style="color: #3db8f5; text-decoration: underline;">Watch Free Video Playlist on YouTube ↗</a></p>
         </div>
