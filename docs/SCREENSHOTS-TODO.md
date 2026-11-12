@@ -131,3 +131,11 @@ Folder: `images/blog/sap-ewm-posc-losc-storage-control-deep-dive/`
 - [ ] 03: Warehouse monitor /SCWM/MON showing open warehouse tasks for a HU in an intermediate bin
 - [ ] 04: /SCWM/TO display of two chained warehouse tasks with source and destination bins
 - [ ] 05: /SCWM/LS01 intermediate bin created in the conveyor storage type
+
+## Mastering SAP MM Organisational Structure in S/4HANA: Company Code, Plant, Storage Location, & Purchasing Org
+Folder: `images/blog/sap-mm-organisational-structure-s4hana/`
+- [ ] 01: OX02 - Create New Company Code entry screen
+- [ ] 02: OX10 - Create New Plant entry screen
+- [ ] 03: OX09 - Storage Location configuration (displaying existing entries for a plant)
+- [ ] 04: OX08 - Purchasing Organization definition screen
+- [ ] 05: OMGF - Assign Purchasing Organization to Company Code screen

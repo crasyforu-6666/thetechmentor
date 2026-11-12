@@ -89,5 +89,12 @@
   "slug": "top-30-sap-mm-interview-questions-2026",
   "title": "Top 30 SAP MM Interview Questions & Scenario-Based Answers for S/4HANA 2026",
   "date": "2026-11-11"
+ },
+ {
+  "topic": "SAP MM organisational structure in S/4HANA: company code, plant, storage location, purchasing org",
+  "module": "MM",
+  "slug": "sap-mm-organisational-structure-s4hana",
+  "title": "Mastering SAP MM Organisational Structure in S/4HANA: Company Code, Plant, Storage Location, & Purchasing Org",
+  "date": "2026-11-12"
  }
 ]

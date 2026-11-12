@@ -470,5 +470,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-11",
     excerpt: "Learn to implement and optimize SAP EWM Yard Management, covering Transportation Units (TUs), dock door processes, and the full vehicle check-in to check-out cycle.",
     imageUrl: "https://youronementor.com/blog/covers/sap-ewm-yard-management-tu-dock-door-check-in-guide.svg"
+  },
+  {
+    id: "post_1794482728331",
+    title: "Mastering SAP MM Organisational Structure in S/4HANA: Company Code, Plant, Storage Location, & Purchasing Org",
+    slug: "sap-mm-organisational-structure-s4hana",
+    category: "Tutorial",
+    badge: "SAP MM TUTORIAL",
+    readTime: "12 min read",
+    date: "Nov 12, 2026",
+    isoDate: "2026-11-12",
+    excerpt: "Dive into the core of SAP MM by understanding and configuring its organisational structure in S/4HANA. Learn about Company Code, Plant, Storage Location, and Purchasing Organization with practical, consultant-level insights.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-mm-organisational-structure-s4hana.svg"
   }
 ];
