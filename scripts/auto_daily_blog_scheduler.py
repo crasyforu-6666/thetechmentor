@@ -1583,10 +1583,11 @@ def run_daily_publisher(preferred_module=None, dry_run=False):
     if topic:
         topic.setdefault("slug", ai_writer.slugify(topic["title"]))
         topic.setdefault("category", "Tutorial")
-        topic.setdefault("badge", f"SAP {topic['module']}")
+        topic.setdefault("badge", "SAP " + {"LOG": "Logistics", "AI": "AI"}.get(topic["module"], topic["module"]))
         topic.setdefault("read_time", "12 min read")
         topic.setdefault("meta_desc", topic["title"])
-        target_mod = {"MM": "mm", "EWM": "ewm", "SD": "sd", "AI": "joule", "Career": "mm"}.get(topic["module"], target_mod)
+        target_mod = {"MM": "mm", "EWM": "ewm", "SD": "sd", "FICO": "fico", "AI": "joule", "Career": "mm",
+                      "ABAP": "mm", "BASIS": "mm", "TM": "ewm", "LOG": "mm"}.get(topic["module"], target_mod)
         try:
             topic["faqs"] = [(q, "") for q in fetch_google_suggestions(topic["keyword"])][:6]
         except Exception:

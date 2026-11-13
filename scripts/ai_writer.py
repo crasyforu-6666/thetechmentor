@@ -44,13 +44,15 @@ BANNED_PHRASES = [
 
 DEFAULT_STANDARDS = """
 EDITORIAL STANDARDS (theTechMentor)
-- Author voice: Anshuman Behuria, SAP MM & EWM consultant with 12+ years of S/4HANA
-  implementation experience, training career-switchers in India. Practical, direct,
-  first-hand. Explain *why*, not just *what*.
-- Audience: Indian professionals (logistics, IT support, freshers, junior SAP
-  consultants) moving into SAP MM / EWM roles, plus working consultants.
+- Author voice: theTechMentor's SAP mentors (lead mentor Anshuman Behuria, 12+ years of
+  S/4HANA implementation experience), training learners in India across SAP MM, SD,
+  FICO, ABAP, BASIS, EWM, TM and end-to-end logistics. Practical, direct, first-hand.
+  Explain *why*, not just *what*.
+- Audience: Indian professionals and freshers moving into SAP functional or technical
+  roles, plus working consultants.
 - Every article must teach something concrete: real transaction codes, SPRO menu
-  paths, table names, configuration steps, worked examples with sample values,
+  paths, table names, configuration steps (for ABAP: real syntax and objects; for
+  BASIS: real admin transactions and HANA tools), worked examples with sample values,
   common errors with their message text and the fix, and interview angles.
 - Be accurate. Never invent transaction codes, tables, notes or release features.
   If something differs between ECC and S/4HANA, or between embedded and
@@ -87,7 +89,7 @@ ARTICLE_SCHEMA = {
         "meta_description": {"type": "string", "description": "120-155 characters, includes keyword, ends with a reason to click"},
         "slug": {"type": "string", "description": "lowercase-hyphenated URL slug, 3-8 words, no year unless essential"},
         "category": {"type": "string", "enum": CATEGORIES},
-        "module": {"type": "string", "enum": ["MM", "EWM", "SD", "FICO", "AI", "Career"],
+        "module": {"type": "string", "enum": ["MM", "EWM", "SD", "FICO", "ABAP", "BASIS", "TM", "LOG", "AI", "Career"],
                    "description": "Main SAP area; sets the article's colour theme"},
         "level": {"type": "string", "description": "e.g. 'Beginner', 'Intermediate', 'Consultant'"},
         "process_flow": {

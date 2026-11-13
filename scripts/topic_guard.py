@@ -30,7 +30,7 @@ mm ewm sd fico wm end question questions answer answers lifecycle new
 """.split())
 
 SIMILARITY_LIMIT = 0.55
-MODULE_WORDS = {"mm", "ewm", "sd", "fico", "wm"}
+MODULE_WORDS = {"mm", "ewm", "sd", "fico", "wm", "abap", "basis", "tm"}
 
 
 def _tokens(text: str) -> set:

@@ -4,20 +4,36 @@
   "title": "SAP MM organisational structure in S/4HANA: company code, plant, storage location, purchasing org"
  },
  {
-  "module": "Career",
-  "title": "SAP MM consultant roadmap for freshers in India"
- },
- {
   "module": "MM",
   "title": "Material master views in S/4HANA explained field by field"
+ },
+ {
+  "module": "FICO",
+  "title": "SAP FICO organisational structure in S/4HANA: company code, controlling area, chart of accounts"
  },
  {
   "module": "EWM",
   "title": "EWM warehouse structure: storage types, sections and bins"
  },
  {
+  "module": "ABAP",
+  "title": "ABAP on HANA: code pushdown explained with examples"
+ },
+ {
   "module": "SD",
   "title": "SAP SD organisational structure in S/4HANA"
+ },
+ {
+  "module": "BASIS",
+  "title": "SAP S/4HANA system architecture explained for BASIS beginners"
+ },
+ {
+  "module": "TM",
+  "title": "SAP TM in S/4HANA: embedded TM vs standalone overview"
+ },
+ {
+  "module": "LOG",
+  "title": "End-to-end SAP logistics: how MM, SD, EWM and TM fit together"
  },
  {
   "module": "MM",
@@ -28,16 +44,52 @@
   "title": "Warehouse process types and their role in SAP EWM"
  },
  {
+  "module": "Career",
+  "title": "SAP MM consultant roadmap for freshers in India"
+ },
+ {
+  "module": "ABAP",
+  "title": "Core Data Services (CDS) views for beginners"
+ },
+ {
+  "module": "SD",
+  "title": "Sales document types and item categories configuration"
+ },
+ {
+  "module": "AI",
+  "title": "SAP Business AI use cases in S/4HANA logistics"
+ },
+ {
   "module": "MM",
   "title": "Purchase requisition release strategy configuration with classification"
+ },
+ {
+  "module": "FICO",
+  "title": "New General Ledger in S/4HANA: ledgers, ledger groups and parallel accounting"
  },
  {
   "module": "EWM",
   "title": "Storage type search sequences and putaway strategies in EWM"
  },
  {
-  "module": "Career",
-  "title": "Switching from warehouse operations to an SAP EWM career"
+  "module": "ABAP",
+  "title": "CDS view annotations, associations and access control (DCL)"
+ },
+ {
+  "module": "SD",
+  "title": "Availability check (ATP) in S/4HANA for SD consultants"
+ },
+ {
+  "module": "BASIS",
+  "title": "SAP HANA database administration basics"
+ },
+ {
+  "module": "TM",
+  "title": "SAP TM organisational structure and master data"
+ },
+ {
+  "module": "LOG",
+  "title": "Procure-to-pay to order-to-cash: the complete S/4HANA supply chain flow"
  },
  {
   "module": "MM",
@@ -48,16 +100,56 @@
   "title": "Stock removal strategies in EWM: FIFO, LIFO, fixed bin, partial quantities"
  },
  {
+  "module": "Career",
+  "title": "Switching from warehouse operations to an SAP EWM career"
+ },
+ {
+  "module": "FICO",
+  "title": "Document splitting configuration in S/4HANA step by step"
+ },
+ {
+  "module": "ABAP",
+  "title": "ABAP Managed Database Procedures (AMDP) step by step"
+ },
+ {
+  "module": "SD",
+  "title": "Credit management in S/4HANA (FSCM credit management)"
+ },
+ {
+  "module": "AI",
+  "title": "Predictive MRP and demand-driven replenishment in S/4HANA"
+ },
+ {
   "module": "MM",
   "title": "Purchasing info records: standard, subcontracting, consignment and pipeline"
+ },
+ {
+  "module": "FICO",
+  "title": "Fiscal year variants, posting periods and period opening in SAP FI"
  },
  {
   "module": "EWM",
   "title": "Inbound delivery process in EWM end to end"
  },
  {
-  "module": "AI",
-  "title": "SAP Business AI use cases in S/4HANA logistics"
+  "module": "ABAP",
+  "title": "Building OData services with SEGW and CDS"
+ },
+ {
+  "module": "SD",
+  "title": "Billing types and copy control in SAP SD"
+ },
+ {
+  "module": "BASIS",
+  "title": "HANA backup and recovery strategies"
+ },
+ {
+  "module": "TM",
+  "title": "Freight units and freight unit building rules"
+ },
+ {
+  "module": "LOG",
+  "title": "Inbound logistics in S/4HANA: PO to goods receipt in EWM"
  },
  {
   "module": "MM",
@@ -72,48 +164,16 @@
   "title": "Switching from IT support to SAP functional consulting"
  },
  {
-  "module": "MM",
-  "title": "Outline agreements: scheduling agreements vs contracts in SAP MM"
+  "module": "FICO",
+  "title": "Accounts payable in S/4HANA: vendor invoices, credit memos and down payments"
  },
  {
-  "module": "EWM",
-  "title": "Warehouse tasks vs warehouse orders in SAP EWM"
- },
- {
-  "module": "SD",
-  "title": "Sales document types and item categories configuration"
- },
- {
-  "module": "MM",
-  "title": "RFQ and quotation comparison process in SAP MM (ME41, ME47, ME49)"
- },
- {
-  "module": "AI",
-  "title": "Predictive MRP and demand-driven replenishment in S/4HANA"
- },
- {
-  "module": "MM",
-  "title": "Stock transport orders: one-step vs two-step and intra vs inter-company"
- },
- {
-  "module": "Career",
-  "title": "SAP MM consultant salary in India: fresher to senior"
- },
- {
-  "module": "MM",
-  "title": "Third-party procurement process in SAP MM with SD integration"
+  "module": "ABAP",
+  "title": "ABAP RESTful Application Programming model (RAP) basics"
  },
  {
   "module": "SD",
-  "title": "Availability check (ATP) in S/4HANA for SD consultants"
- },
- {
-  "module": "MM",
-  "title": "Pipeline procurement and settlement in SAP MM"
- },
- {
-  "module": "EWM",
-  "title": "Handling unit management and packaging specifications in EWM"
+  "title": "Delivery and shipping point determination in SAP SD"
  },
  {
   "module": "AI",
@@ -121,35 +181,59 @@
  },
  {
   "module": "MM",
-  "title": "Returnable transport packaging (RTP) process in SAP MM"
+  "title": "Outline agreements: scheduling agreements vs contracts in SAP MM"
+ },
+ {
+  "module": "FICO",
+  "title": "Automatic payment program (F110) configuration in S/4HANA"
  },
  {
   "module": "EWM",
-  "title": "Packing work centres and deconsolidation in EWM"
+  "title": "Warehouse tasks vs warehouse orders in SAP EWM"
  },
  {
-  "module": "Career",
-  "title": "SAP EWM consultant salary and demand in India"
- },
- {
-  "module": "MM",
-  "title": "Goods receipt with movement type 101: postings, documents and tables"
- },
- {
-  "module": "EWM",
-  "title": "RF framework in EWM: menus, logical transactions and personalisation"
+  "module": "ABAP",
+  "title": "Creating a Fiori elements app from a CDS view"
  },
  {
   "module": "SD",
-  "title": "Credit management in S/4HANA (FSCM credit management)"
+  "title": "Returns and credit memo process in SAP SD"
+ },
+ {
+  "module": "BASIS",
+  "title": "HANA system replication for high availability"
+ },
+ {
+  "module": "TM",
+  "title": "Freight order management in S/4HANA TM"
+ },
+ {
+  "module": "LOG",
+  "title": "Outbound logistics in S/4HANA: sales order to delivery, EWM picking and TM shipment"
  },
  {
   "module": "MM",
-  "title": "Goods issue, transfer postings and stock types in SAP MM"
+  "title": "RFQ and quotation comparison process in SAP MM (ME41, ME47, ME49)"
  },
  {
   "module": "EWM",
-  "title": "Resource management and queues in SAP EWM"
+  "title": "Handling unit management and packaging specifications in EWM"
+ },
+ {
+  "module": "Career",
+  "title": "SAP MM consultant salary in India: fresher to senior"
+ },
+ {
+  "module": "FICO",
+  "title": "Accounts receivable: customer invoices, incoming payments and dunning"
+ },
+ {
+  "module": "ABAP",
+  "title": "Classic vs new syntax: modern ABAP 7.5 statements you should use"
+ },
+ {
+  "module": "SD",
+  "title": "Intercompany sales process in S/4HANA"
  },
  {
   "module": "AI",
@@ -157,7 +241,95 @@
  },
  {
   "module": "MM",
-  "title": "Movement types in SAP MM: the 30 every consultant must know"
+  "title": "Stock transport orders: one-step vs two-step and intra vs inter-company"
+ },
+ {
+  "module": "FICO",
+  "title": "Dunning procedure configuration in SAP FI"
+ },
+ {
+  "module": "EWM",
+  "title": "Packing work centres and deconsolidation in EWM"
+ },
+ {
+  "module": "ABAP",
+  "title": "Internal tables in ABAP: standard, sorted and hashed"
+ },
+ {
+  "module": "SD",
+  "title": "Output management (BRF+) for sales documents"
+ },
+ {
+  "module": "BASIS",
+  "title": "SAP client administration: client copy, export and import"
+ },
+ {
+  "module": "TM",
+  "title": "Transportation planning: manual planning and the planning cockpit"
+ },
+ {
+  "module": "LOG",
+  "title": "Stock transport between plants with EWM and TM"
+ },
+ {
+  "module": "MM",
+  "title": "Third-party procurement process in SAP MM with SD integration"
+ },
+ {
+  "module": "EWM",
+  "title": "RF framework in EWM: menus, logical transactions and personalisation"
+ },
+ {
+  "module": "Career",
+  "title": "SAP EWM consultant salary and demand in India"
+ },
+ {
+  "module": "FICO",
+  "title": "Bank accounting in S/4HANA: house banks, bank account management and EBS"
+ },
+ {
+  "module": "ABAP",
+  "title": "Object-oriented ABAP: classes, interfaces and exceptions"
+ },
+ {
+  "module": "SD",
+  "title": "Free goods and rebates (settlement management) in S/4HANA"
+ },
+ {
+  "module": "AI",
+  "title": "SAP BTP basics for functional consultants"
+ },
+ {
+  "module": "MM",
+  "title": "Pipeline procurement and settlement in SAP MM"
+ },
+ {
+  "module": "FICO",
+  "title": "Electronic bank statement (EBS) configuration and posting rules"
+ },
+ {
+  "module": "EWM",
+  "title": "Resource management and queues in SAP EWM"
+ },
+ {
+  "module": "ABAP",
+  "title": "ALV reports with CL_SALV_TABLE"
+ },
+ {
+  "module": "BASIS",
+  "title": "Transport management system (STMS) configuration and routes"
+ },
+ {
+  "module": "TM",
+  "title": "Vehicle scheduling and routing (VSR) optimisation in SAP TM"
+ },
+ {
+  "module": "LOG",
+  "title": "Logistics document flow in S/4HANA and how to troubleshoot it"
+ },
+ {
+  "module": "MM",
+  "title": "Returnable transport packaging (RTP) process in SAP MM"
  },
  {
   "module": "EWM",
@@ -168,44 +340,208 @@
   "title": "How to prepare for an SAP MM interview in 30 days"
  },
  {
+  "module": "FICO",
+  "title": "New Asset Accounting in S/4HANA: chart of depreciation and depreciation areas"
+ },
+ {
+  "module": "ABAP",
+  "title": "Enhancements in S/4HANA: BAdIs, user exits and enhancement spots"
+ },
+ {
+  "module": "SD",
+  "title": "Customer master (Business Partner) for SD in S/4HANA"
+ },
+ {
   "module": "MM",
-  "title": "Creating a custom movement type safely (OMJJ) in S/4HANA"
+  "title": "Goods receipt with movement type 101: postings, documents and tables"
+ },
+ {
+  "module": "FICO",
+  "title": "Asset acquisition, transfer and retirement in S/4HANA"
  },
  {
   "module": "EWM",
   "title": "Physical inventory in EWM: annual, cycle counting and ad hoc"
  },
  {
+  "module": "ABAP",
+  "title": "Key user extensibility vs developer extensibility in S/4HANA"
+ },
+ {
   "module": "SD",
-  "title": "Billing types and copy control in SAP SD"
+  "title": "Partner determination in SAP SD"
+ },
+ {
+  "module": "BASIS",
+  "title": "Managing transport requests and imports safely"
+ },
+ {
+  "module": "TM",
+  "title": "Carrier selection and tendering in SAP TM"
+ },
+ {
+  "module": "LOG",
+  "title": "Available-to-promise and supply chain planning basics for logistics consultants"
  },
  {
   "module": "MM",
-  "title": "Reservations and MRP-driven goods issue in SAP MM"
+  "title": "Goods issue, transfer postings and stock types in SAP MM"
  },
  {
   "module": "EWM",
   "title": "Cross-docking in SAP EWM: opportunistic and planned"
  },
  {
-  "module": "AI",
-  "title": "SAP BTP basics for functional consultants"
+  "module": "Career",
+  "title": "Scenario-based SAP EWM interview questions with answers"
+ },
+ {
+  "module": "FICO",
+  "title": "Depreciation run (AFAB) and asset year-end closing"
+ },
+ {
+  "module": "ABAP",
+  "title": "SmartForms and Adobe Forms: when to use which"
+ },
+ {
+  "module": "SD",
+  "title": "Incompletion procedure configuration in SAP SD"
+ },
+ {
+  "module": "MM",
+  "title": "Movement types in SAP MM: the 30 every consultant must know"
+ },
+ {
+  "module": "FICO",
+  "title": "Cost element accounting in S/4HANA: GL accounts as cost elements"
+ },
+ {
+  "module": "EWM",
+  "title": "Value-added services (VAS) in SAP EWM"
+ },
+ {
+  "module": "ABAP",
+  "title": "BAPIs and RFCs: calling SAP functions from outside"
+ },
+ {
+  "module": "SD",
+  "title": "Consignment process in SAP SD (fill-up, issue, return, pick-up)"
+ },
+ {
+  "module": "BASIS",
+  "title": "User administration (SU01) and mass user maintenance"
+ },
+ {
+  "module": "TM",
+  "title": "Charge calculation: rate tables, calculation sheets and agreements"
+ },
+ {
+  "module": "LOG",
+  "title": "SAP logistics master data: material, business partner, plant and storage"
+ },
+ {
+  "module": "MM",
+  "title": "Creating a custom movement type safely (OMJJ) in S/4HANA"
+ },
+ {
+  "module": "EWM",
+  "title": "Kitting in SAP EWM: kit-to-order and kit-to-stock"
+ },
+ {
+  "module": "Career",
+  "title": "SAP certification for MM and EWM: is it worth it?"
+ },
+ {
+  "module": "FICO",
+  "title": "Cost center accounting: planning, allocations and assessments"
+ },
+ {
+  "module": "ABAP",
+  "title": "IDocs in SAP: message types, partner profiles and monitoring (WE02, BD87)"
+ },
+ {
+  "module": "SD",
+  "title": "Third-party and individual purchase orders from SD"
+ },
+ {
+  "module": "MM",
+  "title": "Reservations and MRP-driven goods issue in SAP MM"
+ },
+ {
+  "module": "FICO",
+  "title": "Profit center accounting in S/4HANA"
+ },
+ {
+  "module": "EWM",
+  "title": "Production supply in EWM: PMR and staging"
+ },
+ {
+  "module": "ABAP",
+  "title": "ABAP debugging techniques every developer should know"
+ },
+ {
+  "module": "SD",
+  "title": "Top 25 SAP SD interview questions with scenario answers"
+ },
+ {
+  "module": "BASIS",
+  "title": "Role design and authorisation concept (PFCG) in S/4HANA"
+ },
+ {
+  "module": "TM",
+  "title": "Freight settlement and integration with MM invoice verification"
+ },
+ {
+  "module": "LOG",
+  "title": "Integration points between logistics and finance in S/4HANA"
  },
  {
   "module": "MM",
   "title": "Physical inventory process: MI01, MI04, MI07 and cycle counting"
  },
  {
+  "module": "EWM",
+  "title": "Quality inspection integration in EWM (QIE)"
+ },
+ {
   "module": "Career",
-  "title": "Scenario-based SAP EWM interview questions with answers"
+  "title": "How to build an SAP consultant resume with no project experience"
+ },
+ {
+  "module": "FICO",
+  "title": "Internal orders: settlement rules and budgeting"
+ },
+ {
+  "module": "ABAP",
+  "title": "Performance tuning in ABAP on HANA (SQL trace, ATC checks)"
  },
  {
   "module": "MM",
   "title": "Logistics invoice verification (MIRO) step by step"
  },
  {
+  "module": "FICO",
+  "title": "Product costing basics: cost estimates, costing variants and CK11N"
+ },
+ {
   "module": "EWM",
-  "title": "Value-added services (VAS) in SAP EWM"
+  "title": "Labour management in SAP EWM"
+ },
+ {
+  "module": "ABAP",
+  "title": "ABAP unit testing basics"
+ },
+ {
+  "module": "BASIS",
+  "title": "Analysing authorisation errors with SU53 and STAUTHTRACE"
+ },
+ {
+  "module": "TM",
+  "title": "Shipper scenario vs logistics service provider (LSP) scenario in SAP TM"
+ },
+ {
+  "module": "LOG",
+  "title": "Building a career as an SAP logistics consultant (MM, SD, EWM, TM)"
  },
  {
   "module": "MM",
@@ -213,19 +549,47 @@
  },
  {
   "module": "EWM",
-  "title": "Kitting in SAP EWM: kit-to-order and kit-to-stock"
+  "title": "Warehouse monitor (/SCWM/MON) for daily operations"
+ },
+ {
+  "module": "Career",
+  "title": "Day in the life of an SAP MM support consultant"
+ },
+ {
+  "module": "FICO",
+  "title": "Month-end and year-end closing checklist for SAP FICO consultants"
+ },
+ {
+  "module": "ABAP",
+  "title": "ABAP Development Tools (ADT) in Eclipse: setup and tips"
  },
  {
   "module": "MM",
   "title": "Evaluated receipt settlement (ERS) with MRRL"
  },
  {
-  "module": "EWM",
-  "title": "Production supply in EWM: PMR and staging"
+  "module": "FICO",
+  "title": "GST configuration in SAP S/4HANA for India"
  },
  {
-  "module": "Career",
-  "title": "SAP certification for MM and EWM: is it worth it?"
+  "module": "EWM",
+  "title": "Exception handling and exception codes in SAP EWM"
+ },
+ {
+  "module": "ABAP",
+  "title": "Clean core and ABAP Cloud: what changes for developers"
+ },
+ {
+  "module": "BASIS",
+  "title": "SAP kernel upgrade step by step"
+ },
+ {
+  "module": "TM",
+  "title": "Order-based vs delivery-based transportation requirements"
+ },
+ {
+  "module": "LOG",
+  "title": "Real-world SAP logistics project scenarios for interviews"
  },
  {
   "module": "MM",
@@ -233,35 +597,55 @@
  },
  {
   "module": "EWM",
-  "title": "Quality inspection integration in EWM (QIE)"
+  "title": "Post processing framework (PPF) and printing in EWM"
  },
  {
-  "module": "SD",
-  "title": "Delivery and shipping point determination in SAP SD"
+  "module": "Career",
+  "title": "Implementation vs support projects: what freshers should choose"
+ },
+ {
+  "module": "FICO",
+  "title": "Withholding tax (TDS) configuration in SAP for India"
+ },
+ {
+  "module": "ABAP",
+  "title": "Top 25 SAP ABAP interview questions with answers"
  },
  {
   "module": "MM",
   "title": "Planned and unplanned delivery costs in invoice verification"
  },
  {
+  "module": "FICO",
+  "title": "Foreign currency valuation (FAGL_FCV) in S/4HANA"
+ },
+ {
   "module": "EWM",
-  "title": "Labour management in SAP EWM"
+  "title": "EWM master data: products, packaging and bins upload"
+ },
+ {
+  "module": "BASIS",
+  "title": "Applying SAP Notes with SNOTE and support package updates (SPAM/SAINT)"
+ },
+ {
+  "module": "TM",
+  "title": "SAP TM integration with SD and MM documents"
  },
  {
   "module": "MM",
   "title": "Material valuation: standard price vs moving average price"
  },
  {
-  "module": "Career",
-  "title": "How to build an SAP consultant resume with no project experience"
- },
- {
   "module": "EWM",
-  "title": "Warehouse monitor (/SCWM/MON) for daily operations"
+  "title": "Stock types and availability groups in embedded EWM"
  },
  {
-  "module": "SD",
-  "title": "Returns and credit memo process in SAP SD"
+  "module": "Career",
+  "title": "SAP Activate methodology explained for consultants"
+ },
+ {
+  "module": "FICO",
+  "title": "Top 25 SAP FICO interview questions with scenario answers"
  },
  {
   "module": "MM",
@@ -269,15 +653,15 @@
  },
  {
   "module": "EWM",
-  "title": "Exception handling and exception codes in SAP EWM"
+  "title": "EWM and TM integration basics"
  },
  {
-  "module": "EWM",
-  "title": "Post processing framework (PPF) and printing in EWM"
+  "module": "BASIS",
+  "title": "Background job administration (SM36, SM37)"
  },
  {
-  "module": "Career",
-  "title": "Day in the life of an SAP MM support consultant"
+  "module": "TM",
+  "title": "SAP TM and EWM integration for outbound shipments"
  },
  {
   "module": "MM",
@@ -285,15 +669,11 @@
  },
  {
   "module": "EWM",
-  "title": "EWM master data: products, packaging and bins upload"
+  "title": "Material flow system (MFS) basics in SAP EWM"
  },
  {
-  "module": "SD",
-  "title": "Intercompany sales process in S/4HANA"
- },
- {
-  "module": "EWM",
-  "title": "Stock types and availability groups in embedded EWM"
+  "module": "Career",
+  "title": "Fit-to-standard workshops: a consultant's guide"
  },
  {
   "module": "MM",
@@ -301,19 +681,15 @@
  },
  {
   "module": "EWM",
-  "title": "EWM and TM integration basics"
+  "title": "Serial numbers and batches in SAP EWM"
  },
  {
-  "module": "Career",
-  "title": "Implementation vs support projects: what freshers should choose"
+  "module": "BASIS",
+  "title": "System monitoring with ST22, SM21, SM50 and ST03N"
  },
  {
-  "module": "EWM",
-  "title": "Material flow system (MFS) basics in SAP EWM"
- },
- {
-  "module": "SD",
-  "title": "Output management (BRF+) for sales documents"
+  "module": "TM",
+  "title": "Transportation network: locations, zones and lanes"
  },
  {
   "module": "MM",
@@ -321,7 +697,11 @@
  },
  {
   "module": "EWM",
-  "title": "Serial numbers and batches in SAP EWM"
+  "title": "Returns process in SAP EWM"
+ },
+ {
+  "module": "Career",
+  "title": "How to explain your SAP project in an interview"
  },
  {
   "module": "MM",
@@ -329,19 +709,15 @@
  },
  {
   "module": "EWM",
-  "title": "Returns process in SAP EWM"
- },
- {
-  "module": "Career",
-  "title": "SAP Activate methodology explained for consultants"
- },
- {
-  "module": "EWM",
   "title": "Top 20 SAP EWM error messages and how to fix them"
  },
  {
-  "module": "SD",
-  "title": "Free goods and rebates (settlement management) in S/4HANA"
+  "module": "BASIS",
+  "title": "Printer and spool administration in SAP"
+ },
+ {
+  "module": "TM",
+  "title": "Event management and tracking in SAP TM"
  },
  {
   "module": "MM",
@@ -352,6 +728,10 @@
   "title": "SAP EWM tables and BAdIs every consultant should know"
  },
  {
+  "module": "Career",
+  "title": "Common mistakes new SAP consultants make in their first project"
+ },
+ {
   "module": "MM",
   "title": "Shelf life expiration date (SLED) handling in SAP MM"
  },
@@ -360,8 +740,12 @@
   "title": "Advanced shipping and receiving (ASR) in S/4HANA EWM"
  },
  {
-  "module": "Career",
-  "title": "Fit-to-standard workshops: a consultant's guide"
+  "module": "BASIS",
+  "title": "RFC destinations and SM59 connection troubleshooting"
+ },
+ {
+  "module": "TM",
+  "title": "Basic shipping vs advanced TM in S/4HANA licensing"
  },
  {
   "module": "MM",
@@ -372,32 +756,40 @@
   "title": "Warehouse billing and storage billing in EWM"
  },
  {
-  "module": "EWM",
-  "title": "Migrating from WM to embedded EWM in S/4HANA"
- },
- {
-  "module": "EWM",
-  "title": "Basic vs advanced EWM: licensing and feature differences"
- },
- {
   "module": "Career",
-  "title": "How to explain your SAP project in an interview"
+  "title": "SAP S/4HANA Cloud vs on-premise for MM consultants"
  },
  {
   "module": "MM",
   "title": "MRP basics for MM consultants: MRP types, lot sizes and planning"
  },
  {
+  "module": "EWM",
+  "title": "Migrating from WM to embedded EWM in S/4HANA"
+ },
+ {
+  "module": "BASIS",
+  "title": "SAP Fiori launchpad and gateway administration for BASIS"
+ },
+ {
+  "module": "TM",
+  "title": "Top 20 SAP TM interview questions with answers"
+ },
+ {
   "module": "MM",
   "title": "Reorder point planning (VB) configuration in SAP MM"
  },
  {
-  "module": "Career",
-  "title": "Common mistakes new SAP consultants make in their first project"
+  "module": "EWM",
+  "title": "Basic vs advanced EWM: licensing and feature differences"
  },
  {
   "module": "MM",
   "title": "Fiori apps every SAP MM consultant should know in S/4HANA"
+ },
+ {
+  "module": "BASIS",
+  "title": "S/4HANA system conversion: BASIS tasks with SUM and DMO"
  },
  {
   "module": "MM",
@@ -408,8 +800,8 @@
   "title": "SAP Ariba and S/4HANA integration basics for MM consultants"
  },
  {
-  "module": "Career",
-  "title": "SAP S/4HANA Cloud vs on-premise for MM consultants"
+  "module": "BASIS",
+  "title": "SAP Solution Manager / Cloud ALM overview for BASIS"
  },
  {
   "module": "MM",
@@ -420,12 +812,20 @@
   "title": "Purchase order history and document flow troubleshooting"
  },
  {
+  "module": "BASIS",
+  "title": "Security hardening checklist for SAP systems"
+ },
+ {
   "module": "MM",
   "title": "SAP MM tables cheat sheet: EKKO, EKPO, MSEG, MATDOC, MARD and more"
  },
  {
   "module": "MM",
   "title": "MATDOC in S/4HANA: the new inventory data model explained"
+ },
+ {
+  "module": "BASIS",
+  "title": "Top 25 SAP BASIS interview questions with answers"
  },
  {
   "module": "MM",
