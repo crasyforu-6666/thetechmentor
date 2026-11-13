@@ -313,7 +313,7 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
   <link rel="icon" href="../images/logo-mark.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="../site.css?v=5" />
+  <link rel="stylesheet" href="../site.css?v=6" />
   <link rel="stylesheet" href="ai-article.css?v=3" />
   <script type="application/ld+json">{ld_json}</script>
   <script src="../site-config.js"></script>
@@ -327,6 +327,7 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul class="nav-links">
         <li><a href="../index.html#courses">Courses</a></li>
+        <li><a href="../digital-products">Digital Products</a></li>
         <li><a href="../index.html#paths">Career paths</a></li>
         <li><a href="index.html">Blog</a></li>
         <li><a href="../index.html#advisor" class="btn btn-ghost btn-sm">Free counselling</a></li>
@@ -405,7 +406,7 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
         <p>Online SAP S/4HANA academy for logistics, procurement and warehouse careers.</p>
       </div>
       <div><h4>Courses</h4><ul><li><a href="../index.html#courses">All courses</a></li><li><a href="../index.html#paths">Career paths</a></li><li><a href="../index.html#formats">Live vs self-paced</a></li></ul></div>
-      <div><h4>Resources</h4><ul><li><a href="index.html">Blog</a></li><li><a href="../index.html#faq">FAQ</a></li><li><a href="../index.html#advisor">Free counselling</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="../digital-products">Digital Products</a></li><li><a href="index.html">Blog</a></li><li><a href="../index.html#faq">FAQ</a></li><li><a href="../index.html#advisor">Free counselling</a></li></ul></div>
       <div><h4>Contact</h4><ul><li><a href="mailto:info@youronementor.com">info@youronementor.com</a></li><li><a href="https://wa.me/917848942021" target="_blank" rel="noopener noreferrer">WhatsApp +91 78489 42021</a></li></ul></div>
       <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li><li><a href="../refund.html">Refunds</a></li></ul></div>
     </div>

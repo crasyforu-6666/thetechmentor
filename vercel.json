@@ -24,6 +24,17 @@
       "source": "/blog/ewm-wave-management-explained.html",
       "destination": "/blog/sap-ewm-wave-management-wocr-configuration.html",
       "permanent": true
+    },
+    {
+      "source": "/digital-products.html",
+      "destination": "/digital-products",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/digital-products",
+      "destination": "/digital-products.html"
     }
   ]
 }

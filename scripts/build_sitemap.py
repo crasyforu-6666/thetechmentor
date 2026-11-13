@@ -48,6 +48,8 @@ def url_for(rel):
         return BASE + "/"
     if rel == "blog/index.html":
         return BASE + "/blog/"
+    if rel == "digital-products.html":
+        return BASE + "/digital-products"
     return BASE + "/" + rel
 
 
