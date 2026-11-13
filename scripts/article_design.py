@@ -389,7 +389,7 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
 
       <div class="blog-course-cta ai-cta">
         <h3>Learn SAP hands-on with theTechMentor</h3>
-        <p>Live weekend batches or self-paced videos, with S/4HANA practice server access and interview preparation.</p>
+        <p>Live weekday &amp; weekend batches or 24/7 recorded courses, with S/4HANA practice server access and interview preparation.</p>
         <div class="blog-cta-actions">
           <a href="../index.html#pricing" class="btn btn-primary">See programs &amp; fees</a>
           <a href="../index.html#enroll" class="btn btn-outline">Book a free 15-min call</a>
