@@ -355,3 +355,14 @@
 [2026-11-13 08:06:00] ✅ Updated homepage index.html with new blog card
 [2026-11-13 08:06:00] ✅ Updated blog/index.html hub with new blog card
 [2026-11-13 08:06:00] 🎉 Successfully published article 'Mastering Material Master Views in S/4HANA: A Field-by-Field Deep Dive for MM & EWM Consultants'!
+[2026-11-13 16:31:00] 🚀 Starting Autonomous Twice-Daily Blog Publishing Routine...
+[2026-11-13 16:31:00] 🎯 Target SAP Domain : [JOULE] SAP Joule AI / Autonomous ERP
+[2026-11-13 16:31:00] 📌 Selected Trending Topic: SAP FICO organisational structure in S/4HANA: company code, controlling area, chart of accounts
+[2026-11-13 16:31:00] 📌 Primary SEO Keyword : sap fico organisational structure in s/4hana
+[2026-11-13 16:31:00] 📌 Target Article Slug  : sap-fico-organisational-structure-in-s-4hana-company-code-controlling-area-chart
+[2026-11-13 16:31:40] ✍️ Article written: Mastering SAP FICO Organisational Structure in S/4HANA: Company Code, Controlling Area, and Chart of Accounts (2908 words)
+[2026-11-13 16:31:42] ✅ Generated Article Page: /home/runner/work/thetechmentor/thetechmentor/blog/sap-fico-organisational-structure-s4hana-guide.html
+[2026-11-13 16:31:42] ✅ Updated blog/custom-blogs.js repository file
+[2026-11-13 16:31:42] ✅ Updated homepage index.html with new blog card
+[2026-11-13 16:31:42] ✅ Updated blog/index.html hub with new blog card
+[2026-11-13 16:31:42] 🎉 Successfully published article 'Mastering SAP FICO Organisational Structure in S/4HANA: Company Code, Controlling Area, and Chart of Accounts'!

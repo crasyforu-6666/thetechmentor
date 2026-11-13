@@ -103,5 +103,12 @@
   "slug": "material-master-views-s4hana-field-by-field-guide",
   "title": "Mastering Material Master Views in S/4HANA: A Field-by-Field Deep Dive for MM & EWM Consultants",
   "date": "2026-11-13"
+ },
+ {
+  "topic": "SAP FICO organisational structure in S/4HANA: company code, controlling area, chart of accounts",
+  "module": "FICO",
+  "slug": "sap-fico-organisational-structure-s4hana-guide",
+  "title": "Mastering SAP FICO Organisational Structure in S/4HANA: Company Code, Controlling Area, and Chart of Accounts",
+  "date": "2026-11-13"
  }
 ]

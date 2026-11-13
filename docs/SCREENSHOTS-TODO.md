@@ -147,3 +147,11 @@ Folder: `images/blog/material-master-views-s4hana-field-by-field-guide/`
 - [ ] 03: MM02: Purchasing view, highlighting Purchasing Group and Order Unit
 - [ ] 04: MM02: Warehouse Management 1 view, highlighting Storage Condition and Storage Type
 - [ ] 05: MM02: Accounting 1 view, highlighting Valuation Class and Price Control
+
+## Mastering SAP FICO Organisational Structure in S/4HANA: Company Code, Controlling Area, and Chart of Accounts
+Folder: `images/blog/sap-fico-organisational-structure-s4hana-guide/`
+- [ ] 01: T-code OX02: Define Company Code - showing basic details like name, city, country.
+- [ ] 02: T-code OBY6: Global Parameters for Company Code - showing assigned Chart of Accounts, Fiscal Year Variant.
+- [ ] 03: T-code OB13: Edit Chart of Accounts List - showing creation of new Chart of Accounts.
+- [ ] 04: T-code OB62: Assign Company Code to Chart of Accounts - showing the linkage.
+- [ ] 05: T-code OKKP: Maintain Controlling Area - showing basic data and assignment of company codes.

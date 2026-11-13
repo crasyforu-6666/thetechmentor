@@ -494,5 +494,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-13",
     excerpt: "This comprehensive guide demystifies SAP S/4HANA Material Master views, providing a field-by-field explanation crucial for MM and EWM consultants in India.",
     imageUrl: "https://youronementor.com/blog/covers/material-master-views-s4hana-field-by-field-guide.svg"
+  },
+  {
+    id: "post_1794587502435",
+    title: "Mastering SAP FICO Organisational Structure in S/4HANA: Company Code, Controlling Area, and Chart of Accounts",
+    slug: "sap-fico-organisational-structure-s4hana-guide",
+    category: "Tutorial",
+    badge: "SAP FICO TUTORIAL",
+    readTime: "13 min read",
+    date: "Nov 13, 2026",
+    isoDate: "2026-11-13",
+    excerpt: "Demystify SAP FICO organisational structure in S/4HANA. Learn about Company Code, Controlling Area, Chart of Accounts, and their critical configuration and integration for logistics.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-fico-organisational-structure-s4hana-guide.svg"
   }
 ];
