@@ -271,14 +271,14 @@ button.link { background: none; border: 0; color: var(--blue); font: inherit; cu
 .cta-band h2 { color: #fff; margin: 0 0 .3rem; }
 .cta-band p { color: #dbeafe; margin: 0; }
 .cta-actions { display: flex; gap: .7rem; flex-wrap: wrap; }
-.footer { background: #0b1220; color: #94a3b8; }
+.footer { background: #070a17; color: #94a3b8; overflow: hidden; }
 .footer-grid { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 2rem; padding: 3.5rem 0 2rem; }
 .footer h4 { color: #fff; font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; }
 .footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; font-size: .9rem; }
 .footer a { color: #cbd5e1; text-decoration: none; }
 .footer a:hover { color: #fff; }
 .footer-brand p { margin-top: .8rem; font-size: .9rem; }
-.footer-bottom { border-top: 1px solid #1e293b; padding: 1.2rem 0 1.6rem; font-size: .8rem; }
+.footer-bottom { border-top: 1px solid #1e293b; padding: 1.2rem 0 .5rem; font-size: .8rem; }
 
 /* ---------- Modal + sticky bar ---------- */
 .modal-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, .55); display: grid; place-items: center; z-index: 100; padding: 16px; }
@@ -353,3 +353,8 @@ button.link { background: none; border: 0; color: var(--blue); font: inherit; cu
 #modal-pay-btn:hover { background: #ea580c; }
 @media (max-width: 900px) { .formats-2 { grid-template-columns: 1fr; } }
 @media (max-width: 420px) { .form-2 { grid-template-columns: 1fr; } }
+
+/* Big brand wordmark at the foot of the page */
+.footer-wordmark { width: 100%; line-height: 0; margin-top: .5rem; pointer-events: none; user-select: none; }
+.footer-wordmark img { display: block; width: 100%; height: auto; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 35%); mask-image: linear-gradient(to bottom, transparent 0%, #000 35%); }
+@media (max-width: 640px) { .footer-wordmark { padding-bottom: 76px; } .footer { padding-bottom: 0 !important; } }

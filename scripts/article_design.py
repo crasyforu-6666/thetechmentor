@@ -313,7 +313,7 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
   <link rel="icon" href="../images/logo-mark.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="../site.css?v=1" />
+  <link rel="stylesheet" href="../site.css?v=5" />
   <link rel="stylesheet" href="ai-article.css?v=3" />
   <script type="application/ld+json">{ld_json}</script>
   <script src="../site-config.js"></script>
@@ -410,6 +410,7 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
       <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li><li><a href="../refund.html">Refunds</a></li></ul></div>
     </div>
     <div class="wrap footer-bottom"><p>© {today.year} theTechMentor. SAP and S/4HANA are trademarks of SAP SE; theTechMentor is not affiliated with SAP SE.</p></div>
+    <div class="footer-wordmark" aria-hidden="true"><img src="../images/footer-wordmark.webp" alt="" width="2000" height="306" loading="lazy" /></div>
   </footer>
   <script src="blog-leads.js"></script>
   <script>document.querySelector(".nav-toggle")?.addEventListener("click",function(){{var l=document.querySelector(".nav-links");var o=l.classList.toggle("open");this.setAttribute("aria-expanded",String(o));}});</script>
