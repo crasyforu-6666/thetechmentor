@@ -313,7 +313,7 @@ def render(article: dict, related: list, word_count: int, published_iso: str = N
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
   <link rel="icon" href="../images/logo-mark.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="../site.css?v=6" />
+  <link rel="stylesheet" href="../site.css?v=7" />
   <link rel="stylesheet" href="ai-article.css?v=3" />
   <script type="application/ld+json">{ld_json}</script>
   <script src="../site-config.js"></script>
