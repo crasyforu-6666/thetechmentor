@@ -482,5 +482,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-12",
     excerpt: "Dive into the core of SAP MM by understanding and configuring its organisational structure in S/4HANA. Learn about Company Code, Plant, Storage Location, and Purchasing Organization with practical, consultant-level insights.",
     imageUrl: "https://youronementor.com/blog/covers/sap-mm-organisational-structure-s4hana.svg"
+  },
+  {
+    id: "post_1794557160310",
+    title: "Mastering Material Master Views in S/4HANA: A Field-by-Field Deep Dive for MM & EWM Consultants",
+    slug: "material-master-views-s4hana-field-by-field-guide",
+    category: "Tutorial",
+    badge: "SAP MM TUTORIAL",
+    readTime: "10 min read",
+    date: "Nov 13, 2026",
+    isoDate: "2026-11-13",
+    excerpt: "This comprehensive guide demystifies SAP S/4HANA Material Master views, providing a field-by-field explanation crucial for MM and EWM consultants in India.",
+    imageUrl: "https://youronementor.com/blog/covers/material-master-views-s4hana-field-by-field-guide.svg"
   }
 ];

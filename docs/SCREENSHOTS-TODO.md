@@ -139,3 +139,11 @@ Folder: `images/blog/sap-mm-organisational-structure-s4hana/`
 - [ ] 03: OX09 - Storage Location configuration (displaying existing entries for a plant)
 - [ ] 04: OX08 - Purchasing Organization definition screen
 - [ ] 05: OMGF - Assign Purchasing Organization to Company Code screen
+
+## Mastering Material Master Views in S/4HANA: A Field-by-Field Deep Dive for MM & EWM Consultants
+Folder: `images/blog/material-master-views-s4hana-field-by-field-guide/`
+- [ ] 01: MM01: Initial screen, selecting views for material creation
+- [ ] 02: MM02: Basic Data 1 view, highlighting Material Group and Base Unit of Measure
+- [ ] 03: MM02: Purchasing view, highlighting Purchasing Group and Order Unit
+- [ ] 04: MM02: Warehouse Management 1 view, highlighting Storage Condition and Storage Type
+- [ ] 05: MM02: Accounting 1 view, highlighting Valuation Class and Price Control
