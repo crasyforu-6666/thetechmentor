@@ -163,3 +163,11 @@ Folder: `images/blog/sap-ewm-warehouse-structure-storage-types-sections-bins/`
 - [ ] 03: Transaction /SCWM/BIN: Create Storage Bins (showing template and coordinate structure)
 - [ ] 04: Transaction /SCWM/MON: Storage Bin view (showing bin master data details)
 - [ ] 05: SPRO: Assign Storage Bins to Activity Areas
+
+## SAP MM OBYC Account Determination: S/4HANA Automatic Posting Masterclass
+Folder: `images/blog/sap-mm-obyc-account-determination-s4hana-masterclass/`
+- [ ] 01: OBYC initial screen showing the list of transaction keys such as BSX, WRX, GBB and PRD
+- [ ] 02: OBYC GBB table with general modifications VBR, VNG and valuation class 3000 with accounts
+- [ ] 03: OMWB simulation of movement type 201 showing debit and credit accounts
+- [ ] 04: MB03 material document with the linked FI document showing the BSX line item
+- [ ] 05: Material master Accounting 1 view showing the valuation class field

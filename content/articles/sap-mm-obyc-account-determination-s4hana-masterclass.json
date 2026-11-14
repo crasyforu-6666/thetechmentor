@@ -1,0 +1,119 @@
+{
+ "seo_title": "SAP MM OBYC Account Determination in S/4HANA Explained",
+ "h1": "SAP MM OBYC Account Determination: S/4HANA Automatic Posting Masterclass",
+ "meta_description": "SAP MM OBYC account determination explained: BSX, WRX, GBB, PRD, valuation class, modifiers, config steps and error fixes. Learn it with worked examples.",
+ "slug": "sap-mm-obyc-account-determination-s4hana-masterclass",
+ "category": "Tutorial",
+ "module": "MM",
+ "level": "Intermediate",
+ "badge": "SAP MM TUTORIAL",
+ "excerpt": "How OBYC automatic account determination works in S/4HANA: valuation class, transaction keys BSX, WRX, GBB, PRD, modifiers, configuration steps, errors and interview questions.",
+ "intro_html": "<p>Every goods movement and invoice receipt in SAP MM creates an accounting document, and nobody types the G/L accounts. The system picks them through <strong>SAP MM OBYC account determination</strong>. When it is configured wrongly, you see \"Account determination for entry XYZ 3000 BSX not possible\" in production at month-end, and the whole warehouse stops posting.</p><p>This guide shows how the logic works end to end: material master to valuation class, then transaction key, modifier and G/L account. You will learn the main keys (BSX, WRX, GBB, PRD, UMB, KDM), how to configure them in <code>OBYC</code>, how to trace a posting, and how to fix the usual errors. It also covers what changed in S/4HANA and the questions interviewers ask.</p>",
+ "sections": [
+  {
+   "heading": "How OBYC account determination works",
+   "html": "<p><code>OBYC</code> (Configuration of Automatic Postings – Inventory Management) is the table-driven bridge between Materials Management and Financial Accounting. The system does not look at the material for a G/L account. It builds a lookup key from several attributes and finds the account in a customizing table.</p><p>The lookup chain for a goods movement is:</p><ol><li>The movement type (for example 101, 261, 301) determines the <strong>transaction/event key</strong> through the table <code>T156</code> and the posting string logic (<code>T156S</code>, value string).</li><li>The material's <strong>valuation class</strong> (field in the Accounting 1 view, table <code>MBEW-BKLAS</code>) is mapped through the <strong>valuation grouping code</strong> and the chart of accounts (<code>OMSK</code>).</li><li>Where needed, the <strong>general modification</strong> (account modifier) is added, such as the value from the movement type's account grouping.</li><li>The <strong>chart of accounts</strong>, via the valuation area's company code, selects the G/L account in <code>T030</code>.</li></ol><p>So the effective key is: chart of accounts + transaction key + (valuation grouping code) + (modifier) + valuation class = G/L account. Not every key uses all dimensions, which is why each key's configuration screen looks different.</p><aside class=\"note\"><strong>ECC vs S/4HANA:</strong> The OBYC logic is the same, but in S/4HANA the postings flow into the Universal Journal table <code>ACDOCA</code>, and the material ledger is mandatory. See our <a href=\"sap-s4hana-universal-journal-acdoca-guide.html\">Universal Journal guide</a>. Also, the material master field is still valuation class, but the material number length can be 40 characters.</aside>"
+  },
+  {
+   "heading": "Material type, valuation class and account category reference",
+   "html": "<p>The valuation class is the most important link. It is not defined on the material type directly. It is assigned in the material master (Accounting 1) and restricted by the <strong>account category reference</strong> on the material type's valuation setup.</p><table><thead><tr><th>Step</th><th>Path / T-code</th><th>What you do</th></tr></thead><tbody><tr><td>1</td><td><code>SPRO &gt; Materials Management &gt; Valuation and Account Assignment &gt; Account Determination &gt; Account Determination Without Wizard &gt; Define Valuation Classes</code> (<code>OMSK</code>)</td><td>Create account category reference (e.g. 0001 Raw/Trading) and valuation classes (3000 Raw Materials, 7900 Semi-finished, 7920 Finished goods)</td></tr><tr><td>2</td><td>Same node, <em>Define Account Category Reference</em></td><td>Link which valuation classes are allowed for an account category reference</td></tr><tr><td>3</td><td>Material type (<code>OMS2</code>)</td><td>Assign the account category reference to the material type</td></tr><tr><td>4</td><td><code>MM01</code>/<code>MM02</code> Accounting 1</td><td>User selects a valuation class from the allowed list</td></tr></tbody></table><p>The standard design practice is to keep valuation classes aligned to the type of inventory account: raw materials, packaging, semi-finished, finished goods, trading goods, spares. Do not create one class per material, because every class multiplies the OBYC entries you must maintain. Our <a href=\"material-master-views-s4hana-field-by-field-guide.html\">material master views guide</a> covers the Accounting view fields.</p><aside class=\"warning\"><strong>Warning:</strong> Changing the valuation class on a material that has stock is restricted. In S/4HANA you need the stock to be zero or use the revaluation approach. Plan the class design before go-live, because correction later means a lot of postings.</aside>"
+  },
+  {
+   "heading": "Key transaction keys: BSX, WRX, GBB, PRD, UMB, KDM",
+   "html": "<p>You will meet these keys in every implementation. Learn what each one posts, and which dimensions it needs.</p><table><thead><tr><th>Key</th><th>Purpose</th><th>Dimensions</th><th>Typical account</th></tr></thead><tbody><tr><td><code>BSX</code></td><td>Inventory posting (stock account)</td><td>Valuation class</td><td>Raw material stock</td></tr><tr><td><code>WRX</code></td><td>GR/IR clearing account</td><td>Valuation class (often same account for all)</td><td>GR/IR clearing</td></tr><tr><td><code>GBB</code></td><td>Offsetting entry for inventory posting (consumption, scrap, issues to cost center, GI to order, initial stock entry)</td><td>General modification + valuation class</td><td>Consumption, scrap, offsetting entry</td></tr><tr><td><code>PRD</code></td><td>Price differences (standard price materials)</td><td>Valuation class</td><td>Purchase price variance</td></tr><tr><td><code>UMB</code></td><td>Revaluation gains and losses (e.g. <code>MR21</code>)</td><td>Valuation class</td><td>Price difference gain/loss</td></tr><tr><td><code>KDM</code></td><td>Exchange rate differences in MM invoice verification</td><td>Valuation class</td><td>FX gain/loss</td></tr><tr><td><code>BSV</code></td><td>Change in stock value from delivery costs</td><td>Valuation class</td><td>Inventory change</td></tr><tr><td><code>AUM</code></td><td>Cross-company/plant stock transfer</td><td>Valuation class</td><td>Transfer clearing</td></tr></tbody></table><p>Keep in mind: <code>BSX</code> is the debit side of a goods receipt (101) into stock, while <code>WRX</code> is the credit side to GR/IR. For a goods issue to a cost center (201), <code>GBB</code> with modifier <code>VBR</code> is the debit to expense and <code>BSX</code> the credit to stock.</p><aside class=\"tip\"><strong>Tip:</strong> To see which keys a movement type uses, go to <code>OMWB</code> (Simulation of automatic postings), enter a movement type and valuation class, and the system displays the debit and credit accounts without a real posting.</aside>"
+  },
+  {
+   "heading": "General modification: BSA, VBR, VNG, and others for GBB",
+   "html": "<p>The <code>GBB</code> key is used by many movement types, so the system adds an <strong>account modifier</strong> (general modification) to separate them. It comes from the movement type's reference in <code>T156</code>/<code>T156S</code> and is visible in <code>OMJJ</code> (Customizing: new movement types) under the posting string reference and account grouping.</p><table><thead><tr><th>Modifier</th><th>Used for</th><th>Example movement types</th></tr></thead><tbody><tr><td><code>BSA</code></td><td>Initial entry of stock balances</td><td>561</td></tr><tr><td><code>VBR</code></td><td>Consumption posting for internal goods issue (cost center)</td><td>201, 202</td></tr><tr><td><code>VNG</code></td><td>Scrapping / loss in goods receipt</td><td>551, 552</td></tr><tr><td><code>AUF</code></td><td>Goods receipt for production order offset</td><td>101 against order, 261</td></tr><tr><td><code>INV</code></td><td>Inventory difference (physical inventory)</td><td>701, 702</td></tr><tr><td><code>VAX</code>/<code>VAY</code></td><td>Delivery-related consumption (sales order)</td><td>601</td></tr><tr><td><code>ZOB</code></td><td>Goods receipt without PO</td><td>501</td></tr></tbody></table><p>For a worked example, say plant 1000, chart <code>YCOA</code>, valuation class 3000. A 201 issue of 10 pieces at standard price INR 500 posts: Debit 400000 (Consumption – raw material, from <code>GBB/VBR/3000</code>) INR 5,000; Credit 300000 (Raw material stock, from <code>BSX/3000</code>) INR 5,000. The cost center is the account assignment in the movement.</p><p>If the finance team wants different expense accounts per department, you can use the same modifier but different valuation classes, or create a custom movement type with a different account grouping in <code>OMJJ</code>. Do not hard-code business logic in a user exit when OBYC can handle it.</p><aside class=\"note\"><strong>Note:</strong> In S/4HANA, expense accounts for cost-relevant postings must be cost elements (primary cost elements are G/L accounts of type \"Primary costs or revenue\"). A missing cost element master gives an error when posting to a cost center.</aside>"
+  },
+  {
+   "heading": "Step-by-step configuration of a new valuation class in OBYC",
+   "html": "<p>Assume the business adds a new class 3050 \"Packaging Material\". Here is the procedure.</p><ol><li>Create the G/L accounts in <code>FS00</code> (stock account 300050, consumption account 400050) with the chart of accounts and company code segments. Stock accounts must allow automatic postings only (\"Post automatically only\") and be reconciliation-neutral for MM.</li><li>In <code>OMSK</code>, create valuation class 3050 and add it to the account category reference used by material type packaging (for example <code>VERP</code>).</li><li>Run <code>OBYC</code>, select the chart of accounts, and open <code>BSX</code>. Add valuation grouping code (if used) and class 3050, with account 300050.</li><li>Open <code>GBB</code>. For each general modification relevant to you (<code>VBR</code>, <code>VNG</code>, <code>INV</code>, <code>AUF</code>) add 3050 with the right expense account.</li><li>Maintain <code>WRX</code> (GR/IR), <code>PRD</code> or <code>UMB</code> as the material's price control requires, and <code>BSV</code>/<code>KDM</code> if used.</li><li>Test with <code>OMWB</code>, then post <code>MIGO</code> 101 and 201 documents and check <code>MB03</code> and <code>FB03</code>.</li><li>Transport the customizing request. Note OBYC entries are cross-client customizing in <code>T030</code> keyed by chart, so make sure the request is client-independent where appropriate.</li></ol><aside class=\"tip\"><strong>Tip:</strong> Use the \"Account Determination with Wizard\" only to review the logic. In real projects the consultants usually maintain in <code>OBYC</code> directly, because it is faster and easy to export for audit.</aside>"
+  },
+  {
+   "heading": "Tracing a posting and linking to invoice verification",
+   "html": "<p>When finance asks \"why did this go to account X?\", follow this sequence.</p><ol><li>Open the material document in <code>MB03</code> and click the accounting document.</li><li>In <code>FB03</code> / <code>FAGLL03</code>, double-click the line item and check the \"Transaction key\" field (field <code>KTOSL</code>, e.g. BSX).</li><li>Check the valuation class on the material (<code>MM03</code> Accounting 1).</li><li>Run <code>OMWB</code> with the same movement type, plant and class and compare.</li></ol><p>For the purchasing cycle, a standard-price material posts at goods receipt: Dr <code>BSX</code> stock at standard price, Cr <code>WRX</code> GR/IR at PO price, and the difference to <code>PRD</code>. At invoice receipt (<code>MIRO</code>) the system debits GR/IR (<code>WRX</code>), credits the vendor reconciliation account, and posts further differences to <code>PRD</code> or to stock for moving average. See the <a href=\"configure-purchase-order-cycle-s4hana.html\">purchase order cycle guide</a> for the whole flow.</p><p>If the material is valued with actual costing, <code>PRD</code> and <code>UMB</code> are replaced by material ledger logic and the price differences are collected in the ML. The <a href=\"sap-s4hana-material-ledger-actual-costing-valuation-guide.html\">material ledger guide</a> covers this. For split-valuated stock, each valuation type can have its own class, so be sure to read the <a href=\"sap-mm-split-valuation-configuration-step-by-step.html\">split valuation article</a> too.</p>"
+  },
+  {
+   "heading": "Common OBYC errors and fixes",
+   "html": "<table><thead><tr><th>Error message</th><th>Cause</th><th>Fix</th></tr></thead><tbody><tr><td>Account determination for entry XXXX 3000 BSX not possible (<code>M8 190</code>)</td><td>No account maintained for chart/key/valuation class</td><td>Maintain <code>BSX</code> in <code>OBYC</code> for the class and chart</td></tr><tr><td>Account not defined for GBB/VBR/class 3000 (<code>F5 ...</code> or <code>M8 ...</code>)</td><td>Missing GBB modifier entry</td><td>Add class under <code>GBB</code> and the modifier shown in the message</td></tr><tr><td>Account XXXXXX requires an assignment to a CO object (<code>KI 235</code>)</td><td>Expense account has no cost object in the movement</td><td>Provide cost center/order in <code>MIGO</code> or change account to non-cost-relevant</td></tr><tr><td>Account XXXXXX is not a cost element / Cost element missing</td><td>Primary cost element not created</td><td>Create it via <code>FS00</code> as primary cost type in S/4HANA</td></tr><tr><td>Posting only possible in automatic mode</td><td>Manual post to stock account</td><td>Use goods movement; never post manually to reconciliation accounts</td></tr><tr><td>Valuation class not allowed for material type</td><td>Class not linked to account category reference</td><td>Update the link in <code>OMSK</code></td></tr></tbody></table><aside class=\"warning\"><strong>Warning:</strong> Never solve an error by pointing every class to a single suspense account. It passes the test but ruins inventory reconciliation, and the month-end difference between MM and FI becomes impossible to explain.</aside>"
+  },
+  {
+   "heading": "Common mistakes and good practice",
+   "html": "<ul><li><strong>Too many valuation classes.</strong> Each one needs entries for BSX, GBB (multiple modifiers), PRD/UMB and more. Design around account needs.</li><li><strong>Skipping OMWB tests.</strong> Always simulate before transport.</li><li><strong>Ignoring valuation grouping codes.</strong> If plants have different accounts, check <code>OMWD</code> (valuation grouping) before assuming one setting works for all.</li><li><strong>Forgetting new custom movement types.</strong> A copied movement type in <code>OMJJ</code> keeps the same posting string; change it only if you intend different accounts.</li><li><strong>Not aligning with FI.</strong> The FI lead should approve the account list, including reconciliation account flags and cost element categories.</li></ul><p>Practising on an S/4HANA sandbox, where you can create a class, post a 101 and 201 and inspect the line items, teaches this faster than reading. If you are building your MM skills in order, <a href=\"how-to-master-sap-mm-in-3-months.html\">this 3-month plan</a> places OBYC in the right sequence.</p>"
+  },
+  {
+   "heading": "Interview questions on this topic",
+   "html": "<aside class=\"interview\"><strong>Q: How does the system determine the G/L account for a goods receipt?</strong> Answer in sequence: movement type → transaction key (BSX/WRX) → valuation class from the material → chart of accounts → account in <code>T030</code>.</aside><ul><li>What is the difference between BSX and GBB? (BSX is the stock account; GBB is the offset such as consumption, with a general modification.)</li><li>Which key holds GR/IR? (<code>WRX</code>.)</li><li>How would you give two plants different stock accounts? (Valuation grouping code via <code>OMWD</code> and <code>OBYC</code> entries by grouping.)</li><li>A 201 posting fails with a GBB/VBR error. What do you check? (<code>OBYC</code> for GBB, modifier VBR and the valuation class.)</li><li>How do you test without posting? (<code>OMWB</code>.)</li></ul><p>More scenario questions are in the <a href=\"top-30-sap-mm-interview-questions-2026.html\">top 30 SAP MM interview questions</a>.</p>"
+  }
+ ],
+ "key_takeaways": [
+  "OBYC finds the G/L account from chart of accounts, transaction key, valuation class and, for some keys, a modifier or valuation grouping code.",
+  "BSX is the stock account, WRX is GR/IR, GBB is the offset for consumption and scrap, and PRD/UMB handle price differences and revaluation.",
+  "GBB needs a general modification such as VBR, VNG, BSA, INV or AUF, which comes from the movement type's posting string.",
+  "Keep valuation classes few and aligned to inventory account types, because each class multiplies OBYC entries.",
+  "Test with OMWB before transport and trace live postings through the transaction key in the FI line item.",
+  "In S/4HANA the postings land in ACDOCA, and cost-relevant expense accounts must exist as primary cost elements."
+ ],
+ "faqs": [
+  {
+   "question": "What is OBYC in SAP MM?",
+   "answer": "OBYC is the transaction for configuring automatic postings in Inventory Management and Invoice Verification. It maps transaction keys such as BSX, WRX and GBB to G/L accounts per chart of accounts and valuation class."
+  },
+  {
+   "question": "What is the difference between valuation class and valuation grouping code?",
+   "answer": "The valuation class comes from the material master and groups materials by the type of stock account. The valuation grouping code groups valuation areas (plants) so that different plants can use different accounts for the same class."
+  },
+  {
+   "question": "How do I find which account a movement type will post to?",
+   "answer": "Use OMWB, enter the movement type, plant and valuation class, and the system simulates the debit and credit accounts. For posted documents, check the transaction key on the FI line item."
+  },
+  {
+   "question": "Why do I get 'Account determination for entry BSX not possible'?",
+   "answer": "No G/L account is maintained for that chart of accounts, transaction key and valuation class combination. Add the entry in OBYC for the valuation class stated in the message and retest."
+  },
+  {
+   "question": "Did OBYC change in S/4HANA?",
+   "answer": "The configuration logic is unchanged. The differences are that postings are stored in the Universal Journal ACDOCA, the material ledger is always active, and cost elements are G/L accounts."
+  },
+  {
+   "question": "Is OBYC used for SD postings?",
+   "answer": "Not for revenue. Sales revenue and COGS postings use VKOA for revenue accounts and OBYC key GBB with modifier VAX/VAY for COGS on delivery related goods issue."
+  },
+  {
+   "question": "Can I change the valuation class of a material with stock?",
+   "answer": "It is restricted and needs care. Normally you move stock to zero or use a controlled process with FI approval, because the change shifts value between G/L accounts."
+  }
+ ],
+ "process_flow": [
+  {
+   "title": "Material master valuation class",
+   "detail": "MM01/MM02 Accounting 1 stores the valuation class that drives the account."
+  },
+  {
+   "title": "Movement type to key",
+   "detail": "Movement type and posting string select BSX, WRX, GBB or PRD."
+  },
+  {
+   "title": "Add modifier and grouping",
+   "detail": "GBB adds a modifier like VBR; valuation grouping code applies if used."
+  },
+  {
+   "title": "OBYC lookup in T030",
+   "detail": "Chart, key and class return the G/L account."
+  },
+  {
+   "title": "Post and verify",
+   "detail": "MIGO creates the FI document; check in MB03, FB03 and OMWB."
+  }
+ ],
+ "screenshot_ideas": [
+  "OBYC initial screen showing the list of transaction keys such as BSX, WRX, GBB and PRD",
+  "OBYC GBB table with general modifications VBR, VNG and valuation class 3000 with accounts",
+  "OMWB simulation of movement type 201 showing debit and credit accounts",
+  "MB03 material document with the linked FI document showing the BSX line item",
+  "Material master Accounting 1 view showing the valuation class field"
+ ],
+ "word_count": 1915,
+ "published": "2026-11-14"
+}
