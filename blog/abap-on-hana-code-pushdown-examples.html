@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABAP on HANA: Code Pushdown Explained with Examples</title>
+  <meta name="description" content="Unlock superior performance with ABAP on HANA code pushdown. Learn CDS Views, AMDP, and Open SQL for S/4HANA optimization with real-world examples. Click." />
+  <link rel="canonical" href="https://youronementor.com/blog/abap-on-hana-code-pushdown-examples.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://youronementor.com/blog/abap-on-hana-code-pushdown-examples.html" />
+  <meta property="og:title" content="Mastering ABAP on HANA: Code Pushdown Techniques with Practical Examples" />
+  <meta property="og:description" content="Unlock superior performance with ABAP on HANA code pushdown. Learn CDS Views, AMDP, and Open SQL for S/4HANA optimization with real-world examples. Click." />
+  <meta property="og:image" content="https://youronementor.com/blog/covers/abap-on-hana-code-pushdown-examples.png" />
+  <meta property="og:site_name" content="theTechMentor" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="article:published_time" content="2026-11-14" />
+  <meta property="article:modified_time" content="2026-11-14" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+  <link rel="icon" href="../images/logo-mark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../site.css?v=7" />
+  <link rel="stylesheet" href="ai-article.css?v=3" />
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Mastering ABAP on HANA: Code Pushdown Techniques with Practical Examples", "description": "Unlock superior performance with ABAP on HANA code pushdown. Learn CDS Views, AMDP, and Open SQL for S/4HANA optimization with real-world examples. Click.", "image": "https://youronementor.com/blog/covers/abap-on-hana-code-pushdown-examples.png", "datePublished": "2026-11-14", "dateModified": "2026-11-14", "author": {"@type": "Person", "name": "Anshuman Behuria", "url": "https://www.linkedin.com/in/anshuman-behuria-946860130"}, "publisher": {"@type": "Organization", "name": "theTechMentor", "url": "https://youronementor.com"}, "mainEntityOfPage": "https://youronementor.com/blog/abap-on-hana-code-pushdown-examples.html", "wordCount": 2446}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://youronementor.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://youronementor.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Mastering ABAP on HANA: Code Pushdown Techniques with Practical Examples", "item": "https://youronementor.com/blog/abap-on-hana-code-pushdown-examples.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What are common ABAP on HANA interview questions for experienced consultants?", "acceptedAnswer": {"@type": "Answer", "text": "Experienced consultants are often asked about the 'why' behind code pushdown, comparisons between CDS Views and AMDPs (advantages, disadvantages, use cases), how to handle authorization in CDS, performance tuning of pushdown logic, and real-world examples from past projects. You should also be prepared to discuss the impact of S/4HANA data model changes on ABAP development."}}, {"@type": "Question", "name": "What are the key ABAP on HANA topics to learn for a developer?", "acceptedAnswer": {"@type": "Answer", "text": "Key topics include: understanding the SAP HANA architecture, advanced Open SQL syntax, Core Data Services (CDS) for data modeling and analytics, ABAP Managed Database Procedures (AMDP) for native database procedures, performance analysis tools (SQL Trace, SQL Monitor, ATC), and integrating Fiori/UI5 applications with CDS-based services. Mastering ABAP Development Tools (ADT) in Eclipse is also fundamental."}}, {"@type": "Question", "name": "How can learning ABAP on HANA help with career opportunities and jobs?", "acceptedAnswer": {"@type": "Answer", "text": "ABAP on HANA skills are in high demand across India, particularly as more companies migrate to S/4HANA. It's no longer enough to just know classic ABAP. Proficiency in code pushdown techniques makes you a valuable asset, opening doors to roles as S/4HANA ABAP developers, architects, and technical consultants. This can lead to significant salary growth, often in the ₹8-18 LPA range for experienced professionals, depending on skills and company."}}, {"@type": "Question", "name": "Is ABAP on HANA certification useful?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, an SAP certification in ABAP on HANA (e.g., C_TADM_ADM_70) can definitely be useful. It validates your skills and knowledge, making your resume stand out in a competitive job market. While practical experience is paramount, certification can provide an initial advantage, especially for freshers or those looking to transition roles."}}, {"@type": "Question", "name": "Who is Anshuman Behuria and what is his role at theTechMentor?", "acceptedAnswer": {"@type": "Answer", "text": "Anshuman Behuria is the lead SAP mentor at theTechMentor, with over 12 years of extensive experience in S/4HANA implementation. He guides learners and consultants, providing practical, first-hand insights across various SAP modules, including MM, EWM, FICO, ABAP, BASIS, and end-to-end logistics."}}]}]</script>
+  <script src="../site-config.js"></script>
+  <script src="../tracking.js"></script>
+</head>
+<body class="ai-page" style="--accent:#4f46e5;--accent2:#06b6d4;--accent-soft:#e0e7ff;">
+  <div class="reading-progress" id="reading-progress-bar"></div>
+  <header class="header">
+    <nav class="nav wrap" aria-label="Main">
+      <a href="../index.html" class="brand" aria-label="theTechMentor home"><img src="../images/logo-mark.svg" alt="" width="36" height="36" /><span>the<b>Tech</b>Mentor</span></a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="nav-links">
+        <li><a href="../index.html#courses">Courses</a></li>
+        <li><a href="../digital-products">Digital Products</a></li>
+        <li><a href="../index.html#paths">Career paths</a></li>
+        <li><a href="index.html">Blog</a></li>
+        <li><a href="../index.html#advisor" class="btn btn-ghost btn-sm">Free counselling</a></li>
+        <li><a href="../index.html#courses" class="btn btn-primary btn-sm">Explore courses</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="blog-article-wrap ai-wrap">
+    <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a> &gt; <a href="index.html">Blog</a> &gt; <span>Tutorial</span>
+    </nav>
+
+    <header class="ai-hero">
+      <span class="ai-pill">SAP ABAP TUTORIAL</span>
+      <h1 class="blog-title">Mastering ABAP on HANA: Code Pushdown Techniques with Practical Examples</h1>
+      <p class="ai-dek">Dive into ABAP on HANA code pushdown. Learn essential techniques like CDS Views and AMDP to optimize your S/4HANA applications for unparalleled performance with practical examples.</p>
+      <div class="blog-meta">
+        <div class="author-chip">
+          <img class="author-photo" src="../images/anshuman-behuria-96.jpg" alt="Anshuman Behuria" width="40" height="40" />
+          <div class="author-info"><strong>Anshuman Behuria</strong><span>Lead SAP Mentor · theTechMentor</span></div>
+        </div>
+        <span>Updated <time datetime="2026-11-14">Nov 14, 2026</time></span>
+      </div>
+      <img class="ai-cover" src="covers/abap-on-hana-code-pushdown-examples.svg" width="1200" height="630" alt="Mastering ABAP on HANA: Code Pushdown Techniques with Practical Examples" />
+    </header>
+
+    <article class="article-content ai-article">
+      <div class="glance"><div><span>Module</span><strong>SAP ABAP</strong></div><div><span>Read time</span><strong>11 min</strong></div><div><span>Level</span><strong>Consultant</strong></div><div class="glance-codes"><span>T-codes covered</span><p><code>LFA1</code></p></div></div>
+
+      <div class="ai-intro"><p>The shift to SAP S/4HANA, underpinned by the SAP HANA in-memory database, fundamentally changed how we develop applications in ABAP. Gone are the days of retrieving large datasets to the application server and then processing them with complex ABAP loops and calculations. This approach, known as "data-to-code," becomes a major bottleneck on HANA.</p><p>The modern paradigm, especially for ABAP on HANA, is <strong>code pushdown</strong>. Instead of bringing data to the ABAP layer, we push the complex data-intensive logic down to the HANA database, leveraging its immense processing power. This article will explain why code pushdown is critical, detail the primary techniques—CDS Views and ABAP Managed Database Procedures (AMDP)—and provide practical ABAP examples for consultants and freshers looking to optimize their S/4HANA implementations.</p><p>By understanding and applying code pushdown, you'll be able to write highly performant ABAP applications that fully harness the power of SAP HANA, a skill crucial for any S/4HANA developer or architect today.</p></div>
+
+      <div class="ai-box ai-takeaways"><div class="box-label">⚡ Key takeaways</div><ul><li>Code pushdown is essential for ABAP on HANA, shifting data-intensive logic from the application server to the HANA database for superior performance.</li><li>Core Data Services (CDS) Views are the primary declarative technique for pushdown, ideal for joins, aggregations, and virtual data models.</li><li>ABAP Managed Database Procedures (AMDP) provide procedural pushdown using database-native languages like SQLScript for complex logic.</li><li>Enhanced Open SQL should be the first choice for simpler pushdown, as it now supports many aggregations and expressions directly.</li><li>For MM and EWM consultants, understanding code pushdown is crucial for optimizing reports, designing efficient enhancements, and leveraging S/4HANA&#x27;s real-time capabilities.</li><li>Always strive for maximum pushdown, choosing the right technique (Open SQL &amp;gt; CDS &amp;gt; AMDP) for maintainability and performance.</li></ul></div>
+
+      
+
+      <nav class="ai-box ai-toc" aria-label="Contents"><div class="box-label">📑 In this guide</div><ol><li><a href="#sec-1"><span>01</span>Understanding the Need for Code Pushdown in ABAP on HANA</a></li><li><a href="#sec-2"><span>02</span>Core Principles of Code Pushdown Techniques</a></li><li><a href="#sec-3"><span>03</span>Key Code Pushdown Techniques: CDS Views, AMDP, and Open SQL</a></li><li><a href="#sec-4"><span>04</span>Practical Example: Optimizing a Material Stock Report using a CDS View</a></li><li><a href="#sec-5"><span>05</span>Implementing Complex Logic with ABAP Managed Database Procedures (AMDP)</a></li><li><a href="#sec-6"><span>06</span>Common Mistakes and Best Practices in Code Pushdown</a></li><li><a href="#sec-7"><span>07</span>ABAP on HANA for MM and EWM Consultants</a></li><li><a href="#sec-8"><span>08</span>Interview Questions on ABAP on HANA and Code Pushdown</a></li><li><a href="#faqs"><span>?</span>Frequently asked questions</a></li></ol></nav>
+
+      <h2 id="sec-1"><span class="h2-n">01</span>Understanding the Need for Code Pushdown in ABAP on HANA</h2>
+<p>Historically, ABAP applications were optimized for traditional relational databases. This meant fetching raw data from the database into the application server memory and then performing aggregations, filters, and complex calculations there. This "data-to-code" paradigm was efficient when database operations were slow and network latency was a concern.</p><p>However, with SAP HANA, we have an in-memory, column-oriented database designed for real-time analytics and massive data processing. The bottleneck now shifts to transferring large volumes of data from HANA to the ABAP application server. Code pushdown addresses this by executing data-intensive logic directly within the HANA database layer, where the data resides.</p><aside class="note"><p><strong>ECC vs. S/4HANA Data Model:</strong> In ECC, tables like <code>MARA</code>, <code>MAKT</code>, <code>MBEW</code>, <code>MKPF</code>, <code>MSEG</code> were separate. In S/4HANA, many of these have been rationalized into simplified tables like <code>ACDOCA</code> (Universal Journal) and simplified logistics tables (e.g., <code>MATDOC</code> replaces <code>MKPF</code>/<code>MSEG</code>). This simplification, combined with HANA's capabilities, makes code pushdown even more impactful for performance.</p></aside><p>The benefits are clear: significantly faster report execution, real-time analytics, and reduced load on the application server. For MM and EWM consultants, this translates to quicker stock evaluations, faster inventory reports, and near real-time visibility into warehouse operations.</p>
+<h2 id="sec-2"><span class="h2-n">02</span>Core Principles of Code Pushdown Techniques</h2>
+<p>Code pushdown is not a single technique but a philosophy applied through various SAP tools and frameworks. The core idea is always the same: delegate processing to the database layer. Here are the fundamental principles:</p><ol><li><strong>Data Proximity:</strong> Process data where it lives. HANA's in-memory architecture makes data access incredibly fast at the database layer.</li><li><strong>Declarative vs. Procedural:</strong> Prioritize declarative SQL-based logic over procedural ABAP loops where possible. Declarative statements allow the database optimizer to determine the most efficient execution plan.</li><li><strong>Minimizing Data Transfer:</strong> Only transfer the final, aggregated, or filtered results from the database to the application server, not the raw, unprocessed data.</li><li><strong>Leveraging Database Capabilities:</strong> Utilize HANA-specific features like column stores, compression, and advanced SQL functions directly.</li></ol><p>These principles guide the choice of specific code pushdown techniques, ensuring that ABAP applications are built for optimal performance on the S/4HANA platform.</p>
+<h2 id="sec-3"><span class="h2-n">03</span>Key Code Pushdown Techniques: CDS Views, AMDP, and Open SQL</h2>
+<p>SAP provides several powerful tools to implement code pushdown. The most prominent ones are Core Data Services (CDS) Views and ABAP Managed Database Procedures (AMDP). Modern Open SQL also plays a vital role.</p><h3>1. Core Data Services (CDS) Views</h3><p>CDS Views are the primary and recommended way to achieve code pushdown in S/4HANA. They define semantic data models directly in the database, acting as virtual data models. They are written in DDL (Data Definition Language) and are database-agnostic, meaning they work across different databases, although they are highly optimized for HANA.</p><ul><li><strong>Virtual Data Model:</strong> CDS Views create views on top of existing database tables. They don't store data themselves.</li><li><strong>Rich Capabilities:</strong> Support associations, aggregations, calculations, joins, and expressions directly in the database.</li><li><strong>Consumption:</strong> Can be consumed by ABAP programs using Open SQL, SAP Fiori applications, BI tools, and even other CDS Views.</li><li><strong>Analytical Power:</strong> Crucial for analytical applications and real-time reporting due to their ability to push down complex calculations.</li></ul><aside class="tip"><p><strong>When to use CDS Views:</strong> For data retrieval, aggregation, filtering, and joining operations where the logic can be expressed declaratively in SQL. Think reports, analytical dashboards, and exposing data for Fiori apps.</p></aside><h3>2. ABAP Managed Database Procedures (AMDP)</h3><p>AMDPs allow you to implement database procedures directly in ABAP, but they are executed natively on the database. Unlike CDS Views, which are declarative, AMDPs are procedural. They are typically written in SQLScript (for HANA) or other database-specific languages.</p><ul><li><strong>Procedural Logic:</strong> Ideal for complex, procedural logic that is difficult or inefficient to express purely in declarative SQL, such as iterative calculations, complex branching, or error handling.</li><li><strong>Performance:</strong> Offers excellent performance as the entire procedure runs on the database, avoiding data transfer to the application server.</li><li><strong>ABAP Integration:</strong> Defined and managed within ABAP classes (implemented as interfaces <code>IF_AMDP_MARKER_HDB</code>). This means full ABAP lifecycle management, debugging, and transport.</li></ul><aside class="warning"><p><strong>AMDP Caveat:</strong> While powerful, AMDPs are database-specific (e.g., SQLScript for HANA). This means they are not database-agnostic like CDS Views. Use them judiciously for HANA-specific optimizations when CDS is not sufficient.</p></aside><h3>3. Enhanced Open SQL</h3><p>Modern Open SQL in ABAP has been significantly enhanced to leverage HANA's capabilities. Many features previously requiring explicit code pushdown techniques can now be achieved directly through Open SQL syntax, which the database optimizer then processes efficiently.</p><ul><li><strong>Aggregations and Grouping:</strong> Direct support for <code>AVG</code>, <code>SUM</code>, <code>COUNT</code>, <code>MIN</code>, <code>MAX</code>, and <code>GROUP BY</code> clauses.</li><li><strong>Expressions:</strong> Inline expressions and calculations (e.g., <code>CASE WHEN</code>, arithmetic operations).</li><li><strong>Joins:</strong> Complex joins can be defined directly.</li><li><strong>SQL Views:</strong> Can consume CDS Views and traditional database views.</li></ul><p>Always try to achieve your logic with enhanced Open SQL first, then consider CDS Views, and finally AMDP for highly complex, procedural, database-specific scenarios.</p>
+<h2 id="sec-4"><span class="h2-n">04</span>Practical Example: Optimizing a Material Stock Report using a CDS View</h2>
+<p>Let's consider a common MM scenario: creating a report to show the current stock quantity and value for materials across storage locations. Traditionally, this might involve fetching data from <code>MARC</code>, <code>MARD</code>, <code>MBEW</code>, and <code>MAKT</code>, then looping through to calculate totals.</p><p>With code pushdown, we can define a CDS View to perform these joins and aggregations at the database level. Assume we need the total unrestricted stock quantity and value per material, plant, and storage location.</p><h3>Old Approach (Conceptual ABAP on Application Server):</h3><pre><code>SELECT * INTO TABLE lt_marc FROM marc WHERE werks = '1000'." Fetch all plant data
+LOOP AT lt_marc ASSIGNING &lt;fs_marc&gt;.
+  SELECT * INTO TABLE lt_mard FROM mard WHERE matnr = &lt;fs_marc&gt;-matnr AND werks = &lt;fs_marc&gt;-werks.
+  " ... more selects for MBEW, MAKT, then loop and sum ...
+ENDLOOP.</code></pre><p>This is highly inefficient. Now, let's use a CDS View:</p><h3>New Approach (CDS View and ABAP consumption):</h3><p><strong>Step 1: Define the CDS View in ADT (ABAP Development Tools)</strong></p><pre><code>@AbapCatalog.sqlViewName: 'Z_C_MM_MATSTOCK'
+@AbapCatalog.compiler.compareFilter: true
+@AbapCatalog.preserveKey: true
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Material Stock Quantity and Value'
+define view ZI_MM_MaterialStock_V
+  as select from marc as PlantData
+    inner join   mard as StorageData on PlantData.matnr = StorageData.matnr
+                                    and PlantData.werks = StorageData.werks
+    inner join   makt as MaterialText on PlantData.matnr = MaterialText.matnr
+                                     and MaterialText.spras = $session.system_language
+    inner join   mbew as ValuationData on PlantData.matnr = ValuationData.matnr
+                                      and PlantData.werks = ValuationData.werks
+{
+  key PlantData.matnr         as Material,
+  key PlantData.werks         as Plant,
+  key StorageData.lgort       as StorageLocation,
+      MaterialText.maktx      as MaterialDescription,
+      StorageData.labst       as UnrestrictedStockQty, " Unrestricted-use stock
+      ValuationData.verpr     as MovingAveragePrice,   " Moving average price
+      ValuationData.verpr * StorageData.labst as TotalStockValue
+}
+where PlantData.werks = '1000';
+</code></pre><p>This CDS View <code>ZI_MM_MaterialStock_V</code> joins <code>MARC</code>, <code>MARD</code>, <code>MAKT</code>, and <code>MBEW</code> directly on the database and even calculates <code>TotalStockValue</code> at the database layer. This reduces the data transferred to the ABAP application server to just the final, calculated fields.</p><p><strong>Step 2: Consume the CDS View in an ABAP Program</strong></p><pre><code>REPORT z_mm_stock_report_cds.
+
+DATA: lt_material_stock TYPE TABLE OF zi_mm_materialstock_v.
+
+SELECT * FROM zi_mm_materialstock_v INTO TABLE @lt_material_stock.
+
+cl_demo_output=&gt;display( lt_material_stock ).
+</code></pre><p>The ABAP code becomes much simpler and more readable. All the heavy lifting (joins, calculations) is performed by the HANA database via the CDS View. This pattern is crucial for enhancing performance in logistics reports, inventory analysis, and any scenario requiring aggregation of <a href="material-master-views-s4hana-field-by-field-guide.html">material master data</a>.</p><aside class="interview"><p><strong>Interview Question:</strong> Explain the benefits of using a CDS View over a classic ABAP report with multiple SELECT statements and loops for aggregation. Provide an example.</p><p><strong>Answer Guidance:</strong> Focus on performance (pushdown to DB), simplified ABAP code, reusability, and potential for exposing as an OData service for Fiori.</p></aside>
+<h2 id="sec-5"><span class="h2-n">05</span>Implementing Complex Logic with ABAP Managed Database Procedures (AMDP)</h2>
+<p>While CDS Views are excellent for declarative logic, sometimes you encounter scenarios demanding procedural constructs that are best executed at the database level. This is where AMDPs shine. Let's imagine a more complex calculation for inventory aging, requiring iterative processing or complex conditional logic that is difficult to express efficiently in a single CDS view.</p><h3>Scenario: Custom Stock Aging Calculation</h3><p>Suppose you need to calculate stock aging for materials, involving multiple steps like determining receipt dates, tracking movements, and applying specific business rules that involve temporary tables or cursors, too complex for a single CDS. An AMDP can encapsulate this.</p><p><strong>Step 1: Define an ABAP Class with AMDP Interface</strong></p><pre><code>CLASS zcl_mm_inventory_aging DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+    INTERFACES if_amdp_marker_hdb.
+
+    METHODS calculate_aging
+      IMPORTING
+        iv_plant    TYPE werks_d
+      EXPORTING
+        et_aging_data TYPE tt_aging_data.
+
+    TYPES: BEGIN OF ts_aging_data,
+             matnr     TYPE matnr,
+             werks     TYPE werks_d,
+             aging_days TYPE i,
+           END OF ts_aging_data,
+           tt_aging_data TYPE STANDARD TABLE OF ts_aging_data WITH EMPTY KEY.
+
+ENDCLASS.
+</code></pre><p><strong>Step 2: Implement the AMDP Method (in SQLScript)</strong></p><pre><code>CLASS zcl_mm_inventory_aging IMPLEMENTATION.
+
+  METHOD calculate_aging BY DATABASE PROCEDURE
+                               FOR HDB
+                               LANGUAGE SQLSCRIPT
+                               OPTIONS READ-ONLY
+                               USING matdoc.
+
+    " Declare local table variable for intermediate results
+    DECLARE lt_matdoc_filtered TABLE (
+      matnr     NVARCHAR(18),
+      werks     NVARCHAR(4),
+      mblnr     NVARCHAR(10),
+      mjahr     NVARCHAR(4),
+      zeile     NVARCHAR(4),
+      budat     DATE
+    );
+
+    " Filter MATDOC for relevant movements (e.g., initial receipts, goods receipts)
+    INSERT INTO lt_matdoc_filtered
+    SELECT
+      matnr,
+      werks,
+      mblnr,
+      mjahr,
+      zeile,
+      budat
+    FROM matdoc
+    WHERE werks = :iv_plant
+      AND bwart IN ('101', '501'); " Example: Goods Receipt
+
+    " Now perform complex aging logic
+    " For simplicity, let's just get the oldest receipt date for each material for demonstration
+    et_aging_data = SELECT
+                       matnr,
+                       werks,
+                       DAYS_BETWEEN(MIN(budat), CURRENT_DATE) AS aging_days
+                     FROM lt_matdoc_filtered
+                     GROUP BY matnr, werks;
+
+  ENDMETHOD.
+
+ENDCLASS.
+</code></pre><p>In this example, the <code>calculate_aging</code> method is marked <code>BY DATABASE PROCEDURE FOR HDB LANGUAGE SQLSCRIPT</code>. The logic inside, written in SQLScript, filters material documents (<code>matdoc</code> - the simplified S/4HANA material document table) and calculates the aging directly on HANA. The ABAP code then simply calls this method.</p><p><strong>Step 3: Call the AMDP Method from an ABAP Program</strong></p><pre><code>REPORT z_mm_aging_report_amdp.
+
+DATA: lo_aging_calculator TYPE REF TO zcl_mm_inventory_aging,
+      lt_aging_results    TYPE zcl_mm_inventory_aging=&gt;tt_aging_data.
+
+CREATE OBJECT lo_aging_calculator.
+
+lo_aging_calculator-&gt;calculate_aging(
+  EXPORTING
+    iv_plant    = '1000'
+  IMPORTING
+    et_aging_data = lt_aging_results
+).
+
+cl_demo_output=&gt;display( lt_aging_results ).
+</code></pre><p>This demonstrates how an AMDP can handle specific, complex logic that benefits from native database execution, all while being managed within the ABAP development environment.</p>
+<h2 id="sec-6"><span class="h2-n">06</span>Common Mistakes and Best Practices in Code Pushdown</h2>
+<p>While code pushdown offers immense benefits, missteps can negate its advantages. Be aware of these common pitfalls:</p><ul><li><strong>Partial Pushdown:</strong> Pushing some logic but still fetching too much raw data to the application layer for final processing. Aim for maximum pushdown.</li><li><strong>Over-complicating Simple Scenarios:</strong> Don't use AMDPs for simple joins and aggregations that a CDS View or enhanced Open SQL can handle more elegantly and maintainably.</li><li><strong>Ignoring Database-Agnosticism:</strong> Relying too heavily on HANA-specific SQLScript in AMDPs when a generic solution would suffice, making future database migrations harder (though less likely in S/4HANA).</li><li><strong>Lack of Authorization Checks:</strong> Ensure your CDS Views and AMDPs respect SAP's authorization concept. CDS Views support DCL (Data Control Language) for authorization.</li><li><strong>Performance Tuning Neglect:</strong> Even with code pushdown, poorly designed CDS Views or AMDPs can be slow. Always analyze execution plans in HANA Studio.</li></ul><aside class="tip"><p><strong>Best Practice: Start Simple:</strong> For any new development, first try to achieve your data-intensive logic using enhanced Open SQL. If that's insufficient, move to CDS Views. Only consider AMDPs for complex, procedural, or highly performance-critical logic that cannot be efficiently expressed with CDS. This hierarchy promotes maintainability and reusability.</p></aside><p>Remember, code pushdown is about leveraging the database intelligently, not just blindly moving code. Proper design and analysis are key.</p>
+<h2 id="sec-7"><span class="h2-n">07</span>ABAP on HANA for MM and EWM Consultants</h2>
+<p>Even if your primary role is not ABAP development, understanding ABAP on HANA and code pushdown is vital for MM and EWM consultants in India.</p><ul><li><strong>Performance Understanding:</strong> When users complain about slow reports (e.g., inventory aging, stock valuation, <a href="sap-ewm-slotting-rearrangement-optimization.html">slotting analysis</a>), understanding code pushdown helps you identify if the issue is in the ABAP code's data access rather than just network or application server issues.</li><li><strong>Functional Enhancements:</strong> You will often work with ABAP developers for custom reports or enhancements. Knowing the capabilities of CDS and AMDP allows you to propose more efficient solutions and define requirements that leverage HANA's power for real-time insights in procurement, warehouse management, and <a href="sap-mm-automatic-po-creation-me59n-pr-automation.html">automatic processes</a>.</li><li><strong>Future-Proofing:</strong> S/4HANA is the future. Custom code that does not embrace code pushdown will perform poorly and may even be incompatible with future S/4HANA innovations like <a href="sap-joule-ai-s4hana-logistics-procurement-blueprint.html">SAP Joule AI</a> or embedded analytics.</li><li><strong>Debugging:</strong> While not directly developing, you might assist in debugging issues related to custom reports or processes. Understanding where data processing occurs (application vs. database layer) is crucial for efficient troubleshooting.</li></ul><p>Familiarity with these concepts empowers you to be a more effective consultant in an S/4HANA environment, driving better solutions for your clients, whether in <a href="embedded-ewm-s4hana-setup-walkthrough.html">embedded EWM</a> or core MM scenarios.</p>
+<h2 id="sec-8"><span class="h2-n">08</span>Interview Questions on ABAP on HANA and Code Pushdown</h2>
+<p>For freshers and experienced professionals in India, ABAP on HANA is a hot topic in interviews. Here are common questions:</p><table><thead><tr><th>Question</th><th>Key Points for Answer</th></tr></thead><tbody><tr><td>What is code pushdown in ABAP on HANA and why is it essential?</td><td>Moving data-intensive logic to the HANA database. Essential for performance, leveraging HANA's in-memory capabilities, and avoiding data transfer bottlenecks.</td></tr><tr><td>Name different techniques for code pushdown. When would you use each?</td><td><strong>CDS Views:</strong> Declarative, virtual data models, good for joins/aggregations, analytics. <strong>AMDP:</strong> Procedural, for complex logic, database-specific (SQLScript). <strong>Enhanced Open SQL:</strong> First choice for simple pushdown, built-in aggregations.</td></tr><tr><td>Explain the benefits of CDS Views over classic ABAP database access.</td><td>Performance (DB execution), reusability, simplified ABAP, supports annotations (OData, UI), DCL for authorizations.</td></tr><tr><td>What are ABAP Managed Database Procedures (AMDP)? What are their advantages and disadvantages?</td><td>ABAP-managed database procedures executed natively on DB (e.g., SQLScript). <strong>Advantages:</strong> High performance for complex procedural logic. <strong>Disadvantages:</strong> Database-specific, less declarative than CDS.</td></tr><tr><td>How does the data model simplification in S/4HANA (e.g., MATDOC vs. MKPF/MSEG) impact code pushdown?</td><td>Fewer tables to join means simpler CDS/AMDP logic and even better performance on HANA. Centralized tables like <code>ACDOCA</code> make financial reporting pushdown more efficient.</td></tr><tr><td>Describe a real-world scenario where you would use a CDS View for an MM/EWM report.</td><td>Generating a list of materials with current stock, total value, and supplier details. Joins <code>MARC</code>, <code>MARD</code>, <code>MBEW</code>, <code>LFA1</code>, calculates value.</td></tr></tbody></table><aside class="interview"><p><strong>Interview Tip:</strong> When asked about ABAP on HANA jobs, emphasize your understanding of performance optimization, not just basic ABAP. Highlight practical experience with ADT, CDS, and AMDP, even from a sandbox system. Companies are looking for consultants who can build future-proof solutions.</p></aside>
+
+
+      
+
+      <div class="ai-optin" id="lead-optin">
+        <div class="optin-icon">🎁</div>
+        <strong>Free: SAP MM &amp; EWM video course + interview kit</strong>
+        <p>Get the 40+ lesson playlist, the most-asked interview questions and our 90-day roadmap on WhatsApp.</p>
+        <form class="ttm-optin-form" data-source="blog:abap-on-hana-code-pushdown-examples">
+          <input name="name" required placeholder="Your name" autocomplete="name" />
+          <input name="phone" required placeholder="WhatsApp number" autocomplete="tel" inputmode="tel" />
+          <input name="email" type="email" placeholder="Email (optional)" autocomplete="email" />
+          <button type="submit" class="btn btn-primary">Send me the free kit</button>
+        </form>
+        <div class="ttm-optin-done" hidden></div>
+      </div>
+
+      <h2 id="faqs"><span class="h2-n">?</span>Frequently asked questions</h2>
+      <details class="ai-faq"><summary>What are common ABAP on HANA interview questions for experienced consultants?</summary><p>Experienced consultants are often asked about the &#x27;why&#x27; behind code pushdown, comparisons between CDS Views and AMDPs (advantages, disadvantages, use cases), how to handle authorization in CDS, performance tuning of pushdown logic, and real-world examples from past projects. You should also be prepared to discuss the impact of S/4HANA data model changes on ABAP development.</p></details><details class="ai-faq"><summary>What are the key ABAP on HANA topics to learn for a developer?</summary><p>Key topics include: understanding the SAP HANA architecture, advanced Open SQL syntax, Core Data Services (CDS) for data modeling and analytics, ABAP Managed Database Procedures (AMDP) for native database procedures, performance analysis tools (SQL Trace, SQL Monitor, ATC), and integrating Fiori/UI5 applications with CDS-based services. Mastering ABAP Development Tools (ADT) in Eclipse is also fundamental.</p></details><details class="ai-faq"><summary>How can learning ABAP on HANA help with career opportunities and jobs?</summary><p>ABAP on HANA skills are in high demand across India, particularly as more companies migrate to S/4HANA. It&#x27;s no longer enough to just know classic ABAP. Proficiency in code pushdown techniques makes you a valuable asset, opening doors to roles as S/4HANA ABAP developers, architects, and technical consultants. This can lead to significant salary growth, often in the ₹8-18 LPA range for experienced professionals, depending on skills and company.</p></details><details class="ai-faq"><summary>Is ABAP on HANA certification useful?</summary><p>Yes, an SAP certification in ABAP on HANA (e.g., C_TADM_ADM_70) can definitely be useful. It validates your skills and knowledge, making your resume stand out in a competitive job market. While practical experience is paramount, certification can provide an initial advantage, especially for freshers or those looking to transition roles.</p></details><details class="ai-faq"><summary>Who is Anshuman Behuria and what is his role at theTechMentor?</summary><p>Anshuman Behuria is the lead SAP mentor at theTechMentor, with over 12 years of extensive experience in S/4HANA implementation. He guides learners and consultants, providing practical, first-hand insights across various SAP modules, including MM, EWM, FICO, ABAP, BASIS, and end-to-end logistics.</p></details>
+
+      <div class="related"><div class="flow-label">Keep learning</div><div class="rel-grid"><a class="rel-card" href="sap-fico-organisational-structure-s4hana-guide.html"><img src="covers/sap-fico-organisational-structure-s4hana-guide.svg" alt="" loading="lazy" /><span>Mastering SAP FICO Organisational Structure in S/4HANA: Company Code, Controlling Area, and Chart of Accounts</span></a><a class="rel-card" href="sap-mm-organisational-structure-s4hana.html"><img src="covers/sap-mm-organisational-structure-s4hana.svg" alt="" loading="lazy" /><span>Mastering SAP MM Organisational Structure in S/4HANA: Company Code, Plant, Storage Location, &amp; Purchasing Org</span></a><a class="rel-card" href="material-master-views-s4hana-field-by-field-guide.html"><img src="covers/material-master-views-s4hana-field-by-field-guide.svg" alt="" loading="lazy" /><span>Mastering Material Master Views in S/4HANA: A Field-by-Field Deep Dive for MM &amp; EWM Consultants</span></a></div></div>
+
+      <div class="blog-course-cta ai-cta">
+        <h3>Learn SAP hands-on with theTechMentor</h3>
+        <p>Live weekday &amp; weekend batches or 24/7 recorded courses, with S/4HANA practice server access and interview preparation.</p>
+        <div class="blog-cta-actions">
+          <a href="../index.html#pricing" class="btn btn-primary">See programs &amp; fees</a>
+          <a href="../index.html#enroll" class="btn btn-outline">Book a free 15-min call</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="brand brand-light"><img src="../images/logo-mark.svg" alt="" width="32" height="32" /><span>the<b>Tech</b>Mentor</span></a>
+        <p>Online SAP S/4HANA academy for logistics, procurement and warehouse careers.</p>
+      </div>
+      <div><h4>Courses</h4><ul><li><a href="../index.html#courses">All courses</a></li><li><a href="../index.html#paths">Career paths</a></li><li><a href="../index.html#formats">Live vs self-paced</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="../digital-products">Digital Products</a></li><li><a href="index.html">Blog</a></li><li><a href="../index.html#faq">FAQ</a></li><li><a href="../index.html#advisor">Free counselling</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="mailto:info@youronementor.com">info@youronementor.com</a></li><li><a href="https://wa.me/917848942021" target="_blank" rel="noopener noreferrer">WhatsApp +91 78489 42021</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li><li><a href="../refund.html">Refunds</a></li></ul></div>
+    </div>
+    <div class="wrap footer-bottom"><p>© 2026 theTechMentor. SAP and S/4HANA are trademarks of SAP SE; theTechMentor is not affiliated with SAP SE.</p></div>
+    <div class="footer-wordmark" aria-hidden="true"><img src="../images/footer-wordmark.webp?v=3" alt="" width="2000" height="306" loading="lazy" /></div>
+  </footer>
+  <script src="blog-leads.js"></script>
+  <script>document.querySelector(".nav-toggle")?.addEventListener("click",function(){var l=document.querySelector(".nav-links");var o=l.classList.toggle("open");this.setAttribute("aria-expanded",String(o));});</script>
+</body>
+</html>

@@ -171,3 +171,11 @@ Folder: `images/blog/sap-mm-obyc-account-determination-s4hana-masterclass/`
 - [ ] 03: OMWB simulation of movement type 201 showing debit and credit accounts
 - [ ] 04: MB03 material document with the linked FI document showing the BSX line item
 - [ ] 05: Material master Accounting 1 view showing the valuation class field
+
+## Mastering ABAP on HANA: Code Pushdown Techniques with Practical Examples
+Folder: `images/blog/abap-on-hana-code-pushdown-examples/`
+- [ ] 01: ADT: CDS View definition, showing DDL Source
+- [ ] 02: ADT: AMDP class definition, showing method implementation
+- [ ] 03: HANA Studio/DB Explorer: Data Preview of a custom CDS View
+- [ ] 04: ADT: ABAP program (or class method) calling a CDS View or AMDP method
+- [ ] 05: SPRO path: Not directly relevant for ABAP code, but showing a system configuration screen to hint at the underlying data that ABAP on HANA leverages (e.g., material master fields in MMSC or MARC)

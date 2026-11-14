@@ -518,5 +518,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-14",
     excerpt: "Demystify the SAP EWM warehouse structure, from its foundational warehouse number to the granular storage bins, and learn how to configure each element for optimized warehouse operations.",
     imageUrl: "https://youronementor.com/blog/covers/sap-ewm-warehouse-structure-storage-types-sections-bins.svg"
+  },
+  {
+    id: "post_1794676353260",
+    title: "Mastering ABAP on HANA: Code Pushdown Techniques with Practical Examples",
+    slug: "abap-on-hana-code-pushdown-examples",
+    category: "Tutorial",
+    badge: "SAP ABAP TUTORIAL",
+    readTime: "11 min read",
+    date: "Nov 14, 2026",
+    isoDate: "2026-11-14",
+    excerpt: "Dive into ABAP on HANA code pushdown. Learn essential techniques like CDS Views and AMDP to optimize your S/4HANA applications for unparalleled performance with practical examples.",
+    imageUrl: "https://youronementor.com/blog/covers/abap-on-hana-code-pushdown-examples.svg"
   }
 ];

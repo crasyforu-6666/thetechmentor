@@ -117,5 +117,12 @@
   "slug": "sap-ewm-warehouse-structure-storage-types-sections-bins",
   "title": "Mastering the SAP EWM Warehouse Structure: Storage Types, Sections, and Bins",
   "date": "2026-11-14"
+ },
+ {
+  "topic": "ABAP on HANA: code pushdown explained with examples",
+  "module": "ABAP",
+  "slug": "abap-on-hana-code-pushdown-examples",
+  "title": "Mastering ABAP on HANA: Code Pushdown Techniques with Practical Examples",
+  "date": "2026-11-14"
  }
 ]
