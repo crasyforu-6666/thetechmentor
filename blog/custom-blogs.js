@@ -506,5 +506,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-13",
     excerpt: "Demystify SAP FICO organisational structure in S/4HANA. Learn about Company Code, Controlling Area, Chart of Accounts, and their critical configuration and integration for logistics.",
     imageUrl: "https://youronementor.com/blog/covers/sap-fico-organisational-structure-s4hana-guide.svg"
+  },
+  {
+    id: "post_1794626586453",
+    title: "Mastering the SAP EWM Warehouse Structure: Storage Types, Sections, and Bins",
+    slug: "sap-ewm-warehouse-structure-storage-types-sections-bins",
+    category: "Tutorial",
+    badge: "SAP EWM TUTORIAL",
+    readTime: "13 min read",
+    date: "Nov 14, 2026",
+    isoDate: "2026-11-14",
+    excerpt: "Demystify the SAP EWM warehouse structure, from its foundational warehouse number to the granular storage bins, and learn how to configure each element for optimized warehouse operations.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-ewm-warehouse-structure-storage-types-sections-bins.svg"
   }
 ];

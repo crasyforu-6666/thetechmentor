@@ -155,3 +155,11 @@ Folder: `images/blog/sap-fico-organisational-structure-s4hana-guide/`
 - [ ] 03: T-code OB13: Edit Chart of Accounts List - showing creation of new Chart of Accounts.
 - [ ] 04: T-code OB62: Assign Company Code to Chart of Accounts - showing the linkage.
 - [ ] 05: T-code OKKP: Maintain Controlling Area - showing basic data and assignment of company codes.
+
+## Mastering the SAP EWM Warehouse Structure: Storage Types, Sections, and Bins
+Folder: `images/blog/sap-ewm-warehouse-structure-storage-types-sections-bins/`
+- [ ] 01: SPRO: Define Warehouse Number (View: Warehouse Number Control Data)
+- [ ] 02: SPRO: Define Storage Type (General Storage Type Parameters)
+- [ ] 03: Transaction /SCWM/BIN: Create Storage Bins (showing template and coordinate structure)
+- [ ] 04: Transaction /SCWM/MON: Storage Bin view (showing bin master data details)
+- [ ] 05: SPRO: Assign Storage Bins to Activity Areas

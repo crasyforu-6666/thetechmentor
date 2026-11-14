@@ -110,5 +110,12 @@
   "slug": "sap-fico-organisational-structure-s4hana-guide",
   "title": "Mastering SAP FICO Organisational Structure in S/4HANA: Company Code, Controlling Area, and Chart of Accounts",
   "date": "2026-11-13"
+ },
+ {
+  "topic": "EWM warehouse structure: storage types, sections and bins",
+  "module": "EWM",
+  "slug": "sap-ewm-warehouse-structure-storage-types-sections-bins",
+  "title": "Mastering the SAP EWM Warehouse Structure: Storage Types, Sections, and Bins",
+  "date": "2026-11-14"
  }
 ]
