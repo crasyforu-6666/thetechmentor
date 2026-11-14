@@ -1,91 +1,301 @@
 {
-  "version": 1,
-  "currency": "INR",
-  "server": {
-    "id": "sap-practice-server",
-    "title": "SAP S/4HANA Practice Server Access",
-    "category": "servers",
-    "modules": [
-      { "id": "mm",        "label": "SAP MM (Materials Management)",       "tier": "core" },
-      { "id": "sd",        "label": "SAP SD (Sales & Distribution)",       "tier": "core" },
-      { "id": "fico",      "label": "SAP FICO (Finance & Controlling)",    "tier": "core" },
-      { "id": "abap",      "label": "SAP ABAP (ABAP on HANA)",             "tier": "core" },
-      { "id": "basis",     "label": "SAP BASIS (System Administration)",   "tier": "core" },
-      { "id": "ewm",       "label": "SAP EWM (Embedded EWM)",              "tier": "specialized" },
-      { "id": "tm",        "label": "SAP TM (Transportation Management)",  "tier": "specialized" },
-      { "id": "logistics", "label": "SAP Logistics (MM + SD + EWM + TM)",  "tier": "specialized" }
-    ],
-    "durations": [
-      { "id": "1m", "label": "1 Month Access",  "months": 1, "tag": "" },
-      { "id": "3m", "label": "3 Months Access", "months": 3, "tag": "Popular — Save 15%" },
-      { "id": "6m", "label": "6 Months Access", "months": 6, "tag": "Best Value — Save 25%" }
-    ],
-    "pricing": {
-      "core":        { "1m": 1499, "3m": 3799, "6m": 6999 },
-      "specialized": { "1m": 1999, "3m": 4999, "6m": 8999 }
-    },
-    "highlights": [
-      "24/7 Browser Fiori & SAP GUI Access",
-      "Pre-configured Master Data & IDES/Best Practices",
-      "Credentials delivered within 2 hours",
-      "Dedicated WhatsApp tech support"
-    ]
-  },
-  "categories": [
-    { "id": "resumes",   "label": "Sample Resumes (PDF)" },
-    { "id": "interview", "label": "Interview Questions (PDF)" },
-    { "id": "notes",     "label": "Study & Config Notes (PDF)" }
+ "version": 1,
+ "currency": "INR",
+ "server": {
+  "id": "sap-practice-server",
+  "title": "SAP S/4HANA Practice Server Access",
+  "category": "servers",
+  "modules": [
+   {
+    "id": "mm",
+    "label": "SAP MM (Materials Management)",
+    "tier": "core"
+   },
+   {
+    "id": "sd",
+    "label": "SAP SD (Sales & Distribution)",
+    "tier": "core"
+   },
+   {
+    "id": "fico",
+    "label": "SAP FICO (Finance & Controlling)",
+    "tier": "core"
+   },
+   {
+    "id": "abap",
+    "label": "SAP ABAP (ABAP on HANA)",
+    "tier": "core"
+   },
+   {
+    "id": "basis",
+    "label": "SAP BASIS (System Administration)",
+    "tier": "core"
+   },
+   {
+    "id": "ewm",
+    "label": "SAP EWM (Embedded EWM)",
+    "tier": "specialized"
+   },
+   {
+    "id": "tm",
+    "label": "SAP TM (Transportation Management)",
+    "tier": "specialized"
+   },
+   {
+    "id": "logistics",
+    "label": "SAP Logistics (MM + SD + EWM + TM)",
+    "tier": "specialized"
+   }
   ],
-  "products": [
-    { "id": "resume-mm-pack", "category": "resumes", "title": "SAP MM Functional Consultant Resume Pack (0–5 Yrs)", "price": 0,
-      "summary": "Ready-to-edit resumes for fresher, 2-year and 5-year SAP MM profiles with project bullet points recruiters look for.",
-      "format": "PDF + editable DOCX", "pages": 12, "file": null,
-      "preview": ["Fresher (0 yr) resume with training-project section", "2-year support consultant resume", "5-year implementation consultant resume", "40 ready-made SAP MM project bullet points", "ATS keyword checklist for MM roles"] },
-    { "id": "resume-ewm-logistics", "category": "resumes", "title": "SAP EWM & Logistics Implementation Resume Templates (3 Variants)", "price": 299,
-      "summary": "Three resume variants for EWM and end-to-end logistics consultants — implementation, rollout and support profiles.",
-      "format": "PDF + editable DOCX", "pages": 15, "file": null,
-      "preview": ["Embedded EWM implementation consultant", "EWM + TM logistics rollout profile", "Warehouse-to-SAP career switch variant", "Project descriptions for inbound, outbound, RF and waves", "Skills matrix and certification section"] },
-    { "id": "resume-transition-kit", "category": "resumes", "title": "Non-SAP to SAP Career Transition Resume + Cover Letter Kit", "price": 0,
-      "summary": "Reposition your logistics, IT-support or finance experience for an SAP role — resume, cover letter and LinkedIn summary.",
-      "format": "PDF", "pages": 10, "file": null,
-      "preview": ["How to map domain experience to SAP modules", "Before/after resume example", "Cover letter template", "LinkedIn headline & About section templates", "Common mistakes that get resumes rejected"] },
-    { "id": "resume-role-bundle", "category": "resumes", "title": "SAP SD / FICO / ABAP / BASIS Role-Specific Resume Bundle", "price": 399,
-      "summary": "Four role-specific resume templates with module keywords, tools and project bullets for SD, FICO, ABAP and BASIS.",
-      "format": "PDF + editable DOCX", "pages": 20, "file": null,
-      "preview": ["SAP SD consultant template", "SAP FICO consultant template", "SAP ABAP on HANA developer template", "SAP BASIS administrator template", "Keyword bank per role"] },
-
-    { "id": "iq-mm-100", "category": "interview", "title": "Top 100 SAP MM Real-Time Scenario Interview Q&A", "price": 0,
-      "summary": "100 scenario-based SAP MM questions with model answers, from P2P basics to OBYC and split valuation.",
-      "format": "PDF", "pages": 38, "file": null,
-      "preview": ["Organisation structure & master data (15 Q)", "Procure-to-pay scenarios (25 Q)", "Inventory, valuation & OBYC (25 Q)", "Special procurement (15 Q)", "Support-ticket scenarios (20 Q)"] },
-    { "id": "iq-ewm-tm-bank", "category": "interview", "title": "SAP EWM & TM Architect Interview Bank (150+ Scenarios + Answers)", "price": 499,
-      "summary": "150+ architect-level EWM and TM scenarios with answers — warehouse design, waves, RF, freight orders and carrier selection.",
-      "format": "PDF", "pages": 60, "file": null,
-      "preview": ["Embedded vs decentralised EWM design questions", "Inbound/outbound & wave scenarios", "POSC/LOSC and RF framework", "TM freight units, orders and planning", "Charge calculation & settlement"] },
-    { "id": "iq-sd-o2c", "category": "interview", "title": "SAP SD & O2C Integration Interview Guide", "price": 299,
-      "summary": "Order-to-cash interview questions with integration answers across SD, MM and FI, including pricing and VKOA.",
-      "format": "PDF", "pages": 32, "file": null,
-      "preview": ["Sales document types & item categories", "Pricing procedure & condition technique", "Delivery, billing and VKOA", "Credit management in S/4HANA", "SD–FI–MM integration scenarios"] },
-    { "id": "iq-fico-abap", "category": "interview", "title": "SAP FICO & ABAP Technical Interview Cheat Sheet", "price": 299,
-      "summary": "Compact Q&A for FICO consultants and ABAP developers — ACDOCA, closing, CDS views, AMDP and enhancements.",
-      "format": "PDF", "pages": 24, "file": null,
-      "preview": ["Universal Journal & GL questions", "AP/AR and asset accounting", "Month-end closing scenarios", "ABAP on HANA, CDS & AMDP", "BAdIs, user exits and debugging"] },
-
-    { "id": "notes-mm-tcode-obyc", "category": "notes", "title": "SAP MM Complete T-Code & OBYC Account Determination Cheat Sheet", "price": 0,
-      "summary": "Every everyday SAP MM transaction code plus the OBYC transaction keys and what they post — on two printable pages.",
-      "format": "PDF", "pages": 2, "file": "downloads/sap-mm-tcode-obyc-cheat-sheet.pdf",
-      "preview": ["Master data, purchasing and inventory T-codes", "Invoice verification & valuation T-codes", "OBYC transaction keys BSX, WRX, GBB, PRD, KDM and more", "GBB account modifiers", "Configuration paths you use most"] },
-    { "id": "notes-p2p-o2c-blueprint", "category": "notes", "title": "SAP S/4HANA P2P & O2C End-to-End Configuration Blueprint", "price": 499,
-      "summary": "Step-by-step configuration blueprint for procure-to-pay and order-to-cash with SPRO paths and test scripts.",
-      "format": "PDF", "pages": 55, "file": null,
-      "preview": ["Enterprise structure set-up", "P2P configuration with SPRO paths", "O2C configuration with SPRO paths", "Account determination (OBYC & VKOA)", "End-to-end test scripts"] },
-    { "id": "notes-ewm-workbook", "category": "notes", "title": "SAP EWM Wave Management, POSC & LOSC Step-by-Step Workbook", "price": 599,
-      "summary": "Hands-on workbook for wave templates, WOCR, process- and layout-oriented storage control with exercises.",
-      "format": "PDF", "pages": 48, "file": null,
-      "preview": ["Warehouse process types & activities", "Wave templates and release methods", "WOCR configuration", "POSC vs LOSC with exercises", "Monitoring with /SCWM/MON"] },
-    { "id": "notes-basis-security", "category": "notes", "title": "SAP BASIS & Security Quick Reference Handbook", "price": 399,
-      "summary": "Admin transactions, HANA tools, transport management and role design in one quick reference.",
-      "format": "PDF", "pages": 36, "file": null,
-      "preview": ["Daily monitoring transactions", "HANA backup & recovery basics", "STMS transport management", "User & role administration (SU01, PFCG)", "Troubleshooting authorisations (SU53)"] }
+  "durations": [
+   {
+    "id": "1m",
+    "label": "1 Month Access",
+    "months": 1,
+    "tag": ""
+   },
+   {
+    "id": "3m",
+    "label": "3 Months Access",
+    "months": 3,
+    "tag": "Popular — Save 30%"
+   }
+  ],
+  "pricing": {
+   "core": {
+    "1m": 999,
+    "3m": 2099
+   },
+   "specialized": {
+    "1m": 999,
+    "3m": 2099
+   }
+  },
+  "highlights": [
+   "24/7 Browser Fiori & SAP GUI Access",
+   "Pre-configured Master Data & IDES/Best Practices",
+   "Credentials delivered within 2 hours",
+   "Dedicated WhatsApp tech support"
   ]
+ },
+ "categories": [
+  {
+   "id": "resumes",
+   "label": "Sample Resumes (PDF)"
+  },
+  {
+   "id": "interview",
+   "label": "Interview Questions (PDF)"
+  },
+  {
+   "id": "notes",
+   "label": "Study & Config Notes (PDF)"
+  }
+ ],
+ "products": [
+  {
+   "id": "resume-mm-pack",
+   "category": "resumes",
+   "title": "SAP MM Functional Consultant Resume Pack (0–5 Yrs)",
+   "price": 0,
+   "summary": "Ready-to-edit resumes for fresher, 2-year and 5-year SAP MM profiles with project bullet points recruiters look for.",
+   "format": "PDF + editable DOCX",
+   "pages": 12,
+   "file": null,
+   "preview": [
+    "Fresher (0 yr) resume with training-project section",
+    "2-year support consultant resume",
+    "5-year implementation consultant resume",
+    "40 ready-made SAP MM project bullet points",
+    "ATS keyword checklist for MM roles"
+   ]
+  },
+  {
+   "id": "resume-ewm-logistics",
+   "category": "resumes",
+   "title": "SAP EWM & Logistics Implementation Resume Templates (3 Variants)",
+   "price": 299,
+   "summary": "Three resume variants for EWM and end-to-end logistics consultants — implementation, rollout and support profiles.",
+   "format": "PDF + editable DOCX",
+   "pages": 15,
+   "file": null,
+   "preview": [
+    "Embedded EWM implementation consultant",
+    "EWM + TM logistics rollout profile",
+    "Warehouse-to-SAP career switch variant",
+    "Project descriptions for inbound, outbound, RF and waves",
+    "Skills matrix and certification section"
+   ]
+  },
+  {
+   "id": "resume-transition-kit",
+   "category": "resumes",
+   "title": "Non-SAP to SAP Career Transition Resume + Cover Letter Kit",
+   "price": 0,
+   "summary": "Reposition your logistics, IT-support or finance experience for an SAP role — resume, cover letter and LinkedIn summary.",
+   "format": "PDF",
+   "pages": 10,
+   "file": null,
+   "preview": [
+    "How to map domain experience to SAP modules",
+    "Before/after resume example",
+    "Cover letter template",
+    "LinkedIn headline & About section templates",
+    "Common mistakes that get resumes rejected"
+   ]
+  },
+  {
+   "id": "resume-role-bundle",
+   "category": "resumes",
+   "title": "SAP SD / FICO / ABAP / BASIS Role-Specific Resume Bundle",
+   "price": 399,
+   "summary": "Four role-specific resume templates with module keywords, tools and project bullets for SD, FICO, ABAP and BASIS.",
+   "format": "PDF + editable DOCX",
+   "pages": 20,
+   "file": null,
+   "preview": [
+    "SAP SD consultant template",
+    "SAP FICO consultant template",
+    "SAP ABAP on HANA developer template",
+    "SAP BASIS administrator template",
+    "Keyword bank per role"
+   ]
+  },
+  {
+   "id": "iq-mm-100",
+   "category": "interview",
+   "title": "Top 100 SAP MM Real-Time Scenario Interview Q&A",
+   "price": 0,
+   "summary": "100 scenario-based SAP MM questions with model answers, from P2P basics to OBYC and split valuation.",
+   "format": "PDF",
+   "pages": 38,
+   "file": null,
+   "preview": [
+    "Organisation structure & master data (15 Q)",
+    "Procure-to-pay scenarios (25 Q)",
+    "Inventory, valuation & OBYC (25 Q)",
+    "Special procurement (15 Q)",
+    "Support-ticket scenarios (20 Q)"
+   ]
+  },
+  {
+   "id": "iq-ewm-tm-bank",
+   "category": "interview",
+   "title": "SAP EWM & TM Architect Interview Bank (150+ Scenarios + Answers)",
+   "price": 499,
+   "summary": "150+ architect-level EWM and TM scenarios with answers — warehouse design, waves, RF, freight orders and carrier selection.",
+   "format": "PDF",
+   "pages": 60,
+   "file": null,
+   "preview": [
+    "Embedded vs decentralised EWM design questions",
+    "Inbound/outbound & wave scenarios",
+    "POSC/LOSC and RF framework",
+    "TM freight units, orders and planning",
+    "Charge calculation & settlement"
+   ]
+  },
+  {
+   "id": "iq-sd-o2c",
+   "category": "interview",
+   "title": "SAP SD & O2C Integration Interview Guide",
+   "price": 299,
+   "summary": "Order-to-cash interview questions with integration answers across SD, MM and FI, including pricing and VKOA.",
+   "format": "PDF",
+   "pages": 32,
+   "file": null,
+   "preview": [
+    "Sales document types & item categories",
+    "Pricing procedure & condition technique",
+    "Delivery, billing and VKOA",
+    "Credit management in S/4HANA",
+    "SD–FI–MM integration scenarios"
+   ]
+  },
+  {
+   "id": "iq-fico-abap",
+   "category": "interview",
+   "title": "SAP FICO & ABAP Technical Interview Cheat Sheet",
+   "price": 299,
+   "summary": "Compact Q&A for FICO consultants and ABAP developers — ACDOCA, closing, CDS views, AMDP and enhancements.",
+   "format": "PDF",
+   "pages": 24,
+   "file": null,
+   "preview": [
+    "Universal Journal & GL questions",
+    "AP/AR and asset accounting",
+    "Month-end closing scenarios",
+    "ABAP on HANA, CDS & AMDP",
+    "BAdIs, user exits and debugging"
+   ]
+  },
+  {
+   "id": "notes-mm-tcode-obyc",
+   "category": "notes",
+   "title": "SAP MM Complete T-Code & OBYC Account Determination Cheat Sheet",
+   "price": 0,
+   "summary": "Every everyday SAP MM transaction code plus the OBYC transaction keys and what they post — on two printable pages.",
+   "format": "PDF",
+   "pages": 2,
+   "file": "downloads/sap-mm-tcode-obyc-cheat-sheet.pdf",
+   "preview": [
+    "Master data, purchasing and inventory T-codes",
+    "Invoice verification & valuation T-codes",
+    "OBYC transaction keys BSX, WRX, GBB, PRD, KDM and more",
+    "GBB account modifiers",
+    "Configuration paths you use most"
+   ]
+  },
+  {
+   "id": "notes-p2p-o2c-blueprint",
+   "category": "notes",
+   "title": "SAP S/4HANA P2P & O2C End-to-End Configuration Blueprint",
+   "price": 499,
+   "summary": "Step-by-step configuration blueprint for procure-to-pay and order-to-cash with SPRO paths and test scripts.",
+   "format": "PDF",
+   "pages": 55,
+   "file": null,
+   "preview": [
+    "Enterprise structure set-up",
+    "P2P configuration with SPRO paths",
+    "O2C configuration with SPRO paths",
+    "Account determination (OBYC & VKOA)",
+    "End-to-end test scripts"
+   ]
+  },
+  {
+   "id": "notes-ewm-workbook",
+   "category": "notes",
+   "title": "SAP EWM Wave Management, POSC & LOSC Step-by-Step Workbook",
+   "price": 599,
+   "summary": "Hands-on workbook for wave templates, WOCR, process- and layout-oriented storage control with exercises.",
+   "format": "PDF",
+   "pages": 48,
+   "file": null,
+   "preview": [
+    "Warehouse process types & activities",
+    "Wave templates and release methods",
+    "WOCR configuration",
+    "POSC vs LOSC with exercises",
+    "Monitoring with /SCWM/MON"
+   ]
+  },
+  {
+   "id": "notes-basis-security",
+   "category": "notes",
+   "title": "SAP BASIS & Security Quick Reference Handbook",
+   "price": 399,
+   "summary": "Admin transactions, HANA tools, transport management and role design in one quick reference.",
+   "format": "PDF",
+   "pages": 36,
+   "file": null,
+   "preview": [
+    "Daily monitoring transactions",
+    "HANA backup & recovery basics",
+    "STMS transport management",
+    "User & role administration (SU01, PFCG)",
+    "Troubleshooting authorisations (SU53)"
+   ]
+  }
+ ]
 }

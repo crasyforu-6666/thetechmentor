@@ -68,6 +68,13 @@ def build():
         for d in srv["durations"])
     highlights = "".join(f"<li>{e(h)}</li>" for h in srv["highlights"])
     core, spec = srv["pricing"]["core"], srv["pricing"]["specialized"]
+    def plan_list(tbl):
+        return " · ".join(f"{d['label'].replace(' Access', '')}: {inr(tbl[d['id']])}" for d in srv["durations"])
+    if core == spec:
+        price_note = "All modules — " + plan_list(core)
+    else:
+        price_note = ("Core modules (MM, SD, FICO, ABAP, BASIS) — " + plan_list(core) +
+                      "<br />EWM, TM &amp; Logistics — " + plan_list(spec))
     cards = "".join(product_card(p, cats[p["category"]]) for p in data["products"])
     tabs = "".join(f'<button type="button" class="chip" data-dp-filter="{e(c["id"])}">{e(c["label"])}</button>' for c in data["categories"])
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
@@ -155,7 +162,7 @@ def build():
             <h2>{e(srv['title'])}</h2>
             <p class="sub">Practise every configuration and transaction on your own S/4HANA system — any module, any time.</p>
             <ul class="ticks">{highlights}</ul>
-            <p class="dp-table-note">Core modules (MM, SD, FICO, ABAP, BASIS): {inr(core['1m'])} / {inr(core['3m'])} / {inr(core['6m'])} · EWM, TM &amp; Logistics: {inr(spec['1m'])} / {inr(spec['3m'])} / {inr(spec['6m'])} <span class="muted">(1 / 3 / 6 months)</span></p>
+            <p class="dp-table-note">{price_note}</p>
           </div>
           <div class="dp-server-box">
             <div class="form-row"><label for="dp-module">Select SAP module</label><select id="dp-module">{mod_opts}</select></div>
