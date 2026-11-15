@@ -1,0 +1,4 @@
+/* Tailwind theme + utilities (no preflight: the ported design ships its own base styles). */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "./home.css";

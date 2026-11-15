@@ -1,18 +1,7 @@
-linkedin-saas/
-.local-node/
-node_modules/
-sap-video-agent/
-src/
-supabase/
-.cursor/
-.git/
+.DS_Store
 **/.DS_Store
-# Not deployed: browser-only demo login with hardcoded passwords (insecure) and setup docs
-auth/
-login/
-admin/
-integrations/
-scripts/
-logs/
-docs/
-content/
+# Not deployed: browser-only demo admin and internal material
+legacy/admin/
+legacy/integrations/
+legacy/logs/
+legacy/docs/

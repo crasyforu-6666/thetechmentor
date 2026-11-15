@@ -48,6 +48,7 @@ jobs:
           if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ]; then npm install -g @anthropic-ai/claude-code; fi
 
       - name: Write and publish what is due
+        working-directory: legacy
         run: |
           MODE="${{ github.event.inputs.mode }}"
           if [ -z "$MODE" ] || [ "$MODE" = "auto" ]; then
@@ -63,7 +64,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A blog index.html logs sitemap.xml robots.txt content docs vercel.json
+          git add -A legacy/blog legacy/index.html legacy/logs legacy/sitemap.xml legacy/robots.txt legacy/content legacy/docs vercel.json
           if git diff --cached --quiet; then echo "Nothing to commit"; exit 0; fi
           git commit -m "feat(blog): automated article"
           for i in 1 2 3 4; do

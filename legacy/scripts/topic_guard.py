@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BLOG_DIR = os.path.join(BASE_DIR, "blog")
 BACKLOG = os.path.join(BASE_DIR, "content", "topic-backlog.json")
 HISTORY = os.path.join(BASE_DIR, "content", "topic-history.json")
-VERCEL = os.path.join(BASE_DIR, "vercel.json")
+VERCEL = os.path.join(os.path.dirname(BASE_DIR), "vercel.json")  # repo root (site lives in legacy/)
 
 STOP = set("""
 a an and the of in on for to with vs versus by from at as is are how what why when which your you

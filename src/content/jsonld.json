@@ -1,0 +1,452 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "theTechMentor",
+      "url": "https://youronementor.com/",
+      "email": "info@youronementor.com",
+      "telephone": "+91-7848942021",
+      "sameAs": [
+        "https://www.linkedin.com/in/anshuman-behuria-946860130",
+        "https://www.youtube.com/playlist?list=PL71i23QiQd9VSrHTuXQyiOlLsi8NnGbSp",
+        "https://smarteduverse.graphy.com/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "name": "Anshuman Behuria",
+      "jobTitle": "Lead SAP MM & EWM Mentor",
+      "image": "https://youronementor.com/images/anshuman-behuria.jpg",
+      "url": "https://www.linkedin.com/in/anshuman-behuria-946860130",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "theTechMentor"
+      }
+    },
+    {
+      "@type": "Course",
+      "name": "SAP MM (Materials Management)",
+      "description": "SAP MM (Materials Management) on SAP S/4HANA: Procure-to-Pay (P2P), MIGO, MIRO, OBYC, split valuation, FI/SD integration.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "4999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "29999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT35H",
+          "description": "Recorded classes available 24/7 with lifetime access"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP SD (Sales & Distribution)",
+      "description": "SAP SD (Sales & Distribution) on SAP S/4HANA: Order-to-Cash (O2C), pricing procedure, condition technique, billing, VKOA, credit management.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "4999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "29999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT35H",
+          "description": "Recorded classes available 24/7 with lifetime access"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP FICO (Finance & Controlling)",
+      "description": "SAP FICO (Finance & Controlling) on SAP S/4HANA: Universal Journal (ACDOCA), General Ledger, AP/AR, Asset Accounting, cost center & profit center accounting.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "4999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "34999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT40H",
+          "description": "Recorded classes available 24/7 with lifetime access"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP ABAP (Advanced Business Application Programming)",
+      "description": "SAP ABAP (Advanced Business Application Programming) on SAP S/4HANA: ABAP on HANA, CDS views, AMDP, OData services, enhancements, reports & SmartForms.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "4999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "29999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT40H",
+          "description": "Recorded classes available 24/7 with lifetime access"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP BASIS (System Administration)",
+      "description": "SAP BASIS (System Administration) on SAP S/4HANA: S/4HANA architecture, HANA DB administration, user & role security, transport management (STMS), kernel upgrades.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "4999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "34999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT35H",
+          "description": "Recorded classes available 24/7 with lifetime access"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP EWM (Extended Warehouse Management)",
+      "description": "SAP EWM (Extended Warehouse Management) on SAP S/4HANA: Inbound/outbound processing, wave management, RF framework, slotting, POSC/LOSC, yard management.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "6999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "34999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT40H",
+          "description": "Recorded classes available 24/7 with lifetime access"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP TM (Transportation Management)",
+      "description": "SAP TM (Transportation Management) on SAP S/4HANA: Freight order management, carrier selection, charge calculation, shipper/LSP scenarios, S/4HANA embedded TM.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "6999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "34999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT40H",
+          "description": "Recorded classes available 24/7 with lifetime access"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "name": "SAP Logistics (End-to-End Supply Chain)",
+      "description": "SAP Logistics (End-to-End Supply Chain) on SAP S/4HANA: Integrated MM + SD + EWM + TM workflows across procurement, order fulfilment and warehouse execution.",
+      "provider": {
+        "@type": "Organization",
+        "name": "theTechMentor",
+        "sameAs": "https://youronementor.com/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "category": "Recorded Session",
+          "price": "6999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#recorded"
+        },
+        {
+          "@type": "Offer",
+          "category": "Live Mentored Session",
+          "price": "34999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://youronementor.com/#live"
+        }
+      ],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": "PT45H",
+          "description": "Recorded classes available 24/7 with lifetime access"
+        },
+        {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "Weekly",
+            "byDay": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
