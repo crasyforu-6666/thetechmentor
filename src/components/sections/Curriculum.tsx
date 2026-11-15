@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { curriculum } from "@/content/site";
 
-export default function CurriculumTabs() {
+export default function Curriculum() {
   const [active, setActive] = useState(curriculum.tabs[0].key);
   return (
+    <section className="section alt" id="curriculum">
     <div className="wrap two-col">
       <div>
         <p className="eyebrow">{curriculum.eyebrow}</p>
@@ -47,5 +48,6 @@ export default function CurriculumTabs() {
         ))}
       </div>
     </div>
+    </section>
   );
 }

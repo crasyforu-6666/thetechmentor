@@ -1,8 +1,29 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { brand, nav } from "@/content/site";
-import { scrollToId, useHomeState } from "./HomeState";
+import { announce, brand, nav, skipLink } from "@/content/site";
+import { scrollToId, useHomeState } from "@/components/shared/HomeState";
+
+function SkipLink() {
+  return (
+    <a className="skip-link" href={skipLink.href}>
+      {skipLink.label}
+    </a>
+  );
+}
+
+function Announce() {
+  return (
+    <div className="announce">
+      <div className="wrap">
+        <span>
+          <span className="dot" aria-hidden="true"></span> {announce.text}
+        </span>
+        <a href={announce.link.href}>{announce.link.label}</a>
+      </div>
+    </div>
+  );
+}
 
 export default function Header() {
   const { query, setQuery } = useHomeState();
@@ -28,6 +49,9 @@ export default function Header() {
   const close = () => setOpen(false);
 
   return (
+    <>
+    <SkipLink />
+    <Announce />
     <header className={`header${scrolled ? " is-scrolled" : ""}`} id="top">
       <nav className="nav wrap" aria-label={nav.ariaLabel}>
         <a href="#top" className="brand" aria-label={brand.homeLabel}>
@@ -84,5 +108,6 @@ export default function Header() {
         </ul>
       </nav>
     </header>
+    </>
   );
 }

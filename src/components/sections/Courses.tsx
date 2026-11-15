@@ -2,8 +2,8 @@
 
 import { flushSync } from "react-dom";
 import { brand, catalog, type Course } from "@/content/site";
-import { useHomeState } from "./HomeState";
-import { AdvisorLink } from "./Links";
+import { useHomeState } from "@/components/shared/HomeState";
+import { AdvisorLink } from "@/components/shared/Links";
 
 function matches(c: Course, filter: string, query: string) {
   const okFilter = filter === "all" || filter === c.format || c.cats.split(" ").includes(filter);
@@ -55,7 +55,7 @@ function CourseCard({ c, hidden }: { c: Course; hidden: boolean }) {
   );
 }
 
-export default function Catalog() {
+export default function Courses() {
   const { filter, query, setFilter, reset } = useHomeState();
   let shown = 0;
   const sections = catalog.sections.map((sec) => {

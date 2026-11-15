@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { advisor, inr, priceFor } from "@/content/site";
-import { useHomeState } from "./HomeState";
+import { advisor, contact, inr, priceFor } from "@/content/site";
+import { useHomeState } from "@/components/shared/HomeState";
 
 declare global {
   interface Window {
@@ -13,7 +13,7 @@ declare global {
 
 const f = advisor.form;
 
-export default function LeadForm() {
+function LeadForm() {
   const { prefill } = useHomeState();
   const [course, setCourse] = useState("");
   const [format, setFormat] = useState("");
@@ -135,5 +135,33 @@ export default function LeadForm() {
         )}
       </div>
     </div>
+  );
+}
+
+const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
+
+export default function CounsellingForm() {
+  return (
+    <section className="section advisor" id="advisor">
+      <div className="wrap two-col">
+        <div className="advisor-copy" id="enroll">
+          <p className="eyebrow">{advisor.eyebrow}</p>
+          <h2>{advisor.title}</h2>
+          <p className="sub">{advisor.sub}</p>
+          <ul className="ticks">
+            {advisor.ticks.map((t) => (
+              <li key={t}>{t}</li>
+            ))}
+          </ul>
+          <div className="contact">
+            <a href={contact.whatsappUrl} {...ext}>
+              {advisor.contactWhatsapp}
+            </a>
+            <a href={contact.emailUrl}>{advisor.contactEmail}</a>
+          </div>
+        </div>
+        <LeadForm />
+      </div>
+    </section>
   );
 }

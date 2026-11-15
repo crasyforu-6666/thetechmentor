@@ -1,50 +1,42 @@
-import Catalog from "@/components/home/Catalog";
-import Header from "@/components/home/Header";
-import { HomeStateProvider } from "@/components/home/HomeState";
-import {
-  Advisor,
-  Announce,
-  Blog,
-  CtaBand,
-  Curriculum,
-  Faq,
-  Footer,
-  Formats,
-  Hero,
-  Mentor,
-  Outcomes,
-  Paths,
-  SkipLink,
-  Stats,
-  StickyBar,
-  Strip,
-  Why,
-} from "@/components/home/Sections";
+import { HomeStateProvider } from "@/components/shared/HomeState";
+import Header from "@/components/sections/Header";
+import Hero from "@/components/sections/Hero";
+import Employers from "@/components/sections/Employers";
+import Courses from "@/components/sections/Courses";
+import Stats from "@/components/sections/Stats";
+import Features from "@/components/sections/Features";
+import CareerPaths from "@/components/sections/CareerPaths";
+import Curriculum from "@/components/sections/Curriculum";
+import Formats from "@/components/sections/Formats";
+import Testimonials from "@/components/sections/Testimonials";
+import Mentor from "@/components/sections/Mentor";
+import LearningHub from "@/components/sections/LearningHub";
+import CounsellingForm from "@/components/sections/CounsellingForm";
+import FAQ from "@/components/sections/FAQ";
+import ClosingCTA from "@/components/sections/ClosingCTA";
+import Footer from "@/components/sections/Footer";
 
 export default function HomePage() {
   return (
     <HomeStateProvider>
-      <SkipLink />
-      <Announce />
       <Header />
       <main id="main">
         <Hero />
-        <Strip />
-        <Catalog />
+        <Employers />
+        <Courses />
         <Stats />
-        <Why />
-        <Paths />
+        <Features />
+        <CareerPaths />
         <Curriculum />
         <Formats />
-        <Outcomes />
+        <Testimonials />
         <Mentor />
-        <Blog />
-        <Advisor />
-        <Faq />
-        <CtaBand />
+        <LearningHub />
+        <CounsellingForm />
+        <FAQ />
+        <ClosingCTA />
       </main>
       <Footer />
-      <StickyBar />
     </HomeStateProvider>
   );
 }
