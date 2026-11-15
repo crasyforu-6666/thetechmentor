@@ -124,5 +124,12 @@
   "slug": "abap-on-hana-code-pushdown-examples",
   "title": "Mastering ABAP on HANA: Code Pushdown Techniques with Practical Examples",
   "date": "2026-11-14"
+ },
+ {
+  "topic": "SAP SD organisational structure in S/4HANA",
+  "module": "SD",
+  "slug": "sap-sd-organisational-structure-s4hana-guide",
+  "title": "Mastering SAP SD Organisational Structure in S/4HANA for Logistics Consultants",
+  "date": "2026-11-15"
  }
 ]

@@ -179,3 +179,11 @@ Folder: `images/blog/abap-on-hana-code-pushdown-examples/`
 - [ ] 03: HANA Studio/DB Explorer: Data Preview of a custom CDS View
 - [ ] 04: ADT: ABAP program (or class method) calling a CDS View or AMDP method
 - [ ] 05: SPRO path: Not directly relevant for ABAP code, but showing a system configuration screen to hint at the underlying data that ABAP on HANA leverages (e.g., material master fields in MMSC or MARC)
+
+## Mastering SAP SD Organisational Structure in S/4HANA for Logistics Consultants
+Folder: `images/blog/sap-sd-organisational-structure-s4hana-guide/`
+- [ ] 01: OVX5 - Define Sales Organization: Show standard definition screen.
+- [ ] 02: OVXA - Define Distribution Channel: Show screen for creating new channels.
+- [ ] 03: OVX3 - Assign Sales Organization to Company Code: Highlight the assignment entry.
+- [ ] 04: OVXG - Set up Sales Area: Demonstrate linking Sales Org, Dist. Channel, and Division.
+- [ ] 05: OVX6 - Assign Sales Organization - Distribution Channel - Plant: Show a configured entry.

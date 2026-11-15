@@ -530,5 +530,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-14",
     excerpt: "Dive into ABAP on HANA code pushdown. Learn essential techniques like CDS Views and AMDP to optimize your S/4HANA applications for unparalleled performance with practical examples.",
     imageUrl: "https://youronementor.com/blog/covers/abap-on-hana-code-pushdown-examples.svg"
+  },
+  {
+    id: "post_1794735239720",
+    title: "Mastering SAP SD Organisational Structure in S/4HANA for Logistics Consultants",
+    slug: "sap-sd-organisational-structure-s4hana-guide",
+    category: "Tutorial",
+    badge: "SAP SD TUTORIAL",
+    readTime: "13 min read",
+    date: "Nov 15, 2026",
+    isoDate: "2026-11-15",
+    excerpt: "This article provides a comprehensive guide to SAP SD organisational structure in S/4HANA, detailing key elements like Sales Organization, Distribution Channel, and Division, along with their configuration and cross-module impacts for logistics consultants.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-sd-organisational-structure-s4hana-guide.svg"
   }
 ];
