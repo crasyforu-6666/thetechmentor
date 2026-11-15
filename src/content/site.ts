@@ -276,6 +276,9 @@ export const catalog = {
   ],
 };
 
+/** Next live batch start (shown as "Starts {date}" for Live Mentored Sessions). */
+export const liveBatch = { startDate: "2026-11-28", startLabel: "28 Nov 2026", startsPrefix: "Starts " };
+
 export const filterKeys = ["recorded", "live", "functional", "technical", "supply"];
 
 /* ---------- Stats / Why ---------- */
