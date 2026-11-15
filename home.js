@@ -15,7 +15,7 @@
   var sections = Array.prototype.slice.call(document.querySelectorAll("#courses .cat-section"));
   var chips = document.querySelectorAll(".filters .chip");
   var noResults = document.getElementById("no-results");
-  var inputs = [document.getElementById("course-search"), document.getElementById("hero-search")].filter(Boolean);
+  var inputs = [document.getElementById("course-search")].filter(Boolean);
   var state = { filter: "all", query: "" };
 
   function run() {
@@ -52,11 +52,8 @@
     });
     inp.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); scrollTo("courses"); } });
   });
-  var heroBtn = document.getElementById("hero-search-btn");
-  if (heroBtn) heroBtn.addEventListener("click", function () { scrollTo("courses"); });
-
-  document.querySelectorAll(".popular button[data-q]").forEach(function (b) {
-    b.addEventListener("click", function () { state.filter = "all"; setQuery(b.getAttribute("data-q")); run(); scrollTo("courses"); });
+  document.querySelectorAll('.popular a[href^="#"]:not([data-jump])').forEach(function (a) {
+    a.addEventListener("click", function () { state.filter = "all"; setQuery(""); run(); });
   });
   // data-jump: filter keys (recorded/live/functional/technical/supply) or a course keyword
   var FILTERS = ["recorded", "live", "functional", "technical", "supply"];
