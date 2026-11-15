@@ -187,3 +187,11 @@ Folder: `images/blog/sap-sd-organisational-structure-s4hana-guide/`
 - [ ] 03: OVX3 - Assign Sales Organization to Company Code: Highlight the assignment entry.
 - [ ] 04: OVXG - Set up Sales Area: Demonstrate linking Sales Org, Dist. Channel, and Division.
 - [ ] 05: OVX6 - Assign Sales Organization - Distribution Channel - Plant: Show a configured entry.
+
+## SAP S/4HANA System Architecture Explained for BASIS Beginners
+Folder: `images/blog/sap-s4hana-system-architecture-basis-beginners/`
+- [ ] 01: DBACOCKPIT (or ST04 in older releases): Show SAP HANA database overview
+- [ ] 02: SM50: Work process overview illustrating application layer processes
+- [ ] 03: SPRO: SAP Reference IMG structure to show where BASIS settings are found
+- [ ] 04: Fiori Launchpad: Example of a modern SAP S/4HANA UI
+- [ ] 05: SM21: System log entries for troubleshooting

@@ -542,5 +542,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-15",
     excerpt: "This article provides a comprehensive guide to SAP SD organisational structure in S/4HANA, detailing key elements like Sales Organization, Distribution Channel, and Division, along with their configuration and cross-module impacts for logistics consultants.",
     imageUrl: "https://youronementor.com/blog/covers/sap-sd-organisational-structure-s4hana-guide.svg"
+  },
+  {
+    id: "post_1794762961544",
+    title: "SAP S/4HANA System Architecture Explained for BASIS Beginners",
+    slug: "sap-s4hana-system-architecture-basis-beginners",
+    category: "Tutorial",
+    badge: "SAP BASIS TUTORIAL",
+    readTime: "10 min read",
+    date: "Nov 15, 2026",
+    isoDate: "2026-11-15",
+    excerpt: "Dive into the core components of SAP S/4HANA architecture, from the HANA database to the application layer and deployment options. Essential for BASIS beginners.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-s4hana-system-architecture-basis-beginners.svg"
   }
 ];

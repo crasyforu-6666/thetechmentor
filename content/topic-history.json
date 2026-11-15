@@ -131,5 +131,12 @@
   "slug": "sap-sd-organisational-structure-s4hana-guide",
   "title": "Mastering SAP SD Organisational Structure in S/4HANA for Logistics Consultants",
   "date": "2026-11-15"
+ },
+ {
+  "topic": "SAP S/4HANA system architecture explained for BASIS beginners",
+  "module": "BASIS",
+  "slug": "sap-s4hana-system-architecture-basis-beginners",
+  "title": "SAP S/4HANA System Architecture Explained for BASIS Beginners",
+  "date": "2026-11-15"
  }
 ]
