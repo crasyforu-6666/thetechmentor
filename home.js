@@ -1,4 +1,4 @@
-/* Homepage: course catalog filters/search, and the enrol/advisor modal pre-fill. */
+/* Homepage: course catalog filters/search, and counselling form pre-fill. */
 (function () {
   "use strict";
 
@@ -87,52 +87,19 @@
       }
       return p;
     }
-    course.addEventListener("change", function () { update(); if (prefix === "modal") syncModal(); });
-    format.addEventListener("change", function () { update(); if (prefix === "modal") syncModal(); });
+    course.addEventListener("change", update);
+    format.addEventListener("change", update);
     return { course: course, format: format, update: update };
   }
-  var modal = wire("modal");
-  wire("app");
+  var app = wire("app");
 
-  /* ---------- Modal pre-fill (runs after script.js opens/resets the modal) ---------- */
-  var label = document.getElementById("modal-selected-program");
-  var payBtn = document.getElementById("modal-pay-btn");
-  var payNote = document.getElementById("modal-pay-note");
-  var title = document.getElementById("modal-title");
-  var submit = document.getElementById("modal-submit");
-
-  function syncModal() {
-    if (!modal) return;
-    var c = modal.course.value, f = modal.format.value, p = priceFor(c, f);
-    if (label) label.textContent = (c && f) ? c + " — " + f + (p ? " (" + inr(p) + ")" : "") : "Free counselling (15 min)";
-    if (payBtn) {
-      payBtn.hidden = !p;
-      payBtn.textContent = f === "Live Mentored Session" ? "Reserve your seat — pay " + inr(p || 0) : "Pay " + inr(p || 0) + " & start now";
-    }
-    if (payNote) payNote.hidden = !p;
-  }
-
-  document.addEventListener("click", function (e) {
-    var btn = e.target.closest(".open-screening-modal");
-    if (!btn || !modal) return;
-    var c = btn.getAttribute("data-course") || "";
-    var f = btn.getAttribute("data-format") || "";
-    modal.course.value = c;
-    modal.format.value = f;
-    modal.update();
-    syncModal();
-    var enrol = btn.getAttribute("data-action") === "enroll";
-    if (title) title.textContent = enrol ? "Enrol in " + c : "Talk to a career advisor";
-    if (submit) submit.textContent = enrol ? "Not ready to pay? Request a call back" : "Request a call back";
-    if (submit) submit.className = enrol ? "btn btn-ghost btn-block" : "btn btn-primary btn-block";
-  });
-
-  if (payBtn) {
-    payBtn.addEventListener("click", function () {
-      var c = modal.course.value, f = modal.format.value, p = priceFor(c, f);
-      if (!p || typeof window.payWithRazorpay !== "function") return;
-      var v = function (id) { var el = document.getElementById(id); return el ? el.value : ""; };
-      window.payWithRazorpay(p, c + " — " + f, { name: v("modal-name"), email: v("modal-email"), phone: v("modal-phone") });
+  /* ---------- "Ask an advisor" links pre-fill the counselling form ---------- */
+  document.querySelectorAll('a[href="#enroll-form"][data-course]').forEach(function (a) {
+    a.addEventListener("click", function () {
+      if (!app) return;
+      app.course.value = a.getAttribute("data-course") || "";
+      app.format.value = a.getAttribute("data-format") || "";
+      app.update();
     });
-  }
+  });
 })();

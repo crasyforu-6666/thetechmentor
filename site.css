@@ -343,8 +343,6 @@ button.link { background: none; border: 0; color: var(--blue); font: inherit; cu
 .form-2 > div { display: grid; gap: .35rem; }
 .price-line { background: var(--blue-50); border: 1px solid #c7d6f5; color: var(--ink); border-radius: 10px; padding: .6rem .8rem; font-size: .9rem; margin: -.2rem 0 .9rem; }
 .pay-note { text-align: center; color: var(--muted); font-size: .8rem; margin: .4rem 0 1rem; }
-#modal-pay-btn { background: #f97316; box-shadow: 0 8px 20px -8px rgba(249, 115, 22, .7); }
-#modal-pay-btn:hover { background: #ea580c; }
 @media (max-width: 900px) { .formats-2 { grid-template-columns: 1fr; } }
 @media (max-width: 420px) { .form-2 { grid-template-columns: 1fr; } }
 

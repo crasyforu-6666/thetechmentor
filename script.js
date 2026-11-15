@@ -327,52 +327,7 @@
     });
   }
 
-  // Screening Modal logic
-  const modalBackdrop = document.getElementById("screening-modal-backdrop");
-  const modalCloseBtn = document.getElementById("modal-close-btn");
-  const modalProgramLabel = document.getElementById("modal-selected-program");
-  const modalForm = document.getElementById("modal-screening-form");
-  const modalResult = document.getElementById("modal-routing-result");
-
-  function openScreeningModal(programName) {
-    if (!modalBackdrop) return;
-    if (modalProgramLabel) {
-      modalProgramLabel.textContent = programName || "Strategy Call (15-Min)";
-    }
-    if (modalForm) {
-      modalForm.reset();
-      modalForm.hidden = false;
-    }
-    if (modalResult) {
-      modalResult.hidden = true;
-      modalResult.innerHTML = "";
-    }
-    modalBackdrop.hidden = false;
-  }
-
-  function closeScreeningModal() {
-    if (modalBackdrop) {
-      modalBackdrop.hidden = true;
-    }
-  }
-
-  document.querySelectorAll(".open-screening-modal").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const program = btn.getAttribute("data-program") || "Strategy Call (15-Min)";
-      openScreeningModal(program);
-    });
-  });
-
-  modalCloseBtn?.addEventListener("click", closeScreeningModal);
-
-  modalBackdrop?.addEventListener("click", (e) => {
-    if (e.target === modalBackdrop) {
-      closeScreeningModal();
-    }
-  });
-
-  // Pre-qualification Routing Form Handler (Shared for page form & modal form)
+  // Pre-qualification Routing Form Handler
   function handleScreeningSubmit(e, formEl, outputEl) {
     e.preventDefault();
     if (!formEl.checkValidity()) {
@@ -381,7 +336,6 @@
     }
 
     const formData = new FormData(formEl);
-    const budget = formData.get("budget");
     const rawName = formData.get("name") || "Applicant";
     const name = String(rawName).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
     const email = formData.get("email") || "";
@@ -399,8 +353,7 @@
         phone: phone,
         module: course,
         experience: experience,
-        budget: budget,
-        status: budget === "Yes" ? "Qualified" : "Self-Paced Redirected"
+        status: "New"
       });
       localStorage.setItem("ttm_admin_leads", JSON.stringify(currentLeads));
     } catch (e) {
@@ -408,12 +361,11 @@
     }
 
     // Deliver the lead to the owner (Google Sheet + email) and to ad tracking.
-    const programLabel = document.getElementById("modal-selected-program");
     const pickedCourse = formData.get("course") || "";
     const pickedFormat = formData.get("format") || "";
     const selectedProgram = pickedCourse && pickedFormat
       ? `${pickedCourse} — ${pickedFormat}`
-      : (formEl.id === "modal-screening-form" && programLabel ? programLabel.textContent : "Free counselling call");
+      : "Free counselling call";
     if (window.ttmSend) {
       window.ttmSend({
         type: "lead",
@@ -422,19 +374,17 @@
         phone: phone,
         role: formData.get("role") || "",
         timeline: formData.get("timeline") || "",
-        budget: budget || "",
-        status: budget === "Yes" ? "Qualified" : "Self-Paced Redirected",
+        status: "New",
         program: selectedProgram
       });
     }
     if (window.ttmTrack) {
-      window.ttmTrack("lead", { content_name: selectedProgram, lead_status: budget === "Yes" ? "qualified" : "self_paced" });
+      window.ttmTrack("lead", { content_name: selectedProgram, lead_status: "new" });
     }
 
     formEl.hidden = true;
     outputEl.hidden = false;
 
-    if (budget === "Yes") {
       outputEl.innerHTML = `
         <div class="routing-card routing-success">
           <h4>🎉 Candidate Pre-Qualified!</h4>
@@ -443,19 +393,6 @@
           <p style="margin-top: 0.75rem; font-size: 0.85rem;">🔓 <strong>Curriculum Playlist Unlocked:</strong> <a href="https://www.youtube.com/playlist?list=PL71i23QiQd9VSrHTuXQyiOlLsi8NnGbSp" target="_blank" rel="noopener noreferrer" style="color: #3db8f5; text-decoration: underline;">Access 40+ Module Video Library ↗</a></p>
         </div>
       `;
-    } else {
-      outputEl.innerHTML = `
-        <div class="routing-card routing-redirect">
-          <h4>Recorded Sessions recommended</h4>
-          <p>Thanks ${name}! Live mentored batches start at ₹29,999. Based on your budget, our Recorded Sessions (from ₹4,999, lifetime access) are the best place to start — you can move to a live batch later.</p>
-          <div style="display:flex; flex-direction:column; gap:0.5rem;">
-            <a href="#recorded" class="btn btn-primary btn-block" onclick="document.getElementById('screening-modal-backdrop').hidden=true">Browse recorded courses — from ₹4,999</a>
-            <button type="button" onclick="payWithRazorpay(4999, 'SAP MM — Recorded Session')" class="btn btn-ghost btn-block">Start SAP MM recorded course (₹4,999)</button>
-          </div>
-          <p style="margin-top: 0.75rem; font-size: 0.85rem;">🔓 <strong>Free Video Access:</strong> <a href="https://www.youtube.com/playlist?list=PL71i23QiQd9VSrHTuXQyiOlLsi8NnGbSp" target="_blank" rel="noopener noreferrer" style="color: #3db8f5; text-decoration: underline;">Watch Free Video Playlist on YouTube ↗</a></p>
-        </div>
-      `;
-    }
   }
 
   const pageForm = document.getElementById("enroll-form");
@@ -467,11 +404,6 @@
     }
   });
 
-  modalForm?.addEventListener("submit", (e) => {
-    if (modalResult) {
-      handleScreeningSubmit(e, modalForm, modalResult);
-    }
-  });
 
   // Traffic Telemetry Tracking & Custom Blog Rendering
   try {
