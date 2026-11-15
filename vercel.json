@@ -1,4 +1,8 @@
 {
+  "framework": null,
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": "out",
   "redirects": [
     {
       "source": "/blog/top-sap-mm-interview-questions-2026-scenario-based.html",
