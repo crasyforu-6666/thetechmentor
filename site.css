@@ -92,7 +92,7 @@ button.link { background: none; border: 0; color: var(--blue); font: inherit; cu
 .hl { background: linear-gradient(90deg, var(--blue) 0%, var(--violet) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .lead { font-size: clamp(1.02rem, 1.4vw, 1.15rem); color: var(--ink-2); max-width: 580px; }
 .popular { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; margin-top: 1rem; font-size: .88rem; color: var(--muted); }
-.popular a { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: .32rem .8rem; font: 600 .82rem var(--body); color: var(--ink-2); cursor: pointer; }
+.popular a { text-decoration: none; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: .32rem .8rem; font: 600 .82rem var(--body); color: var(--ink-2); cursor: pointer; }
 .popular a:hover { border-color: var(--blue); color: var(--blue); }
 .hero-proof { list-style: none; padding: 0; margin: 1.8rem 0 0; display: flex; flex-wrap: wrap; gap: .6rem 1.4rem; color: var(--muted); font-size: .92rem; }
 .hero-proof strong { color: var(--ink); font-size: 1.05rem; margin-right: .2rem; }
