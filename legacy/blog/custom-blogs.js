@@ -554,5 +554,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-15",
     excerpt: "Dive into the core components of SAP S/4HANA architecture, from the HANA database to the application layer and deployment options. Essential for BASIS beginners.",
     imageUrl: "https://youronementor.com/blog/covers/sap-s4hana-system-architecture-basis-beginners.svg"
+  },
+  {
+    id: "post_1794822711713",
+    title: "SAP TM in S/4HANA: Embedded vs Standalone Architecture Deep Dive",
+    slug: "sap-tm-s4hana-embedded-vs-standalone",
+    category: "Tutorial",
+    badge: "SAP TM TUTORIAL",
+    readTime: "11 min read",
+    date: "Nov 16, 2026",
+    isoDate: "2026-11-16",
+    excerpt: "Understand SAP Transportation Management (TM) within S/4HANA, comparing the embedded deployment with the standalone model. This guide covers technical architecture, key functionalities, and implementation considerations.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-tm-s4hana-embedded-vs-standalone.svg"
   }
 ];

@@ -138,5 +138,12 @@
   "slug": "sap-s4hana-system-architecture-basis-beginners",
   "title": "SAP S/4HANA System Architecture Explained for BASIS Beginners",
   "date": "2026-11-15"
+ },
+ {
+  "topic": "SAP TM in S/4HANA: embedded TM vs standalone overview",
+  "module": "TM",
+  "slug": "sap-tm-s4hana-embedded-vs-standalone",
+  "title": "SAP TM in S/4HANA: Embedded vs Standalone Architecture Deep Dive",
+  "date": "2026-11-16"
  }
 ]

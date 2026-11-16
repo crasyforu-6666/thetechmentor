@@ -195,3 +195,11 @@ Folder: `images/blog/sap-s4hana-system-architecture-basis-beginners/`
 - [ ] 03: SPRO: SAP Reference IMG structure to show where BASIS settings are found
 - [ ] 04: Fiori Launchpad: Example of a modern SAP S/4HANA UI
 - [ ] 05: SM21: System log entries for troubleshooting
+
+## SAP TM in S/4HANA: Embedded vs Standalone Architecture Deep Dive
+Folder: `images/blog/sap-tm-s4hana-embedded-vs-standalone/`
+- [ ] 01: SPRO: Transportation Management menu path overview.
+- [ ] 02: Transaction /SCMTMS/TOR_FBL: Display of Freight Orders.
+- [ ] 03: Transportation Cockpit (/SCMTMS/PLN): Showing a planning board with freight units and freight orders.
+- [ ] 04: Business Partner (BP): Carrier role defined.
+- [ ] 05: Freight Agreement (/SCMTMS/TCM_FRTMNT_AGR): Displaying rate tables.
