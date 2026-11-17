@@ -1,0 +1,124 @@
+{
+ "seo_title": "SAP MM Split Valuation Configuration: Step-by-Step Guide",
+ "h1": "SAP MM Split Valuation Configuration Step by Step in S/4HANA",
+ "meta_description": "SAP MM split valuation configuration explained: global types, categories, local definitions, material master, OBYC and MIGO postings. Read the full guide.",
+ "slug": "sap-mm-split-valuation-configuration-step-by-step",
+ "category": "Tutorial",
+ "module": "MM",
+ "level": "Intermediate",
+ "badge": "SAP MM TUTORIAL",
+ "excerpt": "Configure split valuation in SAP MM from scratch: global and local valuation types and categories, material master setup, account determination, MIGO postings and common errors.",
+ "intro_html": "<p>One material, one moving average price: that is the default in SAP. It stops working when the same material has genuinely different values, such as in-house produced versus bought-out, imported versus domestic, or a refurbished lot versus a new lot. Blend them into one price and your cost of goods sold, stock balance and margins all go wrong.</p><p>This guide walks through <strong>SAP MM split valuation configuration</strong> in the order you would do it on a project. It covers global valuation types and categories, local definitions per plant, material master setup, account determination, and MIGO postings. It also covers the errors you will hit and the questions interviewers ask. You should finish able to configure split valuation in a sandbox and explain the accounting behind it.</p>",
+ "sections": [
+  {
+   "heading": "What split valuation is and when to use it",
+   "html": "<p>Split valuation lets you keep one material number but value its stock in separate <em>partial stocks</em>. Each partial stock has its own quantity, price control, price and valuation class. The material master has a <strong>header material</strong> (the total) and one <strong>sub-material</strong> record for every valuation type.</p><p>The data sits in table <code>MBEW</code>, one row per valuation type. The header record has an empty <code>BWTAR</code> (valuation type) field and carries the valuation category in <code>BWTTY</code>. Sub-material rows have <code>BWTAR</code> filled.</p><table><thead><tr><th>Business case</th><th>Valuation type example</th><th>Why split</th></tr></thead><tbody><tr><td>Bought-out vs in-house made</td><td><code>EXTERN</code> / <code>INHOUSE</code></td><td>Different cost: purchase price vs production cost</td></tr><tr><td>Domestic vs imported</td><td><code>DOMESTIC</code> / <code>IMPORT</code></td><td>Import duty and freight change landed cost</td></tr><tr><td>Quality grade</td><td><code>GRADE-A</code> / <code>GRADE-B</code></td><td>Different selling value and stock account</td></tr><tr><td>New vs refurbished</td><td><code>NEW</code> / <code>REFURB</code></td><td>Refurbished stock is valued lower</td></tr><tr><td>Batch-wise</td><td>Batch number as type</td><td>Each batch has its own price (see <a href=\"sap-mm-batch-management-s4hana-configuration.html\">batch management</a>)</td></tr></tbody></table><aside class=\"warning\"><strong>Do not over-use it.</strong> Every valuation type multiplies material master records, price changes, period-end work and reconciliation effort. If the only difference is vendor or country, ask whether a separate material or a plain batch would be simpler.</aside>"
+  },
+  {
+   "heading": "Global vs local settings: how the configuration is layered",
+   "html": "<p>Split valuation configuration has a global layer that is client-wide and a local layer that is specific to a valuation area. In most S/4HANA systems the valuation area is the plant. This is the part freshers most often get wrong.</p><table><thead><tr><th>Layer</th><th>Object</th><th>Purpose</th></tr></thead><tbody><tr><td>Global</td><td>Global valuation types</td><td>Master list of types (for example <code>EXTERN</code>, <code>INHOUSE</code>) usable in any plant</td></tr><tr><td>Global</td><td>Global valuation categories</td><td>Groups of types (category <code>A</code> = Purchased / In-house)</td></tr><tr><td>Global</td><td>Assignment of types to categories</td><td>Defines which types belong to each category</td></tr><tr><td>Local</td><td>Valuation category assignments per plant</td><td>Which categories and types are allowed in a given plant</td></tr><tr><td>Local</td><td>Default and procurement attributes</td><td>Which type is the default, and which type applies for external or internal procurement</td></tr></tbody></table><p>Texts and the global master list are stored in <code>T149D</code> (valuation types) and <code>T149</code> (valuation categories). The exact screens differ a little between releases, so treat the field names below as a guide and confirm them on your own system.</p><aside class=\"note\"><strong>ECC vs S/4HANA:</strong> The configuration nodes are essentially the same. What changes in S/4HANA is the data behind it. Material Ledger is always active, and stock quantities and values come from the material document line items rather than from aggregates. See our <a href=\"sap-s4hana-material-ledger-actual-costing-valuation-guide.html\">Material Ledger guide</a> for how that affects valuation reporting.</aside>"
+  },
+  {
+   "heading": "Step-by-step SPRO configuration",
+   "html": "<p>Before starting, confirm that valuation is at plant level (<code>OX14</code> shows the valuation level setting for the client). Split valuation is only supported when valuation is at plant level. Then work through the steps below.</p><p>The menu path is <code>SPRO &gt; IMG &gt; Materials Management &gt; Valuation and Account Assignment &gt; Split Valuation</code>.</p><table><thead><tr><th>#</th><th>Activity</th><th>Sample values</th></tr></thead><tbody><tr><td>1</td><td><strong>Activate Split Valuation</strong> (client-wide switch, T-code <code>OMWC</code>)</td><td>Tick the activation indicator</td></tr><tr><td>2</td><td><strong>Configure Split Valuation &gt; Global Types</strong></td><td><code>EXTERN</code> = Bought-out, <code>INHOUSE</code> = In-house made</td></tr><tr><td>3</td><td><strong>Global Categories</strong></td><td><code>A</code> = Procured vs produced</td></tr><tr><td>4</td><td><strong>Assign Global Types to Global Categories</strong></td><td><code>A</code> &rarr; <code>EXTERN</code>, <code>INHOUSE</code></td></tr><tr><td>5</td><td><strong>Local definition: assign categories to plants</strong></td><td>Plant <code>1000</code> and <code>1100</code> use category <code>A</code></td></tr><tr><td>6</td><td><strong>Set defaults and procurement attributes</strong></td><td><code>EXTERN</code> for external procurement, <code>INHOUSE</code> for internal procurement</td></tr><tr><td>7</td><td><strong>Account determination</strong> in <code>OBYC</code></td><td>Valuation classes per type, for example <code>3000</code> (raw material) and <code>7900</code> (semi-finished)</td></tr></tbody></table><ol><li>Open <code>OMWC</code> and activate split valuation. Once you create valuation types for real materials, switching it off is not realistic.</li><li>Define the global valuation types with short, meaningful codes. Codes are not translated, so use one naming convention for the whole landscape.</li><li>Define a global valuation category and assign the types to it.</li><li>In the local (plant-level) part of the same node, assign the categories to the plants that need them. Only those plants will accept the valuation category in the material master.</li><li>Maintain the default type and the external and internal procurement indicators. These drive which partial stock a goods receipt from a purchase order or a production order lands in.</li><li>Transport the settings. Treat them as cross-client-sensitive. A wrong global type reaches every plant.</li></ol><aside class=\"tip\">Define the valuation types in a design workshop before you touch the system. Agree the codes, the owner of each, and the accounting treatment (separate stock account or not) with the FI team up front. Reworking types after stock exists is painful.</aside>"
+  },
+  {
+   "heading": "Material master setup and price control",
+   "html": "<p>Configuration alone does nothing until the material master points to a valuation category. Create or change the material with <code>MM01</code> or <code>MM02</code>, open the <strong>Accounting 1</strong> view at plant level, and fill in <strong>Valuation Category</strong> (<code>BWTTY</code>). For field-level detail on this view, see our <a href=\"material-master-views-s4hana-field-by-field-guide.html\">material master views guide</a>.</p><ol><li>In <code>MM01</code>, select the Accounting 1 view and enter the plant. Set <strong>Valuation Category</strong> = <code>A</code> and save the header material.</li><li>Run <code>MM01</code> again for the same material. On the organisational levels dialog, enter the plant and the <strong>Valuation Type</strong>, for example <code>EXTERN</code>. This creates the first sub-material.</li><li>Fill in the valuation class, price control and price for that type. Typically this is <code>V</code> (moving average) for bought-out and <code>S</code> (standard) for in-house made.</li><li>Repeat for <code>INHOUSE</code>. Each type is a separate accounting record.</li></ol><p>Remember what is where. Quantities are held per valuation type. The header material shows the total across all types, and its price is only a derived average for information.</p><aside class=\"warning\">Once valuation types exist for a material in a plant and stock has been posted, you cannot simply change the valuation category. Plan the category correctly at creation. If a change is truly needed, it normally needs zero stock and a controlled data-clean-up approach, tested in a sandbox first.</aside><p>Price control can differ per type, but think about it before you do that. A standard-price in-house type and a moving-average purchased type is a common and sensible combination because production costs are revalued through variances while purchase prices float.</p>"
+  },
+  {
+   "heading": "Account determination for split valuated stock",
+   "html": "<p>The main reason to split value is usually to separate the stock on the balance sheet. That happens through the <strong>valuation class</strong> assigned to each valuation type in the Accounting 1 view. Because <code>OBYC</code> determines the stock account (<code>BSX</code>) from the valuation class, two valuation types with different valuation classes post to different G/L accounts. If they share a valuation class, they share an account, and the split is purely quantity and price. Our <a href=\"sap-mm-obyc-account-determination-s4hana-masterclass.html\">OBYC masterclass</a> covers the full account determination logic.</p><table><thead><tr><th>Valuation type</th><th>Price control</th><th>Valuation class</th><th>Stock account (BSX)</th></tr></thead><tbody><tr><td><code>EXTERN</code></td><td>V</td><td><code>3000</code></td><td>Raw material stock</td></tr><tr><td><code>INHOUSE</code></td><td>S</td><td><code>7900</code></td><td>Semi-finished stock</td></tr></tbody></table><p>The valuation class must be allowed for the material type through the account category reference (<code>OMSK</code>). If the class is not linked to the reference for the material type, the system will not accept it in the Accounting 1 view.</p><aside class=\"note\">Plan the valuation class for each type with FI before go-live. If a split is needed for management reporting only, use the same valuation class and let CKM3 or a custom report show the split instead of creating new G/L accounts.</aside>"
+  },
+  {
+   "heading": "MIGO postings and how split valuation behaves",
+   "html": "<p>Goods movements must identify the partial stock. The valuation type gets into the document in one of three ways: you enter it, it comes from the purchase order or production order, or the system takes the default from configuration.</p><ol><li><strong>Purchase order:</strong> in <code>ME21N</code>, the item carries a valuation type (field <code>EKPO-BWTAR</code>) on the material data tab. If the category is set and no type is entered, the default for external procurement is used. The full cycle is in our <a href=\"configure-purchase-order-cycle-s4hana.html\">purchase order cycle guide</a>.</li><li><strong>Goods receipt:</strong> in <code>MIGO</code> (movement type <code>101</code>), the type is copied from the PO item. Stock and value post to the partial stock of that type.</li><li><strong>Goods issue:</strong> for a goods issue such as <code>201</code> or <code>261</code>, you must name the valuation type to issue from. Entering the header material without a type is a typical user error.</li><li><strong>Transfer between types:</strong> use <code>MIGO</code> with transfer posting, material-to-material (movement <code>309</code>), where the same material is both sender and receiver with different valuation types. If the types carry different prices or accounts, the posting creates the corresponding accounting lines. Test the exact accounts with your configuration in a sandbox rather than assuming.</li></ol><p>To verify results, use <code>MMBE</code> for stock overview, <code>MB51</code> for the material document list, <code>FB03</code> for the accounting document, and <code>CKM3</code> for the price and value history per valuation type.</p><aside class=\"tip\">After posting a test goods receipt, always open the accounting document and check three things: the valuation type on the line, the G/L account, and the amount. That tells you in two minutes whether OBYC and valuation classes are right.</aside>"
+  },
+  {
+   "heading": "Common mistakes and troubleshooting",
+   "html": "<p>These are the problems that come up repeatedly in training batches and projects. Exact message wording varies by release and language, so match on the meaning.</p><table><thead><tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr></thead><tbody><tr><td>Valuation category field is not accepted in the plant</td><td>Category not assigned to that plant in the local configuration</td><td>Add the plant to the local assignment and re-save the material</td></tr><tr><td>System asks for a valuation type, or says it is not defined for the material</td><td>Sub-material was never created, or the wrong type was entered in the PO or MIGO</td><td>Create the sub-material record in <code>MM01</code> for that type and plant</td></tr><tr><td>Goods issue posts to the wrong partial stock</td><td>User left the type blank and the default was used</td><td>Train users, or make the type mandatory in the process and screen variants</td></tr><tr><td>Both types hit the same G/L account</td><td>Same valuation class on both types</td><td>Assign different valuation classes, and maintain <code>BSX</code> for each in <code>OBYC</code></td></tr><tr><td>Valuation class not accepted for the material</td><td>Class not linked to the material type in <code>OMSK</code></td><td>Assign the account category reference to the class</td></tr><tr><td>Cannot change valuation category</td><td>Stock or valuation types already exist</td><td>Clear stock and plan a controlled change; test in a sandbox first</td></tr></tbody></table><aside class=\"warning\">Do not treat split valuation as a way to track quantity by lot. If you need traceability, expiry or quality status, use batch management, and use batch-level valuation only when each batch really has a different price.</aside><p>A few more habits help. Keep type codes consistent across plants. Never create types with <code>MM01</code> in production without the matching configuration transport. Revalue standard-price types through the controlled price-change process and not by editing prices ad hoc.</p>"
+  },
+  {
+   "heading": "Interview questions on this topic",
+   "html": "<aside class=\"interview\"><strong>Q: What is split valuation and why do companies use it?</strong> A: It values the same material in separate partial stocks, each with its own quantity, price and valuation class. It is used when origin, quality or batch makes the value different, for example in-house versus bought-out.</aside><ol><li><strong>What is the difference between a valuation category and a valuation type?</strong> The type is the individual partial stock (<code>EXTERN</code>). The category is the group of types allowed for a material, and it is the field you maintain in the material master.</li><li><strong>What is the difference between global and local configuration?</strong> Global defines the types and categories client-wide. Local controls where they are used, by plant, and which type is the default.</li><li><strong>Can two valuation types of the same material have different price control?</strong> Yes. Each type is its own accounting record, so for example one can be <code>S</code> and the other <code>V</code>.</li><li><strong>How do you separate the balance sheet accounts?</strong> Assign different valuation classes to the types, then maintain <code>BSX</code> for each class in <code>OBYC</code>.</li><li><strong>How do you move stock between two valuation types?</strong> Use a material-to-material transfer posting, movement <code>309</code>, in <code>MIGO</code>.</li><li><strong>How does split valuation relate to batches?</strong> It can be done at batch level, where each batch is its own valuation type. Use it only when batches truly have different values.</li></ol><p>For more preparation, see our <a href=\"top-30-sap-mm-interview-questions-2026.html\">top 30 SAP MM interview questions</a>. If you are building a study plan, practising this on an S/4HANA sandbox is far more effective than reading about it, because the errors teach the configuration logic.</p>"
+  }
+ ],
+ "key_takeaways": [
+  "Split valuation keeps one material number but values partial stocks separately, with one MBEW row per valuation type plus a header record.",
+  "Configuration has a global layer (types, categories, assignment) and a local layer (plant assignment, defaults, procurement attributes).",
+  "The valuation category is set in the Accounting 1 view; each valuation type then gets its own sub-material record, price control and valuation class.",
+  "Different valuation classes per type plus BSX entries in OBYC are what actually separate the G/L stock accounts.",
+  "Goods issues and transfers must name the valuation type; movement 309 moves stock between types.",
+  "Use it sparingly, because every type adds master data and period-end effort. Batch management is often the better tool for traceability."
+ ],
+ "faqs": [
+  {
+   "question": "What is split valuation in SAP MM?",
+   "answer": "It lets you value the same material in separate partial stocks, each with its own quantity, price control, price and valuation class. It is used when stock from different origins or qualities has different values."
+  },
+  {
+   "question": "What is the T-code to activate split valuation?",
+   "answer": "Activation is done with OMWC, or through SPRO under Materials Management > Valuation and Account Assignment > Split Valuation. The global and local definitions are maintained in the same configuration area."
+  },
+  {
+   "question": "Where do I set the valuation category for a material?",
+   "answer": "In the Accounting 1 view of the material master (MM01 or MM02) at plant level, in the Valuation Category field. The category must first be assigned to that plant in the local configuration."
+  },
+  {
+   "question": "Can I change the valuation category after posting stock?",
+   "answer": "Generally not in a simple way. Once valuation types and stock exist, the change needs a controlled approach, usually with zero stock. Test it in a sandbox before attempting it in production."
+  },
+  {
+   "question": "How do I post a goods receipt to a specific valuation type?",
+   "answer": "Enter the valuation type on the purchase order item, or let the default for external procurement apply. MIGO copies it into the goods receipt, and stock posts to that partial stock."
+  },
+  {
+   "question": "How do I move stock from one valuation type to another?",
+   "answer": "Use MIGO with a transfer posting, material to material, with movement type 309. The same material is both sender and receiver with different valuation types."
+  },
+  {
+   "question": "Does split valuation need separate G/L accounts?",
+   "answer": "No. Separate accounts only arise if the valuation types have different valuation classes and OBYC has different BSX accounts for those classes. With the same class, they share an account."
+  },
+  {
+   "question": "What is the difference between split valuation and batch management?",
+   "answer": "Batch management tracks lots for traceability, expiry and quality. Split valuation values stock separately. The two can be combined when each batch has its own price, but batch management alone does not split value."
+  }
+ ],
+ "process_flow": [
+  {
+   "title": "Activate split valuation",
+   "detail": "Switch it on in OMWC after confirming plant-level valuation."
+  },
+  {
+   "title": "Define global types and categories",
+   "detail": "Create types such as EXTERN and INHOUSE and assign them to a category."
+  },
+  {
+   "title": "Assign locally to plants",
+   "detail": "Set which plants use the category, and the default and procurement attributes."
+  },
+  {
+   "title": "Maintain material master",
+   "detail": "Set the valuation category, then create each sub-material in MM01."
+  },
+  {
+   "title": "Set account determination",
+   "detail": "Assign valuation classes per type and maintain BSX in OBYC."
+  },
+  {
+   "title": "Post and verify in MIGO",
+   "detail": "Test GR, GI and transfers, then check MMBE, MB51 and CKM3."
+  }
+ ],
+ "screenshot_ideas": [
+  "OMWC / SPRO Split Valuation node showing the global valuation types and categories screen",
+  "SPRO local definition screen assigning the valuation category to plant 1000 with default types",
+  "MM01 Accounting 1 view showing Valuation Category and the valuation type organisational-levels dialog",
+  "MIGO goods receipt 101 with the valuation type on the item line",
+  "FB03 accounting document of a split-valuated goods receipt showing the valuation type and G/L accounts",
+  "CKM3 price and value overview for one valuation type"
+ ],
+ "word_count": 2108,
+ "published": "2026-11-17"
+}

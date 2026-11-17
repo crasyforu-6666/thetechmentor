@@ -211,3 +211,12 @@ Folder: `images/blog/end-to-end-sap-logistics-mm-sd-ewm-tm-integration/`
 - [ ] 03: /SCWM/MON - Warehouse Monitor (displaying inbound/outbound delivery orders, warehouse tasks)
 - [ ] 04: /SCMTMS/FO - Freight Order (showing planning details, execution status)
 - [ ] 05: SPRO path: Logistics Execution > Extended Warehouse Management Integration > Basic Setup of EWM Connectivity > Assign Warehouse Number to Plant/Storage Location
+
+## SAP MM Split Valuation Configuration Step by Step in S/4HANA
+Folder: `images/blog/sap-mm-split-valuation-configuration-step-by-step/`
+- [ ] 01: OMWC / SPRO Split Valuation node showing the global valuation types and categories screen
+- [ ] 02: SPRO local definition screen assigning the valuation category to plant 1000 with default types
+- [ ] 03: MM01 Accounting 1 view showing Valuation Category and the valuation type organisational-levels dialog
+- [ ] 04: MIGO goods receipt 101 with the valuation type on the item line
+- [ ] 05: FB03 accounting document of a split-valuated goods receipt showing the valuation type and G/L accounts
+- [ ] 06: CKM3 price and value overview for one valuation type

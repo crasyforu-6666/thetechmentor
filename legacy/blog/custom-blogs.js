@@ -308,7 +308,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
   },
   {
     id: "post_1788602783210",
-    title: "SAP MM Split Valuation Configuration: S/4HANA Inventory Valuation Masterclass",
+    title: "SAP MM Split Valuation Configuration Step by Step in S/4HANA",
     slug: "sap-mm-split-valuation-configuration-step-by-step",
     category: "Tutorial",
     readTime: "12 min read",
