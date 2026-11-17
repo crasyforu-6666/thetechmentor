@@ -566,5 +566,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-16",
     excerpt: "Understand SAP Transportation Management (TM) within S/4HANA, comparing the embedded deployment with the standalone model. This guide covers technical architecture, key functionalities, and implementation considerations.",
     imageUrl: "https://youronementor.com/blog/covers/sap-tm-s4hana-embedded-vs-standalone.svg"
+  },
+  {
+    id: "post_1794887938694",
+    title: "Mastering End-to-End SAP Logistics: MM, SD, EWM, and TM Integration in S/4HANA",
+    slug: "end-to-end-sap-logistics-mm-sd-ewm-tm-integration",
+    category: "Tutorial",
+    badge: "SAP LOGISTICS GUIDE",
+    readTime: "12 min read",
+    date: "Nov 17, 2026",
+    isoDate: "2026-11-17",
+    excerpt: "Learn how SAP MM, SD, EWM, and TM modules integrate to form a seamless end-to-end logistics process within S/4HANA, from procurement to delivery.",
+    imageUrl: "https://youronementor.com/blog/covers/end-to-end-sap-logistics-mm-sd-ewm-tm-integration.svg"
   }
 ];

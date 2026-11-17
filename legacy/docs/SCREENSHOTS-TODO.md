@@ -203,3 +203,11 @@ Folder: `images/blog/sap-tm-s4hana-embedded-vs-standalone/`
 - [ ] 03: Transportation Cockpit (/SCMTMS/PLN): Showing a planning board with freight units and freight orders.
 - [ ] 04: Business Partner (BP): Carrier role defined.
 - [ ] 05: Freight Agreement (/SCMTMS/TCM_FRTMNT_AGR): Displaying rate tables.
+
+## Mastering End-to-End SAP Logistics: MM, SD, EWM, and TM Integration in S/4HANA
+Folder: `images/blog/end-to-end-sap-logistics-mm-sd-ewm-tm-integration/`
+- [ ] 01: ME23N - Display Purchase Order (showing line item, delivery tab, confirmation key)
+- [ ] 02: VL02N - Outbound Delivery (picking tab, status, linked to EWM/TM relevant data)
+- [ ] 03: /SCWM/MON - Warehouse Monitor (displaying inbound/outbound delivery orders, warehouse tasks)
+- [ ] 04: /SCMTMS/FO - Freight Order (showing planning details, execution status)
+- [ ] 05: SPRO path: Logistics Execution > Extended Warehouse Management Integration > Basic Setup of EWM Connectivity > Assign Warehouse Number to Plant/Storage Location

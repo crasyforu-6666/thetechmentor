@@ -145,5 +145,12 @@
   "slug": "sap-tm-s4hana-embedded-vs-standalone",
   "title": "SAP TM in S/4HANA: Embedded vs Standalone Architecture Deep Dive",
   "date": "2026-11-16"
+ },
+ {
+  "topic": "End-to-end SAP logistics: how MM, SD, EWM and TM fit together",
+  "module": "LOG",
+  "slug": "end-to-end-sap-logistics-mm-sd-ewm-tm-integration",
+  "title": "Mastering End-to-End SAP Logistics: MM, SD, EWM, and TM Integration in S/4HANA",
+  "date": "2026-11-17"
  }
 ]
