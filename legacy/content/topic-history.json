@@ -152,5 +152,12 @@
   "slug": "end-to-end-sap-logistics-mm-sd-ewm-tm-integration",
   "title": "Mastering End-to-End SAP Logistics: MM, SD, EWM, and TM Integration in S/4HANA",
   "date": "2026-11-17"
+ },
+ {
+  "topic": "Business Partner for vendors in S/4HANA: roles, grouping and number ranges",
+  "module": "MM",
+  "slug": "business-partner-vendors-s4hana-roles-grouping-number-ranges",
+  "title": "Business Partner for Vendors in S/4HANA: Roles, Grouping and Number Ranges",
+  "date": "2026-11-18"
  }
 ]

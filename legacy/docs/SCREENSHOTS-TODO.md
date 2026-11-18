@@ -220,3 +220,11 @@ Folder: `images/blog/sap-mm-split-valuation-configuration-step-by-step/`
 - [ ] 04: MIGO goods receipt 101 with the valuation type on the item line
 - [ ] 05: FB03 accounting document of a split-valuated goods receipt showing the valuation type and G/L accounts
 - [ ] 06: CKM3 price and value overview for one valuation type
+
+## Business Partner for Vendors in S/4HANA: Roles, Grouping and Number Ranges
+Folder: `images/blog/business-partner-vendors-s4hana-roles-grouping-number-ranges/`
+- [ ] 01: Transaction BP: vendor creation screen with grouping and role FLVN00 selected
+- [ ] 02: SPRO: Business Partner number ranges and groupings assignment screen
+- [ ] 03: SPRO: CVI number assignment from BP grouping to vendor account group
+- [ ] 04: SE16N: CVI_VEND_LINK showing BP GUID and vendor number
+- [ ] 05: BP transaction: Vendor Purchasing Data tab for role FLVN01

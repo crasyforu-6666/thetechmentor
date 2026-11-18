@@ -1,0 +1,119 @@
+{
+ "seo_title": "Business Partner for Vendors in S/4HANA: Roles & Setup",
+ "h1": "Business Partner for Vendors in S/4HANA: Roles, Grouping and Number Ranges",
+ "meta_description": "Learn business partner for vendors in S/4HANA: BP roles, groupings, number ranges, CVI config and errors with fixes. Read before your next project.",
+ "slug": "business-partner-vendors-s4hana-roles-grouping-number-ranges",
+ "category": "Tutorial",
+ "module": "MM",
+ "level": "Intermediate",
+ "badge": "SAP MM TUTORIAL",
+ "excerpt": "How business partner for vendors in S/4HANA works: BP roles, groupings, number ranges, CVI synchronisation, common errors and interview questions.",
+ "intro_html": "<p>If you learned SAP MM on ECC, you remember <code>XK01</code>, <code>XK02</code> and <code>MK01</code>. In S/4HANA those are gone from the daily process. Vendors are now created as Business Partners through <code>BP</code>, and many learners get stuck on the first attempt: the BP saves, but the vendor is missing in <code>ME21N</code>, or the number range throws an error.</p><p>This article explains how <strong>business partner for vendors in S/4HANA</strong> works in practice. You will see how roles, groupings and number ranges fit together, how Customer Vendor Integration (CVI) links the BP to the supplier record, and how to configure and test it. You will also get common errors with fixes and interview questions.</p>",
+ "sections": [
+  {
+   "heading": "Why SAP moved vendors to Business Partner",
+   "html": "<p>In ECC, customers and vendors were separate master records. The same company that bought from you and sold to you needed two records, with two addresses, two sets of bank data and no shared identity. Duplicates and inconsistent data were common.</p><p>In S/4HANA, the Business Partner (BP) is the single leading object for the party. One BP can hold a customer role, a vendor role and others, with one address and one set of general data. The vendor (supplier) still exists in tables such as <code>LFA1</code>, <code>LFB1</code> and <code>LFM1</code>, because MM and FI processes read them. But it is created and maintained through the BP.</p><aside class=\"note\"><strong>ECC vs S/4HANA:</strong> In S/4HANA the vendor transactions <code>XK01</code>, <code>XK02</code>, <code>XK03</code>, <code>MK01</code>, <code>FK01</code> and their relatives are not available for maintenance. Use <code>BP</code>. Display-style access is possible through <code>BP</code> too. Check the simplification list for your release.</aside><p>The central BP data sits in <code>BUT000</code> (general data), with addresses in <code>ADRC</code> and the BP-to-address link in <code>BUT020</code>. Roles are stored in <code>BUT100</code>. The link between BP and vendor is in <code>CVI_VEND_LINK</code>, which maps the BP's partner GUID to the vendor number.</p><table><thead><tr><th>Level</th><th>Where it lives</th><th>Typical content</th></tr></thead><tbody><tr><td>General (BP)</td><td><code>BUT000</code>, <code>ADRC</code>, <code>BUT0BK</code></td><td>Name, address, bank, tax numbers</td></tr><tr><td>Company code</td><td><code>LFB1</code></td><td>Reconciliation account, payment terms, payment methods</td></tr><tr><td>Purchasing org</td><td><code>LFM1</code></td><td>Order currency, Incoterms, GR-based IV</td></tr><tr><td>Vendor general</td><td><code>LFA1</code></td><td>Vendor number, search term, account group</td></tr></tbody></table>"
+  },
+  {
+   "heading": "BP roles for vendors: which one do you need",
+   "html": "<p>A role decides which screens and data the BP gets. The role is the key concept for vendors because the role decides whether a vendor record is generated in the background.</p><table><thead><tr><th>BP role</th><th>Purpose</th><th>Creates vendor data?</th></tr></thead><tbody><tr><td><code>000000</code> Business Partner (Gen.)</td><td>General data only</td><td>No</td></tr><tr><td><code>FLVN00</code> Supplier (Fin. Accounting)</td><td>Company code data: reconciliation account, payment terms</td><td>Yes, <code>LFA1</code> and <code>LFB1</code></td></tr><tr><td><code>FLVN01</code> Supplier</td><td>Purchasing data: purchasing org, partner functions</td><td>Yes, <code>LFA1</code> and <code>LFM1</code></td></tr><tr><td><code>FLCU00</code> / <code>FLCU01</code></td><td>Customer FI and sales roles</td><td>Customer side</td></tr></tbody></table><p>A purchasing user needs <code>FLVN01</code>; an accounts-payable user needs <code>FLVN00</code>. A vendor used in both purchase orders and invoice posting needs both. The BP in role <code>000000</code> alone cannot be used in a PO.</p><aside class=\"tip\"><strong>Tip:</strong> In <code>BP</code>, use the <em>Change in BP role</em> dropdown and choose \"Supplier\" to jump straight to purchasing data. Create the general data once, then add roles with the <em>Other Role</em> button instead of creating a second BP.</aside><p>One BP can also be both customer and vendor, for example a company that is a supplier and a buyer. That is the main benefit of the new model. Add <code>FLCU00</code> or <code>FLCU01</code> to the same BP and the customer record is generated with the same number if number assignment is aligned (see below).</p>"
+  },
+  {
+   "heading": "BP grouping and number ranges",
+   "html": "<p>The <strong>BP grouping</strong> controls two things: which internal or external number range the BP uses, and which vendor account group is created when the BP is synchronised. It is the S/4HANA equivalent of the ECC account group, but applied at BP level.</p><p>Number ranges for BPs are maintained in <code>SPRO</code> → Cross-Application Components → SAP Business Partner → Business Partner → Basic Settings → Number Ranges and Groupings. Two nodes matter: <em>Define Number Ranges</em> (T-code <code>BUCF</code> ) and <em>Define Groupings and Assign Number Ranges</em>.</p><table><thead><tr><th>Grouping</th><th>Number range</th><th>Type</th><th>Sample interval</th></tr></thead><tbody><tr><td><code>BP02</code> Ext. Vendors</td><td><code>02</code></td><td>Internal</td><td>2000000000 – 2999999999</td></tr><tr><td><code>BP03</code> Ext. Customers</td><td><code>03</code></td><td>Internal</td><td>3000000000 – 3999999999</td></tr><tr><td><code>Z001</code> Domestic Vendors</td><td><code>V1</code></td><td>External</td><td>100000 – 199999</td></tr></tbody></table><p>The values above are sample values; the standard intervals in your system may differ, so check before you copy them. The point is to design the interval so that it does not clash with the vendor number range.</p><aside class=\"warning\"><strong>Warning:</strong> The vendor number range (the account group number range in <code>OBAS</code>) and the BP number range must be consistent. If you want the BP number and the vendor number to be identical, which is the recommended approach, both must use the same interval and both must be external or the BP must be internal with the \"same numbers\" setting. A mismatch is the single most common CVI error.</aside><p>Always decide the numbering concept before go-live. Changing intervals after vendors exist is painful and affects open items, interfaces and reports.</p>"
+  },
+  {
+   "heading": "Customer Vendor Integration (CVI) configuration",
+   "html": "<p>CVI is the synchronisation layer. When you save a BP with a supplier role, CVI converts the BP data into vendor master data. Without correct CVI config, the BP exists but no supplier is generated, or the save fails.</p><p>The key configuration sits in <code>SPRO</code> → Cross-Application Components → Master Data Synchronization → Customer/Vendor Integration → Business Partner Settings:</p><ol><li><strong>Set BP Role Category for Direction BP to Vendor:</strong> maps role category <code>FLVN00</code> and <code>FLVN01</code> to the vendor creation. Standard entries normally exist already.</li><li><strong>Define BP Role for Direction Vendor to BP:</strong> sets which BP role is created when a legacy vendor is converted. Typically <code>FLVN00</code>.</li><li><strong>Define Number Assignment for Direction BP to Vendor:</strong> here you assign the BP grouping to the vendor account group, and set the number assignment behaviour.</li><li><strong>Define Number Assignment for Direction Vendor to BP:</strong> the reverse mapping, used when the vendor is created through a legacy path or migration.</li><li><strong>Activate Synchronization Control</strong> in <code>CVIV_CUSTOMIZ</code> / the synchronisation control node (<code>CVI_CUSTOMIZ</code>-related): ensure the BP is the leading object in your release.</li></ol><p>In S/4HANA, the standard approach is \"same number\" for BP and vendor. In the number assignment table you map the BP grouping to a vendor account group, for example BP grouping <code>Z001</code> to account group <code>KRED</code>. Test the mapping by creating one vendor through <code>BP</code> and checking <code>LFA1-LIFNR</code> in <code>SE16N</code>.</p><aside class=\"note\"><strong>Background:</strong> The old report <code>CVI_COMPLETENESS_CHECK</code> (check availability in your release) and the pre-check reports from the conversion cockpit are used during system conversion. In a greenfield project you do not run them, but you still configure the same CVI mappings.</aside><p>For the vendor-side fields (reconciliation account, payment terms), you continue to configure account groups using <code>OBD3</code> (field status) and <code>OBAS</code> (number ranges), as you did in ECC. Account group field control still determines which vendor fields are required.</p>"
+  },
+  {
+   "heading": "Creating a vendor in BP: step-by-step",
+   "html": "<p>Here is a worked example with sample values for an Indian vendor, \"Shree Packaging Pvt Ltd\", Pune.</p><ol><li>Run <code>BP</code>. Choose <em>Organization</em> as the BP type.</li><li>Select the grouping (for example <code>Z001</code> Domestic Vendors) and the role <code>FLVN00</code>.</li><li>Enter the name, search term <code>SHREEPACK</code>, address (street, city Pune, region <code>MH</code>, country <code>IN</code>, postal code 411001) and language <code>EN</code>.</li><li>In the <em>Identification</em> tab, enter tax numbers: GSTIN and PAN, using the tax number categories <code>IN3</code> (GSTIN) and <code>IN4</code> (PAN) if they are configured in your system.</li><li>On the <em>Payment Transactions</em> tab, add bank details: IFSC in the bank key field, account number and holder name.</li><li>Switch to the <em>Vendor: Company Code Data</em> screen: company code <code>1000</code>, reconciliation account <code>160000</code>, payment terms <code>ZN30</code>, payment method <code>T</code>.</li><li>Add role <code>FLVN01</code>. Enter purchasing org <code>1000</code>, order currency <code>INR</code>, payment terms and Incoterms.</li><li>Save. Note the BP number shown in the status bar.</li><li>Check in <code>SE16N</code> table <code>LFA1</code> for the vendor, and <code>LFM1</code> for purchasing data. Create a test PO in <code>ME21N</code> with that vendor.</li></ol><aside class=\"tip\"><strong>Tip:</strong> To verify the link, use <code>SE16N</code> on <code>CVI_VEND_LINK</code>. If the BP GUID appears there with the vendor number, synchronisation worked. If not, the CVI configuration is the problem, not your data.</aside><p>This vendor can now be used in the process described in <a href=\"configure-purchase-order-cycle-s4hana.html\">How to Configure a Complete Purchase Order Cycle in SAP S/4HANA</a>. Vendor purchasing org data also depends on the structure covered in <a href=\"sap-mm-organisational-structure-s4hana.html\">Mastering SAP MM Organisational Structure in S/4HANA</a>.</p>"
+  },
+  {
+   "heading": "Common errors and fixes",
+   "html": "<p>Most failures come from configuration gaps, not from user input. Use this table when troubleshooting in a sandbox or project.</p><table><thead><tr><th>Symptom / message</th><th>Likely cause</th><th>Fix</th></tr></thead><tbody><tr><td>\"Business partner ... has no vendor role\" or vendor not found in PO</td><td>BP only has role <code>000000</code></td><td>Add <code>FLVN00</code> or <code>FLVN01</code> and save</td></tr><tr><td>\"Number range ... not defined\" or \"Number assignment ... not possible\"</td><td>BP grouping not assigned to a number range, or interval missing</td><td>Check <code>BUCF</code> and the grouping assignment node</td></tr><tr><td>\"Vendor account group could not be determined\" (wording varies by release)</td><td>No mapping from BP grouping to account group in CVI</td><td>Maintain <em>Define Number Assignment for Direction BP to Vendor</em></td></tr><tr><td>Reconciliation account is required</td><td>Account group field control in <code>OBD3</code> or missing FI role data</td><td>Fill the company code screen, or adjust the field status</td></tr><tr><td>Tax number format error for GSTIN</td><td>Wrong tax category or length</td><td>Use the correct category and 15-character GSTIN</td></tr><tr><td>Mass load creates BPs but no suppliers</td><td>Synchronisation not run or errors in the CVI log</td><td>Run <code>CVI_FETCH_ERROR</code> / check the sync cockpit (<code>MDS_LOAD_COCKPIT</code>) and fix the errors</td></tr></tbody></table><aside class=\"warning\"><strong>Warning:</strong> Do not insert data directly into <code>LFA1</code> or <code>BUT000</code> to fix a stuck record. It breaks the CVI link and causes inconsistencies that are hard to repair. Use the BP transaction or the supported migration tools.</aside><p>For bulk data, the Migration Cockpit uses the migration object \"Supplier\" or \"Business partner\" depending on release. Check which object your release supports before planning the load.</p>"
+  },
+  {
+   "heading": "EWM and logistics impact",
+   "html": "<p>EWM consultants are affected too. In EWM, business partners are used for the supplier and carrier in inbound deliveries and for the ship-to party and forwarding agent in outbound. In embedded EWM, BP master data from the S/4HANA system is used directly. In decentralized EWM, partners are transferred through CIF-style or BP replication, depending on the release. See <a href=\"s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix.html\">Embedded EWM vs Decentralized EWM on S/4HANA</a> for the architecture differences.</p><p>The vendor BP must have a valid role before an inbound delivery can be created from the PO. Missing partner data on the delivery is a frequent cause of EWM inbound issues. The end-to-end picture is in <a href=\"end-to-end-sap-logistics-mm-sd-ewm-tm-integration.html\">Mastering End-to-End SAP Logistics</a>.</p><aside class=\"note\"><strong>Note:</strong> Some EWM setups need the BP to also have a role for yard or carrier use. Check your scenario and the partner roles configured in the delivery.</aside>"
+  },
+  {
+   "heading": "Interview questions on this topic",
+   "html": "<aside class=\"interview\"><strong>How it is asked:</strong> Interviewers usually start with \"What replaced XK01 in S/4HANA?\" and then move to scenario questions about roles and number ranges. Practise answering with the table names and the config nodes.</aside><ol><li><strong>What is the difference between BP role <code>FLVN00</code> and <code>FLVN01</code>?</strong> <code>FLVN00</code> carries FI (company code) data, and <code>FLVN01</code> carries purchasing data.</li><li><strong>How do you keep BP and vendor numbers identical?</strong> Use the same interval for both, and set the CVI number assignment so that the BP number is reused as the vendor number.</li><li><strong>A BP is saved but the vendor does not appear in ME21N. Why?</strong> Check the role (needs <code>FLVN01</code>), the purchasing org data, and the CVI link in <code>CVI_VEND_LINK</code>.</li><li><strong>What is the BP grouping?</strong> It controls the number range and the vendor account group mapping.</li><li><strong>Can one BP be a customer and a vendor?</strong> Yes. Add both role sets to one BP. That is the main benefit of the model.</li></ol><p>More practice is in <a href=\"top-30-sap-mm-interview-questions-2026.html\">Top 30 SAP MM Interview Questions &amp; Scenario-Based Answers</a>. If you practise on an S/4HANA sandbox, create one vendor with each grouping and trace the records in <code>SE16N</code>; that exercise alone prepares you for most BP questions.</p>"
+  }
+ ],
+ "key_takeaways": [
+  "In S/4HANA, vendors are created through transaction BP; XK01/MK01-style transactions are replaced.",
+  "BP role FLVN00 holds company code (FI) data and FLVN01 holds purchasing data. A BP with only role 000000 cannot be used in a PO.",
+  "The BP grouping controls the number range and the vendor account group mapping; keep BP and vendor numbers identical.",
+  "CVI synchronises BP data into LFA1, LFB1 and LFM1. Verify the link in CVI_VEND_LINK.",
+  "Most errors come from missing number range assignment, missing CVI mapping or missing roles, not from user data.",
+  "One BP can be both customer and vendor, which removes duplicate master data."
+ ],
+ "faqs": [
+  {
+   "question": "What is a business partner in S/4HANA?",
+   "answer": "A business partner (BP) is the central master data object for any person, organisation or group you do business with. Customers, vendors and contacts are roles of a BP. You maintain it with transaction BP, and the general data is stored once in tables such as BUT000."
+  },
+  {
+   "question": "How do I configure a business partner vendor in SAP S/4HANA?",
+   "answer": "Define BP number ranges and groupings in SPRO under SAP Business Partner, then maintain CVI settings: BP role category, number assignment from BP grouping to vendor account group, and the reverse direction. Finally create a test BP with role FLVN00 or FLVN01 and check LFA1 and CVI_VEND_LINK."
+  },
+  {
+   "question": "What is customer vendor integration (CVI) in S/4HANA?",
+   "answer": "CVI is the synchronisation layer between the business partner and the legacy customer or vendor records. When you save a BP with a supplier or customer role, CVI generates the corresponding records in tables such as LFA1 and KNA1, so MM, SD and FI processes continue to work."
+  },
+  {
+   "question": "What is business partner in S4 compared with ECC vendor master?",
+   "answer": "In ECC the vendor was its own master record created with XK01 or MK01. In S/4HANA the BP is the leading object and the vendor is generated from it. This gives one address and general data for customer and vendor roles."
+  },
+  {
+   "question": "Can I still use XK01 or MK01 in S/4HANA?",
+   "answer": "No. In S/4HANA these maintenance transactions are replaced by BP for creating and changing vendors. Use the BP transaction, and check the simplification list for your release for the exact behaviour."
+  },
+  {
+   "question": "Should the BP number and vendor number be the same?",
+   "answer": "Yes, SAP recommends identical numbers. Align the BP grouping number range with the vendor account group range and configure CVI number assignment. It makes reporting, interfaces and support much easier."
+  },
+  {
+   "question": "Which BP role do I need for purchase orders?",
+   "answer": "You need the supplier purchasing role FLVN01 with purchasing organisation data. If the vendor is also invoiced, add FLVN00 with company code data."
+  }
+ ],
+ "process_flow": [
+  {
+   "title": "Define number ranges (BUCF)",
+   "detail": "Create BP intervals that fit the vendor number plan."
+  },
+  {
+   "title": "Set BP groupings",
+   "detail": "Assign each grouping to a number range in SPRO."
+  },
+  {
+   "title": "Configure CVI mapping",
+   "detail": "Map BP grouping to vendor account group and role categories."
+  },
+  {
+   "title": "Create BP (BP)",
+   "detail": "Add roles FLVN00 and FLVN01 with company code and purchasing data."
+  },
+  {
+   "title": "Verify vendor",
+   "detail": "Check LFA1 and CVI_VEND_LINK in SE16N."
+  },
+  {
+   "title": "Test in ME21N",
+   "detail": "Create a PO to confirm the vendor works end to end."
+  }
+ ],
+ "screenshot_ideas": [
+  "Transaction BP: vendor creation screen with grouping and role FLVN00 selected",
+  "SPRO: Business Partner number ranges and groupings assignment screen",
+  "SPRO: CVI number assignment from BP grouping to vendor account group",
+  "SE16N: CVI_VEND_LINK showing BP GUID and vendor number",
+  "BP transaction: Vendor Purchasing Data tab for role FLVN01"
+ ],
+ "word_count": 1960,
+ "published": "2026-11-18"
+}

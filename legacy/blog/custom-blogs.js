@@ -578,5 +578,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-17",
     excerpt: "Learn how SAP MM, SD, EWM, and TM modules integrate to form a seamless end-to-end logistics process within S/4HANA, from procurement to delivery.",
     imageUrl: "https://youronementor.com/blog/covers/end-to-end-sap-logistics-mm-sd-ewm-tm-integration.svg"
+  },
+  {
+    id: "post_1794976266053",
+    title: "Business Partner for Vendors in S/4HANA: Roles, Grouping and Number Ranges",
+    slug: "business-partner-vendors-s4hana-roles-grouping-number-ranges",
+    category: "Tutorial",
+    badge: "SAP MM TUTORIAL",
+    readTime: "9 min read",
+    date: "Nov 18, 2026",
+    isoDate: "2026-11-18",
+    excerpt: "How business partner for vendors in S/4HANA works: BP roles, groupings, number ranges, CVI synchronisation, common errors and interview questions.",
+    imageUrl: "https://youronementor.com/blog/covers/business-partner-vendors-s4hana-roles-grouping-number-ranges.svg"
   }
 ];
