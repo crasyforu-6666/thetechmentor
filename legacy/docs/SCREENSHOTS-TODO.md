@@ -228,3 +228,11 @@ Folder: `images/blog/business-partner-vendors-s4hana-roles-grouping-number-range
 - [ ] 03: SPRO: CVI number assignment from BP grouping to vendor account group
 - [ ] 04: SE16N: CVI_VEND_LINK showing BP GUID and vendor number
 - [ ] 05: BP transaction: Vendor Purchasing Data tab for role FLVN01
+
+## Mastering Warehouse Process Types and their Role in SAP EWM
+Folder: `images/blog/sap-ewm-warehouse-process-types/`
+- [ ] 01: SPRO: Path for 'Define Warehouse Process Type' under Cross-Process Settings
+- [ ] 02: Transaction SCWM/CL_WPT_PPF: Displaying the details of a standard Warehouse Process Type (e.g., 1010 for Inbound)
+- [ ] 03: Transaction SCWM/TODLV_I: An inbound delivery with generated warehouse tasks, highlighting the WPT for each task
+- [ ] 04: Table /SCWM/TWPT: Showing key fields for a few different WPTs
+- [ ] 05: Transaction SCWM/MON: Monitor for warehouse tasks, showing WPT as a column

@@ -590,5 +590,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-18",
     excerpt: "How business partner for vendors in S/4HANA works: BP roles, groupings, number ranges, CVI synchronisation, common errors and interview questions.",
     imageUrl: "https://youronementor.com/blog/covers/business-partner-vendors-s4hana-roles-grouping-number-ranges.svg"
+  },
+  {
+    id: "post_1795010976847",
+    title: "Mastering Warehouse Process Types and their Role in SAP EWM",
+    slug: "sap-ewm-warehouse-process-types",
+    category: "Tutorial",
+    badge: "SAP EWM TUTORIAL",
+    readTime: "10 min read",
+    date: "Nov 18, 2026",
+    isoDate: "2026-11-18",
+    excerpt: "Dive deep into SAP EWM Warehouse Process Types (WPTs), understanding their configuration and vital role in orchestrating warehouse movements like putaway and picking.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-ewm-warehouse-process-types.svg"
   }
 ];

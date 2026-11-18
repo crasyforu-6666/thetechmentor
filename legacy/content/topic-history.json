@@ -159,5 +159,12 @@
   "slug": "business-partner-vendors-s4hana-roles-grouping-number-ranges",
   "title": "Business Partner for Vendors in S/4HANA: Roles, Grouping and Number Ranges",
   "date": "2026-11-18"
+ },
+ {
+  "topic": "Warehouse process types and their role in SAP EWM",
+  "module": "EWM",
+  "slug": "sap-ewm-warehouse-process-types",
+  "title": "Mastering Warehouse Process Types and their Role in SAP EWM",
+  "date": "2026-11-18"
  }
 ]
