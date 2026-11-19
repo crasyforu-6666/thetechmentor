@@ -244,3 +244,11 @@ Folder: `images/blog/sap-mm-consultant-roadmap-freshers-india/`
 - [ ] 03: MIGO goods receipt for PO with movement type 101 and the resulting accounting document
 - [ ] 04: MIRO invoice verification with a balance of zero before posting
 - [ ] 05: OBYC transaction key BSX/WRX/GBB account assignment screen
+
+## SAP S/4HANA MRP Live (MD01N) vs Classic MRP (MD01): Architecture, Differences and Migration
+Folder: `images/blog/sap-s4hana-mrp-live-classic-mrp-comparison/`
+- [ ] 01: MD01N selection screen showing plant, processing key NEUPL/NETCH and creation options
+- [ ] 02: MD01 selection screen for side-by-side comparison with MD01N
+- [ ] 03: MD04 stock/requirements list for a sample material after an MRP Live run
+- [ ] 04: SM37 job log of a nightly MRP Live background run showing duration
+- [ ] 05: MM03 MRP 1 view showing MRP type, MRP controller and lot size

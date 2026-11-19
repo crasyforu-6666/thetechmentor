@@ -258,7 +258,7 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
   },
   {
     id: "post_1787892679924",
-    title: "SAP S/4HANA MRP Live vs Classic MRP: Performance & Functional Matrix",
+    title: "SAP S/4HANA MRP Live (MD01N) vs Classic MRP (MD01): Architecture, Differences and Migration",
     slug: "sap-s4hana-mrp-live-classic-mrp-comparison",
     category: "Guide",
     readTime: "11 min read",
