@@ -602,5 +602,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-18",
     excerpt: "Dive deep into SAP EWM Warehouse Process Types (WPTs), understanding their configuration and vital role in orchestrating warehouse movements like putaway and picking.",
     imageUrl: "https://youronementor.com/blog/covers/sap-ewm-warehouse-process-types.svg"
+  },
+  {
+    id: "post_1795059481887",
+    title: "SAP MM Consultant Roadmap for Freshers in India: A 12-Month Plan",
+    slug: "sap-mm-consultant-roadmap-freshers-india",
+    category: "Career",
+    badge: "SAP MM CAREER ROADMAP",
+    readTime: "7 min read",
+    date: "Nov 19, 2026",
+    isoDate: "2026-11-19",
+    excerpt: "A realistic month-by-month SAP MM consultant roadmap for freshers in India: what to learn, which T-codes to practise, how to build projects and prepare for interviews.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-mm-consultant-roadmap-freshers-india.svg"
   }
 ];

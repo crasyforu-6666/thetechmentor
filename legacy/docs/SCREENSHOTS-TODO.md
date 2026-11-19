@@ -236,3 +236,11 @@ Folder: `images/blog/sap-ewm-warehouse-process-types/`
 - [ ] 03: Transaction SCWM/TODLV_I: An inbound delivery with generated warehouse tasks, highlighting the WPT for each task
 - [ ] 04: Table /SCWM/TWPT: Showing key fields for a few different WPTs
 - [ ] 05: Transaction SCWM/MON: Monitor for warehouse tasks, showing WPT as a column
+
+## SAP MM Consultant Roadmap for Freshers in India: A 12-Month Plan
+Folder: `images/blog/sap-mm-consultant-roadmap-freshers-india/`
+- [ ] 01: MM01 material master view selection screen showing Basic, Purchasing, MRP and Accounting views
+- [ ] 02: ME21N purchase order with item overview and account assignment
+- [ ] 03: MIGO goods receipt for PO with movement type 101 and the resulting accounting document
+- [ ] 04: MIRO invoice verification with a balance of zero before posting
+- [ ] 05: OBYC transaction key BSX/WRX/GBB account assignment screen
