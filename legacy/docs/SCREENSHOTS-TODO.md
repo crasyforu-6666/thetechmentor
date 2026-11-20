@@ -260,3 +260,11 @@ Folder: `images/blog/core-data-services-cds-views-beginners-s4hana/`
 - [ ] 03: Eclipse ADT: Data Preview of a newly created CDS view (e.g., of MARA/MAKT data)
 - [ ] 04: Eclipse ADT: Example of a CDS view with basic annotations
 - [ ] 05: Eclipse ADT: Showing an association or a simple join in a CDS view
+
+## Setting Up Embedded EWM in S/4HANA: A Step-by-Step Architecture Walkthrough
+Folder: `images/blog/embedded-ewm-s4hana-setup-walkthrough/`
+- [ ] 01: SPRO: Extended Warehouse Management > Master Data > Define Warehouse Number showing the new warehouse entry
+- [ ] 02: SPRO Enterprise Structure: assignment of the warehouse number to plant and storage location (T320)
+- [ ] 03: /SCWM/LS01 or /SCWM/LS10 screen with a created storage bin and its storage type
+- [ ] 04: /SCWM/PRDI showing an inbound delivery created from an ERP delivery
+- [ ] 05: /SCWM/MON stock overview for the test product beside MMBE for the same material
