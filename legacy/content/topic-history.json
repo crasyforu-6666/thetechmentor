@@ -173,5 +173,12 @@
   "slug": "sap-mm-consultant-roadmap-freshers-india",
   "title": "SAP MM Consultant Roadmap for Freshers in India: A 12-Month Plan",
   "date": "2026-11-19"
+ },
+ {
+  "topic": "Core Data Services (CDS) views for beginners",
+  "module": "ABAP",
+  "slug": "core-data-services-cds-views-beginners-s4hana",
+  "title": "Core Data Services (CDS) Views for Beginners: Your S/4HANA Foundation",
+  "date": "2026-11-20"
  }
 ]

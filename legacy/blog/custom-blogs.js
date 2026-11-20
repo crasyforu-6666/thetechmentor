@@ -614,5 +614,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-19",
     excerpt: "A realistic month-by-month SAP MM consultant roadmap for freshers in India: what to learn, which T-codes to practise, how to build projects and prepare for interviews.",
     imageUrl: "https://youronementor.com/blog/covers/sap-mm-consultant-roadmap-freshers-india.svg"
+  },
+  {
+    id: "post_1795145259375",
+    title: "Core Data Services (CDS) Views for Beginners: Your S/4HANA Foundation",
+    slug: "core-data-services-cds-views-beginners-s4hana",
+    category: "Tutorial",
+    badge: "SAP ABAP TUTORIAL",
+    readTime: "14 min read",
+    date: "Nov 20, 2026",
+    isoDate: "2026-11-20",
+    excerpt: "Dive into Core Data Services (CDS) views for beginners. This guide covers their importance in S/4HANA, architecture, step-by-step creation, and practical applications for SAP MM and EWM professionals.",
+    imageUrl: "https://youronementor.com/blog/covers/core-data-services-cds-views-beginners-s4hana.svg"
   }
 ];

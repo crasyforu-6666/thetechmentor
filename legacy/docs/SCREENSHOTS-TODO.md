@@ -252,3 +252,11 @@ Folder: `images/blog/sap-s4hana-mrp-live-classic-mrp-comparison/`
 - [ ] 03: MD04 stock/requirements list for a sample material after an MRP Live run
 - [ ] 04: SM37 job log of a nightly MRP Live background run showing duration
 - [ ] 05: MM03 MRP 1 view showing MRP type, MRP controller and lot size
+
+## Core Data Services (CDS) Views for Beginners: Your S/4HANA Foundation
+Folder: `images/blog/core-data-services-cds-views-beginners-s4hana/`
+- [ ] 01: Eclipse ADT: Create New DDL Source wizard
+- [ ] 02: Eclipse ADT: Basic CDS view definition with 'DEFINE VIEW' and field selection
+- [ ] 03: Eclipse ADT: Data Preview of a newly created CDS view (e.g., of MARA/MAKT data)
+- [ ] 04: Eclipse ADT: Example of a CDS view with basic annotations
+- [ ] 05: Eclipse ADT: Showing an association or a simple join in a CDS view
