@@ -187,5 +187,12 @@
   "slug": "sap-sd-sales-document-types-item-categories-configuration",
   "title": "Mastering Sales Document Types and Item Categories Configuration in SAP S/4HANA SD",
   "date": "2026-11-21"
+ },
+ {
+  "topic": "SAP Business AI use cases in S/4HANA logistics",
+  "module": "AI",
+  "slug": "sap-business-ai-use-cases-s4hana-logistics",
+  "title": "SAP Business AI Use Cases in S/4HANA Logistics: A Consultant's Guide",
+  "date": "2026-11-21"
  }
 ]

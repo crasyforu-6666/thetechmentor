@@ -276,3 +276,11 @@ Folder: `images/blog/sap-sd-sales-document-types-item-categories-configuration/`
 - [ ] 03: VOV4: Item category determination matrix, with an example entry.
 - [ ] 04: VTAA: Copy control for sales documents, item level overview.
 - [ ] 05: VA01: Create Sales Order, showing where document type and item category are selected/displayed.
+
+## SAP Business AI Use Cases in S/4HANA Logistics: A Consultant's Guide
+Folder: `images/blog/sap-business-ai-use-cases-s4hana-logistics/`
+- [ ] 01: Fiori Launchpad: Tiles for 'Intelligent Goods Receipt Processing' or 'Predictive Maintenance Notifications'.
+- [ ] 02: SPRO path: Logistics - General > Predictive Analytics > Define Predictive Scenario Types (conceptual illustration of AI configuration access).
+- [ ] 03: Fiori App: 'Manage Predicted Deliveries' or 'Supplier Delivery Performance Prediction'.
+- [ ] 04: Fiori App: 'Warehouse Workload Forecast' (showing predicted resource needs in EWM).
+- [ ] 05: SAP GUI: Transaction code MD04 (Stock/Requirements List) demonstrating how AI-driven demand planning can influence proposals.
