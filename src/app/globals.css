@@ -3,3 +3,4 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 @import "./home.css";
 @import "./motion.css";
+@import "./mentor.css";

@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 const REVEAL =
-  ".sec-head, .cat-head, .course, .why, .path, .format, .outcome, .blog-card, .stats-grid > div, .mentor > *, .advisor-copy, .form-card, details.faq, .cta-inner > *, .weeks li, .footer-grid > div";
+  ".sec-head, .cat-head, .course, .why, .path, .format, .outcome, .blog-card, .stats-grid > div, .mp-visual, .mp-copy > *, .advisor-copy, .form-card, details.faq, .cta-inner > *, .weeks li, .footer-grid > div";
 const GLOW = ".course, .why, .path, .format, .outcome, .blog-card";
 
 /** Page-wide motion: scroll reveal, stat count-up, cursor glow, hero spotlight, scroll progress. */
@@ -71,7 +71,7 @@ export default function Motion() {
     cleanups.push(() => io.disconnect());
 
     // Count-up for stats ("1,000+", "12+ yrs", "24/7" stays as is)
-    const nums = Array.from(document.querySelectorAll<HTMLElement>(".stats strong, .hero-proof strong"));
+    const nums = Array.from(document.querySelectorAll<HTMLElement>(".stats strong, .hero-proof strong, .mp-stat strong"));
     const cio = new IntersectionObserver(
       (entries) =>
         entries.forEach((en) => {

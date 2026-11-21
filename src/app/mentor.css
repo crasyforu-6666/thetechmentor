@@ -1,0 +1,52 @@
+/* Mentor profile — dark spotlight style (purple glow, two-tone name, glowing pill CTA). */
+.mentor-dark { position: relative; overflow: hidden; isolation: isolate; color: #e5e7f5;
+  background: radial-gradient(700px 500px at 20% 40%, rgba(109, 40, 217, .28), transparent 70%), radial-gradient(600px 400px at 95% 100%, rgba(37, 99, 235, .18), transparent 70%), #07061a; }
+.mentor-pro { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+
+.mp-visual { position: relative; display: grid; place-items: center; min-height: 460px; }
+.mp-glow { position: absolute; width: 78%; aspect-ratio: 1; border-radius: 50%; filter: blur(55px); z-index: -1;
+  background: radial-gradient(circle, #7c3aed 0%, #5b21b6 40%, transparent 70%); animation: mp-breathe 6s ease-in-out infinite; }
+@keyframes mp-breathe { 50% { transform: scale(1.12); opacity: .8; } }
+.mp-photo { position: relative; width: min(380px, 88%); aspect-ratio: 1; border-radius: 46% 54% 52% 48% / 48% 46% 54% 52%; overflow: hidden;
+  box-shadow: 0 0 0 2px rgba(167, 139, 250, .55), 0 0 60px rgba(124, 58, 237, .55); animation: mp-morph 12s ease-in-out infinite; }
+.mp-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.05) contrast(1.05); }
+.mp-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(7, 6, 26, .55)), radial-gradient(circle at 50% 30%, transparent 45%, rgba(91, 33, 182, .35)); }
+@keyframes mp-morph { 50% { border-radius: 54% 46% 46% 54% / 52% 54% 46% 48%; } }
+
+.mp-stats { list-style: none; margin: 0; padding: 0; }
+.mp-stat { position: absolute; display: grid; gap: .1rem; padding: .7rem 1rem; border-radius: 14px; min-width: 132px;
+  background: rgba(255, 255, 255, .07); border: 1px solid rgba(167, 139, 250, .35); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .6); animation: bob 6s ease-in-out infinite; }
+.mp-stat strong { font: 800 1.35rem var(--head); color: #fff; }
+.mp-stat span { font-size: .78rem; color: #c4b5fd; }
+.mp-stat-1 { top: 6%; left: 0; }
+.mp-stat-2 { top: 44%; right: -2%; animation-delay: 1.5s; }
+.mp-stat-3 { bottom: 4%; left: 8%; animation-delay: 3s; }
+
+.mp-eyebrow { color: #a78bfa; font-weight: 700; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 1rem; }
+.mp-greet { font: 600 clamp(1.1rem, 2vw, 1.5rem) var(--head); color: #8b5cf6; margin: 0; }
+.mp-name { font: 800 clamp(2.6rem, 6vw, 4.4rem) var(--head); line-height: 1; letter-spacing: -0.03em; color: #fff; margin: .2rem 0 1rem; }
+.mp-role { font: 800 clamp(1.3rem, 2.6vw, 1.9rem) var(--head); line-height: 1.15; margin: 0 0 1.2rem; }
+.mp-role-lead { background: linear-gradient(90deg, #a78bfa, #7c3aed); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.mp-role-focus { color: #fff; }
+.mp-bio { font-size: 1.08rem; line-height: 1.7; color: #b8b5d6; max-width: 34rem; margin: 0 0 1.4rem; }
+.mp-bio b { color: #a78bfa; font-weight: 700; }
+.mp-ticks { list-style: none; padding: 0; margin: 0 0 2rem; display: flex; flex-wrap: wrap; gap: .55rem; }
+.mp-ticks li { font-size: .86rem; color: #ddd6fe; padding: .45rem .9rem; border-radius: 999px; background: rgba(139, 92, 246, .12); border: 1px solid rgba(139, 92, 246, .35); }
+.mp-btn { display: inline-flex; align-items: center; gap: .4rem; padding: .95rem 2rem; border-radius: 999px; font: 700 .98rem var(--head); color: #fff; text-decoration: none;
+  background: linear-gradient(180deg, #2e1065, #4c1d95); border: 2px solid #8b5cf6; box-shadow: 0 0 22px rgba(139, 92, 246, .6), inset 0 0 12px rgba(139, 92, 246, .35);
+  transition: transform .25s, box-shadow .25s; }
+.mp-btn:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(139, 92, 246, .85), inset 0 0 16px rgba(139, 92, 246, .5); }
+
+@media (max-width: 900px) {
+  .mentor-pro { grid-template-columns: 1fr; text-align: center; }
+  .mp-visual { min-height: 380px; }
+  .mp-bio { margin-inline: auto; }
+  .mp-ticks { justify-content: center; }
+}
+@media (max-width: 640px) {
+  .mp-stat { min-width: 0; padding: .5rem .75rem; }
+  .mp-stat strong { font-size: 1.1rem; }
+  .mp-stat-2 { right: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .mp-glow, .mp-photo, .mp-stat { animation: none; } }

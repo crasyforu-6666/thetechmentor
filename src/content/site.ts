@@ -416,9 +416,27 @@ export const mentor = {
   photo: "/images/anshuman-behuria.jpg",
   photoAlt: "Anshuman Behuria, lead SAP mentor at theTechMentor",
   eyebrow: "Meet your lead mentor",
+  greeting: "Hello, I'm",
+  firstName: "Anshuman",
+  lastName: "Behuria",
   name: "Anshuman Behuria",
+  roleLead: "Lead SAP",
+  roleFocus: "MM & EWM Mentor",
   role: "Lead SAP MM & EWM Mentor, theTechMentor",
   bio: "Anshuman has delivered SAP MM and EWM implementations across manufacturing, retail and 3PL — from greenfield S/4HANA rollouts to brownfield migrations — and has trained 1,000+ learners through theTechMentor and corporate batches.",
+  /** Same bio, split so key phrases can be highlighted. */
+  bioParts: [
+    { text: "Anshuman has delivered " },
+    { text: "SAP MM and EWM implementations", hl: true },
+    { text: " across manufacturing, retail and 3PL — from greenfield S/4HANA rollouts to brownfield migrations — and has trained " },
+    { text: "1,000+ learners", hl: true },
+    { text: " through theTechMentor and corporate batches." },
+  ] as { text: string; hl?: boolean }[],
+  stats: [
+    { value: "12+ yrs", label: "SAP experience" },
+    { value: "1,000+", label: "Learners trained" },
+    { value: "20+", label: "Implementations" },
+  ],
   ticks: ["SAP certified — MM & EWM (S/4HANA)", "20+ full-cycle implementation projects", "6,900+ LinkedIn followers"],
   cta: { label: "View LinkedIn profile ↗", href: links.linkedin },
 };
