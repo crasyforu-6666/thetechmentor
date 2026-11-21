@@ -69,6 +69,22 @@
       "time": "8:30–9:30 AM IST",
       "mode": "Live Online",
       "whatsappLink": "https://chat.whatsapp.com/DH8YHSJLaCMLUYFZwov2JM"
+    },
+    {
+      "id": "abap",
+      "name": "SAP ABAP",
+      "aliases": [
+        "advanced business application programming",
+        "developer",
+        "programming",
+        "technical",
+        "cds",
+        "odata"
+      ],
+      "startDate": "2026-12-01",
+      "time": "8:30–9:30 AM IST",
+      "mode": "Live Online",
+      "whatsappLink": "https://chat.whatsapp.com/LhPlC3wC3nZ5omSVmJYQOk"
     }
   ]
 }

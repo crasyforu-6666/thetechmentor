@@ -146,7 +146,7 @@ export const batchFinder = {
   title: "Upcoming live batches",
   searchLabel: "Search module",
   searchPlaceholder: "Search module (MM, SD, FICO…)",
-  upcomingCount: 5,
+  upcomingCount: 6,
   debounceMs: 150,
   deepLinkParam: "module",
   joinLabel: (name: string) => `Join ${name} WhatsApp — Free Demo & Timings`,
