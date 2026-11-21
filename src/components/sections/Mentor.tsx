@@ -9,7 +9,7 @@ export default function Mentor() {
         <div className="mp-visual">
           <div className="mp-glow" aria-hidden="true" />
           <div className="mp-photo">
-            <img src={mentor.photo} alt={mentor.photoAlt} width={400} height={400} loading="lazy" />
+            <img src={mentor.photo} alt={mentor.photoAlt} width={mentor.photoWidth} height={mentor.photoHeight} loading="lazy" />
           </div>
           <ul className="mp-stats">
             {mentor.stats.map((s, i) => (

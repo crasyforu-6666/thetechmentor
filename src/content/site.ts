@@ -413,7 +413,9 @@ export const outcomes = {
 
 /* ---------- Mentor ---------- */
 export const mentor = {
-  photo: "/images/anshuman-behuria.jpg",
+  photo: "/images/anshuman-behuria-cutout.webp",
+  photoWidth: 848,
+  photoHeight: 900,
   photoAlt: "Anshuman Behuria, lead SAP mentor at theTechMentor",
   eyebrow: "Meet your lead mentor",
   greeting: "Hello, I'm",
