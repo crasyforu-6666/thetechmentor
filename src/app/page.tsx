@@ -3,6 +3,7 @@ import Motion from "@/components/shared/Motion";
 import Header from "@/components/sections/Header";
 import Hero from "@/components/sections/Hero";
 import Employers from "@/components/sections/Employers";
+import Ticker from "@/components/sections/Ticker";
 import Courses from "@/components/sections/Courses";
 import Stats from "@/components/sections/Stats";
 import Features from "@/components/sections/Features";
@@ -25,6 +26,7 @@ export default function HomePage() {
       <main id="main">
         <Hero />
         <Employers />
+        <Ticker />
         <Courses />
         <Stats />
         <Features />

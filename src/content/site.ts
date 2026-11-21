@@ -162,6 +162,12 @@ export const batchFinder = {
   dateLocale: "en-IN",
 };
 
+/** Kinetic ticker band under the hero. */
+export const ticker = {
+  items: ["SAP MM", "SAP EWM", "SAP FICO", "SAP SD", "SAP ABAP", "SAP BASIS", "SAP TM", "S/4HANA", "Live Batches", "Placement Support"],
+  separator: "✦",
+};
+
 export const strip = {
   title: "Our learners have moved into SAP roles at",
   companies: ["Accenture", "Capgemini", "Infosys", "Wipro"],
