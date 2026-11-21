@@ -1,4 +1,5 @@
 import { HomeStateProvider } from "@/components/shared/HomeState";
+import Motion from "@/components/shared/Motion";
 import Header from "@/components/sections/Header";
 import Hero from "@/components/sections/Hero";
 import Employers from "@/components/sections/Employers";
@@ -19,6 +20,7 @@ import Footer from "@/components/sections/Footer";
 export default function HomePage() {
   return (
     <HomeStateProvider>
+      <Motion />
       <Header />
       <main id="main">
         <Hero />

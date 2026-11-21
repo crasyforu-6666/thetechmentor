@@ -149,9 +149,9 @@ export default function BatchFinder() {
   const showGeneral = list.length === 0 && (q !== "" || today !== null);
 
   return (
-    <div className="hv-card w-full max-w-[440px] justify-self-center self-center p-5 grid grid-cols-[minmax(0,1fr)] gap-3" aria-label={t.title}>
+    <div className="hv-card batch-card w-full max-w-[440px] justify-self-center self-center p-5 grid grid-cols-[minmax(0,1fr)] gap-3" aria-label={t.title}>
       <label className="grid gap-1.5">
-        <span className="text-sm font-bold text-[var(--ink)]">{t.title}</span>
+        <span className="text-sm font-bold text-[var(--ink)]"><span className="live-dot" aria-hidden="true" />{t.title}</span>
         <input
           type="search"
           value={input}
@@ -162,7 +162,7 @@ export default function BatchFinder() {
         />
       </label>
 
-      <ul className="m-0 grid grid-cols-[minmax(0,1fr)] list-none gap-2.5 p-0" aria-live="polite">
+      <ul className="batch-list m-0 grid grid-cols-[minmax(0,1fr)] list-none gap-2 p-0" aria-live="polite">
         {list.map((m) => {
           const days = today ? daysUntil(m.startDate, today) : null;
           const passed = days === null || days < 0;
@@ -172,7 +172,7 @@ export default function BatchFinder() {
             <li
               key={m.id}
               data-module={m.id}
-              className={`grid grid-cols-[minmax(0,1fr)] gap-1.5 rounded-xl border p-3.5 ${highlight ? "border-[var(--blue)] bg-[var(--blue-50)] shadow-[0_0_0_3px_rgba(37,99,235,.18)]" : "border-[var(--line)] bg-white"}`}
+              className={`batch-row grid grid-cols-[minmax(0,1fr)] gap-1 rounded-xl border px-3.5 py-3 ${highlight ? "border-[var(--blue)] bg-[var(--blue-50)] shadow-[0_0_0_3px_rgba(37,99,235,.18)]" : "border-[var(--line)] bg-white"}`}
             >
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <strong className="text-base text-[var(--ink)]">{m.name}</strong>
@@ -183,13 +183,13 @@ export default function BatchFinder() {
                 </span>
               </div>
               {!passed && (
-                <span className="text-sm text-[var(--muted)]">
+                <span className="text-[.82rem] leading-snug text-[var(--muted)]">
                   {fmt(m.startDate)} · {m.time} · {m.mode}
                 </span>
               )}
               <a
-                className="btn btn-primary btn-block"
-                style={{ whiteSpace: "normal", textAlign: "center" }}
+                className="btn btn-primary btn-sm btn-block"
+                style={{ whiteSpace: "normal", textAlign: "center", marginTop: ".3rem" }}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"

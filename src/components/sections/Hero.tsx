@@ -5,6 +5,7 @@ import BatchFinder from "./BatchFinder";
 export default function Hero() {
   return (
     <section className="hero">
+      <div className="hero-spot" aria-hidden="true" />
       <div className="wrap hero-grid">
         <div className="hero-copy">
           <p className="eyebrow">{hero.eyebrow}</p>
