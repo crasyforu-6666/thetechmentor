@@ -3,6 +3,7 @@
  * Components must read from here — never hardcode text, prices or URLs.
  */
 import jsonLdData from "./jsonld.json";
+import batchData from "./batches.json";
 
 export const jsonLd = jsonLdData;
 
@@ -124,19 +125,41 @@ export const hero = {
     { strong: "12+ yrs", text: " SAP project experience" },
     { strong: "Live", text: " S/4HANA practice server" },
   ],
-  visual: {
-    image: "/images/courses/mm.svg",
-    tag: "Live batch",
-    title: "SAP MM — Live Batch",
-    meta: "6 weeks · Sat & Sun · S/4HANA server",
-    progress: 68,
-    progressLabel: "Module 4 of 6 · Inventory & valuation",
-    chips: [
-      { icon: "🎓", title: "Certificate", text: "on completion" },
-      { icon: "🖥️", title: "MIGO · ME21N · MIRO", text: "hands-on practice" },
-      { icon: "💼", title: "Interview prep", text: "mock interviews" },
-    ],
-  },
+};
+
+/* ---------- Hero batch finder (per-module WhatsApp groups) ---------- */
+export type BatchModule = {
+  id: string;
+  name: string;
+  aliases: string[];
+  startDate: string;
+  time: string;
+  mode: string;
+  whatsappLink: string;
+};
+export type BatchData = { defaultWhatsappLink: string; sheetCsvUrl: string; modules: BatchModule[] };
+
+/** Edit src/content/batches.json (or set sheetCsvUrl to a published Google Sheet CSV with the same columns). */
+export const batches: BatchData = batchData;
+
+export const batchFinder = {
+  title: "Upcoming live batches",
+  searchLabel: "Search module",
+  searchPlaceholder: "Search module (MM, SD, FICO…)",
+  upcomingCount: 3,
+  debounceMs: 150,
+  deepLinkParam: "module",
+  joinLabel: (name: string) => `Join ${name} WhatsApp — Free Demo & Timings`,
+  startsToday: "Starts today",
+  startsIn: (days: number) => `Starts in ${days} day${days === 1 ? "" : "s"}`,
+  comingSoon: "Next batch date coming soon",
+  noMatch: "Module not listed — join our general group",
+  noMatchButton: "Join general WhatsApp group",
+  noUpcoming: "New batch dates coming soon — join our general group",
+  generalId: "general",
+  generalName: "General",
+  trackEvent: "whatsapp_batch_click",
+  dateLocale: "en-IN",
 };
 
 export const strip = {
