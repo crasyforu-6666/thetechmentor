@@ -268,3 +268,11 @@ Folder: `images/blog/embedded-ewm-s4hana-setup-walkthrough/`
 - [ ] 03: /SCWM/LS01 or /SCWM/LS10 screen with a created storage bin and its storage type
 - [ ] 04: /SCWM/PRDI showing an inbound delivery created from an ERP delivery
 - [ ] 05: /SCWM/MON stock overview for the test product beside MMBE for the same material
+
+## Mastering Sales Document Types and Item Categories Configuration in SAP S/4HANA SD
+Folder: `images/blog/sap-sd-sales-document-types-item-categories-configuration/`
+- [ ] 01: VO84: Sales document type details screen, highlighting Document Category and Number Range.
+- [ ] 02: VOV7: Item category details, showing 'Schedule Line Allowed' and 'Pricing' flags.
+- [ ] 03: VOV4: Item category determination matrix, with an example entry.
+- [ ] 04: VTAA: Copy control for sales documents, item level overview.
+- [ ] 05: VA01: Create Sales Order, showing where document type and item category are selected/displayed.

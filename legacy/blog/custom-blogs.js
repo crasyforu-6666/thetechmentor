@@ -626,5 +626,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-20",
     excerpt: "Dive into Core Data Services (CDS) views for beginners. This guide covers their importance in S/4HANA, architecture, step-by-step creation, and practical applications for SAP MM and EWM professionals.",
     imageUrl: "https://youronementor.com/blog/covers/core-data-services-cds-views-beginners-s4hana.svg"
+  },
+  {
+    id: "post_1795259775700",
+    title: "Mastering Sales Document Types and Item Categories Configuration in SAP S/4HANA SD",
+    slug: "sap-sd-sales-document-types-item-categories-configuration",
+    category: "Tutorial",
+    badge: "SAP SD TUTORIAL",
+    readTime: "14 min read",
+    date: "Nov 21, 2026",
+    isoDate: "2026-11-21",
+    excerpt: "Understand how to configure sales document types and item categories in SAP S/4HANA. This guide covers the essential customization steps for effective sales process management.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-sd-sales-document-types-item-categories-configuration.svg"
   }
 ];

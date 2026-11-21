@@ -180,5 +180,12 @@
   "slug": "core-data-services-cds-views-beginners-s4hana",
   "title": "Core Data Services (CDS) Views for Beginners: Your S/4HANA Foundation",
   "date": "2026-11-20"
+ },
+ {
+  "topic": "Sales document types and item categories configuration",
+  "module": "SD",
+  "slug": "sap-sd-sales-document-types-item-categories-configuration",
+  "title": "Mastering Sales Document Types and Item Categories Configuration in SAP S/4HANA SD",
+  "date": "2026-11-21"
  }
 ]
