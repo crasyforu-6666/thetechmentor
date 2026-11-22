@@ -232,20 +232,20 @@
   {
    "id": "notes-joule-studio",
    "category": "notes",
-   "title": "Discovering Joule Studio — SAP Business AI & Agents Study Guide",
+   "title": "Joule Studio: A Practitioner's Guide to Building Trusted AI Agents",
    "price": 0,
-   "summary": "Free study guide on SAP Joule Studio: the enterprise AI adoption gap, the Autonomous Enterprise vision, trusted agentic design principles and intent-based development — with a knowledge quiz.",
+   "summary": "Free study notes for SAP consultants: why enterprise AI pilots stall, SAP's Autonomous Enterprise idea, what makes an AI agent trustworthy and the intent-based development flow in Joule Studio — with 12 practice questions.",
    "format": "Google Doc",
-   "pages": 30,
+   "pages": 20,
    "file": null,
    "link": "https://docs.google.com/document/d/1_fWgYwddK2HPQljyKEJ0cv9i_H8awfnzNNneVv6CPHM/edit?usp=sharing",
    "preview": [
-    "Why enterprise AI stalls at disconnected proofs of concept",
-    "SAP's Autonomous Enterprise vision & the SAP Business AI Platform",
-    "Design principles for trusted agentic solutions (with a missed-rebate example)",
-    "Joule Studio development experience, SAP Build & embedded n8n workflows",
-    "Intent-based development flow: PRD → specification → testing",
-    "Knowledge quiz with 15+ exam-style questions"
+    "Module 1: Why most enterprise AI projects stall",
+    "Module 2: SAP's Autonomous Enterprise idea — people decide, agents execute",
+    "Module 3: What makes an AI agent trustworthy (context, openness, governance)",
+    "Module 4: Joule Studio at a glance & how it compares with SAP Build",
+    "Module 5: Inside the development experience — agents, Git, embedded n8n, governance",
+    "Module 6: Intent-based development flow, step by step + 12 practice questions"
    ],
    "slug": "discovering-joule-studio"
   },
