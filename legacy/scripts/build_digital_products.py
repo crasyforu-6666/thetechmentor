@@ -11,6 +11,9 @@ Phase 2: replace the JSON file with an API/DB export and re-run this script
 import html
 import json
 import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data", "digital-products.json")
@@ -87,8 +90,17 @@ def page_cta(p):
     return f'<a class="btn btn-primary pp-cta" href="../digital-products?buy={e(p["id"])}">Buy now — {inr(p["price"])}</a>'
 
 
+def og_image(p):
+    """Per-product preview image if it exists on disk, else the site cover."""
+    rel = f"products/og/{slug(p)}.png"
+    if os.path.exists(os.path.join(ROOT, rel)):
+        return f"{SITE}/{rel}"
+    return f"{SITE}/images/og-cover.png"
+
+
 def product_page(p, cat_label):
     url = page_url(p)
+    og = og_image(p)
     free = p["price"] == 0
     title = f"{p['title']} | {'Free' if free else inr(p['price'])} · theTechMentor"
     share_text = f"{p['title']} — {'free' if free else inr(p['price'])} on theTechMentor"
@@ -98,7 +110,7 @@ def product_page(p, cat_label):
     toc = "".join(f"<li>{e(x)}</li>" for x in p["preview"])
     ld = json.dumps({
         "@context": "https://schema.org", "@type": "Product", "name": p["title"], "description": p["summary"],
-        "brand": {"@type": "Brand", "name": "theTechMentor"}, "url": url, "image": f"{SITE}/images/og-cover.png",
+        "brand": {"@type": "Brand", "name": "theTechMentor"}, "url": url, "image": og,
         "offers": {"@type": "Offer", "price": str(p["price"]), "priceCurrency": "INR", "availability": "https://schema.org/InStock", "url": url},
     }, ensure_ascii=False).replace("</", "<\\/")
     pid = json.dumps(p["id"])
@@ -118,13 +130,16 @@ def product_page(p, cat_label):
   <meta property="og:url" content="{e(url)}" />
   <meta property="og:title" content="{e(p['title'])}{' — Free' if free else ''}" />
   <meta property="og:description" content="{e(p['summary'])}" />
-  <meta property="og:image" content="{SITE}/images/og-cover.png" />
+  <meta property="og:image" content="{e(og)}" />
+  <meta property="og:image:secure_url" content="{e(og)}" />
+  <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="{e(p['title'])} — theTechMentor" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{e(p['title'])}" />
   <meta name="twitter:description" content="{e(p['summary'])}" />
-  <meta name="twitter:image" content="{SITE}/images/og-cover.png" />
+  <meta name="twitter:image" content="{e(og)}" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
@@ -395,6 +410,20 @@ def build():
 
     # One shareable page per product (rule: every item gets its own link).
     os.makedirs(PAGES_DIR, exist_ok=True)
+    try:
+        from og_product_image import render as render_og
+    except Exception as err:  # Pillow/cairosvg missing: keep existing images
+        render_og = None
+        print(f"preview images skipped ({err})")
+    if render_og:
+        og_dir = os.path.join(PAGES_DIR, "og")
+        for p in data["products"]:
+            render_og(p, cats[p["category"]], os.path.join(og_dir, f"{slug(p)}.png"))
+        keep = {f"{slug(p)}.png" for p in data["products"]}
+        for f_ in os.listdir(og_dir):
+            if f_.endswith(".png") and f_ not in keep:
+                os.remove(os.path.join(og_dir, f_))
+        print(f"wrote products/og/ ({len(keep)} preview images)")
     wanted = set()
     for p in data["products"]:
         name = f"{slug(p)}.html"
