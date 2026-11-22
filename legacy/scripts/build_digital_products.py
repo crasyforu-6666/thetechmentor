@@ -38,8 +38,14 @@ ICONS = {"resumes": "📄", "interview": "🎯", "notes": "📘"}
 def product_card(p, cat_label):
     free = p["price"] == 0
     badge = '<span class="dp-badge dp-free">FREE</span>' if free else f'<span class="dp-badge dp-paid">{inr(p["price"])}</span>'
-    cta = ('<button type="button" class="btn btn-primary" data-dp-action="free">Download Free PDF</button>' if free
-           else '<button type="button" class="btn btn-primary" data-dp-action="buy">Buy Now</button>')
+    if p.get("link"):
+        # External document (e.g. Google Doc/Drive): open it directly, no form.
+        cta = (f'<a class="btn btn-primary" href="{e(p["link"])}" target="_blank" rel="noopener noreferrer" '
+               f'data-dp-open="{e(p["id"])}">Open Free Document ↗</a>')
+    elif free:
+        cta = '<button type="button" class="btn btn-primary" data-dp-action="free">Download Free PDF</button>'
+    else:
+        cta = '<button type="button" class="btn btn-primary" data-dp-action="buy">Buy Now</button>'
     return f'''
         <article class="dp-card" data-id="{e(p['id'])}" data-category="{e(p['category'])}" data-free="{str(free).lower()}">
           <div class="dp-card-top">

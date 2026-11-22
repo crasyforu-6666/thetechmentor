@@ -230,6 +230,25 @@
    ]
   },
   {
+   "id": "notes-joule-studio",
+   "category": "notes",
+   "title": "Discovering Joule Studio — SAP Business AI & Agents Study Guide",
+   "price": 0,
+   "summary": "Free study guide on SAP Joule Studio: the enterprise AI adoption gap, the Autonomous Enterprise vision, trusted agentic design principles and intent-based development — with a knowledge quiz.",
+   "format": "Google Doc",
+   "pages": 30,
+   "file": null,
+   "link": "https://docs.google.com/document/d/1_fWgYwddK2HPQljyKEJ0cv9i_H8awfnzNNneVv6CPHM/edit?usp=sharing",
+   "preview": [
+    "Why enterprise AI stalls at disconnected proofs of concept",
+    "SAP's Autonomous Enterprise vision & the SAP Business AI Platform",
+    "Design principles for trusted agentic solutions (with a missed-rebate example)",
+    "Joule Studio development experience, SAP Build & embedded n8n workflows",
+    "Intent-based development flow: PRD → specification → testing",
+    "Knowledge quiz with 15+ exam-style questions"
+   ]
+  },
+  {
    "id": "notes-mm-tcode-obyc",
    "category": "notes",
    "title": "SAP MM Complete T-Code & OBYC Account Determination Cheat Sheet",

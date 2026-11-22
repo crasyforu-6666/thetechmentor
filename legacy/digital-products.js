@@ -189,13 +189,21 @@
     $("dp-preview-title").textContent = p.title;
     $("dp-preview-meta").textContent = catLabel[p.category] + " · " + p.format + " · " + p.pages + " pages · " + (p.price ? inr(p.price) : "FREE");
     $("dp-preview-list").innerHTML = p.preview.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("");
-    $("dp-preview-cta").innerHTML = '<button type="button" class="btn btn-primary btn-block" data-dp-from-preview="' + esc(p.id) + '">' +
-      (p.price ? "Buy now — " + inr(p.price) : "Download free PDF") + "</button>";
+    $("dp-preview-cta").innerHTML = p.link
+      ? '<a class="btn btn-primary btn-block" href="' + esc(p.link) + '" target="_blank" rel="noopener noreferrer" data-dp-open="' + esc(p.id) + '">Open free document ↗</a>'
+      : '<button type="button" class="btn btn-primary btn-block" data-dp-from-preview="' + esc(p.id) + '">' +
+        (p.price ? "Buy now — " + inr(p.price) : "Download free PDF") + "</button>";
     open(drawer);
   }
 
   /* ---------------- Click routing ---------------- */
   document.addEventListener("click", function (e) {
+    var opened = e.target.closest("[data-dp-open]");
+    if (opened) {
+      var op = productById[opened.getAttribute("data-dp-open")];
+      if (window.ttmTrack && op) window.ttmTrack("free_document_open", { content_name: op.title, content_id: op.id });
+      return; // let the link open normally
+    }
     var fromPreview = e.target.closest("[data-dp-from-preview]");
     if (fromPreview) {
       var pp = productById[fromPreview.getAttribute("data-dp-from-preview")];
