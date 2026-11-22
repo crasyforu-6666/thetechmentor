@@ -284,3 +284,11 @@ Folder: `images/blog/sap-business-ai-use-cases-s4hana-logistics/`
 - [ ] 03: Fiori App: 'Manage Predicted Deliveries' or 'Supplier Delivery Performance Prediction'.
 - [ ] 04: Fiori App: 'Warehouse Workload Forecast' (showing predicted resource needs in EWM).
 - [ ] 05: SAP GUI: Transaction code MD04 (Stock/Requirements List) demonstrating how AI-driven demand planning can influence proposals.
+
+## Mastering SAP Purchase Requisition Release Strategy Configuration with Classification
+Folder: `images/blog/sap-purchase-requisition-release-strategy-classification/`
+- [ ] 01: ME51N: Purchase Requisition creation screen showing 'Release Strategy' tab and blocked status.
+- [ ] 02: SPRO: Path to 'Define Release Procedure for Purchase Requisitions' under MM Purchasing.
+- [ ] 03: CT04: Characteristic creation screen, showing CEBAN field reference and value ranges.
+- [ ] 04: CL02: Class creation screen, showing class type '032' and assigned characteristics.
+- [ ] 05: OMEG: Define Release Strategies screen, showing classification tab with conditions.

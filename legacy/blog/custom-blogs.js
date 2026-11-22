@@ -650,5 +650,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-21",
     excerpt: "This guide covers real-world SAP Business AI use cases in S/4HANA Logistics, from predictive procurement to intelligent warehouse operations. Learn how AI transforms supply chain efficiency.",
     imageUrl: "https://youronementor.com/blog/covers/sap-business-ai-use-cases-s4hana-logistics.svg"
+  },
+  {
+    id: "post_1795330771779",
+    title: "Mastering SAP Purchase Requisition Release Strategy Configuration with Classification",
+    slug: "sap-purchase-requisition-release-strategy-classification",
+    category: "Tutorial",
+    badge: "SAP MM TUTORIAL",
+    readTime: "12 min read",
+    date: "Nov 22, 2026",
+    isoDate: "2026-11-22",
+    excerpt: "This guide covers SAP Purchase Requisition Release Strategy configuration with classification in S/4HANA. Master defining release groups, codes, characteristics, and strategies to control procurement.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-purchase-requisition-release-strategy-classification.svg"
   }
 ];
