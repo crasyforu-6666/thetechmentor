@@ -201,5 +201,12 @@
   "slug": "sap-purchase-requisition-release-strategy-classification",
   "title": "Mastering SAP Purchase Requisition Release Strategy Configuration with Classification",
   "date": "2026-11-22"
+ },
+ {
+  "topic": "New General Ledger in S/4HANA: ledgers, ledger groups and parallel accounting",
+  "module": "FICO",
+  "slug": "new-general-ledger-s4hana-ledgers-groups-parallel-accounting",
+  "title": "Understanding New General Ledger in S/4HANA: Ledgers, Ledger Groups, and Parallel Accounting",
+  "date": "2026-11-22"
  }
 ]

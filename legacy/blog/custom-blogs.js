@@ -662,5 +662,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-22",
     excerpt: "This guide covers SAP Purchase Requisition Release Strategy configuration with classification in S/4HANA. Master defining release groups, codes, characteristics, and strategies to control procurement.",
     imageUrl: "https://youronementor.com/blog/covers/sap-purchase-requisition-release-strategy-classification.svg"
+  },
+  {
+    id: "post_1795361149612",
+    title: "Understanding New General Ledger in S/4HANA: Ledgers, Ledger Groups, and Parallel Accounting",
+    slug: "new-general-ledger-s4hana-ledgers-groups-parallel-accounting",
+    category: "Tutorial",
+    badge: "SAP FICO TUTORIAL",
+    readTime: "12 min read",
+    date: "Nov 22, 2026",
+    isoDate: "2026-11-22",
+    excerpt: "This guide demystifies the New General Ledger in SAP S/4HANA, covering the crucial concepts of ledgers, ledger groups, and parallel accounting. Essential for MM/EWM consultants.",
+    imageUrl: "https://youronementor.com/blog/covers/new-general-ledger-s4hana-ledgers-groups-parallel-accounting.svg"
   }
 ];

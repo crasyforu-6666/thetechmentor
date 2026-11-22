@@ -523,3 +523,14 @@
 [2026-11-22 06:59:31] ✅ Updated homepage index.html with new blog card
 [2026-11-22 06:59:31] ✅ Updated blog/index.html hub with new blog card
 [2026-11-22 06:59:31] 🎉 Successfully published article 'Mastering SAP Purchase Requisition Release Strategy Configuration with Classification'!
+[2026-11-22 15:25:12] 🚀 Starting Autonomous Twice-Daily Blog Publishing Routine...
+[2026-11-22 15:25:12] 🎯 Target SAP Domain : [MM] SAP MM / Sourcing & Procurement
+[2026-11-22 15:25:12] 📌 Selected Trending Topic: New General Ledger in S/4HANA: ledgers, ledger groups and parallel accounting
+[2026-11-22 15:25:12] 📌 Primary SEO Keyword : new general ledger in s/4hana
+[2026-11-22 15:25:12] 📌 Target Article Slug  : new-general-ledger-in-s-4hana-ledgers-ledger-groups-and-parallel-accounting
+[2026-11-22 15:25:49] ✍️ Article written: Understanding New General Ledger in S/4HANA: Ledgers, Ledger Groups, and Parallel Accounting (2582 words)
+[2026-11-22 15:25:49] ✅ Generated Article Page: /home/runner/work/thetechmentor/thetechmentor/legacy/blog/new-general-ledger-s4hana-ledgers-groups-parallel-accounting.html
+[2026-11-22 15:25:49] ✅ Updated blog/custom-blogs.js repository file
+[2026-11-22 15:25:49] ✅ Updated homepage index.html with new blog card
+[2026-11-22 15:25:49] ✅ Updated blog/index.html hub with new blog card
+[2026-11-22 15:25:49] 🎉 Successfully published article 'Understanding New General Ledger in S/4HANA: Ledgers, Ledger Groups, and Parallel Accounting'!

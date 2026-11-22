@@ -292,3 +292,10 @@ Folder: `images/blog/sap-purchase-requisition-release-strategy-classification/`
 - [ ] 03: CT04: Characteristic creation screen, showing CEBAN field reference and value ranges.
 - [ ] 04: CL02: Class creation screen, showing class type '032' and assigned characteristics.
 - [ ] 05: OMEG: Define Release Strategies screen, showing classification tab with conditions.
+
+## Understanding New General Ledger in S/4HANA: Ledgers, Ledger Groups, and Parallel Accounting
+Folder: `images/blog/new-general-ledger-s4hana-ledgers-groups-parallel-accounting/`
+- [ ] 01: SPRO: Define Ledgers for General Ledger Accounting (T-code: FAGL_T001_L)
+- [ ] 02: SPRO: Define Ledger Group (T-code: FAGL_T001_LGR)
+- [ ] 03: SPRO: Assign Accounting Principles to Ledgers and Company Codes
+- [ ] 04: SE16N/ACDOCA: Universal Journal Entry showing multiple ledger entries for one transaction
