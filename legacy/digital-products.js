@@ -219,4 +219,15 @@
     if (action === "preview") openPreview(p);
     else openOrder(action === "free" ? "free" : "buy", p);
   });
+
+  // Deep links from a product's share page: ?get=<id> (free form) or ?buy=<id> (checkout)
+  (function () {
+    var qs = new URLSearchParams(location.search);
+    var id = qs.get("get") || qs.get("buy");
+    var target = id && productById[id];
+    if (!target) return;
+    var card = document.querySelector('.dp-card[data-id="' + id + '"]');
+    if (card) card.scrollIntoView({ block: "center" });
+    openOrder(target.price ? "buy" : "free", target);
+  })();
 })();

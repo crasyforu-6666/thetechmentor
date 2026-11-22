@@ -15,6 +15,8 @@ import os
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data", "digital-products.json")
 OUT = os.path.join(ROOT, "digital-products.html")
+PAGES_DIR = os.path.join(ROOT, "products")
+SITE = "https://youronementor.com"
 e = lambda s: html.escape(str(s), quote=True)
 
 
@@ -35,6 +37,15 @@ def inr(n: int) -> str:
 ICONS = {"resumes": "📄", "interview": "🎯", "notes": "📘"}
 
 
+def slug(p):
+    """Public, shareable slug for a product page (optional "slug" field, else the id)."""
+    return p.get("slug") or p["id"]
+
+
+def page_url(p):
+    return f"{SITE}/products/{slug(p)}"
+
+
 def product_card(p, cat_label):
     free = p["price"] == 0
     badge = '<span class="dp-badge dp-free">FREE</span>' if free else f'<span class="dp-badge dp-paid">{inr(p["price"])}</span>'
@@ -53,14 +64,140 @@ def product_card(p, cat_label):
             {badge}
           </div>
           <p class="dp-cat">{e(cat_label)}</p>
-          <h3>{e(p['title'])}</h3>
+          <h3><a class="dp-title-link" href="products/{e(slug(p))}">{e(p['title'])}</a></h3>
           <p class="dp-summary">{e(p['summary'])}</p>
           <ul class="meta"><li>{e(p['format'])}</li><li>{e(p['pages'])} pages</li>{'<li>Instant access</li>' if free else '<li>Lifetime access</li>'}</ul>
           <div class="dp-actions">
             {cta}
             <button type="button" class="btn btn-ghost" data-dp-action="preview">Preview sample pages</button>
+            <a class="dp-share-link" href="products/{e(slug(p))}">🔗 Open &amp; share this item's page</a>
           </div>
         </article>'''
+
+
+def page_cta(p):
+    """Primary action on a product's own page. Rule: every item must be reachable from its page."""
+    if p.get("link"):
+        return (f'<a class="btn btn-primary pp-cta" href="{e(p["link"])}" target="_blank" rel="noopener noreferrer" '
+                f'data-pp-download>Download free PDF ↗</a>')
+    if p.get("file"):
+        return f'<a class="btn btn-primary pp-cta" href="../{e(p["file"])}" download data-pp-download>Download free PDF</a>'
+    if p["price"] == 0:
+        return f'<a class="btn btn-primary pp-cta" href="../digital-products?get={e(p["id"])}">Get this free PDF</a>'
+    return f'<a class="btn btn-primary pp-cta" href="../digital-products?buy={e(p["id"])}">Buy now — {inr(p["price"])}</a>'
+
+
+def product_page(p, cat_label):
+    url = page_url(p)
+    free = p["price"] == 0
+    title = f"{p['title']} | {'Free' if free else inr(p['price'])} · theTechMentor"
+    share_text = f"{p['title']} — {'free' if free else inr(p['price'])} on theTechMentor"
+    from urllib.parse import quote
+    li = "https://www.linkedin.com/sharing/share-offsite/?url=" + quote(url, safe="")
+    wa = "https://wa.me/?text=" + quote(f"{share_text}\n{url}", safe="")
+    toc = "".join(f"<li>{e(x)}</li>" for x in p["preview"])
+    ld = json.dumps({
+        "@context": "https://schema.org", "@type": "Product", "name": p["title"], "description": p["summary"],
+        "brand": {"@type": "Brand", "name": "theTechMentor"}, "url": url, "image": f"{SITE}/images/og-cover.png",
+        "offers": {"@type": "Offer", "price": str(p["price"]), "priceCurrency": "INR", "availability": "https://schema.org/InStock", "url": url},
+    }, ensure_ascii=False).replace("</", "<\\/")
+    pid = json.dumps(p["id"])
+    ptitle = json.dumps(p["title"], ensure_ascii=False).replace("</", "<\\/")
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{e(title)}</title>
+  <meta name="description" content="{e(p['summary'])}" />
+  <link rel="canonical" href="{e(url)}" />
+  <link rel="icon" href="../images/logo-mark.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#1d4ed8" />
+  <meta property="og:type" content="product" />
+  <meta property="og:site_name" content="theTechMentor" />
+  <meta property="og:url" content="{e(url)}" />
+  <meta property="og:title" content="{e(p['title'])}{' — Free' if free else ''}" />
+  <meta property="og:description" content="{e(p['summary'])}" />
+  <meta property="og:image" content="{SITE}/images/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{e(p['title'])}" />
+  <meta name="twitter:description" content="{e(p['summary'])}" />
+  <meta name="twitter:image" content="{SITE}/images/og-cover.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+  <link rel="stylesheet" href="../site.css?v=8" />
+  <script type="application/ld+json">{ld}</script>
+  <script src="../site-config.js"></script>
+  <script src="../tracking.js"></script>
+</head>
+<body class="dp-page pp-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="header" id="top">
+    <nav class="nav wrap" aria-label="Main">
+      <a href="../" class="brand" aria-label="theTechMentor home"><img src="../images/logo-mark.svg" alt="" width="36" height="36" /><span>the<b>Tech</b>Mentor</span></a>
+      <ul class="nav-links pp-nav">
+        <li><a href="../digital-products">← All digital products</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="section pp-hero">
+      <div class="wrap pp-grid">
+        <div class="pp-copy">
+          <p class="dp-cat">{e(cat_label)}</p>
+          <h1>{e(p['title'])}</h1>
+          <p class="lead">{e(p['summary'])}</p>
+          <ul class="meta"><li>{'FREE' if free else inr(p['price'])}</li><li>{e(p['format'])}</li><li>{e(p['pages'])} pages</li><li>{'Instant access' if free else 'Lifetime access'}</li></ul>
+          <div class="pp-actions">
+            {page_cta(p)}
+          </div>
+          <div class="pp-share" aria-label="Share this page">
+            <span>Share:</span>
+            <a class="pp-share-btn pp-li" href="{e(li)}" target="_blank" rel="noopener noreferrer" data-pp-share="linkedin">in LinkedIn</a>
+            <a class="pp-share-btn pp-wa" href="{e(wa)}" target="_blank" rel="noopener noreferrer" data-pp-share="whatsapp">WhatsApp</a>
+            <button type="button" class="pp-share-btn" data-pp-copy="{e(url)}">Copy link</button>
+            <button type="button" class="pp-share-btn" data-pp-native hidden>Share…</button>
+          </div>
+        </div>
+        <aside class="pp-toc-card">
+          <p class="eyebrow">What's inside</p>
+          <ol class="dp-toc">{toc}</ol>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-bottom"><p>© 2026 theTechMentor · <a href="../">youronementor.com</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · SAP and S/4HANA are trademarks of SAP SE; theTechMentor is not affiliated with SAP SE.</p></div>
+  </footer>
+
+  <script>
+  (function () {{
+    var id = {pid}, title = {ptitle};
+    function track(ev, extra) {{ if (window.ttmTrack) window.ttmTrack(ev, Object.assign({{ content_id: id, content_name: title }}, extra || {{}})); }}
+    track("product_page_view", {{ referrer: document.referrer ? new URL(document.referrer).hostname : "direct" }});
+    document.addEventListener("click", function (e) {{
+      if (e.target.closest("[data-pp-download]")) track("free_document_open");
+      var sh = e.target.closest("[data-pp-share]"); if (sh) track("share_click", {{ method: sh.getAttribute("data-pp-share") }});
+      var cp = e.target.closest("[data-pp-copy]");
+      if (cp) {{
+        var u = cp.getAttribute("data-pp-copy");
+        (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(function () {{ cp.textContent = "Link copied ✓"; }}, function () {{ window.prompt("Copy this link:", u); }});
+        track("share_click", {{ method: "copy" }});
+      }}
+      var nv = e.target.closest("[data-pp-native]");
+      if (nv) {{ navigator.share({{ title: title, url: location.origin + location.pathname }}).catch(function () {{}}); track("share_click", {{ method: "native" }}); }}
+    }});
+    if (navigator.share) document.querySelector("[data-pp-native]").hidden = false;
+  }})();
+  </script>
+</body>
+</html>
+'''
 
 
 def build():
@@ -255,6 +392,19 @@ def build():
     with open(OUT, "w", encoding="utf-8") as f:
         f.write(page)
     print(f"wrote {os.path.relpath(OUT, ROOT)} ({len(data['products'])} products)")
+
+    # One shareable page per product (rule: every item gets its own link).
+    os.makedirs(PAGES_DIR, exist_ok=True)
+    wanted = set()
+    for p in data["products"]:
+        name = f"{slug(p)}.html"
+        wanted.add(name)
+        with open(os.path.join(PAGES_DIR, name), "w", encoding="utf-8") as f:
+            f.write(product_page(p, cats[p["category"]]))
+    for old_page in os.listdir(PAGES_DIR):
+        if old_page.endswith(".html") and old_page not in wanted:
+            os.remove(os.path.join(PAGES_DIR, old_page))
+    print(f"wrote products/ ({len(wanted)} share pages)")
 
 
 if __name__ == "__main__":

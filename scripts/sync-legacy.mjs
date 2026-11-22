@@ -4,6 +4,7 @@ import { cpSync, existsSync, rmSync } from "node:fs";
 
 const ENTRIES = [
   "blog",
+  "products",
   "downloads",
   "digital-products.html",
   "digital-products.js",

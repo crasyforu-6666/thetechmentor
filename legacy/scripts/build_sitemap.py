@@ -34,6 +34,11 @@ def collect():
     for name in sorted(os.listdir(blog_dir)):
         if name.endswith(".html"):
             pages.append("blog/" + name)
+    prod_dir = os.path.join(ROOT, "products")
+    if os.path.isdir(prod_dir):
+        for name in sorted(os.listdir(prod_dir)):
+            if name.endswith(".html"):
+                pages.append("products/" + name)
     return [p for p in pages if not is_noindex(p)]
 
 
@@ -48,6 +53,8 @@ def url_for(rel):
         return BASE + "/"
     if rel == "blog/index.html":
         return BASE + "/blog/"
+    if rel.startswith("products/"):
+        return BASE + "/" + rel[:-len(".html")]
     if rel == "digital-products.html":
         return BASE + "/digital-products"
     return BASE + "/" + rel

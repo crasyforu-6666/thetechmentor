@@ -246,7 +246,8 @@
     "Joule Studio development experience, SAP Build & embedded n8n workflows",
     "Intent-based development flow: PRD → specification → testing",
     "Knowledge quiz with 15+ exam-style questions"
-   ]
+   ],
+   "slug": "discovering-joule-studio"
   },
   {
    "id": "notes-mm-tcode-obyc",
