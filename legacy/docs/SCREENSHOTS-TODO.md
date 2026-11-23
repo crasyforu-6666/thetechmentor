@@ -299,3 +299,11 @@ Folder: `images/blog/new-general-ledger-s4hana-ledgers-groups-parallel-accountin
 - [ ] 02: SPRO: Define Ledger Group (T-code: FAGL_T001_LGR)
 - [ ] 03: SPRO: Assign Accounting Principles to Ledgers and Company Codes
 - [ ] 04: SE16N/ACDOCA: Universal Journal Entry showing multiple ledger entries for one transaction
+
+## Mastering SAP EWM Storage Type Search Sequences and Putaway Strategies
+Folder: `images/blog/sap-ewm-storage-type-search-sequences-putaway-strategies/`
+- [ ] 01: SPRO: Define Storage Type Search Sequence for Putaway (Path: SCM Extended Warehouse Management -> Extended Warehouse Management -> Cross-Process Settings -> Warehouse Task -> Define Storage Type Search Sequence for Putaway)
+- [ ] 02: SPRO: Define Putaway Strategies for Storage Types (Path: SCM Extended Warehouse Management -> Extended Warehouse Management -> Goods Receipt Process -> Strategies -> Putaway Strategies -> Define Putaway Strategies)
+- [ ] 03: Material Master (MM02): Storage Data view showing Putaway Control Indicator and Storage Condition
+- [ ] 04: Warehouse Monitor (/SCWM/MON): Displaying a warehouse task and its determined destination bin
+- [ ] 05: Table /SCWM/T3012 (Storage Type Search Sequence for Putaway) entries

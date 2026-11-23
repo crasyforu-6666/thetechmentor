@@ -674,5 +674,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-22",
     excerpt: "This guide demystifies the New General Ledger in SAP S/4HANA, covering the crucial concepts of ledgers, ledger groups, and parallel accounting. Essential for MM/EWM consultants.",
     imageUrl: "https://youronementor.com/blog/covers/new-general-ledger-s4hana-ledgers-groups-parallel-accounting.svg"
+  },
+  {
+    id: "post_1795438786396",
+    title: "Mastering SAP EWM Storage Type Search Sequences and Putaway Strategies",
+    slug: "sap-ewm-storage-type-search-sequences-putaway-strategies",
+    category: "Tutorial",
+    badge: "SAP EWM TUTORIAL",
+    readTime: "10 min read",
+    date: "Nov 23, 2026",
+    isoDate: "2026-11-23",
+    excerpt: "This guide details how to configure SAP EWM storage type search sequences and putaway strategies, essential for efficient warehouse operations and material placement.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-ewm-storage-type-search-sequences-putaway-strategies.svg"
   }
 ];

@@ -208,5 +208,12 @@
   "slug": "new-general-ledger-s4hana-ledgers-groups-parallel-accounting",
   "title": "Understanding New General Ledger in S/4HANA: Ledgers, Ledger Groups, and Parallel Accounting",
   "date": "2026-11-22"
+ },
+ {
+  "topic": "Storage type search sequences and putaway strategies in EWM",
+  "module": "EWM",
+  "slug": "sap-ewm-storage-type-search-sequences-putaway-strategies",
+  "title": "Mastering SAP EWM Storage Type Search Sequences and Putaway Strategies",
+  "date": "2026-11-23"
  }
 ]
