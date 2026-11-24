@@ -307,3 +307,11 @@ Folder: `images/blog/sap-ewm-storage-type-search-sequences-putaway-strategies/`
 - [ ] 03: Material Master (MM02): Storage Data view showing Putaway Control Indicator and Storage Condition
 - [ ] 04: Warehouse Monitor (/SCWM/MON): Displaying a warehouse task and its determined destination bin
 - [ ] 05: Table /SCWM/T3012 (Storage Type Search Sequence for Putaway) entries
+
+## CDS View Annotations, Associations and Access Control (DCL) in S/4HANA: A Practical Guide
+Folder: `images/blog/cds-view-annotations-associations-access-control-dcl/`
+- [ ] 01: ADT data definition editor showing ZI_PurchaseOrderHdr with annotations and both associations
+- [ ] 02: ADT access control editor with the define role code using aspect pfcg_auth(M_BEST_EKO...)
+- [ ] 03: ADT Data Preview of the view before and after the DCL role is active
+- [ ] 04: PFCG authorization tab for M_BEST_EKO with EKORG and ACTVT values
+- [ ] 05: SU53 display of a failed authorization check for the test user

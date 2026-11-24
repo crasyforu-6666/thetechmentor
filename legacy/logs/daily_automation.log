@@ -546,3 +546,15 @@
 [2026-11-23 12:59:46] ✅ Updated homepage index.html with new blog card
 [2026-11-23 12:59:46] ✅ Updated blog/index.html hub with new blog card
 [2026-11-23 12:59:46] 🎉 Successfully published article 'Mastering SAP EWM Storage Type Search Sequences and Putaway Strategies'!
+[2026-11-24 11:02:07] 🚀 Starting Autonomous Twice-Daily Blog Publishing Routine...
+[2026-11-24 11:02:07] 🎯 Target SAP Domain : [MM] SAP MM / Sourcing & Procurement
+[2026-11-24 11:02:07] 📌 Selected Trending Topic: CDS view annotations, associations and access control (DCL)
+[2026-11-24 11:02:07] 📌 Primary SEO Keyword : cds view annotations, associations and access control (dcl)
+[2026-11-24 11:02:07] 📌 Target Article Slug  : cds-view-annotations-associations-and-access-control-dcl
+[2026-11-24 11:02:07] 📌 Google PAA Questions : 5 FAQs integrated
+[2026-11-24 11:03:27] ✍️ Article written: CDS View Annotations, Associations and Access Control (DCL) in S/4HANA: A Practical Guide (2259 words)
+[2026-11-24 11:03:28] ✅ Generated Article Page: /home/runner/work/thetechmentor/thetechmentor/legacy/blog/cds-view-annotations-associations-access-control-dcl.html
+[2026-11-24 11:03:28] ✅ Updated blog/custom-blogs.js repository file
+[2026-11-24 11:03:28] ✅ Updated homepage index.html with new blog card
+[2026-11-24 11:03:28] ✅ Updated blog/index.html hub with new blog card
+[2026-11-24 11:03:28] 🎉 Successfully published article 'CDS View Annotations, Associations and Access Control (DCL) in S/4HANA: A Practical Guide'!

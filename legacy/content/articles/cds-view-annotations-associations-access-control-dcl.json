@@ -1,0 +1,119 @@
+{
+ "seo_title": "CDS View Annotations, Associations and Access Control (DCL)",
+ "h1": "CDS View Annotations, Associations and Access Control (DCL) in S/4HANA: A Practical Guide",
+ "meta_description": "Learn CDS view annotations, associations and access control (DCL) with working MM examples, activation errors and fixes. Build a secured view today.",
+ "slug": "cds-view-annotations-associations-access-control-dcl",
+ "category": "Tutorial",
+ "module": "ABAP",
+ "level": "Intermediate",
+ "badge": "SAP CDS TUTORIAL",
+ "excerpt": "Annotations describe a CDS view, associations connect it to other views, and DCL decides who may see which rows. Build all three on a purchase order view, step by step.",
+ "intro_html": "<p>Most learners can write a basic <code>define view entity</code> after one tutorial. The trouble starts when a Fiori app shows no data for a user, a view will not activate, or a consultant asks, \"Where is the authorization check?\" Those problems come from three things: annotations, associations and access control.</p><p>This guide covers <strong>CDS view annotations, associations and access control (DCL)</strong> in one flow, using a purchase order view that MM and EWM consultants will recognise. By the end you will be able to annotate a view, expose associations, write a DCL role against <code>M_BEST_EKO</code>, and troubleshoot activation errors. If CDS is new to you, read <a href=\"core-data-services-cds-views-beginners-s4hana.html\">Core Data Services (CDS) Views for Beginners</a> first.</p>",
+ "sections": [
+  {
+   "heading": "How the three building blocks fit together",
+   "html": "<p>A CDS view has three layers of meaning. The <code>select</code> list says <em>what data</em> you read. Annotations say <em>how the data is to be treated</em>: labels, currency fields, UI behaviour, analytics type and the authorization mode. Associations say <em>how this view relates to other views</em>, without forcing a join. DCL (Data Control Language) says <em>which rows a given user may read</em>.</p><p>The reason this matters in S/4HANA is that the same view is consumed by ABAP reports, Fiori apps, OData services and analytics. Authorization has to live with the data model, not in each consumer. That is the idea behind DCL. It is also why code-pushdown work, as in <a href=\"abap-on-hana-code-pushdown-examples.html\">ABAP on HANA code pushdown</a>, normally ends with a CDS view plus an access control object.</p><table><thead><tr><th>Element</th><th>Where it is written</th><th>Purpose</th></tr></thead><tbody><tr><td>Annotations</td><td>Above or inside the DDL source (<code>@...</code>)</td><td>Metadata for labels, semantics, UI, analytics, authorization mode</td></tr><tr><td>Association</td><td>DDL source, after <code>as select from</code></td><td>Reusable, lazy relationship to another entity</td></tr><tr><td>Access control</td><td>Separate DCL source (<code>define role</code>)</td><td>Row-level filtering based on PFCG authorizations or literals</td></tr></tbody></table><aside class=\"note\"><strong>ECC vs S/4HANA:</strong> ECC had no CDS-level authorization. You wrote <code>AUTHORITY-CHECK</code> in ABAP after the select. In S/4HANA the check is applied by the framework while the select executes, so unauthorised rows are never returned. Also note that <code>define view entity</code> is the current syntax; older DDIC-based views use <code>define view</code> with <code>@AbapCatalog.sqlViewName</code>. Check which one your release supports.</aside>"
+  },
+  {
+   "heading": "Annotations: the ones you will actually use",
+   "html": "<p>There are hundreds of annotations. Learn the handful that appear in almost every project, and look up the rest in the ABAP CDS documentation inside ADT (ABAP Development Tools in Eclipse).</p><table><thead><tr><th>Annotation</th><th>Example value</th><th>What it does</th></tr></thead><tbody><tr><td><code>@EndUserText.label</code></td><td><code>'PO Header with Supplier'</code></td><td>Description shown in tools and the repository</td></tr><tr><td><code>@AccessControl.authorizationCheck</code></td><td><code>#CHECK</code></td><td>Tells the framework to apply DCL. Other values: <code>#NOT_REQUIRED</code>, <code>#NOT_ALLOWED</code>, <code>#PRIVILEGED_ONLY</code></td></tr><tr><td><code>@VDM.viewType</code></td><td><code>#BASIC</code>, <code>#COMPOSITE</code>, <code>#CONSUMPTION</code></td><td>Position in the virtual data model layers</td></tr><tr><td><code>@Semantics.amount.currencyCode</code></td><td><code>'DocumentCurrency'</code></td><td>Links an amount field to its currency field</td></tr><tr><td><code>@Semantics.quantity.unitOfMeasure</code></td><td><code>'OrderQuantityUnit'</code></td><td>Links a quantity to its unit</td></tr><tr><td><code>@Analytics.dataCategory</code></td><td><code>#DIMENSION</code>, <code>#FACT</code>, <code>#CUBE</code></td><td>Role of the view in analytics</td></tr><tr><td><code>@UI.lineItem</code></td><td><code>[{ position: 10 }]</code></td><td>Shows the field as a column in a Fiori list report</td></tr><tr><td><code>@Search.searchable</code></td><td><code>true</code></td><td>Enables fuzzy search on the view</td></tr></tbody></table><p>Annotations apply at three levels: view level (above <code>define</code>), element level (above a field) and, in some cases, parameter level. The same annotation name can be valid at one level only, so a misplaced annotation is a common activation error.</p><aside class=\"tip\"><strong>Tip:</strong> In ADT, press <code>Ctrl+Space</code> after typing <code>@</code>. The editor offers only annotations valid for that position. This is the quickest way to avoid invented annotation names.</aside><p>One annotation deserves special care: <code>@AccessControl.authorizationCheck</code>. If you leave it out on a view in a system with the check enforced, you get a warning in the activation log. If you set <code>#CHECK</code> and no DCL role exists, users with normal authorization see no rows at all. We return to this in the DCL sections.</p>"
+  },
+  {
+   "heading": "Associations: relationships without a join",
+   "html": "<p>An association defines a link to a target entity but does not execute until a consumer uses it. Think of it as a join that is only built when somebody navigates through it. This makes views smaller and faster than stacking joins into every view.</p><p>Here is a purchase order header view that exposes associations to supplier and company code. The released interface view names below are standard in S/4HANA, but confirm field names in your release using ADT's <em>Open ABAP Development Object</em> (<code>Ctrl+Shift+A</code>).</p><pre><code>@AccessControl.authorizationCheck: #CHECK\n@EndUserText.label: 'PO Header with Supplier'\n@VDM.viewType: #COMPOSITE\ndefine view entity ZI_PurchaseOrderHdr\n  as select from I_PurchaseOrderAPI01 as Po\n  association [0..1] to I_Supplier    as _Supplier\n    on $projection.Supplier = _Supplier.Supplier\n  association [0..1] to I_CompanyCode as _CompanyCode\n    on $projection.CompanyCode = _CompanyCode.CompanyCode\n{\n  key Po.PurchaseOrder,\n      Po.CompanyCode,\n      Po.PurchasingOrganization,\n      Po.PurchasingGroup,\n      Po.Supplier,\n      Po.PurchaseOrderDate,\n      _Supplier,\n      _CompanyCode\n}</code></pre><p>Points to notice:</p><ul><li>The cardinality <code>[0..1]</code> is the maximum and minimum number of target rows per source row. Wrong cardinality causes duplicate rows or wrong join type later.</li><li><code>$projection.Supplier</code> refers to the field as exposed in the select list, not to the source table field.</li><li>The association name starts with an underscore by convention (<code>_Supplier</code>). It only becomes usable by consumers when you add it to the select list, as in the last two lines.</li></ul><h3>Using the association in ABAP SQL</h3><p>A consumer navigates with a path expression, which is a backslash followed by the association name:</p><pre><code>SELECT PurchaseOrder,\n       \\_Supplier-SupplierName AS SupplierName\n  FROM zi_purchaseorderhdr\n  WHERE CompanyCode = '1010'\n  INTO TABLE @DATA(lt_po).</code></pre><p>The database performs a left outer join to <code>I_Supplier</code> only for this query. The same navigation is used by Fiori elements, where a navigation property in the OData service maps to the association.</p><aside class=\"warning\"><strong>Warning:</strong> Do not expose an association whose target has stricter DCL than your view and assume the user sees everything. The target's own access control is applied when you read through the path, so the supplier name may come back empty for users without authorization on the target.</aside>"
+  },
+  {
+   "heading": "Writing a DCL role for the purchase order view",
+   "html": "<p>Access control is a separate repository object created in ADT through <em>New &rarr; Other ABAP Repository Object &rarr; Core Data Services &rarr; Access Control</em>. For our view we want to restrict rows by purchasing organization, using the standard authorization object <code>M_BEST_EKO</code> (field <code>EKORG</code>, with <code>ACTVT</code>).</p><pre><code>@EndUserText.label: 'Access control for PO header'\n@MappingRole: true\ndefine role ZI_PURCHASEORDERHDR {\n  grant select on ZI_PurchaseOrderHdr\n    where ( PurchasingOrganization ) =\n      aspect pfcg_auth( M_BEST_EKO, EKORG, ACTVT = '03' );\n}</code></pre><p>Read this as: a user may select a row only if their PFCG authorizations contain activity 03 (display) for the purchasing organization in that row. The left side is the view field; the right side maps it to the authorization field.</p><h3>Other DCL conditions you will meet</h3><ul><li><strong>Literal condition:</strong> <code>where PurchasingOrganization = '1000'</code>. Useful for fixed scoping.</li><li><strong>User condition:</strong> <code>where CreatedByUser = aspect user</code>. The row is visible to its creator only, provided the view has such a field.</li><li><strong>Unrestricted:</strong> <code>where true</code>. Use it deliberately and rarely, for example on a value-help view that has to be visible to everyone.</li><li><strong>Inheritance:</strong> <code>grant select on ZI_PurchaseOrderItem where inheriting conditions from entity ZI_PurchaseOrderHdr;</code>. The item view reuses the header rule, so there is one place to maintain.</li></ul><aside class=\"tip\"><strong>Tip:</strong> Combine two authorization checks in one role by separating conditions with <code>and</code>/<code>or</code> inside the <code>where</code> clause. A typical MM request is purchasing organization <em>and</em> plant, using <code>M_BEST_EKO</code> and <code>M_BEST_WRK</code>. Confirm the field names in <code>SU21</code> before writing the role.</aside><p>After activation, give the test user a PFCG role containing <code>M_BEST_EKO</code> with <code>EKORG = 1000</code> and <code>ACTVT = 03</code>. Log in as that user, run a data preview of the view in ADT, and check that only organization 1000 rows return. If nothing appears, run <code>SU53</code> for the failed check or trace with <code>ST01</code>.</p>"
+  },
+  {
+   "heading": "Step-by-step: build and test the secured view",
+   "html": "<ol><li>In ADT, create a package such as <code>ZMM_CDS</code> and open the ABAP project connected to your S/4HANA system.</li><li>Create the data definition <code>ZI_PurchaseOrderHdr</code> with the DDL above. Press <code>Ctrl+F3</code> to activate.</li><li>Run <em>Open With &rarr; Data Preview</em> (<code>F8</code>). With <code>#CHECK</code> and no role, a user without special rights sees no rows, which confirms the check is live.</li><li>Create the access control object <code>ZI_PURCHASEORDERHDR</code> with the <code>define role</code> code and activate it.</li><li>Assign a test user a PFCG role with <code>M_BEST_EKO</code> restricted to one purchasing organization (<code>PFCG</code>, then <code>SU01</code> for assignment).</li><li>Log on as the test user and repeat the data preview. Only authorised rows should appear.</li><li>Run the ABAP SQL path expression from the earlier section to confirm the association works under the same user.</li></ol><aside class=\"interview\"><strong>Interview angle:</strong> \"A Fiori app shows a blank list only for business users, not for the developer. Why?\" A strong answer: the developer has broad authorizations (or <code>SAP_ALL</code>), while the view carries <code>#CHECK</code> and the business user's PFCG role lacks matching <code>M_BEST_EKO</code> values, or no DCL role exists. Check <code>SU53</code> and the role.</aside>"
+  },
+  {
+   "heading": "CDS view activation: what goes wrong and how to fix it",
+   "html": "<p>Activation is the step that turns the DDL source into a runtime object. In ADT you activate one object with <code>Ctrl+F3</code> and several inactive objects with <code>Ctrl+Shift+F3</code>. Activate the underlying views before the views that depend on them, and the DCL role after the view it protects.</p><table><thead><tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr></thead><tbody><tr><td>Activation log: unknown field in <code>on</code> condition</td><td>Used the source field instead of the projected field with <code>$projection</code></td><td>Add the field to the select list or use the correct alias</td></tr><tr><td>Association not found by consumer</td><td>Association defined but not added to the select list</td><td>List <code>_Supplier</code> in the field list so it is exposed</td></tr><tr><td>Warning about missing authorization check</td><td><code>@AccessControl.authorizationCheck</code> missing</td><td>Set <code>#CHECK</code> and create a DCL, or <code>#NOT_REQUIRED</code> if the data is not sensitive and your governance allows it</td></tr><tr><td>DCL cannot be activated</td><td>View inactive, or field name in <code>where</code> does not exist in the view</td><td>Activate the view first and use the exposed field names</td></tr><tr><td>Annotation rejected</td><td>Value or position not valid for that annotation</td><td>Use <code>Ctrl+Space</code> in ADT to see allowed values</td></tr><tr><td>Duplicate rows in the result</td><td>Wrong association cardinality or a join to a one-to-many target</td><td>Correct the cardinality and the <code>on</code> condition</td></tr></tbody></table><h3>The \"association cannot be used locally\" problem</h3><p>People search for this message when an association defined in one view does not work where they try to use it. In practice, the cause is usually one of three things: the association is used in the same view in a place or a way the syntax does not allow, the association was never exposed so another view cannot reach it, or the path expression is applied to a view type that does not support it. The exact wording differs between releases, so read the full message in the ADT <em>Problems</em> view and note the line it points to.</p><p>The working fix is almost always the same: define the association, expose it in the select list, and navigate to it from the <em>consuming</em> view or ABAP SQL statement through a path expression. If you need the target data in the same view, use an explicit join or define a path expression in the field list (for example <code>_Supplier.SupplierName as SupplierName</code>).</p><aside class=\"warning\"><strong>Warning:</strong> Do not copy an activation fix from a forum without checking your release. Behaviour of older DDIC-based views and newer view entities differs, and a workaround for one can fail on the other.</aside>"
+  },
+  {
+   "heading": "Finance views: ACDOCA and ACDOCP in CDS",
+   "html": "<p>Two of the most searched finance tables in this area are <code>ACDOCA</code> and <code>ACDOCP</code>. <code>ACDOCA</code> is the Universal Journal table that stores actual line items; its standard CDS interface view is <code>I_JournalEntryItem</code>. See <a href=\"sap-s4hana-universal-journal-acdoca-guide.html\">the Universal Journal (ACDOCA) guide</a> for the table itself and <a href=\"new-general-ledger-s4hana-ledgers-groups-parallel-accounting.html\">New General Ledger</a> for ledger concepts.</p><p><code>ACDOCP</code> is the planning counterpart: it stores plan line items from integrated planning. For reporting on it, first search the system for released standard CDS views that read <code>ACDOCP</code> (in ADT use <em>Open ABAP Development Object</em> and the <em>Where-Used</em> list on the table). Build a custom view only if nothing standard fits.</p><p>For any custom view on these tables, three rules save trouble:</p><ul><li>Read from the standard interface view where one exists. It already carries the semantic annotations for amount, currency and ledger.</li><li>Always annotate amounts with <code>@Semantics.amount.currencyCode</code>, otherwise analytics tools cannot convert or sum them correctly.</li><li>Finance data is sensitive. Use <code>#CHECK</code> with a DCL role on company code (<code>F_BKPF_BUK</code>) or ledger, and never <code>where true</code>.</li></ul><aside class=\"note\"><strong>Background:</strong> Direct selects on <code>ACDOCA</code> in custom code are possible on-premise, but large volumes belong in CDS or in standard analytical apps. Selecting without the ledger (<code>RLDNR</code>) and company code filters in a multi-ledger setup returns mixed data.</aside>"
+  },
+  {
+   "heading": "Common mistakes and interview questions",
+   "html": "<h3>Common mistakes</h3><ul><li>Writing the DCL on the consumption view only and leaving the basic view open, so another developer's view bypasses it. Protect the lowest view that holds sensitive data and inherit upwards.</li><li>Testing as a developer with broad authorizations and shipping without a business-user test.</li><li>Using <code>#NOT_REQUIRED</code> to make an error go away.</li><li>Exposing associations with wrong cardinality, leading to duplicates in Fiori lists.</li><li>Hard-coding client or organization values in DCL literals that later change.</li></ul><h3>Interview questions on this topic</h3><ol><li>What is the difference between a join and an association in CDS?</li><li>What does <code>@AccessControl.authorizationCheck: #CHECK</code> do and what happens without a DCL role?</li><li>How would you restrict a purchase order view by plant and purchasing organization?</li><li>How do you reuse one DCL condition across header and item views?</li><li>Where would you look when a Fiori list is empty for one user only?</li></ol><aside class=\"interview\"><strong>Interview angle:</strong> Interviewers for MM and EWM roles often probe how a functional consultant works with a CDS developer. Be ready to name the authorization object, the organizational field and the PFCG role content you would hand over, rather than only describing syntax. Practising on an S/4HANA sandbox helps you answer from experience.</aside><p>For a logistics view of where such CDS models are consumed, see <a href=\"end-to-end-sap-logistics-mm-sd-ewm-tm-integration.html\">end-to-end logistics integration</a>.</p>"
+  }
+ ],
+ "key_takeaways": [
+  "Annotations add meaning (labels, currency links, UI, authorization mode) to a CDS view; use ADT's Ctrl+Space to avoid invalid ones.",
+  "An association is a lazy relationship: define it, then expose it in the select list so consumers can navigate with path expressions.",
+  "DCL roles (define role) filter rows using PFCG authorizations, for example M_BEST_EKO for purchasing organization.",
+  "@AccessControl.authorizationCheck: #CHECK with no DCL role usually means business users see no rows.",
+  "Protect the lowest sensitive view and reuse conditions by inheriting, and always test with a real business user.",
+  "Check ADT's Problems view first when activation fails; the cause is usually a missing exposed field, wrong $projection reference or inactive dependency."
+ ],
+ "faqs": [
+  {
+   "question": "What is a CDS view DCL?",
+   "answer": "DCL (Data Control Language) is the language used to write access control objects for CDS views. A role defined with define role grants select on a view only for rows that match PFCG authorization values, literals or the current user. It is applied automatically when the view has authorizationCheck set to #CHECK."
+  },
+  {
+   "question": "How do I create a CDS view on ACDOCP?",
+   "answer": "ACDOCP holds plan line items. First search for a released standard CDS view that already reads it, using the where-used list in ADT. If none fits, create a view entity selecting from the table, add semantic annotations for amounts and currencies, and protect it with a DCL role on company code."
+  },
+  {
+   "question": "How does CDS view activation work?",
+   "answer": "You activate a data definition in ADT with Ctrl+F3, or several inactive objects with Ctrl+Shift+F3. Activation checks syntax and dependencies and generates the runtime object. Activate underlying views first, and activate the DCL role after the view it protects."
+  },
+  {
+   "question": "What does the error that an association cannot be used locally mean?",
+   "answer": "It generally points to an association being used in a place or way the view does not allow, or one that has not been exposed. The exact text varies by release, so read the Problems view in ADT. Normally you expose the association in the select list and navigate through it from the consumer, or use an explicit join in the same view."
+  },
+  {
+   "question": "Which CDS view reads ACDOCA?",
+   "answer": "The standard interface view I_JournalEntryItem reads the Universal Journal table ACDOCA. Use it as the base for custom reporting because it already carries semantic annotations. Confirm the view and its fields in your release using ADT."
+  },
+  {
+   "question": "What is the difference between an association and a join in CDS?",
+   "answer": "A join is executed whenever the view runs. An association is only resolved when a consumer navigates through it using a path expression. This keeps views lighter and lets the consumer decide which relationships to use."
+  },
+  {
+   "question": "Why does my CDS view return no data for a business user?",
+   "answer": "Most often the view has #CHECK and the user's PFCG role lacks matching authorization values, or no DCL role exists. Check SU53 right after the failure, or trace with ST01. Then adjust the role or the DCL condition."
+  }
+ ],
+ "process_flow": [
+  {
+   "title": "Create data definition",
+   "detail": "Write the view entity with annotations in ADT and activate with Ctrl+F3."
+  },
+  {
+   "title": "Add associations",
+   "detail": "Define _Supplier and _CompanyCode, then expose them in the select list."
+  },
+  {
+   "title": "Set authorization check",
+   "detail": "Use @AccessControl.authorizationCheck: #CHECK on the view."
+  },
+  {
+   "title": "Write DCL role",
+   "detail": "Create define role with aspect pfcg_auth(M_BEST_EKO, EKORG, ACTVT = '03')."
+  },
+  {
+   "title": "Assign PFCG role",
+   "detail": "Give the test user matching authorization values in PFCG and SU01."
+  },
+  {
+   "title": "Test as business user",
+   "detail": "Run data preview or ABAP SQL, and use SU53 or ST01 if rows are missing."
+  }
+ ],
+ "screenshot_ideas": [
+  "ADT data definition editor showing ZI_PurchaseOrderHdr with annotations and both associations",
+  "ADT access control editor with the define role code using aspect pfcg_auth(M_BEST_EKO...)",
+  "ADT Data Preview of the view before and after the DCL role is active",
+  "PFCG authorization tab for M_BEST_EKO with EKORG and ACTVT values",
+  "SU53 display of a failed authorization check for the test user"
+ ],
+ "word_count": 2259,
+ "published": "2026-11-24"
+}

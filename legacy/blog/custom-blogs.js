@@ -686,5 +686,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-23",
     excerpt: "This guide details how to configure SAP EWM storage type search sequences and putaway strategies, essential for efficient warehouse operations and material placement.",
     imageUrl: "https://youronementor.com/blog/covers/sap-ewm-storage-type-search-sequences-putaway-strategies.svg"
+  },
+  {
+    id: "post_1795518208016",
+    title: "CDS View Annotations, Associations and Access Control (DCL) in S/4HANA: A Practical Guide",
+    slug: "cds-view-annotations-associations-access-control-dcl",
+    category: "Tutorial",
+    badge: "SAP CDS TUTORIAL",
+    readTime: "10 min read",
+    date: "Nov 24, 2026",
+    isoDate: "2026-11-24",
+    excerpt: "Annotations describe a CDS view, associations connect it to other views, and DCL decides who may see which rows. Build all three on a purchase order view, step by step.",
+    imageUrl: "https://youronementor.com/blog/covers/cds-view-annotations-associations-access-control-dcl.svg"
   }
 ];
