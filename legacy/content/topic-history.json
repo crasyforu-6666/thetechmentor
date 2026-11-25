@@ -229,5 +229,12 @@
   "slug": "availability-check-atp-s4hana-sd-consultants",
   "title": "Mastering Availability Check (ATP) in SAP S/4HANA for SD Consultants",
   "date": "2026-11-25"
+ },
+ {
+  "topic": "SAP HANA database administration basics",
+  "module": "BASIS",
+  "slug": "sap-hana-database-administration-basics",
+  "title": "SAP HANA Database Administration Basics: A Practical Guide for MM/EWM Consultants",
+  "date": "2026-11-25"
  }
 ]

@@ -323,3 +323,11 @@ Folder: `images/blog/availability-check-atp-s4hana-sd-consultants/`
 - [ ] 03: VOV6: Maintain Schedule Line Categories, showing 'CP' and its availability check settings
 - [ ] 04: VA01: Sales Order Creation, item level, displaying ATP result/schedule lines
 - [ ] 05: MD04: Stock/Requirements List, showing how sales order requirements impact stock
+
+## SAP HANA Database Administration Basics: A Practical Guide for MM/EWM Consultants
+Folder: `images/blog/sap-hana-database-administration-basics/`
+- [ ] 01: DBACOCKPIT: Overview screen showing system status
+- [ ] 02: HANA Cockpit: Alert Monitor displaying critical alerts
+- [ ] 03: HANA Studio: System Overview tab with memory/CPU usage
+- [ ] 04: HANA Studio: Backup Console showing recent backup status
+- [ ] 05: HANA Cockpit: User Management screen for creating a new user

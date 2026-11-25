@@ -710,5 +710,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-25",
     excerpt: "Master the critical Availability Check (ATP) functionality in SAP S/4HANA for Sales and Distribution. This guide covers configuration, core concepts, and the advanced aATP features.",
     imageUrl: "https://youronementor.com/blog/covers/availability-check-atp-s4hana-sd-consultants.svg"
+  },
+  {
+    id: "post_1795617056764",
+    title: "SAP HANA Database Administration Basics: A Practical Guide for MM/EWM Consultants",
+    slug: "sap-hana-database-administration-basics",
+    category: "Tutorial",
+    badge: "SAP BASIS TUTORIAL",
+    readTime: "13 min read",
+    date: "Nov 25, 2026",
+    isoDate: "2026-11-25",
+    excerpt: "Learn the essentials of SAP HANA database administration, from monitoring to backup, crucial for S/4HANA functional consultants.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-hana-database-administration-basics.svg"
   }
 ];
