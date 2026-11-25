@@ -558,3 +558,15 @@
 [2026-11-24 11:03:28] ✅ Updated homepage index.html with new blog card
 [2026-11-24 11:03:28] ✅ Updated blog/index.html hub with new blog card
 [2026-11-24 11:03:28] 🎉 Successfully published article 'CDS View Annotations, Associations and Access Control (DCL) in S/4HANA: A Practical Guide'!
+[2026-11-25 04:17:46] 🚀 Starting Autonomous Twice-Daily Blog Publishing Routine...
+[2026-11-25 04:17:46] 🎯 Target SAP Domain : [EWM] SAP EWM / Warehouse Logistics
+[2026-11-25 04:17:46] 📌 Selected Trending Topic: Availability check (ATP) in S/4HANA for SD consultants
+[2026-11-25 04:17:46] 📌 Primary SEO Keyword : availability check (atp) in s/4hana for sd consultants
+[2026-11-25 04:17:46] 📌 Target Article Slug  : availability-check-atp-in-s-4hana-for-sd-consultants
+[2026-11-25 04:17:46] 📌 Google PAA Questions : 4 FAQs integrated
+[2026-11-25 04:18:21] ✍️ Article written: Mastering Availability Check (ATP) in SAP S/4HANA for SD Consultants (2317 words)
+[2026-11-25 04:18:21] ✅ Generated Article Page: /home/runner/work/thetechmentor/thetechmentor/legacy/blog/availability-check-atp-s4hana-sd-consultants.html
+[2026-11-25 04:18:21] ✅ Updated blog/custom-blogs.js repository file
+[2026-11-25 04:18:21] ✅ Updated homepage index.html with new blog card
+[2026-11-25 04:18:21] ✅ Updated blog/index.html hub with new blog card
+[2026-11-25 04:18:21] 🎉 Successfully published article 'Mastering Availability Check (ATP) in SAP S/4HANA for SD Consultants'!

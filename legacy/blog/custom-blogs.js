@@ -698,5 +698,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-24",
     excerpt: "Annotations describe a CDS view, associations connect it to other views, and DCL decides who may see which rows. Build all three on a purchase order view, step by step.",
     imageUrl: "https://youronementor.com/blog/covers/cds-view-annotations-associations-access-control-dcl.svg"
+  },
+  {
+    id: "post_1795580301857",
+    title: "Mastering Availability Check (ATP) in SAP S/4HANA for SD Consultants",
+    slug: "availability-check-atp-s4hana-sd-consultants",
+    category: "Tutorial",
+    badge: "SAP SD TUTORIAL",
+    readTime: "11 min read",
+    date: "Nov 25, 2026",
+    isoDate: "2026-11-25",
+    excerpt: "Master the critical Availability Check (ATP) functionality in SAP S/4HANA for Sales and Distribution. This guide covers configuration, core concepts, and the advanced aATP features.",
+    imageUrl: "https://youronementor.com/blog/covers/availability-check-atp-s4hana-sd-consultants.svg"
   }
 ];

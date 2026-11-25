@@ -315,3 +315,11 @@ Folder: `images/blog/cds-view-annotations-associations-access-control-dcl/`
 - [ ] 03: ADT Data Preview of the view before and after the DCL role is active
 - [ ] 04: PFCG authorization tab for M_BEST_EKO with EKORG and ACTVT values
 - [ ] 05: SU53 display of a failed authorization check for the test user
+
+## Mastering Availability Check (ATP) in SAP S/4HANA for SD Consultants
+Folder: `images/blog/availability-check-atp-s4hana-sd-consultants/`
+- [ ] 01: MM02: Material Master, Sales: General/Plant view, Availability Check field (MARC-PRBME)
+- [ ] 02: OVZ9: Configure Scope of Check, showing checking rule 'A' and availability check group '01'
+- [ ] 03: VOV6: Maintain Schedule Line Categories, showing 'CP' and its availability check settings
+- [ ] 04: VA01: Sales Order Creation, item level, displaying ATP result/schedule lines
+- [ ] 05: MD04: Stock/Requirements List, showing how sales order requirements impact stock
