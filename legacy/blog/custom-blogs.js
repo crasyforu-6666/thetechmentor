@@ -722,5 +722,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-25",
     excerpt: "Learn the essentials of SAP HANA database administration, from monitoring to backup, crucial for S/4HANA functional consultants.",
     imageUrl: "https://youronementor.com/blog/covers/sap-hana-database-administration-basics.svg"
+  },
+  {
+    id: "post_1795681911772",
+    title: "SAP TM Organisational Structure and Master Data in S/4HANA: A Practical Guide",
+    slug: "sap-tm-organisational-structure-master-data",
+    category: "Tutorial",
+    badge: "SAP TM TUTORIAL",
+    readTime: "9 min read",
+    date: "Nov 26, 2026",
+    isoDate: "2026-11-26",
+    excerpt: "How SAP TM models organisations, business partners, locations, zones, lanes and resources, and how this differs from the MM and SD structure you already know.",
+    imageUrl: "https://youronementor.com/blog/covers/sap-tm-organisational-structure-master-data.svg"
   }
 ];

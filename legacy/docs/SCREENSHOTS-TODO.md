@@ -331,3 +331,11 @@ Folder: `images/blog/sap-hana-database-administration-basics/`
 - [ ] 03: HANA Studio: System Overview tab with memory/CPU usage
 - [ ] 04: HANA Studio: Backup Console showing recent backup status
 - [ ] 05: HANA Cockpit: User Management screen for creating a new user
+
+## SAP TM Organisational Structure and Master Data in S/4HANA: A Practical Guide
+Folder: `images/blog/sap-tm-organisational-structure-master-data/`
+- [ ] 01: PPOME: TM organisational tree showing a sales organisation and purchasing organisation org unit with function flags
+- [ ] 02: BP: carrier business partner showing supplier role and carrier profile data
+- [ ] 03: /SCMTMS/LOC3: plant location with type, address and geo-coordinates
+- [ ] 04: /SCMTMS/ZONE: transportation zone with assigned locations or postal code ranges
+- [ ] 05: /SCMTMS/RES01: vehicle resource with capacity values

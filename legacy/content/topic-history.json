@@ -236,5 +236,12 @@
   "slug": "sap-hana-database-administration-basics",
   "title": "SAP HANA Database Administration Basics: A Practical Guide for MM/EWM Consultants",
   "date": "2026-11-25"
+ },
+ {
+  "topic": "SAP TM organisational structure and master data",
+  "module": "TM",
+  "slug": "sap-tm-organisational-structure-master-data",
+  "title": "SAP TM Organisational Structure and Master Data in S/4HANA: A Practical Guide",
+  "date": "2026-11-26"
  }
 ]
