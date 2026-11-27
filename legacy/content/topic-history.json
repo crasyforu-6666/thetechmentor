@@ -243,5 +243,12 @@
   "slug": "sap-tm-organisational-structure-master-data",
   "title": "SAP TM Organisational Structure and Master Data in S/4HANA: A Practical Guide",
   "date": "2026-11-26"
+ },
+ {
+  "topic": "Procure-to-pay to order-to-cash: the complete S/4HANA supply chain flow",
+  "module": "LOG",
+  "slug": "procure-to-pay-to-order-to-cash-s4hana-supply-chain-flow",
+  "title": "Procure-to-Pay to Order-to-Cash: The Complete S/4HANA Supply Chain Flow",
+  "date": "2026-11-27"
  }
 ]

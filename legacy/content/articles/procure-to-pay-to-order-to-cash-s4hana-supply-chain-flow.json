@@ -1,0 +1,123 @@
+{
+ "seo_title": "Procure-to-Pay to Order-to-Cash: S/4HANA Flow Explained",
+ "h1": "Procure-to-Pay to Order-to-Cash: The Complete S/4HANA Supply Chain Flow",
+ "meta_description": "See how procure-to-pay to order-to-cash connects in S/4HANA: documents, T-codes, stock and FI postings with a worked INR example. Read the full flow.",
+ "slug": "procure-to-pay-to-order-to-cash-s4hana-supply-chain-flow",
+ "category": "Tutorial",
+ "module": "LOG",
+ "level": "Intermediate",
+ "badge": "SAP S/4HANA SUPPLY CHAIN",
+ "excerpt": "Follow one material from vendor PO to customer payment. See the T-codes, stock and FI postings where procure-to-pay meets order-to-cash in S/4HANA.",
+ "intro_html": "<p>Most learners study procure-to-pay (P2P) in an MM batch and order-to-cash (O2C) in an SD batch, and never see them as one loop. In a real project they are two halves of the same trade cycle. Whatever you buy through P2P becomes the stock you sell through O2C, and both cycles end in the same general ledger.</p><p>This article follows one material from purchase requisition to vendor payment and then from sales order to customer receipt. You will see the documents, transaction codes, tables and FI postings at each step. You will also see exactly where the procure-to-pay to order-to-cash handover happens: stock, valuation and the warehouse. I use a worked example in INR so you can reproduce it on an S/4HANA sandbox.</p>",
+ "sections": [
+  {
+   "heading": "Why procure-to-pay to order-to-cash is one loop, not two processes",
+   "html": "<p>P2P is the buy side: you need a material, you order it, receive it, verify the vendor invoice and pay. O2C is the sell side: a customer orders, you check availability, deliver, bill and collect. Different departments own them, and different SAP modules (MM and FI-AP versus SD and FI-AR) carry them.</p><p>But they share three things, and these three things are where consultants get questions in interviews and where projects get defects:</p><ul><li><strong>Master data.</strong> The material master, plant and storage location are used by both. Vendors and customers are both maintained as Business Partners in S/4HANA.</li><li><strong>Stock.</strong> A goods receipt (GR) increases stock, and a goods issue (GI) from a delivery decreases it. Stock is the physical and financial bridge between the two cycles.</li><li><strong>The ledger.</strong> Both post to the Universal Journal (table <code>ACDOCA</code>). Inventory, GR/IR, COGS, revenue, vendor and customer balances all sit in one place.</li></ul><p>If you need the foundations first, read <a href=\"sap-mm-organisational-structure-s4hana.html\">the MM organisational structure guide</a> and <a href=\"sap-sd-organisational-structure-s4hana-guide.html\">the SD organisational structure guide</a>. The plant is the object both sides share.</p><aside class=\"note\"><strong>ECC vs S/4HANA:</strong> In ECC, vendors lived in <code>LFA1</code> and customers in <code>KNA1</code>, created via <code>XK01</code>/<code>XD01</code>. In S/4HANA the Business Partner (<code>BP</code>) is the single entry point, with customer and supplier roles. Material documents are stored in <code>MATDOC</code> instead of the old <code>MKPF</code>/<code>MSEG</code> pair, and FI line items are in <code>ACDOCA</code>.</aside>"
+  },
+  {
+   "heading": "The procure-to-pay half: documents and postings",
+   "html": "<p>The P2P chain has six standard steps. Each step creates a document that the next step references. That reference chain is what the three-way match in invoice verification depends on.</p><table><thead><tr><th>Step</th><th>T-code</th><th>Document / table</th><th>Accounting effect</th></tr></thead><tbody><tr><td>Purchase requisition</td><td><code>ME51N</code></td><td>PR, <code>EBAN</code></td><td>None (commitment only)</td></tr><tr><td>Purchase order</td><td><code>ME21N</code></td><td>PO, <code>EKKO</code>/<code>EKPO</code></td><td>None</td></tr><tr><td>Goods receipt</td><td><code>MIGO</code> (movement 101)</td><td>Material doc, <code>MATDOC</code></td><td>Dr Inventory (<code>BSX</code>), Cr GR/IR (<code>WRX</code>)</td></tr><tr><td>Invoice verification</td><td><code>MIRO</code></td><td>Invoice, <code>RBKP</code>/<code>RSEG</code></td><td>Dr GR/IR, Dr input tax, Cr Vendor</td></tr><tr><td>Payment</td><td><code>F110</code></td><td>Payment doc, <code>BKPF</code>/<code>ACDOCA</code></td><td>Dr Vendor, Cr Bank</td></tr></tbody></table><p>For the configuration behind the first three steps, see <a href=\"configure-purchase-order-cycle-s4hana.html\">the complete purchase order cycle guide</a>. If requisitions should convert to POs without a buyer touching them, <a href=\"sap-mm-automatic-po-creation-me59n-pr-automation.html\">the ME59N automation article</a> covers it.</p><p>The GR/IR clearing account is the control point. A GR credits it, and the invoice debits it. Any balance left over means goods received but not invoiced, or invoiced but not received. Month-end teams chase this balance every close.</p><aside class=\"tip\"><strong>Tip:</strong> Set up the vendor as a Business Partner with the supplier role (<code>FLVN00</code> for FI vendor, <code>FLVN01</code> for purchasing) before you test. Missing the purchasing role is the most common reason a new vendor is rejected in <code>ME21N</code>. <a href=\"business-partner-vendors-s4hana-roles-grouping-number-ranges.html\">This article explains the roles and number ranges</a>.</aside>"
+  },
+  {
+   "heading": "The order-to-cash half: documents and postings",
+   "html": "<p>O2C mirrors P2P step for step, with the document flow starting from the customer's demand instead of your own.</p><table><thead><tr><th>Step</th><th>T-code</th><th>Document / table</th><th>Accounting effect</th></tr></thead><tbody><tr><td>Inquiry / quotation (optional)</td><td><code>VA11</code> / <code>VA21</code></td><td><code>VBAK</code>/<code>VBAP</code></td><td>None</td></tr><tr><td>Sales order</td><td><code>VA01</code></td><td>Order, <code>VBAK</code>/<code>VBAP</code></td><td>None (credit and ATP checks happen here)</td></tr><tr><td>Outbound delivery</td><td><code>VL01N</code></td><td><code>LIKP</code>/<code>LIPS</code></td><td>None</td></tr><tr><td>Post goods issue</td><td><code>VL02N</code> (movement 601)</td><td><code>MATDOC</code></td><td>Dr COGS (<code>GBB</code>/<code>VAX</code>), Cr Inventory (<code>BSX</code>)</td></tr><tr><td>Billing</td><td><code>VF01</code></td><td><code>VBRK</code>/<code>VBRP</code></td><td>Dr Customer, Cr Revenue, Cr Output tax</td></tr><tr><td>Incoming payment</td><td><code>F-28</code></td><td><code>BKPF</code>/<code>ACDOCA</code></td><td>Dr Bank, Cr Customer</td></tr></tbody></table><p>The sales order is where stock and demand first meet. The availability check decides whether the customer's requested date can be met from current stock, planned receipts (including your open POs) or production. <a href=\"availability-check-atp-s4hana-sd-consultants.html\">The ATP guide for SD consultants</a> shows how checking rules and scope work.</p><p>Revenue and receivable accounts come from condition-based account determination in <code>VKOA</code>, while COGS and inventory come from <code>OBYC</code>. The full SD to FI story is in <a href=\"sap-s4hana-o2c-process-fi-vkoa.html\">the O2C FI integration and VKOA article</a>, so I will not repeat it here.</p><aside class=\"warning\"><strong>Common mistake:</strong> Learners think billing posts the COGS. It does not. COGS is posted at goods issue, using the valuation price from the material master. Billing posts revenue only.</aside>"
+  },
+  {
+   "heading": "Where P2P hands over to O2C: stock, valuation and planning",
+   "html": "<p>This is the part most tutorials skip. There are four handover points between the buy side and the sell side.</p><h3>1. Stock and the valuation price</h3><p>When the GR posts, stock quantity and value increase on the material at plant level. The price that O2C later uses to post COGS comes from this valuation. With price control <strong>S</strong> (standard), COGS uses the standard price and the difference between PO price and standard goes to the price difference account (<code>PRD</code>). With price control <strong>V</strong> (moving average), the price blends with each receipt.</p><p>If you run actual costing, the final cost is only known after the period-end run. See <a href=\"sap-s4hana-material-ledger-actual-costing-valuation-guide.html\">the Material Ledger and actual costing guide</a>. For account mapping, <a href=\"sap-mm-obyc-account-determination-s4hana-masterclass.html\">the OBYC masterclass</a> covers <code>BSX</code>, <code>WRX</code>, <code>GBB</code> and <code>PRD</code>.</p><h3>2. Demand driving procurement</h3><p>Sales orders create independent requirements for MRP-relevant materials. MRP (<code>MD01N</code> in S/4HANA) then creates purchase requisitions for shortages. That is how O2C triggers P2P. A sales order for 500 pieces with only 200 in stock results in a requisition for the shortfall. <a href=\"sap-s4hana-mrp-live-classic-mrp-comparison.html\">The MRP Live article</a> explains how this runs in S/4HANA.</p><h3>3. Material master views</h3><p>The same material master holds purchasing views (GR processing time, order unit), sales views (delivering plant, item category group, availability check), MRP views and accounting views. A missing view in either cycle blocks a document. <a href=\"material-master-views-s4hana-field-by-field-guide.html\">The material master field-by-field guide</a> lists the fields that matter.</p><h3>4. Special procurement and special stock</h3><p>Not every P2P ends in plain stock. Consignment stock (<a href=\"sap-mm-consignment-procurement-mrko-settlement-411k.html\">see the 411 K and MRKO guide</a>) and subcontracting (<a href=\"sap-mm-subcontracting-process-s4hana-special-stock-o.html\">special stock O</a>) change when you own the stock and when liability to the vendor arises. A sale from consignment stock is possible only after the transfer to own stock, so the liability posts at withdrawal.</p><aside class=\"interview\"><strong>Interview angle:</strong> \"How are P2P and O2C linked in SAP?\" A strong answer names stock as the bridge: GR with 101 increases it, GI with 601 reduces it, and the valuation price from the material master determines COGS. Add that MRP turns sales demand into purchase requisitions. That shows you see the loop, not just two lists of T-codes.</aside>"
+  },
+  {
+   "heading": "Worked example: one material through both cycles in INR",
+   "html": "<p>Take company code <code>1000</code>, plant <code>1000</code>, a traded material <code>TRD-100</code> on moving average price, GST at 18%. This is simplified, with no TDS and no freight, so you can follow the numbers.</p><ol><li><strong>PO:</strong> Buy 100 pieces from vendor 100001 at INR 400 each. PO value is INR 40,000.</li><li><strong>GR (101):</strong> Dr Inventory 40,000, Cr GR/IR 40,000. Stock is 100 pieces valued at INR 40,000.</li><li><strong>MIRO:</strong> Vendor invoice INR 47,200 (40,000 plus 7,200 GST). Dr GR/IR 40,000, Dr Input CGST 3,600, Dr Input SGST 3,600, Cr Vendor 47,200.</li><li><strong>Sales order:</strong> Customer 200001 orders 80 pieces at INR 650. ATP confirms 80 from stock.</li><li><strong>Delivery and PGI (601):</strong> Dr COGS 32,000 (80 x 400), Cr Inventory 32,000. Stock left is 20 pieces valued at INR 8,000.</li><li><strong>Billing:</strong> Net INR 52,000, GST INR 9,360. Dr Customer 61,360, Cr Revenue 52,000, Cr Output CGST 4,680, Cr Output SGST 4,680.</li><li><strong>Payments:</strong> You pay the vendor INR 47,200 through <code>F110</code>. The customer pays INR 61,360, which you post with <code>F-28</code>.</li></ol><table><thead><tr><th>Measure</th><th>Amount (INR)</th></tr></thead><tbody><tr><td>Revenue</td><td>52,000</td></tr><tr><td>COGS</td><td>32,000</td></tr><tr><td>Gross margin</td><td>20,000</td></tr><tr><td>Closing inventory (20 pcs)</td><td>8,000</td></tr><tr><td>Net GST payable (9,360 minus 7,200)</td><td>2,160</td></tr><tr><td>Cash movement (in minus out)</td><td>+14,160</td></tr></tbody></table><p>Check your result: run <code>MB52</code> for plant stock and display the accounting document from each step with <code>FB03</code>. The Universal Journal view in <a href=\"sap-s4hana-universal-journal-acdoca-guide.html\">the ACDOCA guide</a> explains why all these lines appear in one table.</p><aside class=\"tip\"><strong>Tip:</strong> The cash figure is not the margin, because GST on the vendor invoice is recoverable and GST on the sale is payable. Learners often confuse the two when asked to reconcile the example.</aside>"
+  },
+  {
+   "heading": "Adding the warehouse: EWM inside both cycles",
+   "html": "<p>If the plant's storage location is warehouse-managed with EWM, the physical movements in both cycles run through EWM. The commercial documents stay the same, but a warehouse layer sits between the delivery and the goods movement.</p><table><thead><tr><th>Stage</th><th>Without EWM</th><th>With embedded EWM</th></tr></thead><tbody><tr><td>Inbound</td><td>GR directly against PO in <code>MIGO</code></td><td>Inbound delivery, warehouse task for putaway, then GR posted from the delivery</td></tr><tr><td>Outbound</td><td>Pick and PGI in <code>VL02N</code></td><td>Outbound delivery order, wave, picking warehouse task, then PGI from EWM</td></tr><tr><td>Stock view</td><td>Plant and storage location</td><td>Bin-level stock plus the ERP-level quantity</td></tr></tbody></table><p>The FI postings are identical, because the GR still posts 101 and the PGI still posts 601. What changes is timing and traceability. See <a href=\"embedded-ewm-s4hana-setup-walkthrough.html\">the embedded EWM setup walkthrough</a>, <a href=\"sap-ewm-warehouse-process-types.html\">warehouse process types</a> and <a href=\"sap-ewm-wave-management-wocr-configuration.html\">wave management</a>. For the bigger picture across TM and EWM, read <a href=\"end-to-end-sap-logistics-mm-sd-ewm-tm-integration.html\">the end-to-end logistics integration guide</a>.</p><aside class=\"note\"><strong>Embedded vs decentralized:</strong> In embedded EWM, deliveries are shared in the same system, so there is no replication. In decentralized EWM, the ERP delivery is distributed to a separate EWM system and the goods movement is confirmed back, so you must monitor queues in <code>SMQ1</code>/<code>SMQ2</code>. <a href=\"s4hana-2026-embedded-ewm-vs-decentral-ewm-matrix.html\">The decision matrix</a> compares both.</aside>"
+  },
+  {
+   "heading": "Procure-to-pay versus order-to-cash: the key differences",
+   "html": "<table><thead><tr><th>Aspect</th><th>Procure-to-pay</th><th>Order-to-cash</th></tr></thead><tbody><tr><td>Trigger</td><td>Internal need (PR, MRP, reorder)</td><td>External customer demand</td></tr><tr><td>Business partner</td><td>Vendor (supplier role)</td><td>Customer role</td></tr><tr><td>Owner module</td><td>MM and FI-AP</td><td>SD and FI-AR</td></tr><tr><td>Stock effect</td><td>Increases stock (101)</td><td>Decreases stock (601)</td></tr><tr><td>Key control</td><td>Three-way match (PO, GR, invoice)</td><td>Credit check and ATP</td></tr><tr><td>Account determination</td><td><code>OBYC</code> (<code>BSX</code>, <code>WRX</code>)</td><td><code>VKOA</code> (revenue) plus <code>OBYC</code> (COGS)</td></tr><tr><td>Cash direction</td><td>Outflow</td><td>Inflow</td></tr><tr><td>Pricing</td><td>Calculation schema (<code>M/ME</code> condition types)</td><td>Pricing procedure (<code>PR00</code>, taxes)</td></tr></tbody></table><p>For the pricing differences in detail, compare <a href=\"sap-mm-pricing-procedure-schema-s4hana-guide.html\">the MM calculation schema guide</a> with <a href=\"sap-sd-pricing-procedure-condition-technique-guide.html\">the SD pricing procedure guide</a>.</p><p>Are they interrelated? Yes, through stock, valuation, MRP and the ledger. You can run one without the other in a service business, but any trading or manufacturing company runs both, and a failure in one shows up in the other. An invoice blocked in MIRO delays vendor payment, and a PGI that fails for lack of stock holds up billing.</p>"
+  },
+  {
+   "heading": "Common mistakes and troubleshooting across the loop",
+   "html": "<table><thead><tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr></thead><tbody><tr><td>PGI fails with insufficient stock</td><td>GR not posted, or stock in blocked/quality status, or wrong storage location in the delivery</td><td>Check <code>MMBE</code> and <code>MB52</code>. Post the GR or correct the storage location.</td></tr><tr><td>GR posting fails: posting period not open</td><td>Period closed in <code>OB52</code></td><td>Ask FI to open the period. Do not backdate without approval.</td></tr><tr><td>Billing document blocked for accounting</td><td>Missing <code>VKOA</code> account or missing customer reconciliation account</td><td>Maintain the key combination in <code>VKOA</code>, then release billing from <code>VFX3</code>.</td></tr><tr><td>Invoice blocked in MIRO</td><td>Price or quantity variance beyond tolerance (<code>OMR6</code>)</td><td>Review the variance, release in <code>MRBR</code>.</td></tr><tr><td>GR/IR balance keeps growing</td><td>Deliveries not invoiced, or invoices without GR</td><td>Analyse with <code>MB5S</code> and clear with <code>F.13</code> or <code>MR11</code> where valid.</td></tr><tr><td>COGS looks wrong on a sale</td><td>Price control or price difference on the material</td><td>Check the accounting 1 view and price control. Review in <code>CKM3</code> if Material Ledger is active.</td></tr></tbody></table><aside class=\"warning\"><strong>Risk:</strong> Do not use <code>MR11</code> to clear GR/IR before you know why the balance exists. Writing off a real unbilled receipt hides a liability that the vendor will still claim.</aside><p>One habit that saves hours: always display the document flow (<code>VA03</code> then Display Document Flow, or the PO history tab in <code>ME23N</code>) before you debug. The problem is almost always in a preceding document.</p>"
+  },
+  {
+   "heading": "Interview questions on procure-to-pay to order-to-cash",
+   "html": "<ol><li><strong>Walk me through P2P and O2C end to end.</strong> Use the two tables above. Give T-codes, documents and the FI posting at each stage.</li><li><strong>What posts at goods receipt and at goods issue?</strong> GR: Dr Inventory, Cr GR/IR. GI on delivery: Dr COGS, Cr Inventory.</li><li><strong>Where does the system get the COGS value?</strong> From the valuation price in the material master (standard or moving average), not from the sales price.</li><li><strong>How does a sales order create a purchase requisition?</strong> Through MRP, which reads the requirements and creates a PR for the shortage. Third-party order processing is the other route, creating a PR directly from the sales order item.</li><li><strong>What is the three-way match?</strong> PO, goods receipt and vendor invoice are compared on quantity and price in <code>MIRO</code>. Differences beyond tolerance block the invoice.</li><li><strong>What changes if EWM is active?</strong> The financial postings stay the same. Physical movement runs through warehouse tasks, and the goods movement posts from the EWM delivery.</li></ol><aside class=\"interview\"><strong>Scenario question:</strong> \"The customer is billed but the margin is negative. Where do you look?\" Check the valuation price at the time of PGI, any price difference from the purchase, and whether the pricing procedure applied the right discount. A confident answer separates the buy-side cost from the sell-side price. Practise this on a sandbox, and use <a href=\"top-30-sap-mm-interview-questions-2026.html\">the MM interview question set</a> for more scenarios.</aside><p>If you are planning your learning path, <a href=\"how-to-master-sap-mm-in-3-months.html\">the 3-month MM plan</a> places P2P first, and O2C understanding is what turns an MM learner into someone useful in integration discussions.</p>"
+  }
+ ],
+ "key_takeaways": [
+  "Procure-to-pay and order-to-cash are two halves of one loop, joined by stock, valuation, MRP and the Universal Journal.",
+  "GR (101) debits inventory and credits GR/IR, while PGI (601) debits COGS and credits inventory. Billing posts revenue, not COGS.",
+  "COGS uses the material's valuation price (standard or moving average), not the selling price.",
+  "MRP turns sales-order demand into purchase requisitions, so O2C can trigger P2P.",
+  "With EWM, the FI postings stay the same but physical moves run through warehouse tasks and the EWM delivery.",
+  "Debug by following the document flow back to the preceding document: PO history for P2P, document flow for O2C."
+ ],
+ "faqs": [
+  {
+   "question": "What is procure to pay order to cash?",
+   "answer": "It is the full trade cycle of a company. Procure-to-pay covers buying: requisition, PO, goods receipt, invoice verification and vendor payment. Order-to-cash covers selling: sales order, delivery, goods issue, billing and customer payment. Together they take material in, sell it and turn it back into cash."
+  },
+  {
+   "question": "What is the difference between procure to pay and order to cash?",
+   "answer": "P2P is the buy side, triggered by your own need, owned by MM and FI-AP, and ends with cash going out. O2C is the sell side, triggered by a customer order, owned by SD and FI-AR, and ends with cash coming in. P2P increases stock with movement 101, and O2C reduces it with 601."
+  },
+  {
+   "question": "Are procure to pay and order to cash interrelated?",
+   "answer": "Yes. They share the material master, plant, Business Partner data and the general ledger. Stock links them physically and financially, because what you receive in P2P is what you ship in O2C. MRP also converts sales demand into purchase requisitions."
+  },
+  {
+   "question": "What are the main T-codes in the procure-to-pay and order-to-cash process?",
+   "answer": "For P2P: ME51N, ME21N, MIGO, MIRO and F110. For O2C: VA01, VL01N, VL02N for goods issue, VF01 and F-28. Account determination uses OBYC for inventory, GR/IR and COGS, and VKOA for revenue."
+  },
+  {
+   "question": "Which accounting entries link P2P and O2C?",
+   "answer": "The inventory account (BSX) is the link. The GR debits it at purchase, and the PGI credits it at sale. The COGS posted at goods issue uses the value that the purchase built into the stock."
+  },
+  {
+   "question": "Does EWM change the procure-to-pay and order-to-cash flow?",
+   "answer": "The commercial documents and FI postings remain the same. EWM adds inbound and outbound delivery processing, warehouse tasks, putaway and picking before the goods movement posts. In decentralized EWM, deliveries also replicate between systems."
+  },
+  {
+   "question": "Which should a fresher learn first, P2P or O2C?",
+   "answer": "Most MM learners start with P2P because it is easier to follow, then add O2C to understand integration. SD learners do the reverse. Either way, learn the stock and FI postings of both, since interviews test the connection."
+  }
+ ],
+ "process_flow": [
+  {
+   "title": "Requisition and PO (ME51N, ME21N)",
+   "detail": "A need becomes a purchase order to the vendor."
+  },
+  {
+   "title": "Goods receipt (MIGO, 101)",
+   "detail": "Stock rises: Dr Inventory, Cr GR/IR."
+  },
+  {
+   "title": "Invoice and payment (MIRO, F110)",
+   "detail": "Three-way match, then the vendor is paid."
+  },
+  {
+   "title": "Sales order (VA01)",
+   "detail": "Customer demand is checked against stock and credit."
+  },
+  {
+   "title": "Delivery and PGI (VL01N, 601)",
+   "detail": "Stock falls: Dr COGS, Cr Inventory."
+  },
+  {
+   "title": "Billing and receipt (VF01, F-28)",
+   "detail": "Revenue is posted and customer cash comes in."
+  }
+ ],
+ "screenshot_ideas": [
+  "ME23N PO history tab showing GR and invoice receipt entries for one PO item",
+  "MB52 or MMBE stock overview before and after goods receipt and goods issue",
+  "FB03 accounting document from MIGO 101 showing BSX and GR/IR lines",
+  "VA03 document flow showing order, delivery, PGI and billing document",
+  "VF03 billing document accounting overview showing revenue and tax lines"
+ ],
+ "word_count": 2249,
+ "published": "2026-11-27"
+}

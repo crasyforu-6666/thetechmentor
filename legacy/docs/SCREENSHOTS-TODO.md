@@ -339,3 +339,11 @@ Folder: `images/blog/sap-tm-organisational-structure-master-data/`
 - [ ] 03: /SCMTMS/LOC3: plant location with type, address and geo-coordinates
 - [ ] 04: /SCMTMS/ZONE: transportation zone with assigned locations or postal code ranges
 - [ ] 05: /SCMTMS/RES01: vehicle resource with capacity values
+
+## Procure-to-Pay to Order-to-Cash: The Complete S/4HANA Supply Chain Flow
+Folder: `images/blog/procure-to-pay-to-order-to-cash-s4hana-supply-chain-flow/`
+- [ ] 01: ME23N PO history tab showing GR and invoice receipt entries for one PO item
+- [ ] 02: MB52 or MMBE stock overview before and after goods receipt and goods issue
+- [ ] 03: FB03 accounting document from MIGO 101 showing BSX and GR/IR lines
+- [ ] 04: VA03 document flow showing order, delivery, PGI and billing document
+- [ ] 05: VF03 billing document accounting overview showing revenue and tax lines

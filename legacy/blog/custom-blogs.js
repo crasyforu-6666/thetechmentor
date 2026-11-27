@@ -734,5 +734,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-26",
     excerpt: "How SAP TM models organisations, business partners, locations, zones, lanes and resources, and how this differs from the MM and SD structure you already know.",
     imageUrl: "https://youronementor.com/blog/covers/sap-tm-organisational-structure-master-data.svg"
+  },
+  {
+    id: "post_1795777337656",
+    title: "Procure-to-Pay to Order-to-Cash: The Complete S/4HANA Supply Chain Flow",
+    slug: "procure-to-pay-to-order-to-cash-s4hana-supply-chain-flow",
+    category: "Tutorial",
+    badge: "SAP S/4HANA SUPPLY CHAIN",
+    readTime: "10 min read",
+    date: "Nov 27, 2026",
+    isoDate: "2026-11-27",
+    excerpt: "Follow one material from vendor PO to customer payment. See the T-codes, stock and FI postings where procure-to-pay meets order-to-cash in S/4HANA.",
+    imageUrl: "https://youronementor.com/blog/covers/procure-to-pay-to-order-to-cash-s4hana-supply-chain-flow.svg"
   }
 ];
