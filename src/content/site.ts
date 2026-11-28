@@ -21,7 +21,7 @@ export const contact = {
 export const trackingConfig = {
   LEAD_WEBHOOK_URL: "",
   META_PIXEL_ID: "",
-  GA4_ID: "",
+  GA4_ID: "G-PGHCC7DJXE",
   WHATSAPP_NUMBER: contact.whatsappNumber,
 };
 

@@ -12,7 +12,7 @@ window.TTM_CONFIG = {
   META_PIXEL_ID: "",
 
   // Google Analytics 4 measurement ID, e.g. "G-XXXXXXXXXX".
-  GA4_ID: "",
+  GA4_ID: "G-PGHCC7DJXE",
 
   // WhatsApp number (country code, no +) used for follow-up buttons.
   WHATSAPP_NUMBER: "917848942021",
