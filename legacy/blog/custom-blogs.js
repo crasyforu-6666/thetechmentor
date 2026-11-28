@@ -746,5 +746,17 @@ window.TTM_CUSTOM_BLOGS = window.TTM_CUSTOM_BLOGS || [
     isoDate: "2026-11-27",
     excerpt: "Follow one material from vendor PO to customer payment. See the T-codes, stock and FI postings where procure-to-pay meets order-to-cash in S/4HANA.",
     imageUrl: "https://youronementor.com/blog/covers/procure-to-pay-to-order-to-cash-s4hana-supply-chain-flow.svg"
+  },
+  {
+    id: "post_1795866964223",
+    title: "Purchase Order Release Strategy in S/4HANA: Flexible Workflow vs. Classic",
+    slug: "purchase-order-release-strategy-s4hana-flexible-workflow-classic",
+    category: "Tutorial",
+    badge: "SAP MM TUTORIAL",
+    readTime: "13 min read",
+    date: "Nov 28, 2026",
+    isoDate: "2026-11-28",
+    excerpt: "Learn to configure and manage Purchase Order release strategies in SAP S/4HANA. This guide covers both Flexible Workflow and the classic method, highlighting their differences and practical applications for MM consultants.",
+    imageUrl: "https://youronementor.com/blog/covers/purchase-order-release-strategy-s4hana-flexible-workflow-classic.svg"
   }
 ];

@@ -347,3 +347,11 @@ Folder: `images/blog/procure-to-pay-to-order-to-cash-s4hana-supply-chain-flow/`
 - [ ] 03: FB03 accounting document from MIGO 101 showing BSX and GR/IR lines
 - [ ] 04: VA03 document flow showing order, delivery, PGI and billing document
 - [ ] 05: VF03 billing document accounting overview showing revenue and tax lines
+
+## Purchase Order Release Strategy in S/4HANA: Flexible Workflow vs. Classic
+Folder: `images/blog/purchase-order-release-strategy-s4hana-flexible-workflow-classic/`
+- [ ] 01: SPRO path for Classic Release Strategy (Purchasing -> Purchase Order -> Release Procedure for Purchase Orders).
+- [ ] 02: CL20N or CL24N screen showing assignment of characteristics values to a release strategy for classic workflow.
+- [ ] 03: Fiori App 'Manage Workflows for Purchase Orders' showing an active workflow definition with conditions and steps.
+- [ ] 04: Fiori App 'My Inbox' demonstrating a purchase order awaiting approval.
+- [ ] 05: ME23N displaying a purchase order with the 'Release Strategy' tab showing approval status.

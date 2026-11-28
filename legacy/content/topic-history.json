@@ -250,5 +250,12 @@
   "slug": "procure-to-pay-to-order-to-cash-s4hana-supply-chain-flow",
   "title": "Procure-to-Pay to Order-to-Cash: The Complete S/4HANA Supply Chain Flow",
   "date": "2026-11-27"
+ },
+ {
+  "topic": "Purchase order release strategy (flexible workflow vs classic) in S/4HANA",
+  "module": "MM",
+  "slug": "purchase-order-release-strategy-s4hana-flexible-workflow-classic",
+  "title": "Purchase Order Release Strategy in S/4HANA: Flexible Workflow vs. Classic",
+  "date": "2026-11-28"
  }
 ]
