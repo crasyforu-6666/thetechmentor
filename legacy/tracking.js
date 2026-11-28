@@ -23,7 +23,9 @@
   }
 
   // ---- Google Analytics 4 ----
-  if (cfg.GA4_ID) {
+  // Don't count the private dashboard as site traffic.
+  var isAdmin = window.location.pathname.indexOf("/admin") === 0;
+  if (cfg.GA4_ID && !isAdmin) {
     var s = document.createElement("script");
     s.async = true;
     s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(cfg.GA4_ID);
